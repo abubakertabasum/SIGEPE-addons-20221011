@@ -1,0 +1,838 @@
+if x_cat == 1 or x_cat == 2 or x_cat == 6:
+                    vals.x_abattement_forfaitaire = round((vals.x_solde_indiciaire_ctrct * 20 )/100)
+				else:
+                    vals.x_abattement_forfaitaire = round((vals.x_solde_indiciaire_ctrct * 25 )/100)
+            else:
+                if x_cat == 1 or x_cat == 2 or x_cat == 6:
+                    vals.x_abattement_forfaitaire = round((vals.x_solde_indiciaire_ctrct * 20 )/100)
+				else:
+                    vals.x_abattement_forfaitaire = round((vals.x_solde_indiciaire_ctrct * 25 )/100)
+     
+
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue-->
+
+<!-- Vue type evaluation -->
+<record model="ir.ui.view" id="view_id_type_evaluation">
+	<field name="name">view.hr_typeevaluation</field>
+	<field name="model">hr_typeevaluation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des types d'évaluations">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue type bulletin -->
+<record model="ir.ui.view" id="view_id_type_bulletin">
+	<field name="name">view.hr_typebulletin</field>
+	<field name="model">hr_typebulletin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des types de bulletin">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue type type grille salariale -->
+<record model="ir.ui.view" id="view_id_type_grille">
+	<field name="name">view.hr_typegrille</field>
+	<field name="model">hr_typegrille</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des types de grille">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue type type contrat -->
+<record model="ir.ui.view" id="view_id_type_contrat">
+	<field name="name">view.hr_typecontrat</field>
+	<field name="model">hr_typecontrat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des types de contrat">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!-- Vue categorie -->
+<record model="ir.ui.view" id="view_id_categorie">
+	<field name="name">view.hr_categorie</field>
+	<field name="model">hr_categorie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des catégories">
+			<field name="name"/>
+			<field name="libcourt"/>
+			<field name="description"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!-- Vue classe -->
+<record model="ir.ui.view" id="view_id_classe">
+	<field name="name">view.hr_classe</field>
+	<field name="model">hr_classe</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des classes">
+			<field name="name"/>
+			<field name="libcourt"/>
+			<field name="description"/>
+		</tree>
+	</field>
+</record>
+<!-- Vue echelle -->
+<record model="ir.ui.view" id="view_id_echelle">
+	<field name="name">view.hr_echelle</field>
+	<field name="model">hr_echelle</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des echelles">
+			<field name="name"/>
+			<field name="libcourt"/>
+			<field name="description"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!-- Vue echelon -->
+<record model="ir.ui.view" id="view_id_echelon">
+	<field name="name">view.hr_echellon</field>
+	<field name="model">hr_echellon</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des echelons">
+			<field name="name"/>
+			<field name="libcourt"/>
+			<field name="description"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- vue service -->
+	<record model="ir.ui.view" id="view_id">
+		<field name="name">view.service</field>
+		<field name="model">hr_service</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des services">
+				<field name="name"/>
+				<field name="libcourt"/>
+				<field name="description"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- vue fonction -->
+	<record model="ir.ui.view" id="view_id">
+		<field name="name">view.fonction</field>
+		<field name="model">hr_fonction</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des fonctions">
+				<field name="name"/>
+				<field name="libcourt"/>
+				<field name="description"/>
+			</tree>
+		</field>
+	</record>
+
+
+
+<!-- Vue position -->
+<record model="ir.ui.view" id="view_id_position">
+	<field name="name">view.hr_position</field>
+	<field name="model">hr_position</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des positions">
+			<field name="name"/>
+			<field name="libcourt"/>
+			<!-- <field name="mnt"/>
+			<field name="mnt_lettre"/>-->
+			<field name="description"/>
+		</tree>
+	</field>
+</record>
+
+
+
+
+<!-- Vue grille salariale -->
+<record model="ir.ui.view" id="view_id_grille_sal">
+	<field name="name">view.hr_grillesalariale</field>
+	<field name="model">hr_grillesalariale</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des grilles salariales">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="indice"/>
+			<field name="montant"/>
+			<field name="taux_horaire"/>
+			<field name="taux_jour"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue element salariale -->
+<record model="ir.ui.view" id="view_id_elemnt">
+	<field name="name">view.hr_elementsalaire</field>
+	<field name="model">hr_elementsalaire</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des éléments de salaire">
+			<field name="name"/>
+			<field name="date_elt"/>
+			<field name="signe"/>
+			<field name="corrige"/>
+			<field name="valide"/>
+			<field name="montant"/>
+			<field name="element_type_salaire_id"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue type mode de paiement -->
+<record model="ir.ui.view" id="view_id_mode_paiement">
+	<field name="name">view.hr_modepaiement</field>
+	<field name="model">hr_modepaiement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des mode de paiement">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_wiz_employe_line_tree" >
+        <field name="name">view.wiz.employee.line.tree</field>
+        <field name="model">wiz_hr_paramelemnetsalaire_line</field>
+        <field name="priority" eval="16"/>
+      	<field name="arch" type="xml">        
+			<tree string="Liste des param" editable="bottom">
+				<field name="hr_type_elt_salaire" />
+				<field name="hr_elementsalaire_id" />
+				<field name="hr_signe" />
+		        <field name="name" />
+			 </tree>
+		 </field>
+</record>
+    
+<record model="ir.ui.view" id="view_wiz_employe_form">
+    <field name="name">view.wiz.employee.form</field>
+    <field name="model">wiz_hr_paramelemnetsalaire</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+    	<form string="Ajout de elements de salaire d'un employé">
+    		    <label for= "employee_id"/>
+    		    	 <field name="employee_id" style = "width:20%"/>
+    		    <label for= "ref_categorie_id"/>
+    		         <field name="ref_categorie_id" style = "width:10%"/>
+    		    <label for= "ref_classe_id"/>
+    		         <field name="ref_classe_id" style = "width:10%"/>
+    		    <label for= "ref_echelle_id"/>
+    		         <field name="ref_echelle_id" style = "width:10%"/>
+    		    <label for= "ref_echellon_id"/>
+		 <field name="ref_echellon_id" style = "width:10%"/>
+     		     <field name="wiz_hr_paramelemnetsalaire_ids" nolabel="1" />
+	     
+            <!--  <footer>
+             	<button name="add_attendee" string="Add" type="object"/>
+             	or
+             	
+             	<button special="cancel" string="Cancel" />
+             </footer>  -->            
+    	</form>
+    	        	
+    </field>
+</record>
+<record model="ir.ui.view" id="view_wiz_employe_tree">
+    <field name="name">view.wiz.employee.tree</field>
+    <field name="model">wiz_hr_paramelemnetsalaire</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+    
+        <tree string="Ajout de elements de salaire d'un employé">
+    		    
+    		    	 <field name="employee_id"/>
+    		   
+    		         <field name="ref_categorie_id"/>
+    		    
+    		         <field name="ref_classe_id"/>
+    		    
+    		         <field name="ref_echelle_id"/>
+    		  
+		 <field name="ref_echellon_id"/>
+     		     <!-- <field name="wiz_hr_paramelemnetsalaire_ids" nolabel="1" />   -->       
+    	</tree>        	
+    </field>
+</record>
+    
+   <record model="ir.actions.act_window" id="act_open_wiz_participant">
+        <field name="name">wiz.employe</field>
+        <field name="res_model">wiz_hr_paramelemnetsalaire</field>
+        <field name="view_mode">tree,form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_wiz_employe_form" />
+    </record>
+
+
+
+
+
+
+<record model="ir.ui.view" id="hr_payslip_form">
+	<field name="name">hr.payslip.form</field>
+	<field name="model">hr.payslip</field>
+    <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+	<field name="arch" type="xml">
+		<!--<notebook>
+				 <page string = "Détails Elements de salaire">
+						      <field name="linees_ids" colspan="4" nolabel="1">
+	                            <tree string="Details" editable="bottom">
+	                                    <field name="hr_type_elt_salaire"/>
+		                                <field name="hr_elementsalaire_id"/>
+		                                <field name="hr_signe"/>
+			                            <field name="name"/>   
+		                        </tree>
+	                            <form string="Details Line">
+	                                <group col="4">
+	                                    <field name="hr_type_elt_salaire"/>
+		                                <field name="hr_elementsalaire_id"/>
+		                                <field name="hr_signe"/>
+			                            <field name="name"/>  
+	                                </group>
+	                            </form>
+	                        </field>    			 
+	               </page>
+		</notebook>
+			
+	<xpath expr="//field[@name='contract_id']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='struct_id']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='credit_note']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='number']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='worked_days_line_ids']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='input_line_ids']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='line_ids']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>-->
+	
+	 <!-- <xpath expr="//page[1]" position="attributes">
+		  <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//page[2]" position="attributes">
+		  <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//page[4]" position="attributes">
+		<attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	<xpath expr="//field[@name='category_id']" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>
+	
+	 <xpath expr="//notebook/page[3]" position="attributes">
+	     <attribute name = "invisible">True</attribute>
+	</xpath>-->
+	
+	<xpath expr="//field[@name='name']" position="after">
+	     <field name = "current_user" options="{'no_open': True}"/>
+	</xpath>
+			
+	
+  </field>
+</record>
+
+
+<template id="assets_backend" inherit_id="web.assets_backend">
+       <xpath expr="." position="inside">
+           <script type="text/javascript" src="/Gestion_Paie/static/src/js/my_javascript.js"></script>
+       </xpath>
+</template>
+
+
+
+<!-- Vue import grille -->
+<record model="ir.ui.view" id="view_id_import_grille">
+	<field name="name">view.hr_importgrille</field>
+	<field name="model">hr_importgrille</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Grille salariale importée">
+			<field name="cd_classe"/>
+			<field name="cd_categorie"/>
+			<field name="cd_echelle"/>
+			<field name="cd_echelon"/>
+			<field name="indice"/>
+			<field name="point_indiciaire"/>
+			<field name="salbasemens"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue type element de salaire-->
+<record model="ir.ui.view" id="view_id_type_element_salaire">
+	<field name="name">view.hr_typeelementsalaire</field>
+	<field name="model">hr_typeelementsalaire</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Type element salaire">
+			<field name="lib_long"/>
+			<field name="name"/>
+			<field name="actif"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue verifcation individuelle -->
+<record model="ir.ui.view" id="view_id_import_grille">
+	<field name="name">view.hr_importgrille</field>
+	<field name="model">hr_importgrille</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Grille salariale importée">
+			<field name="cd_classe"/>
+			<field name="cd_categorie"/>
+			<field name="cd_echelle"/>
+			<field name="cd_echelon"/>
+			<field name="indice"/>
+			<field name="point_indiciaire"/>
+			<field name="salbasemens"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!--Definition des actions-->
+
+<!-- Action Type evaluation -->
+<record model="ir.actions.act_window" id="act_list_type">
+		<field name="name">Type Evaluation</field>
+		<field name="res_model">hr_typeevaluation</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Type bulletin -->
+<record model="ir.actions.act_window" id="act_list_type_bulletin">
+		<field name="name">Type Bulletin</field>
+		<field name="res_model">hr_typebulletin</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Type grille -->
+<record model="ir.actions.act_window" id="act_list_type_grille">
+		<field name="name">Type Grille Salariale</field>
+		<field name="res_model">hr_typegrille</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Type contrat -->
+<record model="ir.actions.act_window" id="act_list_type_contrat">
+		<field name="name">Type Contrat</field>
+		<field name="res_model">hr_typecontrat</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action categorie -->
+<record model="ir.actions.act_window" id="act_list_categorie">
+		<field name="name">Categorie</field>
+		<field name="res_model">hr_categorie</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Classe -->
+<record model="ir.actions.act_window" id="act_list_classe">
+		<field name="name">Classe</field>
+		<field name="res_model">hr_classe</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Echelle -->
+<record model="ir.actions.act_window" id="act_list_echelle">
+		<field name="name">Echelle</field>
+		<field name="res_model">hr_echelle</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action  service-->
+	<record model="ir.actions.act_window" id="act_list_service">
+			<field name="name">Libellé service</field>
+			<field name="res_model">hr_service</field>
+			<field name="view_mode">tree,form,kanban</field>
+		
+	</record>
+
+	<!-- Action  fonction-->
+	<record model="ir.actions.act_window" id="act_list_fonction">
+			<field name="name">Libellé fonction</field>
+			<field name="res_model">hr_fonction</field>
+			<field name="view_mode">tree,form,kanban</field>
+		
+	</record>
+
+<!-- Action Echelon -->
+<record model="ir.actions.act_window" id="act_list_echelon">
+		<field name="name">Echelon</field>
+		<field name="res_model">hr_echellon</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Position -->
+<record model="ir.actions.act_window" id="act_list_position">
+		<field name="name">Position</field>
+		<field name="res_model">hr_position</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Grille Salariale-->
+<record model="ir.actions.act_window" id="act_list_grille_salariale">
+		<field name="name">Grille Salariale</field>
+		<field name="res_model">hr_grillesalariale</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+
+<!-- Action Elements salaires-->
+<record model="ir.actions.act_window" id="act_list_element_salaire">
+		<field name="name">Elements Salaires</field>
+		<field name="res_model">hr_elementsalaire</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+
+<!-- Action Mode de paiement-->
+<record model="ir.actions.act_window" id="act_list_mode_paiement">
+		<field name="name">Mode de paiement</field>
+		<field name="res_model">hr_modepaiement</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+
+
+ <!-- Action Param Element de salaire-->
+<record model="ir.actions.act_window" id="act_list_param_elet_salaire">
+		<field name="name">Paramètre Element Salaire</field>
+		<field name="res_model">wiz_hr_paramelemnetsalaire</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action Param Element de salaire-->
+<record model="ir.actions.act_window" id="act_bull_ind">
+		<field name="name">Bulletin de Paie</field>
+		<field name="res_model">hr.payslip</field>
+		
+</record>
+
+
+<!-- Action import-->
+<record model="ir.actions.act_window" id="act_list_import">
+		<field name="name">Import grille salariale</field>
+		<field name="res_model">hr_importgrille</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+<!-- Action type element salaire-->
+<record model="ir.actions.act_window" id="act_list_type_element_salaire">
+		<field name="name">Liste Type élements salaires</field>
+		<field name="res_model">hr_typeelementsalaire</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>
+
+
+
+
+
+
+<!--Definition du menu-->
+<menuitem id="main_menu" name ="Gestion Paie" sequence ="1"/>
+<menuitem id="main_menu_config" name ="Configuration générale" sequence="2" action="" parent="main_menu"/>
+<menuitem id="main_menu_type" name ="Type de données" sequence="3" action="" parent="main_menu_config"/>
+<menuitem id="main_menu_evaluation" name ="Type Evaluation" sequence="4" action="act_list_type" parent="main_menu_type"/>
+<menuitem id="main_menu_bulletin" name ="Type Bulletin" sequence="5" action="act_list_type_bulletin" parent="main_menu_type"/>
+<menuitem id="main_menu_grille" name ="Type Grille" sequence="6" action="act_list_type_grille" parent="main_menu_type"/>
+<menuitem id="main_menu_contrat" name ="Type Contrat" sequence="7" action="act_list_type_contrat" parent="main_menu_type"/>
+<menuitem id="main_menu_type_element" name ="Type element salaire" sequence="8" action="act_list_type_element_salaire" parent="main_menu_type"/>
+<menuitem id="main_menu_categorie" name ="Categorie" sequence="9" action="act_list_categorie" parent="main_menu_type"/>
+<menuitem id="main_menu_classe" name ="Classe" sequence="10" action="act_list_classe" parent="main_menu_type"/>
+<menuitem id="main_menu_echelle" name ="Echelle" sequence="11" action="act_list_echelle" parent="main_menu_type"/>
+<menuitem id="main_menu_echelon" name ="Echelon" sequence="12" action="act_list_echelon" parent="main_menu_type"/>
+<menuitem id="main_menu_position" name ="Position" sequence="13" action="act_list_position" parent="main_menu_type"/>
+<menuitem id="menu_service" parent="main_menu_type" name="Service" action="act_list_service" sequence = "14"/> 
+<menuitem id="menu_fonction" parent="main_menu_type" name="Fonction" action="act_list_fonction" sequence =  "15"/>
+
+<menuitem id="main_menu_param_salaire" name ="Paramètres Salaires" sequence="20" action="" parent="main_menu"/>
+<menuitem id="main_menu_grille" name ="Grille Salariale" sequence="21" action="act_list_grille_salariale" parent="main_menu_param_salaire"/>
+<menuitem id="main_menu_elt" name ="Elements Salaire" sequence="22" action="act_list_element_salaire" parent="main_menu_param_salaire"/>
+<menuitem id="main_menu_mode" name ="Mode de paiement" sequence="22" action="act_list_mode_paiement" parent="main_menu_param_salaire"/>
+
+
+<menuitem id="main_menu_param_paie" name ="Paramètres Paie" sequence="30" action="" parent="main_menu"/>
+<menuitem id="main_menu_element_sal" name ="Param. Element de Salaire" sequence="31" action="act_list_param_elet_salaire" parent="main_menu_param_paie"/>
+<menuitem id="main_menu_import" name ="Import Grille" sequence="32" action="act_list_import" parent="main_menu_param_paie"/>
+
+
+<menuitem id="main_menu_paie" name ="Paie" sequence="40" action="" parent="main_menu"/>
+<menuitem id="main_menu_preparation_paie" name ="Préparation de paie" sequence="41" action="" parent="main_menu_paie"/>
+<menuitem id="main_menu_prepaIndividuelle" name ="Préparation Individuelle" sequence="42" action="act_bull_ind" parent="main_menu_preparation_paie"/>
+	
+	
+	
+	
+</odoo>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- report bulletin-->
+
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Inherit quotation report (from module sale) -->
+        <template id="report_bulletin_inherit_paie" inherit_id="hr_payroll.report_payslip">
+        <!-- Finds the first table with as class table table-condensed and gives the ability to modify it
+         This will replace everything withing tr (including tr)-->
+         
+                <xpath expr="//div[@class='page']" position = "replace">
+                        <!-- <h2 text-align = 'center'><i><FONT color = "#089CB8"><span t-field="o.name"/></FONT></i></h2><br/>-->
+                        <h2 style="text-align:center; widht:100%">BULLETIN DE PAIE</h2>
+	                    <p style="text-align:center; widht:100%">
+	                        <strong>MOIS : </strong>
+	                        <span t-field="o.name"/>
+	                    </p>
+                        
+						<p style="text-align:center; widht:100%">
+                        	<strong>Reference : </strong>
+                           <span t-field="o.ref_bulletin"/>
+                        </p>
+                        
+                        <!-- <p style="text-align:center; widht:100%">
+                        	<strong>Fonction : </strong>
+                           <span t-field="o.employee_id.x_fonction_id.name"/>
+                        </p>-->
+                        
+		                <xpath expr="//table[@class='table table-sm table-bordered']" position = "replace">
+			                <table class='table table-sm'>
+			                    <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146" >
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Nom/Prénom(s)</strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id"/></td>
+			                            
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Matricule</strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.matricule"/></td>
+			                    </tr>
+			                    <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146">
+			                    	<td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Sexe </strong></td>
+			                    	<td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.gender"/></td>
+			                    	
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Nationalité  </strong></td>
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.x_nationalite_id"/></td>
+			                        
+			                        
+			                    </tr>
+			                    <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146" >
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Service  </strong></td>
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.hr_service.name"/></td>
+			                        
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Emploi  </strong></td>
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.x_emploi_id.name"/></td>
+			                    	
+			                    </tr>
+			                    <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146" >
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Classification </strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="o.employee_id.x_classification_ctrct"/></td>
+			                            
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Nbre charges fiscales  </strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146">
+			                                <t t-if="o.employee_id.charge_enfant == 0">
+			                                    <t t-if="o.employee_id.charge_femme==0 ">0 + 0  </t>
+			                                    <t t-if="o.employee_id.charge_femme !=0 "><span  t-field="o.employee_id.charge_femme"/> + 0 </t>
+			                                </t>
+			        
+			                                <t t-if="o.employee_id.charge_enfant != 0">
+			                                    <t t-if="o.employee_id.charge_femme==0 "> 0 + <span  t-field="o.employee_id.charge_enfant"/>  </t>
+			                                    <t t-if="o.employee_id.charge_femme !=0 "><span  t-field="o.employee_id.charge_femme"/> + <span  t-field="o.employee_id.charge_enfant"/>  </t>
+			                                </t>
+			    
+			    
+			                            </td>
+			                            
+			                        </tr>
+			                        <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146" >
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>Banque  </strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"> <span t-field="o.employee_id.num_banque.bank_id.name"/></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong>N°Compte Bancaire  </strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"> <span t-field="o.employee_id.num_banque"/></td>
+			                        </tr>
+			               </table>          
+			        </xpath>
+			        <xpath expr="//table[@class='table table-sm']" position = "replace">
+			        	<table class = 'table table-sm' style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146">
+			        		<thead style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146">
+			                      <tr style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146" >
+			                          <th style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i>Désignation des éléments de solde</i></strong></th>
+			                          <th style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i>Retenues</i></strong></th>
+			                          <th style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i>Avoirs</i></strong></th>
+			                      </tr>
+			                </thead>
+			                <tbody>
+			                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style = "border: 2px SOLID #434146">
+			                      <t t-if="line.category_id.name not in ('Déduction','SALNET_BASEIMPO','Net','Retenue','Avoir','TOTAL_RENUM','Contribution de la société','CHARGE','TOTAL_RAPPEL') " >
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-field="line.name"/></td> 
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"></td>
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-esc="line.amount"
+			                                          t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td> 
+			                        </t>
+			                   </tr>
+			                   <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146" >
+			                      <t t-if="line.category_id.name in ('Déduction') " >
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"> <span t-field="line.name"/></td>
+			                        
+			                        <td style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><span t-esc="line.amount"
+			                                          t-options='{"widget": "monetary", "display_currency": o.company_id.currency_id}'/></td> 
+			                        <td></td> 
+			                        </t>
+			                  </tr>
+			               
+			                </tbody>
+			        	
+			        	</table>
+			        	<table class='table table-sm' style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> 
+			                  <tr style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146">
+			                            <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i> MODE DE PAIEMENT</i></strong></td> 
+			                            <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i> BASE IMPOSABLE</i></strong></td>
+			                            <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i> TOTAL DES RETENUES</i></strong></td>
+					                    <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i> TOTAL DES AVOIRS</i></strong></td>
+					                    <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"><strong><i> NET A PAYER</i></strong></td>
+			                  </tr>
+			                  <tr style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146">
+				                      <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146">
+				                      	<i><FONT color="red"> <span t-field="o.employee_id.x_mode_paiement" /> <br/></FONT></i>
+								      </td>
+				                            
+				                      <td  style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146">  
+				                         <i><FONT color="red"> <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Base imposable' "><span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				                      </td>
+				                      
+				                      <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146" >
+				                          <i> <FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Total Retenue' "> <span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				
+				                      </td>
+				                      
+				                      <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146" >
+				                          <i> <FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Total Avoir' "> <span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				
+				                      </td>
+				                      
+				                      <td style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> 
+			                           		<FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Salaire Net à Payer' "><span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t></FONT>
+			                          </td>
+			                            
+			                 </tr>
+			            
+			                 
+			             </table><br/>
+			             
+			             <p style="text-align:center;"><i>Dans votre intérêt, conservez ce bulletin de paie sans limitation de durée. Il peut vous aider à faire valoir vos droits.</i></p>
+			        	
+		           </xpath>
+            </xpath>
+ 
+        </template>
+
+
+        
+</odoo>
+
+

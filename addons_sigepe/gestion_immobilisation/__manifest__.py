@@ -1,0 +1,18 @@
+{
+	"name": "Gestion des immobilisations",
+	"version": "1.0",
+	"author": "TELIA INFORMATIQUE",
+	"depends": ["base", "portal", "account", "om_account_asset"],
+	"category": "EPE",
+	"Summary": "Gestion des immobilisations des EPE",
+	"installable": True,
+	"auto_install": False,
+	"data":["security/ir.model.access.csv",
+	"views/immobilisation.xml",
+	"report/immobilisation_report.xml",
+	"report/inventaire_report.xml",
+	"report/mouv_report.xml",
+	"report/journal_report.xml",
+	"data/data.xml",
+	"security/gi_security.xml"],
+}

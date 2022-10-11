@@ -1,0 +1,1516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="view_id_ca_convocation_form">
+	<field name="name">view.ca_convocation.form</field>
+	<field name="model">ca_convocation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Pré-Conseil">
+			<header>
+				<field name="state" widget="statusbar" statusbar_visible="brouillon,envoyer"/>
+				<button name="action_envoyer_mail" string="Envoyer Email" type="object" class="btn-primary" confirm="Voulez vous envoyez une invitation aux administrateurs?"/>
+			</header>
+<sheet>
+	<group string="Invitation">
+		<field name="name" style="width:50%"/>
+		<field name="cat_id" style="width:25%" options="{'no_create':True}"/>
+		<field name="session_id" style="width:25%" domain= "[('cat_id','=', cat_id)]" options="{'no_create':True}" />
+		<field name="heure_debut" force_save="1" />
+		<field name="heure_fin" force_save="1" />
+		<field name="lieu" force_save="1" />
+	</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_convocation_tree">
+	<field name="name">view.ca_convocation.tree</field>
+	<field name="model">ca_convocation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Pré-Conseil">
+			<field name="sequence" widget="handle"/>
+			<field name="name" />
+			<field name="cat_id" />
+			<field name="session_id" />
+			<field name="heure_debut" />
+			<field name="heure_fin" />
+			<field name="lieu" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_ca_conseil_form">
+	<field name="name">view.ca_conseil.form</field>
+	<field name="model">ca_conseil</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Conseil Administration">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="confirm" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['cours'])]}"/>
+ 			</header>
+<sheet>
+	<group>
+		<group> 
+			<field name="intitule" style="width:100%" options="{'no_create':True}"/>
+			<field name="cat_id" style="width:80%" options="{'no_create':True}" force_save="1"/>
+			<field name="session_id" style="width:80%" options="{'no_create':True}" force_save="1"/>
+			<field name="lieu" style="width:50%" force_save="1"/>
+		</group>
+		<group>
+			<field name="heure_debut" style="width:50%" force_save="1"/>
+			<field name="heure_fin" style="width:50%" force_save="1"/>
+			<field name="date_reelle_debut" style="width:50%"/>
+			<field name="date_reelle" style="width:50%"/>
+		</group>
+	</group>
+		<group>
+			<field name="observation"/>
+		</group>
+		<group>
+		<button name="Insertion" string="Afficher les éléments" type="object" class="btn-primary"/>
+		</group>
+		<notebook>
+		<page string= "Liste des participants" >
+			<field name="conseiladmin_ids" nolabel = "1">              
+	            <tree string="" editable = "bottom">
+			      	<field name="membre_id"/>
+					<field name="fonction_id"/>
+					<field name="structure_id"/>
+					<field name="etat"/>
+					<field name="procuration" attrs = "{'invisible':[('etat','in', ['present'])]}" />
+					<field name="observation" attrs = "{'invisible':[('etat','in', ['present'])]}" />
+					<field name="signature"/>
+		      	</tree>
+		    </field>
+		</page>
+			
+		<page string= "Ordre du jour">
+			<field name="ordre_ids" nolabel = "1">              
+	            <tree string="" editable = "bottom">
+			      	<field name="ordre_jour"/>
+					<field name="ref"/>
+					<field name="acte"/>
+		      	</tree>
+		    </field>
+		</page>
+				
+		</notebook>
+	   </sheet>
+	  </form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_conseil_tree">
+	<field name="name">view.ca_conseil.tree</field>
+	<field name="model">ca_conseil</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Conseil Administration">
+			<field name= "cat_id" />
+			<field name="session_id" />
+			<field name="intitule"/>			
+			<field name= "date_reelle_debut" />
+			<field name="date_reelle" />
+			<field name="lieu" />
+			<field name="state"/>
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_conseil">
+	<field name="name">view.ca_conseil.Line</field>
+	<field name="model">ca_conseil_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Conseil d'administration" editable="bottom">
+			<field name="conseil_id" invisible="1"/>
+			<field name="membre_id" />
+			<field name="fonction_id" />
+			<field name="structure_id" />
+			<field name="etat" />
+			<field name= "observation" attrs = "{'invisible':[('etat','in', ['present'])]}" />
+			<field name="procuration" attrs = "{'invisible':[('etat','in', ['present'])]}"/>
+			<field name="signature" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_postconseil_form">
+	<field name="name">view.ca_postconseil.form</field>
+	<field name="model">ca_postconseil</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Post conseil d'administration" >
+			<header>
+			 	<field name="state_postconseil" widget="statusbar" statusbar_visible="draft,sent"/>
+				<button name="action_send_mail" string="Envoyer Maintenant" type="object" class="btn-primary" confirm="Voulez vous envoyez les rapports aux administrateurs?"/>
+			</header>
+	<sheet>
+	<group>
+		<group>
+			<field name="intitule" style="width:100%" options="{'no_create':True}"/>
+			<field name="date" style="width:50%"/>
+		</group>
+		<group>
+			<field name="cat_id" style="width:100%" force_save='1'/>
+			<field name="session_id" style="width:100%" force_save='1'/>
+		</group>
+	</group>
+		<notebook>
+			<page string= "Liste des documents consultés">
+			<field name="doc_ids" nolabel = "1">              
+		            <tree string="" editable = "bottom">
+				      	<field name="lib_long"/>
+						<field name="join_doc"/>
+			      	</tree>
+			    </field>
+			</page>
+			<page string= "Actes de délibération finaux">
+				<field name="delib_ids" nolabel = "1">              
+		            <tree string="" editable = "bottom">
+				      	<field name="lib_long"/>
+				      	<field name="refe"/>
+						<field name="join_doc"/>
+			      	</tree>
+			    </field>
+			</page>
+		</notebook>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_postconseil_tree">
+	<field name="name">view.ca_postconseil.tree</field>
+	<field name="model">ca_postconseil</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Post conseil d'administration">
+			<field name="sequence" widget="handle"/>
+			<field name="cat_id"/>
+			<field name="session_id" />
+			<field name="date" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_sejour_pca_form">
+	<field name="name">view.ca_sejour_pca.form</field>
+	<field name="model">ca_sejour_pca</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sejour du PCA">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="action" string="Valider Premier semestre" type="object" class="btn-primary" confirm="Voulez vous enregistrez les informations pour le premier semestre?" attrs = "{'invisible':[('state','not in', ['1'])]}" />
+				<button name="action_conf" string="Valider Second semestre" type="object" class="btn-primary" confirm="Voulez vous enregistrez les informations pour le second semestre?" attrs = "{'invisible':[('state','not in', ['2'])]}"/>
+			</header>
+	<sheet>
+		<group string= "Tableau de bord de suivi du Président du Conseil d'Administration" >
+		</group>
+	<notebook>
+		<page string= "Premier semestre" >
+			<group>
+				<field name="nom_pca" style="width:75%" options="{'no_create':True}"/>
+				<field name="date_debut" style="width:15%"/>
+				<field name="date_fin" style="width:15%"/>
+				<label for ="piece_jointe" string= "Joindre fichier" />
+				<div>
+					<field name="piece_jointe"  class= "oe_inline"/> (word,pdf,zip)
+				</div>
+			</group>
+		</page>
+		<page string= "Second semestre" >
+			<group>
+				<field name="pca" style="width:75%" options="{'no_create':True}"/>
+				<field name="date_deb" style="width:15%"/>
+				<field name="date_fi" style="width:15%"/>
+				<label for ="piece_join" string= "Joindre fichier" />
+				<div>
+					<field name="piece_join"  class= "oe_inline"/> (word,pdf,zip)
+				</div>
+			</group>
+		</page>
+	</notebook>
+		<group string= " " >
+			<field name= "observation"/>
+		</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_sejour_pca_tree">
+	<field name="name">view.ca_sejour_pca.tree</field>
+	<field name="model">ca_sejour_pca</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sejour du PCA">
+			<field name="sequence" widget="handle"/>
+			<field name="nom_pca" />
+			<field name="date_debut"/>
+			<field name="date_fin" />
+			<field name="date_deb"/>
+			<field name="date_fi"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_sejour_pca_form">
+	<field name="name">view.ca_sejour_pca.form</field>
+	<field name="model">ca_sejour_pca</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sejour du PCA">
+	<sheet>
+		<group>
+			<field name="nom_pca" style="width:50%" options="{'no_create':True}"/>
+			<field name="date_debut" style="width:35%"/>
+			<field name="date_fin" style="width:35%"/>
+			<label for ="piece_jointe" string= "Joindre fichier" />
+			<div>
+				<field name="piece_jointe"  class= "oe_inline"/> (word,pdf,zip)
+			</div>
+		</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_sejour_permanent_form">
+	<field name="name">view.ca_sejour_permanent.form</field>
+	<field name="model">ca_sejour_permanent</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sejour du PCA">
+	<sheet>
+		<group>
+			<field name="nom_pca" style="width:50%" options="{'no_create':True}"/>
+			<field name="date_debut" style="width:35%"/>
+			<field name="date_fin" style="width:35%"/>
+			<label for ="piece_jointe" string= "Joindre fichier" />
+			<div>
+				<field name="piece_jointe"  class= "oe_inline"/> (word,pdf,zip)
+			</div>
+		</group>
+		<group>
+			<field name="observation"/>	
+		</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_sejour_permanent_tree">
+	<field name="name">view.ca_sejour_permanent.tree</field>
+	<field name="model">ca_sejour_permanent</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sejour du PCA">
+			<field name="nom_pca"/>
+			<field name="date_debut" />
+			<field name="date_fin" />
+			<field name="piece_jointe"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_type_session_form">
+	<field name="name">view.ca_type_session.form</field>
+	<field name="model">ca_type_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Type de session">
+			<sheet>
+				<group string= "Type de Conseil" >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_type_session_tree">
+	<field name="name">view.ca_type_session.tree</field>
+	<field name="model">ca_type_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Categorie de conseil">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_nature_de_session_form">
+	<field name="name">view.ca_nature_de_session.form</field>
+	<field name="model">ca_nature_de_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Type de session">
+			<sheet>
+				<group>
+					<field name="lbcourt" style="width:50%"/>
+					<field name="lblong" style="width:75%"/>
+					<field name="company_id" invisible="1"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_nature_de_session_tree">
+	<field name="name">view.ca_nature_de_session.tree</field>
+	<field name="model">ca_nature_de_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Categorie de conseil">
+			<field name="lbcourt" />
+			<field name="lblong" />
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_consult_domiciles_form">
+	<field name="name">view.ca_consult_domicile.form</field>
+	<field name="model">ca_consult_domicile</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Consultation à domicile">
+	<sheet>
+		<div class="oe_button_box" name="button_box">
+	        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+	         <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+	        </button>
+		</div>
+		<group>
+			<field name="lib_long" style="width:100%"/>
+		</group>
+		<group>
+			<group>
+				<field name="date_entree" style="width:100%"/> 
+				<field name="date_fin" style="width:100%"/>
+			</group>
+			<group>
+				<field name="cat_id" style="width:100%" options="{'no_create':True}"/>
+				<field name="session_id" style="width:100%" options="{'no_create':True}"/> 
+			</group>
+		</group>
+		<group>
+		<notebook>
+			<page string= "Liste des documents">
+				<field name="doc_ids" nolabel = "1">              
+		            <tree string="Documents" editable = "bottom">
+				      	<field name="libelle"/>
+						<field name="docu_id"/>
+			      	</tree>
+			    </field>
+			</page>
+		</notebook>
+		</group>
+	</sheet>
+  </form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_consult_domicile_tree">
+	<field name="name">view.ca_consult_domicile.tree</field>
+	<field name="model">ca_consult_domicile</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Consultation à domicile">
+			<field name="lib_long"/>
+			<field name="date_entree"/>
+			<field name="date_fin"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_nature_session_form">
+	<field name="name">view.ca_nature_session.form</field>
+	<field name="model">ca_nature_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Nature session">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="confirm" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['2'])]}"/>
+ 			</header>
+	<sheet>
+		<group>
+			<group>
+				<field name="n_ordre" force_save= "1" invisible="1"/>
+				<field name= "intitule" style="width:100%"/>
+				<field name= "cat_id" style="width:100%" options="{'no_create':True}"/>
+				<field name="lib_long" style="width:100%" options="{'no_create':True}"/>
+			</group>
+			<group>
+				<field name="date_prevue" style="width:50%"/>
+				<field name="date_fin" style="width:50%"/>
+				<field name="lieu" style="width:75%" />
+				<field name="action" style="width:50%"/>
+			</group>
+		</group>
+	  <notebook>
+		<page string= "Liste des participants" >
+			<field name="line_ids" nolabel = "1">              
+	            <tree string="" editable = "bottom">
+			      	<field name="membre_id"/>
+					<field name="fonction_id" force_save='1'/>
+					<field name="structure_id" force_save='1'/>
+		      	</tree>
+		    </field>
+		</page>
+		<page string= "Ordre du Jour et Actes de délibération">
+			<field name="ordres_ids" nolabel = "1">              
+	            <tree string="" editable = "bottom">
+			      	<field name="ordre_jour" options="{'no_create':True}"/>
+					<field name="ref"/>
+					<field name="acte"/>
+		      	</tree>
+		    </field>			
+		</page>
+		<page string= "Documents" >
+			<button name="afficher_piece" string="Afficher les documents" type="object" class="btn-primary"/>
+			<field name="doc_ids" nolabel = "1">              
+	            <tree string="" editable = "bottom">
+			      	<field name="doc_id" options="{'no_create':True}"/>
+					<field name="doc"/>
+		      	</tree>
+		    </field>			
+		</page>
+		
+	</notebook>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_nature_session_tree">
+	<field name="name">view.ca_nature_session.tree</field>
+	<field name="model">ca_nature_session</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Nature de session">
+			<field name="sequence" widget="handle"/>
+			<!--<field name="n_ordre"/>-->
+			<field name="intitule"/>
+			<field name="cat_id"/>
+			<field name="lib_long"/>
+			<field name="date_prevue"/>
+			<field name="date_fin"/>
+			<field name="lieu"/>
+			<field name="state"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_type_membre_form">
+	<field name="name">view.ca_type_membre.form</field>
+	<field name="model">ca_type_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Types de Membres">
+<sheet>
+	<group string= " " >
+		<field name="lib_court" style="width:25%"/>
+		<field name="lib_long" style="width:50%"/>
+	</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_type_membre_tree">
+	<field name="name">view.ca_type_membre.tree</field>
+	<field name="model">ca_type_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Types de Membres">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_type_doc_form">
+	<field name="name">view.ca_type_doc.form</field>
+	<field name="model">ca_type_doc</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Types de documents">
+<sheet>
+	<group>
+		<field name="lib_court" style="width:50%"/>
+		<field name="lib_long" style="width:75%"/>
+		<field name="nat_doc_ids" invisible= "1" />
+		<field name="flag_actif"/>
+	</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_type_doc_tree">
+	<field name="name">view.ca_type_doc.tree</field>
+	<field name="model">ca_type_doc</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Types de documents">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+			<field name="flag_actif"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_ordre_jour_form">
+	<field name="name">view.ca_ordre_jour.form</field>
+	<field name="model">ca_ordre_jour</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Ordre du jour" >
+			<sheet>
+				<group string=" Ordre du jour" >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+					<field name= "commentaire" />
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_ordre_jour_tree">
+	<field name="name">view.ca_ordre_jour.tree</field>
+	<field name="model">ca_ordre_jour</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Ordre du jour" >
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_consult_pro_form">
+	<field name="name">view.ca_consult_pro.form</field>
+	<field name="model">ca_consult_pro</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Ordre du jour consulté" >
+			<sheet>
+				<group>
+		             <field name= "objet" required="True" options="{'no_create':True}" style="width:100%"/>
+				</group>
+				<group>
+					<group>
+						 <field name= "date_debut" force_save= "1" />
+						 <field name= "date_fin"  force_save= "1" />
+					</group>
+					<group>
+						 <field name= "cat_id" force_save= "1" />
+						 <field name= "session_id"  force_save= "1" />
+					</group>
+				</group>
+				<group string= "Nom du consultant" invisible="1" >
+						<field name= "membre_id" force_save= "1"/>
+				</group>
+				<group>
+				<notebook>
+					<page string= "Documents à consulter" >
+						<button name="afficher" string="Afficher" type="object" class="btn-primary"/>
+						<field name="consult_line_ids" nolabel = "1">              
+				            <tree string="" editable = "bottom">
+						      	<field name="libelle"/>
+								<field name="doc"/>
+								<field name="commentaire"/>
+					      	</tree>
+					    </field>
+					</page>
+				</notebook>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_consult_pro_tree">
+	<field name="name">view.ca_consult_pro.tree</field>
+	<field name="model">ca_consult_pro</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Ordre du jour consulté" >
+			<field name= "membre_id" force_save= "1" />
+			<field name= "objet" force_save= "1" />
+			<field name= "cat_id" force_save= "1" />
+			<field name= "session_id" force_save= "1" />
+			<field name= "date_debut" force_save= "1"/>
+			<field name= "date_fin" force_save= "1"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_avis_admin_form">
+	<field name="name">view.ca_avis_admin.form</field>
+	<field name="model">ca_avis_admin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Avis des administrateurs" >
+			<group>
+				<field name= "lib_court" style="width:25%"/>
+				<field name= "lib_long" style="width:50%"/>
+			</group>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_consult_centrale_form">
+	<field name="name">view.ca_consult_centrale.form</field>
+	<field name="model">ca_consult_centrale</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Centralisation des documents" >
+			<header>
+				<field name= "state" widget="statusbar" />
+				<button name= "cent" string= "Centraliser" class="btn-primary" type="object"
+				attrs = "{'invisible':[('state','in', ['2'])]}"/>
+			</header>
+			<sheet>
+				<group string= "Centralisation des consultations" >
+					<div class="oe_title">
+	                    <label for="objet" class="oe_edit_only"/>
+	                    <h1>
+	                        <field name="objet" required="True" options="{'no_create':True}"/>
+	                    </h1>
+                	</div>
+                </group>					
+				<group>
+					<field name= "date" style="width:15%"/>
+				</group>
+					<notebook>
+					<page string= "Avis des administrateurs">
+						<field name="centre_line_ids" nolabel = "1">              
+				            <tree string="" editable = "bottom">
+						      	<field name="membre"/>
+						      	<field name="libelle"/>
+								<field name="commentaire"/>
+					      	</tree>
+					    </field>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_consult_centrale_tree">
+	<field name="name">view.ca_consult_centrale.tree</field>
+	<field name="model">ca_consult_centrale</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Centralisation des documents" >
+			<field name= "objet" />
+			<field name= "date" />
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_motif_mandat_form">
+	<field name="name">view.ca_motif_mandat.form</field>
+	<field name="model">ca_motif_mandat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Motif de depart">
+		<sheet>
+			<group string= " "  colspan="8">
+				<field name="lib_court" style="width:25%" />
+				<field name="lib_long" style="width:50%"/>
+				<field name="description" />
+			</group>
+		</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_motif_mandat_tree">
+	<field name="name">view.ca_motif_mandat.tree</field>
+	<field name="model">ca_motif_mandat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Motif de depart">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+			<field name="description" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_cat_representant_form">
+	<field name="name">view.ca_cat_representant.form</field>
+	<field name="model">ca_cat_representant</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Structure représentée">
+		<sheet>
+			<group string= " " >
+				<field name="lib_court" style="width:25%"/>
+				<field name="lib_long" style="width:50%"/>
+			</group>
+		</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_cat_representant_tree">
+	<field name="name">view.ca_cat_representant.tree</field>
+	<field name="model">ca_cat_representant</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Structure représentée">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_ca_membre_form">
+	<field name="name">view.ca_membre.form</field>
+	<field name="model">ca_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Membres du conseil">
+		<sheet>			
+
+						<field name="image" widget='image' class="oe_avatar" options='{"preview_image":"image_medium"}'/>
+			                <div class="oe_title">
+			                    <label for="nom" class="oe_edit_only"/>
+			                    <h1>
+			                        <field name="nom" placeholder="Nom et Prénom(s)" required="True" style="width:100%"/>
+			                    </h1>
+			                </div>
+			            <group>
+				            <group>        
+								<field name= "n_matricule" style="width:100%"/>
+								<field name= "typemembre_id" style="width:100%"/>
+								<field name= "structure_id" style="width:100%"/>
+								<field name= "cv" style="width:15%" class= "oe_inline"/>
+								<field name= "active"/>							
+							</group>    
+							<group>    
+								<field name= "date_entree" style="width:100%" />
+								<field name= "date_renou_fin" style="width:100%" force_save= "1" />
+								<field name= "action"  style="width:100%"/>
+								<field name= "x_fonction_id"  style="width:100%"/>
+								<field name= "autre"  style="width:100%"/>
+							</group>
+						</group>    
+						<group>
+							<field name= "acte" style="width:25%"/>
+							<field name= "decret_nom" style="width:40%"/>
+							<field name= "date_nom" style="width:40%"/>
+						</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_membre_tree">
+	<field name="name">view.ca_membre.tree</field>
+	<field name="model">ca_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Membres du conseil">
+			<field name="sequence" widget="handle"/>
+			<field name= "n_matricule"/>
+			<field name= "nom"/>
+			<field name= "typemembre_id" />
+			<field name= "structure_id" />
+			<field name= "date_entree"/>
+			<field name= "date_renou_fin" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_administrateur_form">
+	<field name="name">view.ca_administrateur.form</field>
+	<field name="model">ca_administrateur</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Suivi des administrateur">
+			<header>
+				<field name= "state" widget= "statusbar"/>
+				<button name= "mandat" string= "Valider mandat 1" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['brouillon'])]}" />
+				<button name= "renouveller" string= "Renouveller" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['en cours'])]}" />
+			</header>
+<sheet>
+				<group string= "Tableau de bord de suivi des administrateurs" >
+				</group>
+	<notebook>
+		<page string= "Mandat 1">
+			<group string= "Suivi du Président du Conseil d'Administration">
+			</group>
+			<group col = '2'>
+					<group><field name= "nom_id" options="{'no_create':True}"/></group>
+					<group><field name= "etat" style="width:25%"/></group>
+			</group>
+			<group>
+				<field name="date_entree"  style="width:25%" force_save = '1'/>
+				<field name= "date_fin" style="width:25%" force_save = '1'/>
+			</group>
+			<group string= "Suivi des Autres Administrateurs">
+			</group>
+					<field name= "admin_line_ids"/>
+		</page>
+		<page string= "Mandat 2">
+			<group string= "Suivi du PCA" >
+			</group>
+				<group col= "4" colspan= "6">
+					<field name= "nom_renou_id"  options="{'no_create':True}"/>
+					<field name= "date_fin_rel" style="width:50%"/>
+					<field name= "acte_renou" />
+					<field name= "date_renou_reelle" style="width:50%"/>
+					<field name= "decret_renou"  style="width:50%"/>
+					<field name= "date_fin_reelle" style="width:50%"/>
+					<field name= "date_renou_fin" style="width:50%"/>
+				</group>
+			<group string= "Suivi des Autres Administrateurs">
+			</group>
+					<field name= "admin_lines_ids"/>
+		</page>
+		<page string = "Autres informations" >
+			<group string= "Depart du PCA" col= "4">
+				<field name= "motif_id" style="width:50%"/>
+				<field name= "date_depart" style="width:50%"/>
+				<field name= "nom_entrant_id" style = "width:50%" />
+			</group>
+		</page>
+	</notebook>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_administrateur_tree">
+	<field name="name">view.ca_administrateur.tree</field>
+	<field name="model">ca_administrateur</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Administrateurs" >
+			<field name="sequence" widget="handle"/>
+			<field name= "nom_id" />
+			<field name= "date_entree" />
+			<field name= "date_fin" />
+			<field name= "date_fin_rel" />
+			<field name= "date_renou_fin" />
+			<field name= "etat" />
+			<field name= "state" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_membre_line">
+	<field name="name">view.ca_membre.Line</field>
+	<field name="model">ca_membre_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Liste des administrateurs" editable= "bottom">
+			<field name= "membre_id"/>
+			<field name= "typemembre_id" force_save= "1" />
+			<field name= "date_entree" force_save= "1" />
+			<field name= "date_fin" force_save= "1"/>
+			<field name= "observation"/>
+			<field name="admin_line_id" invisible= "1" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_membres_line">
+	<field name="name">view.ca_membres.Line</field>
+	<field name="model">ca_membres_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Liste des administrateurs" editable= "bottom">
+			<field name= "membre_id"/>
+			<field name= "typemembre_id" force_save= "1" />
+			<field name= "date_entree" invisible= "1" />
+			<field name= "date_fin_rel" force_save= "1"/>
+			<field name= "date_renou_reelle"/>
+			<field name= "date_renou_fin" force_save= "1"/>
+			<field name= "date_fin_reelle"/>
+			<field name= "decret_renou"/>
+			<field name= "acte_renou"/>
+			<field name="admin_lines_id" invisible= "1" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_recommandation_form">
+	<field name="name">view.ca_recommandation.form</field>
+	<field name="model">ca_recommandation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= " Liste des récommandations">
+			<header>
+				<field name= "state" widget="statusbar" />
+				<button name="formule" string="Valider" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['B'])]}" />
+			</header>
+<sheet>
+	<group>
+           <field name="objet" required= "True" options="{'no_create':True}"/>
+    </group>
+	<group>
+		<group>
+			<field name= "cat_id" style="width:100%" force_save= "1"/>
+			<field name= "session_id" style="width:100%" force_save= "1"/>
+		</group>
+		<group>	
+			<field name= "date" style="width:50%" />
+			<field name= "membre_id" force_save= "1"/>
+		</group>
+	</group>
+		<notebook>
+			<page string= "Avis des administrateurs">
+				<button name="afficher" string="Afficher" type="object" class="btn-primary"/>
+				<field name="line_ids" nolabel = "1">              
+		            <tree string="" editable = "bottom">
+				      	<field name="ordre_id"/>
+						<field name="commentaire"/>
+			      	</tree>
+			    </field>
+			</page>
+		</notebook>
+		</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_recommandation_tree">
+	<field name="name">view.ca_recommandation.tree</field>
+	<field name="model">ca_recommandation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= " Liste des récommandations">
+			<field name= "objet"/>
+			<field name= "cat_id"/>
+			<field name= "session_id"/>
+			<field name= "date"/>
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_recommandation_line">
+	<field name="name">view.ca_recommandation.Line</field>
+	<field name="model">ca_recommandation_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Centralisation des récommandations" editable= "bottom">
+			<field name= "commentaire"/>
+			<field name="line_id" invisible= "1" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_centre_rec_form">
+	<field name="name">view.ca_centre_rec.form</field>
+	<field name="model">ca_centre_rec</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Centralisation des récommandations">
+			<header>
+				<field name= "state" widget="statusbar" />
+				<button name="central" string="Centralisation" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['B'])]}" />
+			</header>
+				<sheet>
+					<group>
+						<field name= "objet" style="width:100%" options="{'no_create':True}"/>
+					</group>
+					<notebook>
+					<page string= "Recommandations">
+					<field name="rec_line_ids" nolabel = "1">              
+			            <tree string="" editable = "bottom">
+					      	<field name="membre"/>
+					      	<field name="ordre_id"/>
+							<field name="commentaire"/>
+							<field name="reformulation"/>
+							<field name="retenue"/>
+				      	</tree>
+				    </field>
+					</page>
+					</notebook>
+				</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_centre_rec_tree">
+	<field name="name">view.ca_centre_rec.tree</field>
+	<field name="model">ca_centre_rec</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Centralisation des récommandations">
+			<field name= "objet" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_centre_rec">
+	<field name="name">view.ca_centre_rec.Line</field>
+	<field name="model">ca_centre_rec_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Centralisation des récommandations" editable= "bottom">
+			<field name= "membre"/>
+			<field name= "commentaire"/>
+			<field name= "reformulation"/>
+			<field name= "retenue"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_ca_action">
+	<field name="name">view.ca_action.Line</field>
+	<field name="model">ca_action_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Liste des actions" editable= "bottom">
+			<field name= "objet"/>
+			<field name= "date_debut"/>
+			<field name= "date_fin"/>
+			<field name= "observation"/>
+			<field name= "state"/>
+			<field name="action_id" invisible= "1" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_com_compte_form">
+	<field name="name">view.ca_com_compte.form</field>
+	<field name="model">ca_com_compte</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Observations des commissaires aux comptes">
+			<header>
+				<field name= "state" widget="statusbar" />
+				<button name="valider" string="Valider" type="object"  class="btn-primary" attrs = "{'invisible':[('state','in', ['V'])]}"/>
+			</header>
+		<sheet>
+			<group>
+                    <field name="objet" required="True" style="width:100%" options="{'no_create':True}"/>
+		    </group>
+	<group col= "4">
+		<field name= "cat_id" style="width:100%" force_save='1' />
+		<field name= "date" style="width:25%" />
+		<field name= "session_id" style="width:75%"  force_save='1'/>
+		<field name= "membre_id" force_save= "1" />
+		<label for ="piece_jointe" string= "Pièce Jointe" />
+			<div>
+				<field name="piece_jointe"  class= "oe_inline"/> (word,pdf,zip)
+			</div>
+	</group>
+	<group>
+		<field name= "observation"/>
+	</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_com_compte_tree">
+	<field name="name">view.ca_com_compte.tree</field>
+	<field name="model">ca_com_compte</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Observations des commissaires aux comptes">
+		<field name= "cat_id" />
+		<field name= "date" />
+		<field name= "session_id"/>
+		<field name= "membre_id"/>
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_ca_rec_objet_form">
+	<field name="name">view.ca_rec_objet.form</field>
+	<field name="model">ca_rec_objet</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Objet de recommandations" >
+<sheet>
+	<div class="oe_button_box" name="button_box">
+	    <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+	    	<field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+    	</button>
+	</div>
+	<group string= " " >
+		<field name="lib_court" style="width:25%"/>
+		<field name="lib_long" style="width:50%"/>
+	</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_rec_objet_tree">
+	<field name="name">view.ca_rec_objet.tree</field>
+	<field name="model">ca_rec_objet</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Objet de recommandations" >
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_ca_cat_representant_tree">
+	<field name="name">view.ca_cat_representant.tree</field>
+	<field name="model">ca_cat_representant</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Structure représentée">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_ca_parametre_nature_form">
+	<field name="name">view.ca_parametre_nature.form</field>
+	<field name="model">ca_parametre_nature</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= " Liste des récommandations">
+		<sheet>
+			<group>
+				<field name= "nature_id" style="width:100%" options="{'no_create':True}" />
+				<field name= "company_id" style="width:100%" invisible='1' />
+			</group>
+			<notebook>
+				<page string= "Documents liés">
+					<field name="doc_ids" nolabel = "1">              
+			            <tree string="" editable = "bottom">
+					      	<field name="doc_id"/>
+				      	</tree>
+				    </field>
+				</page>
+			</notebook>
+		</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_ca_parametre_nature_tree">
+	<field name="name">view.ca_parametre_nature.tree</field>
+	<field name="model">ca_parametre_nature</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Structure représentée">
+			<field name="nature_id" />
+		</tree>
+	</field>
+</record>
+
+<!--Definition des actions-->
+
+<record model="ir.actions.act_window" id="act_list_ca_rec_objet">
+		<field name="name">Liste des récommandations</field>
+		<field name="res_model">ca_rec_objet</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_ca_com_compte">
+		<field name="name">Observations des commissaires aux comptes</field>
+		<field name="res_model">ca_com_compte</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_ca_centre_rec">
+		<field name="name">Centralisation des récommandations</field>
+		<field name="res_model">ca_centre_rec</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_consult_centrale">
+		<field name="name">Centralisation des consultations</field>
+		<field name="res_model">ca_consult_centrale</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_consult_pro">
+		<field name="name">Consultation à domicile</field>
+		<field name="res_model">ca_consult_pro</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_convocation">
+		<field name="name">Convocation</field>
+		<field name="res_model">ca_convocation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Convocation au conseil d'administration</p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_ca_conseil">
+		<field name="name">Conseil d'administration</field>
+		<field name="res_model">ca_conseil</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Conseil d'administration</p></field>
+   </record>
+
+<record model="ir.actions.act_window" id="act_list_ca_postconseil">
+		<field name="name">Post Conseil d'administration</field>
+		<field name="res_model">ca_postconseil</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Veuillez envoyer le rapport du conseil aux administrateurs</p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_sejour_pca">
+		<field name="name">Sejour du PCA</field>
+		<field name="res_model">ca_sejour_pca</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_sejour_permanent">
+		<field name="name">Sejour permanent</field>
+		<field name="res_model">ca_sejour_permanent</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_type_session">
+		<field name="name">Liste des types de session</field>
+		<field name="res_model">ca_type_session</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Ordinaire ou extraordinaire </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_ca_nature_session">
+		<field name="name">Prépation du CA</field>
+		<field name="res_model">ca_nature_session</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_type_membre">
+		<field name="name">Liste des types de membre</field>
+		<field name="res_model">ca_type_membre</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Types de membre </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_type_doc">
+		<field name="name">Liste des documents</field>
+		<field name="res_model">ca_type_doc</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Tous les documents relatifs au conseil d'administration</p>
+		</field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_ordre_jour">
+		<field name="name">Liste des ordres du jour</field>
+		<field name="res_model">ca_ordre_jour</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Veuillez renseigner les ordres du jour ici</p>
+		</field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_motif_mandat">
+		<field name="name">Motif de depart</field>
+		<field name="res_model">ca_motif_mandat</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Veuillez renseigner le motif</p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_cat_representant">
+		<field name="name">Structure représentante</field>
+		<field name="res_model">ca_cat_representant</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Veuillez renseigner les différentes structures de représentation </p></field>
+</record>
+
+
+
+<record model="ir.actions.act_window" id="act_list_ca_membre">
+		<field name="name">Membres du conseil</field>
+		<field name="res_model">ca_membre</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Veuillez enregistrer les membres du conseil d'administration </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_administrateur">
+		<field name="name">Suivi des admnistrateurs</field>
+		<field name="res_model">ca_administrateur</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Veuillez enregistrer les administrateurs du conseil </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_ca_recommandation">
+		<field name="name">Liste des recommandations</field>
+		<field name="res_model">ca_recommandation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_ca_consult_domicile">
+		<field name="name">Liste des consultations à domicile</field>
+		<field name="res_model">ca_consult_domicile</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_nature">
+		<field name="name">Liste des natures de sessions</field>
+		<field name="res_model">ca_nature_de_session</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_parametre_nature">
+		<field name="name">Paramétrage des documents par nature de sessions </field>
+		<field name="res_model">ca_parametre_nature</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+<!--Definition du menu-->
+
+	<menuitem id="main_menu" name = "Gestion Conseil Administration" sequence="10" groups="conseil_administration.conseil_administration_ag"/>	
+	
+		<menuitem id="main_menu_ca" name = "Gestion Conseil Administration" sequence="2" parent="main_menu"/>
+
+		<menuitem id="main_menu_prepa_ca" name = "Préparation du CA" sequence="21" action= "act_ca_nature_session" parent="main_menu_ca"/>
+		
+		<menuitem id="main_menu_ca_convocation" name = "Convocation" sequence="22" action= "act_list_ca_convocation" parent="main_menu_ca"/>
+
+		<menuitem id="main_menu_ca_conseil" name = "Conseil d'administration" sequence="23" action= "act_ca_conseil" parent="main_menu_ca"/>
+
+		<menuitem id="main_menu_ca_postconseil" name = "Post Conseil" sequence="24" action= "act_list_ca_postconseil" parent="main_menu_ca"/>
+
+	<menuitem id="main_menu_consul" name = "Consultation à domicile" sequence="3" parent="main_menu"/>
+
+		<menuitem id="main_menu_ca_consult_domicile" name = "Saisie/Màj Consultation à domicile" sequence="31" action= "act_list_ca_consult_domicile" parent="main_menu_consul" groups= "conseil_administration.conseil_administration_manager_sup" />
+		
+		<menuitem id="main_menu_ca_consult_pro" name = "Consultation à domicile" sequence="32" action= "act_list_ca_consult_pro" parent="main_menu_consul"/>
+
+		<menuitem id="main_menu_ca_consult_centrale" name = "Centralisation" sequence="33" action= "act_list_ca_consult_centrale" parent="main_menu_consul"/>
+
+	<menuitem id="main_menu_rec" name = "Suivi récommandations" sequence="4" parent="main_menu"/>
+
+		<menuitem id="main_menu_ca_recommandation" name = "Projets de recommandations" sequence="41" action= "act_list_ca_recommandation" parent="main_menu_rec"/>
+
+		<menuitem id="main_menu_ca_centre_rec" name = "Centralisation des recommandations" sequence="42" action= "act_list_ca_centre_rec" parent="main_menu_rec"/>
+
+		<menuitem id="main_menu_ca_com_compte" name = "Observations commissaires aux comptes" sequence="43" action= "act_list_ca_com_compte" parent="main_menu_rec"/>
+
+	<menuitem id="main_menu_mem" name = "Membres Conseil" sequence="5" parent="main_menu"/>
+
+		<menuitem id="main_menu_ca_membre" name = "Saisie/Màj Membres du CA" sequence="51" action= "act_list_ca_membre" parent="main_menu_mem"/>
+
+		<menuitem id="main_menu_ca_administrateur" name = "Suivi des administrateurs" sequence="52" action= "act_list_ca_administrateur" parent="main_menu_mem"/>
+
+		<menuitem id="main_menu_ca_sejour" name = "Séjour du PCA" sequence="53" parent="main_menu_mem"/>
+
+			<menuitem id="main_menu_ca_sejour_ob" name = "Séjour obligatoire" sequence="2" action= "act_list_ca_sejour_pca" parent="main_menu_ca_sejour"/>
+
+			<menuitem id="main_menu_ca_sejour_permanent" name = "Séjour permanent" sequence="3" action= "act_list_ca_sejour_permanent" parent="main_menu_ca_sejour"/>
+
+	<menuitem id="main_menu_parametrage" name = "Paramètres" sequence="6" parent="main_menu" groups= "conseil_administration.conseil_administration_manager_sup" />
+
+		<menuitem id="main_menu_param_nature" name = "Documents par Nature de session" sequence="61" action= "act_list_parametre_nature" parent="main_menu_parametrage"/> 
+
+
+	<menuitem id="main_menu_parametre" name = "Données de base" sequence="7" parent="main_menu" groups= "conseil_administration.conseil_administration_manager_sup" />
+
+		<menuitem id="main_menu_ca_type_membre" name = " Saisie/Màj Types de membre" sequence="71" action= "act_list_ca_type_membre" parent="main_menu_parametre" /> 
+
+		<menuitem id="main_menu_ca_type_session" name = "Saisie/Màj Types de session" sequence="72" action= "act_list_ca_type_session" parent="main_menu_parametre" />
+
+		<menuitem id="main_menu_ca_nature_session" name = "Saisie/Màj Natures de session" sequence="73" action= "act_nature" parent="main_menu_parametre" /> 
+
+		<menuitem id="main_menu_ca_ordre_jour" name = "Saisie/Màj Ordre du jour" sequence= "74" action= "act_list_ca_ordre_jour" parent="main_menu_parametre" />
+
+		<menuitem id="main_menu_ca_motif_mandat" name = "Saisie/Màj Motifs de départ" sequence="75" action= "act_list_ca_motif_mandat" parent="main_menu_parametre" />
+
+		<menuitem id="main_menu_ca_type_doc" name = "Saisie/Màj Documents CA" sequence="77" action= "act_list_ca_type_doc" parent="main_menu_parametre" />
+
+		<menuitem id="main_menu_ca_cat_representant" name = "Saisie/Màj Structure d'origine" sequence="78" action= "act_list_ca_cat_representant" parent="main_menu_parametre" />
+
+ </odoo>
+
+

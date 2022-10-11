@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report 
+    id="report_plan_amort"
+    string="Amortissement"
+    model="account.asset.asset" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_plan_amort" 
+    name="gestion_immobilisation.report_plan_amort_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_plan_amort_view">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="row justify-content-end mb16">
+                        <div class="col-4" name="right_box">
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.immo_id, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+                            <span t-field="o.immo_id"/>
+                        </div>
+                    </div>
+                    <div>
+                    <h1 style= "text-align:center;"> <FONT COLOR= "Blue"> PLAN D'AMORTISSEMENTS D'IMMOBILISATION </FONT> </h1>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.immo_id" class="col-auto mw-100 mb-2">
+                    <strong>Code Immobilisation:</strong>
+                    <tr><span t-field="o.immo_id"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.name" class="col-auto mw-100 mb-2">
+                    <strong>Nom Immobilisation:</strong>
+                        <td> <span t-field="o.name"/> </td>
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.category_id" class="col-auto mw-100 mb-2">
+                    <strong>Categorie d'immobilisation:</strong>
+                    <td> <span t-field="o.category_id"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.immo_id.amort_id" class="col-auto mw-100 mb-2">
+                    <strong>Type d'amortissement:</strong>
+                    <td> <span t-field="o.immo_id.amort_id"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.value" class="col-auto mw-100 mb-2">
+                    <strong>Montant d'acquisition: </strong>
+                    <td> <span t-field="o.value"/> <tr> CFA </tr> </td> 
+                        </div>
+<!--
+                        <div t-if="o.value" class="col-auto mw-100 mb-2">
+                    <strong>Imputation comptable:</strong>
+                    <td> <span t-field="o.immo_id.plan_comp_id"/> </td> 
+                        </div>
+--> 
+                     </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.immo_id.dateacquisition" class="col-auto mw-100 mb-2">
+                    <strong>Date acquisition:</strong>
+                    <tr><span t-field="o.immo_id.dateacquisition"/> </tr>
+                            </div>
+
+                            <div t-if="o.immo_id.date_mise_service" class="col-auto mw-100 mb-2">
+                    <strong>Date mise en service:</strong>
+                    <tr><span t-field="o.immo_id.date_mise_service"/> </tr>
+                            </div>
+
+                            <div t-if="o.first_depreciation_manual_date" class="col-auto mw-100 mb-2">
+                    <strong>Date de dépréciation:</strong>
+                    <tr><span t-field="o.first_depreciation_manual_date"/> </tr> 
+                            </div>
+                        </div>
+
+                    <div>
+                    <h4 style= "text-align:center;"> <FONT COLOR= "Blue" >Tableau d'amortissements </FONT> </h4>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Date de dépréciation</th>
+                        <th style="border:2px solid black" class="text-center">Dotations</th>
+                        <th style="border:2px solid black" class="text-center">Amortissement cumulé</th>
+                        <th style="border:2px solid black" class="text-center">Valeur Nette Comptable</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.depreciation_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.depreciation_date"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.amount"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.depreciated_value"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.remaining_value"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template>
+
+<report 
+    id="report_immobilisation"
+    string="code_bare"
+    model="gi_immobilisation" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_code_bare" 
+    name="gestion_immobilisation.report_code_bare_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_code_bare_view">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <td >
+                    <span t-if="o.code_immo">
+                        <div>
+                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', o.code_immo, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/>
+                        </div>
+                        <div t-field="o.code_immo"> </div>
+                    </span>
+                </td>
+            </div>
+        </t>
+    </t>
+</template> 
+
+</odoo>

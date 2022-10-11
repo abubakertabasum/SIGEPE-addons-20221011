@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="MEM" model="ca_type_membre">
+            <field name="lib_court">PCA</field>
+            <field name="lib_long">PRESIDENT DU CONSEIL D'ADMINISTRATION</field>
+        </record>
+
+        <record id="MEMB" model="ca_type_membre">
+            <field name="lib_court">ADMINISTRATEUR</field>
+            <field name="lib_long">ADMINISTRATEUR</field>
+        </record>
+
+        <record id="MEMBR" model="ca_type_membre">
+            <field name="lib_court">OBSERVATEUR</field>
+            <field name="lib_long">OBSERVATEUR</field>
+        </record>
+
+<!-- Parametrage des types de session -->
+
+        <record id="CA" model="ca_type_session">
+            <field name="lib_court">SESSION ORDINAIRE</field>
+            <field name="lib_long">SESSION ORDINAIRE</field>
+        </record>
+
+        <record id="CAT" model="ca_type_session">
+            <field name="lib_court">SESSION EXTRAORDINAIRE</field>
+            <field name="lib_long">SESSION EXTRAORDINAIRE</field>
+        </record>
+
+<!-- Parametrage de la nature de session -->
+
+        <record id="SE" model="ca_nature_de_session">
+            <field name="lbcourt">SESSION BUDGETAIRE</field>
+            <field name="lblong">SESSION BUDGETAIRE</field>
+        </record>
+
+        <record id="ETATS" model="ca_nature_de_session">
+            <field name="lbcourt">SESSION DES ETATS FINANCIERS</field>
+            <field name="lblong">SESSION DES ETATS FINANCIERS</field>
+        </record>
+
+<!-- Parametrage du motif de mandat -->
+
+        <record id="MA" model="ca_motif_mandat">
+            <field name="lib_court">FIN DE MANDAT</field>
+            <field name="lib_long">FIN DE MANDAT</field>
+        </record>
+
+        <record id="MAN" model="ca_motif_mandat">
+            <field name="lib_court">REVOCATION</field>
+            <field name="lib_long">REVOCATION</field>
+        </record>
+
+        <record id="MAND" model="ca_motif_mandat">
+            <field name="lib_court">INVALIDITE</field>
+            <field name="lib_long">INVALIDITE</field>
+        </record>
+
+        <record id="MANDA" model="ca_motif_mandat">
+            <field name="lib_court">DEMISSION</field>
+            <field name="lib_long">DEMISSION</field>
+        </record>
+
+        <record id="MANDAT" model="ca_motif_mandat">
+            <field name="lib_court">DECES</field>
+            <field name="lib_long">DECES</field>
+        </record>
+
+<!-- Parametrage des ordres du jour -->
+
+        <record id="RA" model="ca_ordre_jour">
+            <field name="lib_court">RAPPORT D'ACTIVITE</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU RAPPORT D'ACTIVITES</field>
+        </record>
+
+        <record id="COMPTEA" model="ca_ordre_jour">
+            <field name="lib_court">COMPTE ADMINISTRATIF</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU COMPTE ADMINISTRATIF</field>
+        </record>
+
+        <record id="CG" model="ca_ordre_jour">
+            <field name="lib_court">COMPTE DE GESTION</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU COMPTE DE GESTION DU CA</field>
+        </record>
+
+        <record id="RB" model="ca_ordre_jour">
+            <field name="lib_court">RESULTAT BUDGETAIRE</field>
+            <field name="lib_long">AFFECTATION DU RESULTAT BUDGETAIRE</field>
+        </record>
+
+        <record id="BM" model="ca_ordre_jour">
+            <field name="lib_court">BUDGET MODIFIE</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU BUDGET MODIFIE</field>
+        </record>
+
+        <record id="ED" model="ca_ordre_jour">
+            <field name="lib_court">ETAT D'EXECUTION</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DE L’ETAT D'EXECUTION DU PPM N-1</field>
+        </record>
+
+        <record id="PPM" model="ca_ordre_jour">
+            <field name="lib_court">PPM MODIFIE</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU PPM MODIFIE DE L'ANNEE N</field>
+        </record>
+
+        <record id="DIVERS" model="ca_ordre_jour">
+            <field name="lib_court">DIVERS</field>
+            <field name="lib_long">DIVERS</field>
+        </record>
+
+        <record id="PA" model="ca_ordre_jour">
+            <field name="lib_court">PROGRAMME D'ACTIVITE</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU PROGRAMME D'ACTIVITE</field>
+        </record>
+
+        <record id="BI" model="ca_ordre_jour">
+            <field name="lib_court">PROGRAMME D'ACTIVITE</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU BUDGET INITIAL</field>
+        </record>
+
+        <record id="PI" model="ca_ordre_jour">
+            <field name="lib_court">PPM INITIAL</field>
+            <field name="lib_long">EXAMEN ET ADOPTION DU PPM INITIAL DE L'ANNEE N</field>
+        </record>
+<!-- Parametrage des structures representantes -->
+
+
+    </data>
+</odoo>

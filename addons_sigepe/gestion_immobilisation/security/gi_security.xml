@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	 <record id="gestion_immobilisation_category" model="ir.module.category">
+        <field name="name">SIGEPE Gestion Immobilisation</field>
+    </record>
+    
+    
+    <record id="gestion_immobilisation_manager_sup" model="res.groups">
+        <field name="name">Superviseur</field>
+        <field name="category_id" ref="gestion_immobilisation_category"/>    
+    </record>
+    
+    <record id="gestion_immobilisation_manager_res" model="res.groups">
+        <field name="name">Responsable</field>
+        <field name="category_id" ref="gestion_immobilisation_category"/>    
+    </record>
+    
+    
+    <record id="gestion_immobilisation_ag" model="res.groups">
+        <field name="name">AGENT</field>
+        <field name="category_id" ref="gestion_immobilisation_category"/>    
+    </record>
+
+</odoo>

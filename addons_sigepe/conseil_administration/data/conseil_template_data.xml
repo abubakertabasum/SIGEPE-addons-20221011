@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+<record id="email_template_edi_convocation" model="mail.template">
+    <field name="name">Conseiladmin: Envoyer</field>
+    <field name="model_id" ref="conseil_administration.model_ca_convocation"/>
+    <field name="subject">${session_id}</field>
+    <field name="email_from">${object.sudo().create_uid.email_formatted | safe}</field>
+    <field name="parter_to">${object.partner_id.id}</field>
+    <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+            <p style="margin: 0px; padding: 0px; font-size: 13px;">
+         
+                <br/><br/>
+                % if object.partner_id.parent_id:
+                    (${object.partner_id.parent_id.name})
+                % endif
+                <br/><br/>
+                Here is in attachment a request for quotation <strong>${object.name}</strong>
+                % if object.partner_ref:
+                    with reference: ${object.partner_id}
+                % endif
+                from ${object.company_id.name}.
+                <br/><br/>
+                <br/><br/>
+            </p>
+        </div></field>
+            <field name="report_template" ref="report_conseil_administration_ca_convocation"/>
+            <field name="report_name">Conseiladmin_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+
+
+
+<record id="email_template_edi_postconseil" model="mail.template">
+    <field name="name">Conseiladmin: Envoyer</field>
+    <field name="model_id" ref="conseil_administration.model_ca_postconseil"/>
+    <field name="subject">$${session_id}</field>
+    <field name="email_from">${object.sudo().create_uid.email_formatted | safe}</field>
+    <field name="parter_to">${object.partner_id.id}</field>
+    <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+            <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                <br/><br/>
+                % if object.partner_id.parent_id:
+                    (${object.partner_id.parent_id.name})
+                % endif
+                <br/><br/>
+                Here is in attachment a request for quotation <strong>${object.name}</strong>
+                % if object.partner_ref:
+                    with reference: ${object.partner_id}
+                % endif
+                from ${object.company_id.name}.
+                <br/><br/>
+                <br/><br/>
+            </p>
+        </div></field>
+
+            <field name="report_template" ref="report_conseil_administration_ca_postconseil"/>
+            <field name="report_name">Conseiladmin_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+
+
+<record id="email_template_edi_nature_conseil" model="mail.template">
+    <field name="name">Conseiladmin: Envoyer</field>
+    <field name="model_id" ref="conseil_administration.model_ca_nature_conseil"/>
+    <field name="subject">$${session_id}</field>
+    <field name="email_from">${object.sudo().create_uid.email_formatted | safe}</field>
+    <field name="parter_to">${object.partner_id.id}</field>
+    <field name="body_html" type="html">
+        <div style="margin: 0px; padding: 0px;">
+            <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                <br/><br/>
+                % if object.partner_id.parent_id:
+                    (${object.partner_id.parent_id.name})
+                % endif
+                <br/><br/>
+                Here is in attachment a request for quotation <strong>${object.name}</strong>
+                % if object.partner_ref:
+                    with reference: ${object.partner_id}
+                % endif
+                from ${object.company_id.name}.
+                <br/><br/>
+                <br/><br/>
+            </p>
+        </div></field>
+
+            <field name="report_template" ref="report_conseil_administration_ca_nature_session"/>
+            <field name="report_name">Conseiladmin_${(object.name or '').replace('/','_')}</field>
+            <field name="lang">${object.partner_id.lang}</field>
+            <field name="user_signature" eval="False"/>
+            <field name="auto_delete" eval="True"/>
+</record>
+    </data>
+</odoo>

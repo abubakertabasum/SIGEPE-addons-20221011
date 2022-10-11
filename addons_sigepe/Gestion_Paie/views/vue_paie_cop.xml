@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue-->
+
+ <record model="ir.ui.view" id="hr_payslip_form">
+	<field name="name">hr.payslip.form</field>
+	<field name="model">hr.payslip</field>
+    <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+	<field name="arch" type="xml">	
+	<xpath expr="//field[@name='name']" position="after">
+	     <field name = "current_user" options="{'no_open': True}"/>
+	</xpath>
+	
+	<xpath expr="//field[@name='current_user']" position="after">
+	     <field name = "annee_bull"/>
+	</xpath>	
+  </field>
+</record>
+
+<!-- Vue report banque tree -->
+<record model="ir.ui.view" id="view_id_report_banq_tree">
+	<field name="name">view.hr.reportbanque.tree</field>
+	<field name="model">hr_reportbanque</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Report/Banque">
+			<field name="name"/>
+			<field name="company_id"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue report banque form -->
+<record model="ir.ui.view" id="view_id_report_banq_form">
+	<field name="name">view.hr_reportbanque.form</field>
+	<field name="model">hr_reportbanque</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Etat par banque">
+                <group>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" class="oe_inline"/>
+                </group>
+                <newline/>
+                <group>
+                <separator string="Description"/><newline/>
+                <field name="description" nolabel="1"/></group>
+            </form>
+	</field>
+</record>
+
+
+
+<!--Definition des actions-->
+
+<!-- Action import-->
+<record model="ir.actions.act_window" id="hr_report_banq_action">
+		<field name="name">Liste des Etats/Banque</field>
+		<field name="res_model">hr_reportbanque</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+
+
+
+
+
+<!--Definition du menu-->
+<menuitem
+        id="hr_report_banq"
+        action="hr_report_banq_action"
+        parent="hr_payroll.menu_hr_payroll_configuration"
+        sequence="51"/>
+
+	
+	
+	
+</odoo>
+
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_list_employe_re"
+            string="Régistre des employés"
+            model="hr_regemployes" 
+            report_type="qweb-html"
+            file="Gestion_RH.report_list_employe_re" 
+            name="Gestion_RH.report_list_employe_re"
+            menu = "True"/>
+
+<template id="report_list_employe_re">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h2>Liste des employés</h2>
+                        <div class="row mt32 mb32">
+                        	<div class="col-3">
+	                            <strong>Type </strong>
+	                            <p t-field="o.name"/>
+                            </div>
+                            <div class="col-3">
+	                            <strong>Direction </strong>
+	                            <p t-esc="o.x_direction_id.name"/>
+                            </div>
+                            <div class="col-3">
+	                            <strong>Service </strong>
+	                            <p t-field="o.x_service_id.name"/>
+                            </div>
+                            <div class="col-3">
+	                            <strong>Date</strong>
+	                            <p t-esc="o.date_imp"/>
+                            </div>
+                        
+                        </div>
+                <table class = 'table table-sm'>
+			        		<thead style="background-color:#D2D2FF">
+			                      <tr style = "border: 2px SOLID #434146" >
+			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Mle Fonctionnaire</i></strong></th>
+			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Mle Contractuel</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Nom/Prénom(s)</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Catégorie</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Echelle</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Echelon</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Genre</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Etat</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Retraite</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Emploi</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Fonction</i></strong></th>
+   			                          <!-- <th style="padding: 4px 8px;  line-height: 1.42857143;"><strong><i>Département</i></strong></th>-->
+   			                          <!-- <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Service</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143;"><strong><i>Zone</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143;"><strong><i>TYpe employé</i></strong></th>-->
+   			                          
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line" style = "border: 2px SOLID #434146">
+			                      
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.mat"/></td>
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.mat_ctrct"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.nom"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.categorie"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.echelle"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.echelon"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.genre"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.eta_civil"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.retraite"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.emploi"/></td>
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.fonction"/></td>
+			                        
+			                        <!--<td style = "border: 2px SOLID #434146"><span t-field="line.service"/></td> 
+			                         <td style = "border: 2px SOLID #434146"><span t-field="line.zone"/></td>
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.type"/></td>--> 
+			                    </tr>
+			  
+			               
+			                </tbody>
+			        	
+			    </table> 
+			    
+
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

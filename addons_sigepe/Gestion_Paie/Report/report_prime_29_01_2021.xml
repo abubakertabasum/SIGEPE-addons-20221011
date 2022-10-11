@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_primes"
+            string="Prime"
+            model="hr_prime" 
+            report_type="qweb-pdf"
+            file="Gestion_Paie.report_primes" 
+            name="Gestion_Paie.report_primes"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_primes">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h4 style="text-align:center"><span t-field="o.x_intitule"/>  DU MOIS DE  <span t-field="o.x_moi"/></h4>
+            <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;">
+			                          <th style="border:2px solid;"><i>Financier</i></th>
+			                          <th style="border:2px solid;"><i>DRH</i></th>
+			                      	  <th style="border:2px solid;"><i>Année</i></th>
+			                      	  <th style="border:2px solid;"><i>Date opération</i></th>
+			                    </tr>
+			                </thead>  
+			                <tbody>
+			                        <td style="border:2px solid;"><span t-field="o.financiers_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="o.drhs_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.x_exercice_id.no_ex"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.date_op"/></td> 
+			                </tbody>
+			    </table> 
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;" >
+			                          <th style="border:2px solid;"><i>Employé</i></th>
+			                          <th style="border:2px solid;"><i>Matricule</i></th>
+			                          <th style="border:2px solid;"><i>Emploi</i></th>
+			                          <th style="border:2px solid;"><i>Classification</i></th>
+			                          <th style="border:2px solid;"><i>Montant perçu</i></th>
+			                          <th style="border:2px solid;"><i>Signature</i></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                      
+			                        <td style="border:2px solid;" ><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;" ><span t-field="line.x_matricule"/></td>
+			                        <td style="border:2px solid;"><span t-field="line.x_emploi"/></td> 
+			                        <td style="border:2px solid;"><span t-field="line.x_classification"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="line.x_mnt_percu"/></td>
+			                        <td style="border:2px solid;"><span t-esc="line.signature"/></td>                      
+			                    </tr>
+			                </tbody>
+			        	
+			    </table>
+			    <p style="text-align:right; widht:100%"> Total : <span t-field="o.x_prime_total"/> FCFA</p> 
+			     <p style="text-align:right; widht:100%">
+	               	Arrêté à la somme de : 
+	                  <span t-field="o.x_mnt_en_lettre"/>  francs CFA.
+	            </p> 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot> 
+
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

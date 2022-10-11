@@ -1,0 +1,494 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report 
+    id="report_inventaire"
+    string="Imprimer"
+    model="gi_invent_bien" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_inventaire" 
+    name="gestion_immobilisation.report_inventaire_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_inventaire_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"> <FONT COLOR= "Blue"> PROCES VERBAL D'INVENTAIRE DU MATERIEL </FONT> </h1>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministere_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <tr><span t-field="o.ministere_id.lib_long"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.direction_id.name" class="col-auto mw-100 mb-2">
+                    <strong>Direction Chargée:</strong>
+                        <td> <span t-field="o.direction_id.name"/> </td>
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.type_invent" class="col-auto mw-100 mb-2">
+                    <strong>Type Inventaire:</strong>
+                    <td> <span t-field="o.type_invent"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                    <strong>Du:</strong>
+                    <td> <span t-field="o.date_debut"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                    <strong>Au:</strong>
+                    <td> <span t-field="o.date_fin"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style= "text-align:center;"> <FONT COLOR= "Blue"> MATERIEL EN SERVICE</FONT> </h4>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Type Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Théorique</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Physique</th>
+                        <th style="border:2px solid black" class="text-center">Valeur</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.inventbien_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quantite"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant_phys"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.valeur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                            
+                        <strong>Ordonnateur matière:</strong>
+                    </div>
+                            
+                        <div> 
+                            <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                        </div>
+
+                            <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Comptable matière:</strong>
+
+                            </div>
+                            
+                        <div>
+                            <span t-field="o.compta_mat_id.employe_id.name"/> 
+                        </div> 
+                            
+
+                        <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Magasinier/ Fichiste:</strong>
+                        </div>
+                            
+                        <div> 
+                            <span t-field="o.magasinier_id.employe_id.name"/> 
+                        </div> 
+                </div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template> 
+
+
+<report 
+    id="report_invent_entree"
+    string="Imprimer"
+    model="gi_invent_entree" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_invent_entree" 
+    name="gestion_immobilisation.report_invent_entree_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_invent_entree_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"> <FONT COLOR= "Blue"> RAPPORT D'INVENTAIRE DES MATIERES EN STOCK</FONT> </h1>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministere_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <tr><span t-field="o.ministere_id.lib_long"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.direction_id.name" class="col-auto mw-100 mb-2">
+                    <strong>Direction Chargée:</strong>
+                        <td> <span t-field="o.direction_id.name"/> </td>
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.type_invent" class="col-auto mw-100 mb-2">
+                    <strong>Type Inventaire:</strong>
+                    <td> <span t-field="o.type_invent"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                    <strong>Du:</strong>
+                    <td> <span t-field="o.date_debut"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                    <strong>Au:</strong>
+                    <td> <span t-field="o.date_fin"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style= "text-align:center;"> <FONT COLOR= "Blue"> MATERIEL EN STOCK</FONT> </h4>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Budgetaire</th>
+                        <th style="border:2px solid black" class="text-center">Type Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Théorique</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Physique</th>
+                        <th style="border:2px solid black" class="text-center">Ecart</th>
+                        <th style="border:2px solid black" class="text-center">Valeur Unité</th>
+                        <th style="border:2px solid black" class="text-center">Montant</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.entree_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.sous_code"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant_phys"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.ecart"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                            
+                        <strong>Ordonnateur matière:</strong>
+                    </div>
+                            
+                        <div> 
+                            <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                        </div>
+
+                            <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Comptable matière:</strong>
+
+                            </div>
+                            
+                        <div>
+                            <span t-field="o.compta_mat_id.employe_id.name"/> 
+                        </div> 
+                            
+
+                        <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Magasinier:</strong>
+                        </div>
+                            
+                        <div> 
+                            <span t-field="o.magasinier_id.employe_id.name"/> 
+                        </div> 
+                </div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template> 
+
+
+<report 
+    id="report_fiche_stock"
+    string="Fiche de stock"
+    model="gi_fiche_stock" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_fiche_stock" 
+    name="gestion_immobilisation.report_fiche_stock"
+    groups = "base.group_user"
+    menu = "True"/>
+
+<template id="report_fiche_stock">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                 <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"><FONT COLOR= "Blue"> FICHE D'INVENTAIRE DES BIENS EN STOCK</FONT></h1>
+                    </div>
+
+                    <div>
+                    <h4 style= "text-align:center;"><FONT COLOR= "Blue">Informations Générale</FONT></h4>
+                    </div>
+
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ministere_id" class="col-auto mw-100 mb-2">
+                        <strong>Ministère:</strong>
+                            <tr><span t-field="o.ministere_id"/> </tr> 
+                    </div>
+                    <div t-if="o.type_invent" class="col-auto mw-100 mb-2">
+                        <strong>Type d'inventaire:</strong>
+                            <tr><span t-field="o.type_invent"/> </tr> 
+                    </div>
+                </div>
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.emplacement" class="col-auto mw-100 mb-2">
+                        <strong>Emplacement:</strong>
+                            <tr><span t-field="o.emplacement"/> </tr> 
+                    </div> 
+                    <div t-if="o.magasin" class="col-auto mw-100 mb-2">
+                        <strong>Magasin:</strong>
+                            <tr><span t-field="o.magasin"/> </tr> 
+                    </div>
+                    <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                        <strong>Date debut:</strong>
+                            <tr><span t-field="o.date_debut"/> </tr> 
+                    </div>
+                    <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                        <strong>Date fin:</strong>
+                            <tr><span t-field="o.date_fin"/> </tr> 
+                    </div>   
+                </div>
+            <h4 style= "text-align:center;"><FONT COLOR= "Blue">Liste des biens en stock</FONT></h4>
+
+            <div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Budgetaire</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Physique</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.fich_stock_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.sous_code"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant_phy"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+
+            </div>
+         <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                            
+                        <strong>Ordonnateur matière:</strong>
+                    </div>
+                            
+                        <div> 
+                            <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                        </div>
+
+                            <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Comptable matière:</strong>
+
+                            </div>
+                            
+                        <div>
+                            <span t-field="o.compta_mat_id.employe_id.name"/> 
+                        </div> 
+                            
+
+                        <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Magasinier:</strong>
+                        </div>
+                            
+                        <div> 
+                            <span t-field="o.magasinier_id.employe_id.name"/> 
+                        </div> 
+                </div>
+        </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+<report 
+    id="report_fiche_service"
+    string="Fiche de stock"
+    model="gi_fiche_service" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_fiche_service" 
+    name="gestion_immobilisation.report_fiche_service"
+    groups = "base.group_user"
+    menu = "True"/>
+
+<template id="report_fiche_service">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                 <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"><FONT COLOR= "Blue"> FICHE D'INVENTAIRE DES BIENS EN SERVICE</FONT></h1>
+                    </div>
+
+                    <div>
+                    <h4 style= "text-align:center;"><FONT COLOR= "Blue">Informations Générale</FONT></h4>
+                    </div>
+
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ministere_id" class="col-auto mw-100 mb-2">
+                        <strong>Ministère:</strong>
+                            <tr><span t-field="o.ministere_id"/> </tr> 
+                    </div>
+                    <div t-if="o.type_invent" class="col-auto mw-100 mb-2">
+                        <strong>Type d'inventaire:</strong>
+                            <tr><span t-field="o.type_invent"/> </tr> 
+                    </div>
+                </div>
+                <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.emplacement" class="col-auto mw-100 mb-2">
+                        <strong>Emplacement:</strong>
+                            <tr><span t-field="o.emplacement"/> </tr> 
+                    </div> 
+                    <div t-if="o.direction_id" class="col-auto mw-100 mb-2">
+                        <strong>Direction/Service:</strong>
+                            <tr><span t-field="o.direction_id"/> </tr> 
+                    </div>
+                    <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                        <strong>Date debut:</strong>
+                            <tr><span t-field="o.date_debut"/> </tr> 
+                    </div>
+                    <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                        <strong>Date fin:</strong>
+                            <tr><span t-field="o.date_fin"/> </tr> 
+                    </div>   
+                </div>
+            <h4 style= "text-align:center;"><FONT COLOR= "Blue">Liste des biens en service</FONT></h4>
+
+            <div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Quantité Physique</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.stock_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant_phy"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+
+            </div>
+         <div class="row mt32 mb32" id="informations">
+                    <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                            
+                        <strong>Ordonnateur matière:</strong>
+                    </div>
+                            
+                        <div> 
+                            <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                        </div>
+
+                            <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Comptable matière:</strong>
+
+                            </div>
+                            
+                        <div>
+                            <span t-field="o.compta_mat_id.employe_id.name"/> 
+                        </div> 
+                            
+
+                        <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                        <strong>Magasinier:</strong>
+                        </div>
+                            
+                        <div> 
+                            <span t-field="o.magasinier_id.employe_id.name"/> 
+                        </div> 
+                </div>
+        </div>
+            </t>
+        </t>
+    </t>
+</template>
+
+
+</odoo>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_fiche"
+            string="Imprimer"
+            model="hr_ficheattente" 
+            report_type="qweb-html"
+            file="Gestion_RH.report_fiche" 
+            name="Gestion_RH.report_fiche"
+            menu = "True"/>
+
+<template id="report_fiche">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h2>FICHE ATTENTE D'OBJECTIFS</h2>
+                        <div class="row mt32 mb32">
+                        	<div class="col-3">
+	                            <strong>Employé:</strong>
+	                            <p t-field="o.name"/>
+                            </div>
+                        </div>
+                <table class = 'table table-sm'>
+			        		<thead style="background-color:#D2D2FF">
+			                      <tr style = "border: 2px SOLID #434146" >
+			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Objectifs</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line" style = "border: 2px SOLID #434146">
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.objectif"/></td>
+			                    </tr>
+			                </tbody>
+			                
+			    </table> 
+			    <tfoot>
+	            		<div class="row mt32 mb32">
+	            			
+	                        <div class="col-3">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.x_drh_id.name"/>
+	                        </div>
+	                        <div class="col-3">
+	                            <strong></strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p />
+	                        </div>
+	                        <div class="col-3">
+	                            <strong></strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p/>
+	                        </div>
+	                        <div class="col-3">
+	                            <strong>Agent</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.name.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>  
+			        	
+			    
+
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

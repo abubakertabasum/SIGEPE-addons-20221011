@@ -1,0 +1,212 @@
+<?xml version="1.0"?>
+<t t-name="hr_payroll.report_payslip">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="report.external_layout">
+                <div class="page" style="margin-top:-20px" >
+                    <h2 style="text-align:center; widht:100%">BULLETIN DE PAIE</h2>
+                    <p style="text-align:center; widht:100%">
+                        <strong>MOIS : </strong>
+                        <span t-field="o.name"/>
+                    </p>
+
+
+                    <table class=" table table-condensed table-bordered" style="width:30%; float:left; border:none">
+                        <tr  style="height:20px;">
+                            <td><strong>Matricule</strong></td>
+                            <td><span t-field="o.employee_id.x_mat"/></td>
+
+                        </tr>
+                        <tr  style="height:20px;">
+                            <td><strong>Name</strong></td>
+                            <td><span t-field="o.employee_id"/></td>
+                        </tr>
+ 
+                        
+                        <tr  style="height:20px;">
+                            <td><strong>Corps
+</strong></td>
+                            <td><span t-field="o.employee_id.x_corps"/></td>
+                        </tr>
+<t t-if="o.employee_id.children !=' '  ">
+ <tr  style="height:20px;">
+                            <td><strong>Fonction
+</strong></td>
+                            <td><span t-field="o.employee_id.job_id"/></td>
+                        </tr>
+</t>
+<tr  style="height:20px;">
+                            <td><strong>Catégorie</strong></td>
+                            <td><span t-field="o.employee_id.x_categorie"/></td>
+                        </tr>
+                        <tr  style="height:20px;">
+                            <td><strong>Echelle</strong></td>
+                            <td><span t-field="o.employee_id.x_echelle"/></td>
+                        </tr>
+                        <tr  style="height:20px;">
+                            <td><strong>Echelon</strong></td>
+                            <td> <span t-field="o.employee_id.x_echelon"/> 
+</td>
+                        </tr>
+                        <tr  style="height:20px;">
+                            <td><strong>Address</strong></td>
+                            <td colspan="3">
+                                <div t-field="o.employee_id.address_home_id" t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;, &quot;fax&quot;], &quot;no_marker&quot;: true}"/>
+                            </td>
+                        </tr >
+                        <tr  style="height:20px;">
+                            <td><strong>Email</strong></td>
+                            <td><span t-field="o.employee_id.work_email"/></td>
+                        </tr>
+                      
+                        <tr  style="height:20px;">
+                            <td><strong>Reference</strong></td>
+                            <td><span t-field="o.number"/></td>
+                        </tr>
+						<tr  style="height:20px;">
+                            <td><strong>Situation matrimoniale</strong></td>
+                            <td><span t-field="o.employee_id.marital"/></td>
+                        </tr>
+                        <tr  style="height:20px;">
+                            <td><strong>Nombre charges fiscales</strong></td>
+                            <td>
+								<t t-if="o.employee_id.children == 0">
+								<t t-if="o.employee_id.x_conjoint==0 ">0 + 0  </t>
+								<t t-if="o.employee_id.x_conjoint !=0 "><span  t-field="o.employee_id.x_conjoint"/> + 0 </t>
+								</t>
+								
+								<t t-if="o.employee_id.children != 0">
+								<t t-if="o.employee_id.x_conjoint==0 "> 0 + <span  t-field="o.employee_id.children"/>  </t>
+								<t t-if="o.employee_id.x_conjoint !=0 "><span  t-field="o.employee_id.x_conjoint"/> + <span  t-field="o.employee_id.children"/>  </t>
+								</t>
+							</td>
+                        </tr>
+                        
+
+                      
+                    </table>
+
+
+
+
+                    <table class=" table table-condensed" style="width:69%;margin-left:1%; float:right; min-height:400px !important">
+                        <thead style="background-color:#D2D2FF">
+                            <tr >
+                                <td colspan="3"  style="padding: 4px 8px;  line-height: 1.42857143;">ÉLÉMENTS DE PAIE</td>
+
+                                <td style="text-align:right; padding-right:40px; padding:4px 8px;  line-height: 1.42857143;">AVOIRS</td>
+                                <td style="text-align:right; padding-right:40px;padding:4px 8px;  line-height: 1.42857143;">RETENUES</td>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr   t-foreach="get_payslip_lines(o.line_ids)" t-as="p"  style=" line-height: 0.72857143  !important;" >
+	                        	<t t-if="p.name not in  'IUTS, Cotisation retraite (CARFO), Total Retenu, Cotisation retraite, Cotisation retraite (CNSS), Cotisation patronale(CARFO), IUTS sur rappel, Trop percu sur exercice, Trop percu sur indemnite de responsabilite, Trop percu sur indemnite de logement, Trop percu sur indemnite de technicite, Trop percu sur indemnite compensatrice forfaitaire, Trop Percu sur Indemnite Astreinte, Trop percu sur allocation familiale, Trop percu sur prime de rendement, Trop percu sur salaire de base,   Trop Percu sur Indemnite Specifique Informaticien, Trop percu sur indemnite explitation reseau, Cotisation caisse de solidarite, Pension alimentaire, Coupure pour fait de greve, Cotisation patronale(CNSS), Net, Salaire Brut, Base imposable, Cotisation assurance(Allianz-BA), Cotisation assurance(CIF-VIE), Cotisation assurance(GA-IARD), Cotisation assurance(JACKSON ASSURANCES), Cotisation assurance(SAHAM), Cotisation assurance(SONAR-IARD), Cotisation assurance(CORIS ASSURANCE), Cotisation assurance(UAB-VIE), Cotisation assurance(SUNU)'   ">
+			                        <td   colspan="3"> <span t-field="p.name"/></td>  
+			                        <td style="text-align:right; padding-right:40px"><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+			                        <td></td>
+		                        </t>
+	
+	                        </tr>
+						<tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p"   style=" line-height: 0.72857143  !important;">
+
+                     
+                            <t t-if="p.name in ' Cotisation retraite (CNSS), Cotisation retraite (CARFO)' ">
+                        <td  colspan="3"> <span t-field="p.name"/></td>  
+                        <td></td>
+                        <td style="text-align:right; padding-right:40px" ><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+</t>
+
+</tr>
+
+<tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p"    style=" line-height: 0.72857143 !important;">
+
+                     
+                            <t t-if="p.name in 'Cotisation retraite, Cotisation patronale(CARFO),  Trop percu sur indemnite de responsabilite, Trop percu sur indemnite de logement, Trop percu sur indemnite de technicite, Trop percu sur indemnite compensatrice forfaitaire, Trop Percu sur Indemnite Astreinte, Trop percu sur allocation familiale, Trop percu sur prime de rendement, Trop percu sur salaire de base, Trop Percu sur Indemnite Specifique Informaticien, Trop percu sur indemnite explitation reseau, Cotisation assurance, Cotisation caisse de solidarite, Pension alimentaire, Coupure pour fait de greve, Cotisation patronale(CNSS)'  ">
+                        <td  colspan="3"> <span t-field="p.name"/></td>  
+                        <td></td>
+                        <td style="text-align:right; padding-right:40px" ><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+</t>
+
+</tr>
+
+<tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p"  style=" line-height: 0.72857143 !important;" >
+
+                     
+                            <t t-if="p.name in 'Cotisation assurance(Allianz-BA), Cotisation assurance(CIF-VIE), Cotisation assurance(GA-IARD), Cotisation assurance(JACKSON ASSURANCES), Cotisation assurance(SAHAM), Cotisation assurance(SONAR-IARD), Cotisation assurance(CORIS ASSURANCE), Cotisation assurance(UAB-VIE), Cotisation assurance(SUNU)'  ">
+                        <td  colspan="3"> <span t-field="p.name"/></td>  
+                        <td></td>
+                        <td style="text-align:right; padding-right:40px" ><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+</t>
+
+</tr>
+
+
+<tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p" style=" line-height: 0.72857143 !important;" >
+<t t-if="p.name in 'IUTS, IUTS sur rappel' ">
+                        <td  colspan="3"> <span t-field="p.name"/></td>  
+                        <td></td>
+                        <td style="text-align:right; padding-right:40px" ><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+</t>
+                       
+</tr>
+
+<tr t-foreach="get_payslip_lines(o.line_ids)" t-as="p"   style=" line-height: 0.72857143 !important;">
+
+                     
+                            <t t-if="p.name in 'Trop percu sur exercice ' ">
+                        <td  colspan="3"> <span t-field="p.name"/></td>  
+                        <td></td>
+                        <td style="text-align:right; padding-right:40px" ><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/></td>
+</t>
+
+</tr>
+                  </tbody>
+                       </table>
+                       <table class=" table" style="width:69%;margin-left:1%;margin-top:-10px; float:right; "> 
+							<tr style="background-color:#D2D2FF;">
+	                            <td style="padding:4px  8px;  line-height: 1.32857143;"> MODE DE PAIEMENT</td>  
+	                            <td style="padding: 4px 8px;  line-height: 1.32857143;">N° COMPTE</td>
+	                            <td style="padding:4px 8px;  line-height: 1.32857143;">BASE IMPOSABLE</td>
+	                            <td style="text-align:right; padding-right:20px;padding: 4px 8px;  line-height: 1.32857143;">BRUTE A ORDONNANCER</td>
+	                            <td style="text-align:right; padding-right:20px;padding: 4px 8px;  line-height: 1.32857143;">TOTAL DES RETENUS</td>
+	                        </tr>
+							<tr style="width:90%;">
+								<td style="border-bottom:1px solid #ddd;" ><span t-field="o.employee_id.x_modepaiement"/> <br/>
+									<span t-field="o.employee_id.x_bank"/> - <span t-field="o.employee_id.x_agence"/>
+								</td>  
+								<td style="border-bottom:1px solid #ddd;"><span t-field="o.employee_id.x_banknum"/> </td>
+                            
+                                <td  style="border-bottom:1px solid #ddd;">  
+                                   <t t-foreach="get_payslip_lines(o.line_ids)" t-as="p"> <t t-if="p.name =='Base imposable' "><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/> </t> </t> 
+                                </td>
+                                <td  style="text-align:right; padding-right:20px; border-bottom:1px solid #ddd">
+                                    <t t-foreach="get_payslip_lines(o.line_ids)" t-as="p"> <t t-if="p.name =='Salaire Brut' "><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/> </t> </t> 
+                                </td>
+                                <td style="text-align:right; padding-right:20px; border-bottom:1px solid #ddd" >
+                                   <t t-foreach="get_payslip_lines(o.line_ids)" t-as="p"> <t t-if="p.name =='Total Retenu' ">
+									<span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/> </t> </t> 
+
+                                </td>
+                            
+                        </tr>
+						 <tr >
+						  
+						
+	                        <td  colspan="3" ></td>
+	                        	<td  style=" background-color:#089CB8; color:#FFF; font-weight:bold">NET A PAYER
+							</td> 
+							<td  style=" border: 2px SOLID #089CB8"> 
+								<t t-foreach="get_payslip_lines(o.line_ids)" t-as="p"> <t t-if="p.name =='Net' "><span t-esc="'{:,}'.format(int(p.amount)).replace(',', ' ')"/> </t> </t>
+							</td> 
+						                       
+						 </tr>
+                               
+                                </table>
+
+
+                                </div>
+                                
+                            </t>
+                        </t>
+                        </t>
+                        </t>

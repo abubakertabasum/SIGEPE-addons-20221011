@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_precompte"
+            string="Imprimer"
+            model="hr_conventionprecptes" 
+            report_type="qweb-html"
+            file="Gestion_RH.report_precompte" 
+            name="Gestion_RH.report_precompte"
+            menu = "True"/>
+
+<template id="report_precompte">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h2>ETAT PAIEMENT PRECOMPTE</h2>
+                        <div class="row mt32 mb32">
+                        	<div class="col-3">
+	                            <strong>Employé:</strong>
+	                            <p t-field="o.x_employe_id"/>
+                            </div>
+                           <div class="col-3">
+	                            <strong>Montant Total</strong>
+	                            <p t-esc="o.mnt_totals"/> F CFA
+                           </div>
+                        
+                        </div>
+                <table class = 'table table-sm'>
+			        		<thead style="background-color:#D2D2FF">
+			                      <tr style = "border: 2px SOLID #434146" >
+			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Date</i></strong></th>
+			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Montant</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Montant instant t</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Reste à payer</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Mode de paiement</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Réf.Pièce</i></strong></th>
+   			                          <th style="padding: 4px 8px;  line-height: 1.42857143; border: 2px SOLID #434146"><strong><i>Observations</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_reg_ids" t-as="line" style = "border: 2px SOLID #434146">
+			                      
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.date"/></td>
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.mnt_echeance"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.reste_echeance"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.reste_a_payer"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.x_mode"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.ref_piece"/></td> 
+			                        <td style = "border: 2px SOLID #434146"><span t-field="line.observation"/></td>
+			                        
+			                    </tr>
+			  
+			                </tbody>
+			                
+			    </table> 
+			    <tfoot>
+				            		<div class="row mt32 mb32">
+				            			
+				                        <div class="col-3">
+				                            <strong>DRH</strong>
+				                            <br/>
+				                            <br/>
+				                            <br/>
+				                            <br/>
+				                            <p t-esc="o.current_user.name"/>
+				                        </div>
+			                        </div>
+				            </tfoot>  
+			        	
+			    
+
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

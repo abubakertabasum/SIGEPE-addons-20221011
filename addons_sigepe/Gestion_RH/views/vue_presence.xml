@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue-->
+<record model="ir.ui.view" id="presence_form">
+	<field name="name">hr.attendance.form</field>
+	<field name="model">hr.attendance</field>
+    <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+	<field name="arch" type="xml">	
+			<!--<xpath expr="//field[@name='check_out']" position="after">
+				  <field name = "actif"/>
+			</xpath>-->
+			
+			<xpath expr="//field[@name='check_out']" position="attributes">
+				  <attribute name="attrs">{'required':False, 'invisible':True, 'nolabel' : True}</attribute>
+			</xpath>
+	</field>
+</record>	
+</odoo>
+
+

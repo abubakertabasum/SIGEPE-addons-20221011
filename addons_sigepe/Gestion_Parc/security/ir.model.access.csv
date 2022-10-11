@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_vehicle,access.fleet_vehicle,model_fleet_vehicle,base.group_user,1,1,1,1
+access_fleet_vehicle_log_fuel,access.fleet_vehicle_log_fuel,model_fleet_vehicle_log_fuel,base.group_user,1,1,1,1
+access_fleet_vehicle_odometer,access.fleet_vehicle_odometer,model_fleet_vehicle_odometer,base.group_user,1,1,1,1
+access_fleet_vehicle_cost,access.fleet_vehicle_cost,model_fleet_vehicle_cost,base.group_user,1,1,1,1
+access_fleet_vehicle_log_contract,access.fleet_vehicle_log_contract,model_fleet_vehicle_log_contract,base.group_user,1,1,1,1
+access_fleet_vehicle_model,access.fleet_vehicle_model,model_fleet_vehicle_model,base.group_user,1,1,1,1
+access_fleet_vehicle_model_brand,access.fleet_vehicle_model_brand,model_fleet_vehicle_model_brand,base.group_user,1,1,1,1
+access_fleet_service_type,access.fleet_service_type,model_fleet_service_type,base.group_user,1,1,1,1
+access_fleet_service_type,access.fleet_service_type,model_fleet_service_type,base.group_user,1,1,1,1
+access_fleet_vehicle_state,access.fleet_vehicle_state,model_fleet_vehicle_state,base.group_user,1,1,1,1
+access_fleet_vehicle_tag,access.fleet_vehicle_tag,model_fleet_vehicle_tag,base.group_user,1,1,1,1
+
+
+

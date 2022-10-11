@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+  
+          <record id="CA" model="gi_categorie">
+            <field name="code">01</field>
+            <field name="lib_court">ORDINATEUR BUREAUTIQUE</field>
+            <field name="lib_long">ORDINATEUR BUREATIQUE</field>
+        </record>
+      
+
+        <record id="CAT" model="gi_categorie">
+            <field name="code">02</field>
+            <field name="lib_court">IMPRIMANTE</field>
+            <field name="lib_long">IMPRIMANTE</field>
+        </record>
+
+<!-- Parametrage des marques -->
+
+        <record id="MAR" model="gi_marque">
+            <field name="lib_court">HP</field>
+            <field name="lib_long"> HEWLETT-PACKARD</field>
+        </record>
+
+        <record id="MARQU" model="gi_marque">
+            <field name="lib_court">TOSHIBA</field>
+            <field name="lib_long">TOSHIBA</field>
+        </record>
+
+<!-- Parametrage des marques -->
+
+        <record id="MOD" model="gi_modele">
+            <field name="lib_court">TOSHIBA TECRA Z10</field>
+            <field name="lib_long">TOSHIBA TECRA Z10</field>
+        </record>
+
+<!-- Parametrage des modes d'acquisition -->
+
+        <record id="ACQ" model="gi_mode_acquisition">
+            <field name="lib_court">ACHATS</field>
+            <field name="lib_long">ACHATS</field>
+        </record>  
+
+        <record id="ACQUI" model="gi_mode_acquisition">
+            <field name="lib_court">DON</field>
+            <field name="lib_long">DON</field>
+        </record> 
+
+        <record id="ACQUIS" model="gi_mode_acquisition">
+            <field name="lib_court">LEG</field>
+            <field name="lib_long">LEG</field>
+        </record> 
+
+<!-- Parametrage des types d'amortissements -->
+
+        <record id="AL" model="gi_typeamortissement">
+            <field name="lib_court">AMORTISSEMENT LINEAIRE</field>
+            <field name="lib_long">AMORTISSEMENT LINEAIRE</field>
+        </record>
+
+        <record id="AD" model="gi_typeamortissement">
+            <field name="lib_court">AMORTISSEMENT DEGRESSIF</field>
+            <field name="lib_long">AMORTISSEMENT DEGRESSIF</field>
+        </record>
+
+<!-- Parametrage de quelques sources de financements -->
+
+        <record id="SOUR" model="gi_source_fin">
+            <field name="lib_court">BM</field>
+            <field name="lib_long">BANQUE MONDIAL</field>
+        </record>  
+
+        <record id="SOURCE" model="gi_source_fin">
+            <field name="lib_court">BAD</field>
+            <field name="lib_long">BANQUE AFRICAINE DE DEVELOPPEMENT</field>
+        </record> 
+
+<!-- Parametrage de quelques sources de financements -->
+
+        <record id="FIN" model="gi_typeimmobilisation">
+            <field name="lib_court">IMMOBILISATION CORPORELLE</field>
+            <field name="lib_long">IMMOBILISATION CORPORELLE</field>
+        </record>     
+
+        <record id="FINAN" model="gi_typeimmobilisation">
+            <field name="lib_court">IMMOBILISATION INCORPERELLE</field>
+            <field name="lib_long">IMMOBILISATION INCORPERELLE</field>
+        </record>
+
+<!-- Parametrage de quelques sources de financements -->
+
+        <record id="MOY" model="gi_etat">
+            <field name="lib_court">MOYEN</field>
+            <field name="lib_long">MOYEN</field>
+        </record>     
+
+        <record id="BN" model="gi_etat">
+            <field name="lib_court">BON</field>
+            <field name="lib_long">BON</field>
+        </record>
+
+        <record id="PAS" model="gi_etat">
+            <field name="lib_court">PASSABLE</field>
+            <field name="lib_long">PASSABLE</field>
+        </record>
+
+<!-- Parametrage des sorties des matières -->
+
+        <record id="MOY" model="gi_motif_sortie">
+            <field name="lib_court">REPARATION</field>
+            <field name="lib_long">REPARATION</field>
+        </record>     
+
+        <record id="BN" model="gi_motif_sortie">
+            <field name="lib_court">LOCATION</field>
+            <field name="lib_long">LOCATION</field>
+        </record>
+
+<!-- Parametrage des sorties des matières -->
+
+        <record id="MEMB" model="gi_type_membre">
+            <field name="lib_court">MEMBRE</field>
+            <field name="lib_long">MEMBRE</field>
+        </record>     
+
+        <record id="SPE" model="gi_type_membre">
+            <field name="lib_court">SPECIALISTE</field>
+            <field name="lib_long">SPECIALISTE</field>
+        </record>
+
+<!-- Parametrage des types de mouvement -->
+
+        <record id="CV" model="gi_typemvtimmo">
+            <field name="lib_court">CESSION VENTE</field>
+            <field name="lib_long">CESSION VENTE</field>
+        </record>     
+
+        <record id="CD" model="gi_typemvtimmo">
+            <field name="lib_court">CESSION DON</field>
+            <field name="lib_long">CESSION DON</field>
+        </record>
+
+        <record id="DE" model="gi_typemvtimmo">
+            <field name="lib_court">DECLASSEMENT</field>
+            <field name="lib_long">DECLASSEMENT</field>
+        </record>
+
+    </data>
+</odoo>

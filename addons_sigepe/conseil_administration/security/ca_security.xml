@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	 <record id="conseil_administration_category" model="ir.module.category">
+        <field name="name">SIGEPE CA</field>
+    </record>
+    
+    <record id="conseil_administration_manager_res" model="res.groups">
+        <field name="name">Responsable</field>
+        <field name="category_id" ref="conseil_administration_category"/>    
+    </record>
+    
+    
+    <record id="conseil_administration_ag" model="res.groups">
+        <field name="name">Accès CA</field>
+        <field name="category_id" ref="conseil_administration_category"/>    
+    </record>
+	
+	<record id="conseil_administration_manager_sup" model="res.groups">
+        <field name="name">Administrateur de données CA</field>		
+        <field name="category_id" ref="conseil_administration_category"/>    
+    </record>
+
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	  <record id = 'Gestion_Formation_category' model = 'ir.module.category'>
+	  			<field name = 'name'>GESTION FORMATION ET STAGE</field>
+	  </record>
+	  
+	  <record id = 'Gestion_Formation_manager_Gestionnaire' model = 'res.groups'>
+	  			<field name = 'name'>GESTIONNAIRE</field>
+	  			<field name = 'category_id' ref ='Gestion_Formation_category'/>
+	  </record>
+	  
+	  
+	  <record id = 'Gestion_Formation_manager_Agent' model = 'res.groups'>
+	  			<field name = 'name'>AGENT</field>
+	  			<field name = 'category_id' ref ='Gestion_Formation_category'/>
+	  </record>
+	  
+	  <record id = 'Gestion_Formation_chef_service' model = 'res.groups'>
+	  			<field name = 'name'>CHEF DE SERVICE</field>
+	  			<field name = 'category_id' ref ='Gestion_Formation_category'/>
+	  </record>
+	  
+	  <record id = 'Gestion_Formation_admin_donnees' model = 'res.groups'>
+	  			<field name = 'name'>ADMIN DONNEES</field>
+	  			<field name = 'category_id' ref ='Gestion_Formation_category'/>
+	  </record>
+
+	  
+
+
+</odoo>

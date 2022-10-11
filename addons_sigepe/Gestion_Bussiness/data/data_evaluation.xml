@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+          
+        <!-- Donnes de base Critère d'evaluations des employs
+       
+        <record id="comp" model="hr_critere_evaluation">
+            <field name="name">Compétence Professionnelle</field>
+            <field name="lib_court">Compétence Professionnelle</field>
+        </record>
+        
+        <record id="cons" model="hr_critere_evaluation">
+            <field name="name">Conscience Professionnelle</field>
+            <field name="lib_court">Conscience Professionnelle</field>
+        </record>
+        
+        <record id="sens" model="hr_critere_evaluation">
+            <field name="name">Sens du service public</field>
+            <field name="lib_court">Sens du service public</field>
+        </record>
+        
+        <record id="lead" model="hr_critere_evaluation">
+            <field name="name">Leadership</field>
+            <field name="lib_court">Leadership</field>
+        </record> -->
+        
+
+    </data>
+</odoo>

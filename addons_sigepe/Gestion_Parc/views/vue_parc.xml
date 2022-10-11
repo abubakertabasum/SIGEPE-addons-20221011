@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue vehicule-->
+<record model="ir.ui.view" id="fleet_vehicle_view_tree">
+	<field name="name">fleet.vehicle.form</field>
+	<field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+	<field name="arch" type="xml">
+	
+	        <xpath expr="//field[@name='power']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='location']" position="replace">
+		          <field name = "x_service_id"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='driver_id']" position="before">
+		          <field name = "num_chasis"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='license_plate']" position="after">
+			<label for="x_categorie_id" class="oe_edit_only"/>
+		          <field name = "x_categorie_id"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='vin_sn']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='tag_ids']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='company_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='first_contract_date']" position="replace">
+		          <field name = "date_mise_circulation"/>
+			</xpath>
+			
+	</field>
+</record>
+
+<!--Definition de la vue vehicule kanban-->
+<record model="ir.ui.view" id="fleet_vehicle_view_kanban">
+	<field name="name">fleet.vehicle.kanban</field>
+	<field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_kanban"/>
+	<field name="arch" type="xml">
+	        <kanban position="attributes">
+	               <attribute name="activity_ids">false</attribute>
+	       </kanban>
+			
+	</field>
+</record>
+
+<!--Definition de la vue du vehicule tree-->
+<record model="ir.ui.view" id="fleet_vehcle_view_tree">
+	<field name="name">fleet.vehicle.tree</field>
+	<field name="model">fleet.vehicle</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vin_sn']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='vin_sn']" position="after">
+		          <field name = "num_chasis" />
+			</xpath>
+	</field>
+</record>
+
+
+
+<!--Definition de la vue du niveau de carburant form-->
+<record model="ir.ui.view" id="fleet_fuel_view_form">
+	<field name="name">fleet.vehicle.log.fuel.form</field>
+	<field name="model">fleet.vehicle.log.fuel</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_fuel_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='purchaser_id']" position="replace">
+		          <field name = "x_conducteur_id"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='amount']" position="replace">
+		          <field name = "x_montant_total"/>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue du niveau de carburant tree-->
+<record model="ir.ui.view" id="fleet_fuel_view_tree">
+	<field name="name">fleet.vehicle.log.fuel.tree</field>
+	<field name="model">fleet.vehicle.log.fuel</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_fuel_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='amount']" position="replace">
+		          <field name = "x_montant_total" invisible = "0"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_montant_total']" position="after">
+		          <field name = "company_id" invisible = "1"/>
+			</xpath>
+	</field>
+</record>
+
+
+<!--Definition de la vue du niveau de carburant kanban-->
+<record model="ir.ui.view" id="fleet_fuel_view_kanban">
+	<field name="name">fleet.vehicle.log.fuel.kanban</field>
+	<field name="model">fleet.vehicle.log.fuel</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_fuel_view_kanban"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vehicle_id']" position="after">
+		          <field name = "company_id" invisible = "1"/>
+			</xpath>
+	</field>
+</record>
+
+
+<!--Definition de la vue relevé kilométrique form-->
+<record model="ir.ui.view" id="fleet_vehicle_odometer_form">
+	<field name="name">fleet.vehicle.odometer.form</field>
+	<field name="model">fleet.vehicle.odometer</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='date']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue relevé kilométrique tree-->
+<record model="ir.ui.view" id="fleet_vehicle_odometer_tree">
+	<field name="name">fleet.vehicle.odometer.tree</field>
+	<field name="model">fleet.vehicle.odometer</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='unit']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue relevé kilométrique kanban-->
+<record model="ir.ui.view" id="fleet_vehicle_odometer_kanban">
+	<field name="name">fleet.vehicle.odometer.kanban</field>
+	<field name="model">fleet.vehicle.odometer</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_kanban"/>
+	<field name="arch" type="xml">
+			
+			<kanban position="attributes">
+	               <attribute name="driver_id">false</attribute>
+	       </kanban>
+	</field>
+</record>
+
+<!--Definition de la vue relevé kilométrique graphe-->
+<record model="ir.ui.view" id="fleet_vehicle_odometer_graphe">
+	<field name="name">fleet.vehicle.odometer.graph</field>
+	<field name="model">fleet.vehicle.odometer</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_odometer_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='value']" position="attributes">
+			     <attribute name = "invisible">False</attribute>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue cout des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_cost_form">
+	<field name="name">fleet.vehicle.cost.form</field>
+	<field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_costs_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='date']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+			<xpath expr="//field[@name='parent_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+	</field>
+</record>
+
+
+<!--Definition de la vue cout des vehicules tree-->
+<record model="ir.ui.view" id="fleet_vehicle_cost_tree">
+	<field name="name">fleet.vehicle.cost.tree</field>
+	<field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_cost_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vehicle_id']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue cout des vehicules graph-->
+<record model="ir.ui.view" id="fleet_vehicle_cost_graph">
+	<field name="name">fleet.vehicle.cost.graph</field>
+	<field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_cost_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vehicle_id']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+<!--Definition de la vue cout des vehicules graph couts estimés-->
+<record model="ir.ui.view" id="fleet_vehicle_cost_graph">
+	<field name="name">fleet.vehicle.cost.graph</field>
+	<field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_cost_indicative_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='amount']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+
+
+<!--Definition de la vue estimation des cout des vehicules graphique-->
+<record model="ir.ui.view" id="fleet_vehicle_cost_graph">
+	<field name="name">fleet.vehicle.cost.graph</field>
+	<field name="model">fleet.vehicle.cost</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_cost_indicative_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='amount']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+	</field>
+</record>
+
+
+
+
+<!--Definition de la vue contrat des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_contract_form">
+	<field name="name">fleet.vehicle.log.contract.form</field>
+	<field name="model">fleet.vehicle.log.contract</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='expiration_date']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+			<xpath expr="//page[2]" position="attributes">
+				<attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='amount']" position="replace">
+		          <field name = "mnt_ctrct"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='ins_ref']" position="after">
+		          <field name = "fichier_joint"/>
+			</xpath>
+			
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue contrat des vehicules tree-->
+<record model="ir.ui.view" id="fleet_vehicle_contract_tree">
+	<field name="name">fleet.vehicle.log.contract.tree</field>
+	<field name="model">fleet.vehicle.log.contract</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='expiration_date']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+			
+	</field>
+</record>
+
+<!--Definition de la vue contrat des vehicules kanban-->
+<record model="ir.ui.view" id="fleet_vehicle_contract_kanban">
+	<field name="name">fleet.vehicle.log.contract.kanban</field>
+	<field name="model">fleet.vehicle.log.contract</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_kanban"/>
+	<field name="arch" type="xml">
+			
+			<kanban position="attributes">
+	               <attribute name="state">false</attribute>
+	       </kanban>
+			
+			
+	</field>
+</record>
+
+<!--Definition de la vue contrat des vehicules graph-->
+<record model="ir.ui.view" id="fleet_vehicle_contract_graph">
+	<field name="name">fleet.vehicle.log.contract.graph</field>
+	<field name="model">fleet.vehicle.log.contract</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_contract_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='cost_amount']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue interventions des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_intervention_form">
+	<field name="name">fleet.vehicle.log.services.form</field>
+	<field name="model">fleet.vehicle.log.services</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='amount']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+<!--Definition de la vue interventions des vehicules tree-->
+<record model="ir.ui.view" id="fleet_vehicle_intervention_tree">
+	<field name="name">fleet.vehicle.log.services.tree</field>
+	<field name="model">fleet.vehicle.log.services</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='amount']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue interventions des vehicules kanban-->
+<record model="ir.ui.view" id="fleet_vehicle_intervention_kanban">
+	<field name="name">fleet.vehicle.log.services.kanban</field>
+	<field name="model">fleet.vehicle.log.services</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_kanban"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vehicle_id']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+<!--Definition de la vue interventions des vehicules graph-->
+<record model="ir.ui.view" id="fleet_vehicle_intervention_graph">
+	<field name="name">fleet.vehicle.log.services.graph</field>
+	<field name="model">fleet.vehicle.log.services</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_log_services_view_graph"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='vehicle_id']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+
+
+<!--Definition de la vue marque du model des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_model_brand_form">
+	<field name="name">fleet.vehicle.model.brand.form</field>
+	<field name="model">fleet.vehicle.model.brand</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_brand_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+<!--Definition de la vue marque du model des vehicules tree-->
+<record model="ir.ui.view" id="fleet_vehicle_model_brand_tree">
+	<field name="name">fleet.vehicle.model.brand.tree</field>
+	<field name="model">fleet.vehicle.model.brand</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_brand_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+<!--Definition de la vue marque du model des vehicules kanban-->
+<record model="ir.ui.view" id="fleet_vehicle_model_brand_kanban">
+	<field name="name">fleet.vehicle.model.brand.kanban</field>
+	<field name="model">fleet.vehicle.model.brand</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_brand_view_kanban"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue model des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_model_brand_form">
+	<field name="name">fleet.vehicle.model.form</field>
+	<field name="model">fleet.vehicle.model</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue statut des vehicules tree-->
+<record model="ir.ui.view" id="fleet_vehicle_statut_tree">
+	<field name="name">fleet.vehicle.state.tree</field>
+	<field name="model">fleet.vehicle.state</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_state_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+<!--Definition de la vue etiquette/categorie des vehicules form-->
+<record model="ir.ui.view" id="fleet_vehicle_cat_form">
+	<field name="name">fleet.vehicle.tag.form</field>
+	<field name="model">fleet.vehicle.tag</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_tag_view_view_form"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='name']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>
+
+
+
+
+<!--Definition de la vue type intervention des vehicules tree
+<record model="ir.ui.view" id="fleet_vehicle_model_tree">
+	<field name="name">fleet.service.type.tree</field>
+	<field name="model">fleet.service.type</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_service_types_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='category']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>-->
+
+
+
+
+<!--Definition de la vue type de contrat des vehicules tree
+<record model="ir.ui.view" id="fleet_service_type_tree">
+	<field name="name">fleet.service.type.tree</field>
+	<field name="model">fleet.service.type</field>
+    <field name="inherit_id" ref="fleet.fleet_vehicle_service_types_view_tree"/>
+	<field name="arch" type="xml">
+			
+			<xpath expr="//field[@name='category']" position="after">
+		          <field name = "company_id" invisible = '1'/>
+			</xpath>
+			
+	</field>
+</record>-->
+<record id='fleet_vehicle_service_types_view_tree' model='ir.ui.view'>
+        <field name="name">fleet.service.type.tree</field>
+        <field name="model">fleet.service.type</field>
+        <field name="arch" type="xml">
+            <tree string="Service Types" editable="top">
+                <field name="name" />
+                <field name="category" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+<record id='fleet_vehicle_contract_types_action' model='ir.actions.act_window'>
+        <field name="name">Contract Types</field>
+        <field name="res_model">fleet.service.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('category','=','contract')]</field>
+        <field name="context">{'default_category':'contract'}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new type of contract
+          </p>
+        </field>
+</record>
+    
+<record id='fleet_vehicle_service_types_action' model='ir.actions.act_window'>
+        <field name="name">Service Types</field>
+        <field name="res_model">fleet.service.type</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('category','=','service')]</field>
+        <field name="context">{'default_category':'service'}</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a new type of service
+          </p><p>
+            Each service can used in contracts, as a standalone service or both.
+          </p>
+        </field>
+</record>
+
+
+
+<!--Definition des actions-->
+
+<!-- Action vehicule-->
+<record model="ir.actions.act_window" id="act_list_vehicule">
+		<field name="name">Liste des Véhicules</field>
+		<field name="res_model">fleet.vehicle</field>
+		<field name="view_mode">kanban,tree,form</field>
+</record>
+
+<!-- Action releve kilometrique vehicule-->
+<record model="ir.actions.act_window" id="act_list_releve">
+		<field name="name">Liste des Relevés kilomètrique des véhicules</field>
+		<field name="res_model">fleet.vehicle.odometer</field>
+		<field name="view_mode">kanban,tree,graph,form</field>
+</record>
+
+<!-- Action cout vehicule-->
+<record model="ir.actions.act_window" id="act_list_cout">
+		<field name="name">Liste des coûts des véhicules</field>
+		<field name="res_model">fleet.vehicle.cost</field>
+		<field name="view_mode">kanban,tree,graph,form</field>
+</record>
+
+<!-- Action depense vehicule-->
+<record model="ir.actions.act_window" id="act_list_analyse_dep">
+		<field name="name">Analyse des dépenses</field>
+		<field name="res_model">fleet.vehicle.cost</field>
+		<field name="view_mode">graph</field>
+</record>
+
+<!-- Action couts estimés vehicule-->
+<record model="ir.actions.act_window" id="act_list_cout_estime">
+		<field name="name">Analyse des coûts estimés</field>
+		<field name="res_model">fleet.vehicle.cost</field>
+		<field name="view_mode">graph</field>
+</record>
+
+<!-- Action contrat vehicule-->
+<record model="ir.actions.act_window" id="act_list_contrat">
+		<field name="name">Liste des contrats des véhicules</field>
+		<field name="res_model">fleet.vehicle.log.contract</field>
+		<field name="view_mode">kanban,tree,graph,form</field>
+</record>
+
+<!-- Action niveau essence vehicule-->
+<record model="ir.actions.act_window" id="act_list_niveau">
+		<field name="name">Liste Suivi du niveau de carburant</field>
+		<field name="res_model">fleet.vehicle.log.fuel</field>
+		<field name="view_mode">kanban,tree,graph,form</field>
+</record>
+
+<!-- Action suivi intervantion vehicule-->
+<record model="ir.actions.act_window" id="act_list_interv">
+		<field name="name">Liste Suivi des interventions sur les véhicules</field>
+		<field name="res_model">fleet.vehicle.log.services</field>
+		<field name="view_mode">kanban,tree,graph,form</field>
+</record>
+
+<!-- Action model de la marque du vehicule-->
+<record model="ir.actions.act_window" id="act_list_marque">
+		<field name="name">Liste Modèle de la marque des véhicules</field>
+		<field name="res_model">fleet.vehicle.model.brand</field>
+		<field name="view_mode">kanban,tree,form</field>
+</record>
+
+<!--Action type statut du véhicule-->
+<record model="ir.actions.act_window" id="act_list_statut">
+		<field name="name">Liste Statut Véhicules</field>
+		<field name="res_model">fleet.vehicle.state</field>
+		<field name="view_mode">tree</field>
+</record>
+
+<!-- Action type contrat des véhicule-->
+<record model="ir.actions.act_window" id="act_list_categorie">
+		<field name="name">Liste Catégorie Véhicules</field>
+		<field name="res_model">fleet.vehicle.tag</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- Action model du vehicule-->
+<record model="ir.actions.act_window" id="act_list_model">
+		<field name="name">Liste Model Véhicule</field>
+		<field name="res_model">fleet.vehicle.model</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!--Definition du menu-->
+
+<menuitem id="main_menu" name ="Gestion Parc Automobile" sequence="8"/>
+<menuitem id="main_menu_vehi" name ="Véhicules" sequence="2" parent="main_menu"/>
+<menuitem id="main_menu_save_vehic" name ="Véhicules" sequence="3" action="act_list_vehicule" parent="main_menu_vehi"/>
+<menuitem id="main_menu_save_rel_vehic" name ="Relevés kilomètrique des véhicules" sequence="4" action="act_list_releve" parent="main_menu_vehi"/>
+<menuitem id="main_menu_save_cout_vehic" name ="Coûts des véhicules" sequence="5" action="act_list_cout" parent="main_menu_vehi"/>
+<menuitem id="main_menu_save_contrat_vehic" name ="Contrats des véhicules" sequence="6" action="act_list_contrat" parent="main_menu_vehi"/>
+<menuitem id="main_menu_niveau_vehic" name ="Suivi du niveau de carburant des véhicules" sequence="7" action="act_list_niveau" parent="main_menu_vehi"/>
+<menuitem id="main_menu_suivi_interv_vehic" name ="Suivi des interventions sur les véhicules" sequence="8" action="act_list_interv" parent="main_menu_vehi"/>
+
+<menuitem id="main_menu_analyse" name ="Synthèse" sequence="20" parent="main_menu"/>
+<menuitem id="main_menu_analyse_dep" name ="Coûts" sequence="21" action="act_list_analyse_dep" parent="main_menu_analyse"/>
+<menuitem id="main_menu_analyse_dep_est" name ="Coûts estimés" sequence="22" action="act_list_cout_estime" parent="main_menu_analyse"/>
+
+
+<menuitem id="main_menu_conf" name ="Données de base" sequence="30" parent="main_menu"/>
+<menuitem id="main_menu_marque" name ="Saisie/Màj-Modèl de la marque du véhicule" sequence="51" parent="main_menu_conf" action="act_list_marque"/>
+<menuitem id="main_menu_model" name ="Saisie/Màj-Modèl du véhicule" sequence="52" parent="main_menu_conf" action="act_list_model"/>
+<menuitem id="main_menu_type_interv" name ="Saisie/Màj-Type Intervention" sequence="53" parent="main_menu_conf" action="fleet_vehicle_service_types_action"/>
+<menuitem id="main_menu_type_contrat" name ="Saisie/Màj-Type Contrat" sequence="54" parent="main_menu_conf" action="fleet_vehicle_contract_types_action"/>
+<menuitem id="main_menu_statut" name ="Saisie/Màj-Statut Véhicule" sequence="55" parent="main_menu_conf" action="act_list_statut"/>
+<menuitem id="main_menu_statut" name ="Saisie/Màj-Catégorie Véhicule" sequence="56" parent="main_menu_conf" action="act_list_categorie"/>
+
+
+<!-- ><menuitem id="main_menu_cat_sal" name ="Saisie/Màj-Catégorie Règle Salaire" sequence="52" parent="main_menu_conf" action="act_cat_salaire"/>	
+<menuitem id="main_menu_elt_sal" name ="Saisie/Màj-Elements de Salaire" sequence="53" parent="main_menu_conf" action="act_elt_sal"/>	
+	
+<menuitem id="main_menu_etat" name ="Etats Nominatifs" parent="main_menu" sequence="40"/>
+<menuitem id="main_menu_par_banq" name ="Virement par Banque" sequence="41" action="hr_report_banq_action" parent="main_menu_etat"/>
+<menuitem id="main_menu_par_caisse" name ="Cotisation par Caisse" sequence="42" action="act_list_contribution" parent="main_menu_etat"/>-->
+    
+
+
+
+</odoo>
+
+

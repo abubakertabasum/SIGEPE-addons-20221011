@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Inherit quotation report (from module sale) -->
+        <template id="report_bulletin_inherit_paie" inherit_id="hr_payroll.report_payslip">
+        <!-- Finds the first table with as class table table-condensed and gives the ability to modify it
+         This will replace everything withing tr (including tr)-->
+         
+                <xpath expr="//div[@class='page']" position = "replace">
+                        <!-- <h2 text-align = 'center'><i><FONT color = "#089CB8"><span t-field="o.name"/></FONT></i></h2><br/>-->
+                        <h2 style="text-align:center; widht:100%">BULLETIN DE PAIE</h2>
+	                    <p style="text-align:center; widht:100%">
+	                        <strong>MOIS : </strong>
+	                        <span t-field="o.name"/>
+	                    </p>
+                        
+						<p style="text-align:center; widht:100%">
+                        	<strong>Reference : </strong>
+                           <span t-field="o.ref_bulletin"/>
+                        </p>
+                        
+                        <!-- <p style="text-align:center; widht:100%">
+                        	<strong>Fonction : </strong>
+                           <span t-field="o.employee_id.x_fonction_id.name"/>
+                        </p>-->
+                        
+		                <xpath expr="//table[@class='table table-sm table-bordered']" position = "replace">
+			                <table class='table table-sm'>
+			                    <tr>
+			                            <td style="border:2px solid;"><strong>Nom/Prénom(s)</strong></td>
+			                            <td style="border:2px solid;"><span t-field="o.employee_id"/></td>
+			                            
+			                            <td style="border:2px solid;"><strong>Matricule</strong></td>
+			                            <td style="border:2px solid;"><span t-field="o.employee_id.matricule"/></td>
+			                    </tr>
+			                    <tr>
+			                    	<td style="border:2px solid;"><strong>Sexe </strong></td>
+			                    	<td style="border:2px solid;"><span t-field="o.employee_id.gender"/></td>
+			                    	
+			                        <td style="border:2px solid;"><strong>Nationalité  </strong></td>
+			                        <td style="border:2px solid;"><span t-field="o.employee_id.x_nationalite_id"/></td>
+			                        
+			                        
+			                    </tr>
+			                    <tr>
+			                        <td style="border:2px solid;"><strong>Service  </strong></td>
+			                        <td style="border:2px solid;"><span t-field="o.employee_id.hr_service.name"/></td>
+			                        
+			                        <td style="border:2px solid;"><strong>Emploi  </strong></td>
+			                        <td style="border:2px solid;"><span t-field="o.employee_id.x_emploi_id.name"/></td>
+			                    	
+			                    </tr>
+			                    <tr>
+			                            <td style="border:2px solid;"><strong>Classification </strong></td>
+			                            <td style="border:2px solid;"><span t-field="o.employee_id.x_classification_ctrct"/></td>
+			                            
+			                            <td style="border:2px solid;"><strong>Nbre charges fiscales  </strong></td>
+			                            <td style="border:2px solid;">
+			                                <t t-if="o.employee_id.charge_enfant == 0">
+			                                    <t t-if="o.employee_id.charge_femme==0 ">0 + 0  </t>
+			                                    <t t-if="o.employee_id.charge_femme !=0 "><span  t-field="o.employee_id.charge_femme"/> + 0 </t>
+			                                </t>
+			        
+			                                <t t-if="o.employee_id.charge_enfant != 0">
+			                                    <t t-if="o.employee_id.charge_femme==0 "> 0 + <span  t-field="o.employee_id.charge_enfant"/>  </t>
+			                                    <t t-if="o.employee_id.charge_femme !=0 "><span  t-field="o.employee_id.charge_femme"/> + <span  t-field="o.employee_id.charge_enfant"/>  </t>
+			                                </t>
+			    
+			    
+			                            </td>
+			                            
+			                        </tr>
+			                        <tr>
+			                            <td style="border:2px solid;"><strong>Banque  </strong></td>
+			                            <td style="border:2px solid;"><span t-field="o.employee_id.x_banque_id.name"/></td>
+			                            <td style="border:2px solid;"><strong>N°Compte Bancaire  </strong></td>
+			                            <td style="border:2px solid;"><span t-field="o.employee_id.num_banque"/></td>
+			                        </tr>
+			               </table>          
+			        </xpath>
+			        <xpath expr="//table[@class='table table-sm']" position = "replace">
+			        	<table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+		                          <th style="border:2px solid;"><strong><i>Désignation des éléments de solde</i></strong></th>
+		                          <th style="border:2px solid;"><strong><i>Retenues</i></strong></th>
+		                          <th style="border:2px solid;"><strong><i>Avoirs</i></strong></th>
+			                </thead>
+			                <tbody>
+			                    <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+			                      <t t-if="line.category_id.name not in ('Déduction','SALNET_BASEIMPO','Net','Retenue','Avoir','TOTAL_RENUM','Contribution de la société','CHARGE','TOTAL_RAPPEL') " >
+			                        <td style="border:2px solid;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;"></td>
+			                        <td style="border:2px solid;"><span t-esc="line.amount"/></td> 
+			                        </t>
+			                   </tr>
+			                   <tr t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line">
+			                      <t t-if="line.category_id.name in ('Déduction') " >
+			                        <td style="border:2px solid;"> <span t-field="line.name"/></td>
+			                        
+			                        <td style="border:2px solid;"><span t-esc="line.amount"/></td> 
+			                        <td style="border:2px solid;"></td> 
+			                        </t>
+			                  </tr>
+			               
+			                </tbody>
+			        	
+			        	</table>
+			        	<table class='table table-sm'> 
+			                  <tr >
+			                            <td style="border:2px solid;"><strong><i> MODE DE PAIEMENT</i></strong></td> 
+			                            <td style="border:2px solid;"><strong><i> BASE IMPOSABLE</i></strong></td>
+			                            <td style="border:2px solid;"><strong><i> TOTAL DES RETENUES</i></strong></td>
+					                    <td style="border:2px solid;"><strong><i> TOTAL DES AVOIRS</i></strong></td>
+					                    <td style="border:2px solid;"><strong><i> NET A PAYER</i></strong></td>
+			                  </tr>
+			                  <tr>
+				                      <td style="border:2px solid;">
+				                      	<i><FONT color="red"> <span t-field="o.employee_id.x_mode_paiement" /> <br/></FONT></i>
+								      </td>
+				                            
+				                      <td style="border:2px solid;">  
+				                         <i><FONT color="red"> <t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Base imposable' "><span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				                      </td>
+				                      
+				                      <td style="border:2px solid;">
+				                          <i> <FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Total Retenue' "> <span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				
+				                      </td>
+				                      
+				                      <td style="border:2px solid;">
+				                          <i> <FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Total Avoir' "> <span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t> </FONT></i>
+				
+				                      </td>
+				                      
+				                      <td style="border:2px solid;"> 
+			                           		<FONT color="red"><t t-foreach="o.line_ids.filtered(lambda line: line.appears_on_payslip)" t-as="line" style="padding: 4px 8px;  line-height: 1.32857143; border: 2px SOLID #434146"> <t t-if="line.name =='Salaire Net à Payer' "><span t-esc="'{:,}'.format(int(line.amount)).replace(',', ' ')"/> </t> </t></FONT>
+			                          </td>
+			                            
+			                 </tr>
+			            
+			                 
+			             </table><br/>
+			             
+			             <p style="text-align:center;"><i>Dans votre intérêt, conservez ce bulletin de paie sans limitation de durée. Il peut vous aider à faire valoir vos droits.</i></p>
+			             <br/>
+			             <br/>
+			              <p style="text-align:center;"><i><span t-field="o.msg"/></i></p>
+			        	
+		           </xpath>
+            </xpath>
+ 
+        </template>
+
+
+        
+</odoo>

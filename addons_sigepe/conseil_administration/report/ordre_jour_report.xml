@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report 
+    id="report_conseil"
+    string="Ordre jour"
+    model="ca_conseil" 
+    report_type="qweb-pdf"
+    file="conseil_administration.report_conseil" 
+    name="conseil_administration.report_conseil_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "False"/>
+
+
+<template id="report_conseil_view">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"> <FONT COLOR= "Blue">Rapport de session du conseil d'administration </FONT> </h1>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Type Session:</strong>
+                    <tr><span t-field="o.cat_id"/> </tr> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Nature de session : </strong>
+                        <td> <span t-field="o.session_id"/> </td>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Lieu : </strong>
+                    <td> <span t-field="o.lieu"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Heure de début : </strong>
+                    <td> <span t-field="o.date_prevue"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Heure de fin : </strong>
+                    <td> <span t-field="o.date_fin"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Observation: </strong>
+                    <td> <span t-field="o.observation"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Etat: </strong>
+                    <td> <span t-field="o.statut"/> </td> 
+                    </div>
+
+                    <div>
+                    <h3 style= "text-align:center;"> <FONT COLOR= "Blue"> Liste des ordres du jour </FONT> </h3>
+                    </div>
+
+			<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Ordre du jour</th>
+                        <th style="border:2px solid black" class="text-center">Divers</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.ordre_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.session_id.lib_long"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.session_id.divers"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+			</div>
+
+                    <div>
+                    <h3 style= "text-align:center;"> <FONT COLOR= "Blue">Liste des actes de delibération</FONT> </h3>
+                    </div>
+
+			<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Acte de delibération</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.ordre_ids" t-as="line" >
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.lib_long"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+			</div>
+
+                </div>
+                </t>
+            </t>
+        </t>
+</template>
+
+</odoo>

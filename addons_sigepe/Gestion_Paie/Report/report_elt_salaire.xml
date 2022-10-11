@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_etat_salaire7_paiement_element"
+            string="Imprimer"
+            model="hr_reportavoir" 
+            report_type="qweb-html"
+            file="Gestion_Paie.report_etat_salaire7_paiement_element" 
+            name="Gestion_Paie.report_etat_salaire7_paiement_element"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_etat_salaire7_paiement_element">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h4 style="text-align:left">ETAT NOMINATIF ELEMENT DE SALAIRE DU MOIS DE : <span t-field="o.x_moi"/></h4>
+            <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;">
+			                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Element salaire</i></strong></th>
+			                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+			                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+			                    </tr>
+			                </thead>  
+			                <tbody>
+			                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="o.x_elt_sal_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+			                </tbody>
+			    </table> 
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;" >
+			                          <th style="border:2px solid;"><strong><i>Mle Fonctionnaire</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Mle Contractuel</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Montant</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                      
+			                        <td style="border:2px solid;" ><span t-field="line.x_matricule"/></td> 
+			                        <td style="border:2px solid;" ><span t-field="line.x_matricule_c"/></td> 
+			                        <td style="border:2px solid;" ><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;" ><span t-esc="line.x_mnt"/></td>                      
+			                    </tr>
+			                </tbody>
+			        	
+			    </table>
+			    <p style="text-align:right; widht:100%"> Total : <span t-field="o.x_mnts"/> FCFA</p> 
+			    <p style="text-align:right; widht:100%">
+	               	Arrêté à la somme de : 
+	                  <span t-field="o.x_mnt_en_lettre"/> francs CFA.
+	            </p> 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>  
+
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

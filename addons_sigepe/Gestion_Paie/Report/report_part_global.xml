@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_part_global9_paiement"
+            string="Imprimer"
+            model="hr_reportpartrecap" 
+            report_type="qweb-html"
+            file="Gestion_Paie.report_part_global9_paiement" 
+            name="Gestion_Paie.report_part_global9_paiement"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_part_global9_paiement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h4 style="text-align:left">ETAT PART SOCIALE EMPLOYE/EMPLOYEUR DU MOIS DE : <span t-field="o.x_moi"/></h4>
+        <t t-if="o.x_type_employe_id.name == 'Fonctionnaire Detaché' ">
+        		<table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid #000000;">
+			                          <th style="border:2px solid #000000;"><strong><i>Mlle Fonctionnaire</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid #000000;"><span t-field="line.x_matricule"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid #000000;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table> 
+			    <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>
+	            	 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>  
+			</t>
+			
+			<t t-if="o.x_type_employe_id.name == 'FONCTIONNAIRE DETACHE' ">
+            <table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid #000000;">
+			                          <th style="border:2px solid #000000;"><strong><i>Mlle Fonctionnaire</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid #000000;"><span t-field="line.x_matricule"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid #000000;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table> 
+			    <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>
+	            	 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>   
+			</t>
+			
+			
+			<t t-if="o.x_type_employe_id.name == 'Contractuel' ">
+            <table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;">
+			                          <th style="border:2px solid;"><strong><i>Mlle Contractuel</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>N°CNSS</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid;"><span t-field="line.x_matricule_c"/></td>
+			                        <td style="border:2px solid;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;"><span t-field="line.x_num_cnss"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table>
+			   <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>			
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>  
+			</t>
+			
+			
+			<t t-if="o.x_type_employe_id.name == 'CONTRACTUEL' ">
+            <table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;">
+			                          <th style="border:2px solid;"><strong><i>Mlle Contractuel</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>N°CNSS</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid;"><span t-field="line.x_matricule_c"/></td>
+			                        <td style="border:2px solid;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;"><span t-field="line.x_num_cnss"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table>
+			   <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>			
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot> 
+			</t>
+			
+			
+			<t t-if="o.x_type_employe_id.name == 'Fonctionnaire Mis à Disposition' ">
+            <table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid #000000;">
+			                          <th style="border:2px solid #000000;"><strong><i>Mlle Fonctionnaire</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid #000000;"><span t-field="line.x_matricule"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid #000000;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table> 
+			    <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>
+	            	 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>   
+			</t>
+			
+			
+			<t t-if="o.x_type_employe_id.name == 'FONCTIONNAIRE MIS A DISPOSITION' ">
+            <table class = 'table table-sm'>
+	        		<thead style="border:2px solid #000000;">
+	                      <tr style="border:2px solid;">
+	                          <th style="border:2px solid;"><strong><i>Libellé</i></strong></th>
+	                          <th style="border:2px solid;"><strong><i>Type employé</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Du</i></strong></th>
+	                      	  <th style="border:2px solid;"><strong><i>Au</i></strong></th>
+	                    </tr>
+	                </thead>  
+	                <tbody>
+	                        <td style="border:2px solid;"><span t-field="o.lib_long"/></td> 
+	                        <td style="border:2px solid;"><span t-esc="o.x_type_employe_id.name"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_debut"/></td> 
+	                        <td style="border:2px solid;"><span t-field="o.x_date_fin"/></td> 
+	                </tbody>
+			    </table>
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid #000000;">
+			                          <th style="border:2px solid #000000;"><strong><i>Mlle Fonctionnaire</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Employé</i></strong></th>
+			                          <th style="border:2px solid #000000;"><strong><i>Part Employeur</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                        <td style="border:2px solid #000000;"><span t-field="line.x_matricule"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_agent)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid #000000;"><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid #000000;"><span t-esc="'{:,}'.format(int(line.x_mnt_employeur)).replace(',', ' ')"/></td>                       
+			                    </tr>
+			                </tbody>
+			        	
+			    </table> 
+			    <div class="row mt32 mb32">
+	            	 <div class="col-3">
+	            	 	  Part Agent :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_employe)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Part Employeur :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_empl)).replace(',', ' ')"/>
+	            	 </div>
+	            	 <div class="col-3">
+	            	 	  Total Part  :
+	            	 	  <span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>
+	            	 </div>
+	            </div>
+	             <p> Arrêté à la somme de : <span t-field="o.x_mnt_en_lettre"/> (<span t-esc="'{:,}'.format(int(o.x_mnt_total)).replace(',', ' ')"/>) francs CFA </p>
+	            	 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>  
+			</t>
+			
+			
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

@@ -1,0 +1,4537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!--Definition de la vue-->
+<record model="ir.ui.view" id="hr_employee_form">
+	<field name="name">hr.employee.form</field>
+	<field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+	<field name="arch" type="xml">
+	
+		  <notebook>
+		  			<page string = "Nomination/Decret">
+									<field name="x_actes_ids">
+			                            <tree string="Pièces Nominations" editable="bottom">
+			                                <field name="ref_acte"/>
+				                            <field name="date_nomination"/>
+				                            <field name="date_effet"/>
+				                            <field name="date_fin"/>
+				                            <field name="fichier_joint"/>
+				                            <field name="etat_nomination"/>
+				                            
+			                            </tree>
+			                            <form string="Pièces Nomination Line">
+			                                <group>
+			                                    <field name="ref_acte"/>
+					                            <field name="date_nomination"/>
+					                            <field name="date_effet"/>
+					                            <field name="date_fin"/>
+					                            <field name="fichier_joint"/>
+					                            <field name="etat_nomination"/>	
+			                                </group>
+			                            </form>
+			                        </field> 
+			                        
+					</page>
+					<page string = "Situation Fonction Publique (FP)" style="text-align:center;">
+					      <group col = "4" string="Situation administrative de l'agent dans l'Etat">
+								    
+								    <field name="x_classees_id" style="width:30%" options="{'no_create':True}"/>
+								    <field name="date_debut" style="width:30%"/>
+								    
+								    <field name="x_categorie_id" style="width:30%" options="{'no_create':True}"/>
+	                                <field name="date_fin" style="width:30%"/>
+								    
+								    <field name="x_echelle_id" style="width:30%" options="{'no_create':True}"/>
+	                                <field name="date_modiff" invisible = '1'/>
+	                                
+	                                <field name="x_echellon_id" style="width:30%" options="{'no_create':True}"/>
+	  							    <field name="x_classification" style="width:20%" invisible = '1' />
+	                                
+						  </group>
+						  <!-- <field name="x_lines_ids">
+                            <tree string="Pièces" editable="bottom">
+                                <field name="objet_grade"/>
+	                            <field name="fichier_joint"/>
+	                            
+                            </tree>
+                            <form string="Pièces Line">
+                                <group>
+                                    <field name="objet_grade"/>
+	                            	<field name="fichier_joint"/>	
+                                </group>
+                            </form>
+                        </field> -->
+						 
+					</page>
+					<page string = "Situation EPE" style="text-align:center;">
+					      <group col = "6" string="Situation administrative de l'agent dans l'EPE">
+								    
+								    <field name="x_categorie_c_id" options="{'no_create':True}"/>
+								    <field name="x_emolument_ctrct"/>
+								    <field name="date_embauche"/>
+								    
+								    <field name="x_echelle_c_id" options="{'no_create':True}"/>
+								    <field name="x_taux_retenu_emolmt"/>
+								    <field name="date_fin_embauche"/>
+								    
+								    <field name="x_echellon_c_id" options="{'no_create':True}"/>
+								    <field name="x_mnt_taux_retenu_emolmt"/>
+                                    <field name="date_modiff" invisible = '0'/>
+								    
+								    <field name="company_id" invisible = '1'/>
+								    <field name="x_emolument_ctrct_net" force_save = '1'/>
+								    
+                                    <field name="x_classification_ctrct" style="width:20%" invisible = '1' />
+						  </group>
+						  <field name="x_lines_ids">
+                            <tree string="Pièces" editable="bottom">
+                                <field name="objet_grade"/>
+	                            <field name="fichier_joint"/>
+	                            
+                            </tree>
+                            <form string="Pièces Line">
+                                <group>
+                                    <field name="objet_grade"/>
+	                            	<field name="fichier_joint"/>	
+                                </group>
+                            </form>
+                        </field> 
+						  <footer>
+               					 <button string="Valider" name="enregistrer_historique" type="object"  class="oe_highlight"/>
+   						 </footer>
+					</page>
+					<page string = "Détachement">
+									<field name="x_acte_ids">
+			                            <tree string="Pièces" editable="bottom">
+			                                <field name="ref_acte"/>
+				                            <field name="date_acte"/>
+				                            <field name="date_effet"/>
+				                            <field name="date_fin"/>
+				                            <field name="fichier_joint"/>
+				                            
+			                            </tree>
+			                            <form string="Pièces Line">
+			                                <group>
+			                                    <field name="ref_acte"/>
+					                            <field name="date_acte"/>
+					                            <field name="date_effet"/>
+					                            <field name="date_fin"/>
+					                            <field name="fichier_joint"/>	
+			                                </group>
+			                            </form>
+			                        </field> 
+			                        
+					</page>
+					<page string = "Mise à Disposition">
+									<field name="x_acte_dec_ids">
+			                            <tree string="Pièces" editable="bottom">
+			                                <field name="ref_acte_dec"/>
+				                            <field name="date_acte_dec"/>
+				                            <field name="date_effet_dec"/>
+				                            <field name="date_fin_dec"/>
+				                            <field name="fichier_joint_dec"/>
+				                            
+			                            </tree>
+			                            <form string="Pièces Line">
+			                                <group>
+			                                    <field name="ref_acte_dec"/>
+				                            <field name="date_acte_dec"/>
+				                            <field name="date_effet_dec"/>
+				                            <field name="date_fin_dec"/>
+				                            <field name="fichier_joint_dec"/>	
+			                                </group>
+			                            </form>
+			                        </field> 
+			                        
+					</page>
+					<page invisible = '0' string = "Informations Salariales  FP" style="text-align:center;">
+					      <group col = "6" string="Informations Salariales" >
+	                                <field name="x_solde_indiciaire" force_save = '1'/>
+	                                <field name="x_solde_indiciaire_net" force_save = '1'/>
+	                                <field name="x_indice" invisible ='1' force_save = '1'/>
+						  </group>
+					</page>
+					<page invisible = '0' string = "Informations Salariales EPE" style="text-align:center;">
+					      <group col = '2'>
+					      		<group><field name="x_solde_indiciaire_ctrct" force_save = '1' style="width:30%"/></group>
+					      		<group><field name="x_allocation_familial" force_save = '1'/></group>
+					      </group>
+					      <group col = "6" string="Informations Indemnités" >
+	                                <field name="x_indem_resp" />
+	                                <field name="x_indem_astr" />
+	                                <field name="x_indem_techn" />
+	                                <field name="x_indem_specif" />
+	                                <field name="x_indem_spec_inspect_trav" />
+	                                <field name="x_indem_spec_inspect_ifc" />
+	                                <field name="x_indem_loge" />
+	                                <field name="x_indem_transp" />
+	                                <field name="x_indem_inform" />
+	                                <field name="x_indem_exploit" />
+	                                <field name="x_indem_finance" />
+	                                <field name="x_indem_garde"/>
+	                                <field name="x_indem_risque"/>
+	                                <field name="x_indem_suj"/>
+	                                <field name="x_indem_form"/>
+	                                <field name="x_indem_caisse"/>
+	                                <field name="x_indem_veste"/>
+	                                <field name="x_indemnite_residence" force_save = '1'/>
+						  </group>
+						  <group col = '2'>
+						  		<group><field name="x_total_indemnites" force_save = '1'/></group>
+						  		<group><field name="x_remu_total" force_save = '1'/></group>
+						  </group>
+					</page>
+				    <page invisible = '0' string = "Declaration CARFO"  style="text-align:center;">
+					      <group col = "3" string="Infos CARFO">
+				               <group>
+	                               
+	                               <field name="x_mnt_carfo"/>
+	                               <field name="x_total_retenue_carfo"/>
+	                               <field name="x_retenue_iuts"/>
+	                           </group>
+	                           <group>    
+	                              <field name="x_montant_charge"/>
+	                              <field name="x_iuts_net"/>
+	                              <field name="x_net_payer"/>
+	                              <field name="x_mnt_patronal_carfo"/>
+	                           </group> 
+						  </group>
+					</page>
+					<page invisible = '0' string = "Declaration CNSS"  style="text-align:center;">
+					      <group col = "3" string="Infos CNSS">
+				               <group>
+	                               <field name="x_total_indemnites"/>
+	                               <field name="x_remu_total"/>
+	                               <field name="x_mnt_cnss"/>
+	                               <field name="x_base_imposable_ctrct"/>
+	                               <field name="x_retenue_iuts"/>
+	                           </group>
+	                           <group>    
+	                              <field name="x_montant_charge"/>
+	                              <field name="x_total_retenue_cnss"/>
+	                              <field name="x_iuts_net"/>
+	                              <field name="x_net_payer_ctrct"/>
+	                              <field name="x_mnt_patronal_cnss"/>
+	                           </group> 
+						  </group>
+					</page>
+					<page string = "Rappel">
+						 <group string="Rappel de l'agent" col = '4'>
+					      			<group><field name="date_debut_rappel"/></group>
+									<group><field name="date_fin_rappel" /></group>
+									<group><field name="nombre_jours_total"/></group>
+                    				<group><button string="Simuler" name="action_ok" type="object" class="oe_highlight" /></group>
+					     </group>
+						<group><field name="mnt_total_rappel" style="width:30%"/></group>
+						<group><field name="tout_coch"/></group>
+					     <group  col = '4'>
+					     			<group><field name="sal_coch"/></group>
+					     			<group><field name="mnt_rappel_salaire" attrs="{'invisible' : [('sal_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+					     			
+					     			<group><field name="alloc_coch"/></group>
+					     			<group><field name="mnt_rappel_allocation" attrs="{'invisible' : [('alloc_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+					     			
+					     			<group><field name="resp_coch"/></group>
+					     			<group><field name="mnt_rappel_resp" attrs="{'invisible' : [('resp_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+					     			
+					     			<group><field name="astr_coch"/></group>
+									<group><field name="mnt_rappel_astr" style="width:100%" attrs="{'invisible' : [('astr_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="loge_coch"/></group>
+									<group><field name="mnt_rappel_loge" style="width:100%" attrs="{'invisible' : [('loge_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="techn_coch"/></group>
+									<group><field name="mnt_rappel_techn" style="width:100%" attrs="{'invisible' : [('techn_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="spec_coch"/></group>
+									<group><field name="mnt_rappel_spec" style="width:100%" attrs="{'invisible' : [('spec_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="it_coch"/></group>
+									<group><field name="mnt_rappel_it" style="width:100%" attrs="{'invisible' : [('it_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="ifc_coch"/></group>
+									<group><field name="mnt_rappel_ifc" style="width:100%" attrs="{'invisible' : [('ifc_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									
+									<group><field name="transp_coch"/></group>
+									<group><field name="mnt_rappel_trans" style="width:100%" attrs="{'invisible' : [('transp_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="resp_inf"/></group>
+									<group><field name="mnt_rappel_inf" style="width:100%" attrs="{'invisible' : [('resp_inf', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="reseau_coch"/></group>
+									<group><field name="mnt_rappel_explot" style="width:100%" attrs="{'invisible' : [('reseau_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="finac_coch"/></group>
+									<group><field name="mnt_rappel_resp_financ" style="width:100%" attrs="{'invisible' : [('finac_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="garde_coch"/></group>
+									<group><field name="mnt_rappel_garde" style="width:100%" attrs="{'invisible' : [('garde_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="risq_coch"/></group>
+									<group><field name="mnt_rappel_risque" style="width:100%" attrs="{'invisible' : [('risq_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="sujetion_coch"/></group>
+									<group><field name="mnt_rappel_sujetion" style="width:100%" attrs="{'invisible' : [('sujetion_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="formation_coch"/></group>
+									<group><field name="mnt_rappel_formation" style="width:100%" attrs="{'invisible' : [('formation_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="veste_coch"/></group>
+									<group><field name="mnt_rappel_veste" style="width:100%" attrs="{'invisible' : [('veste_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+									<group><field name="caisse_coch"/></group>
+									<group><field name="mnt_rappel_caisse" style="width:100%" attrs="{'invisible' : [('caisse_coch', 'not in',True),('tout_coch', 'not in',True)]}"/></group>
+									
+						 </group>
+						 <group><field name="mnt_total_avoir" style="width:30%"/></group>
+					   	 		   
+					</page>
+					<!-- <page string = "Retenue">
+					     <group string="Trop perçu de l'agent" col = '6'>
+					      			<field name="date_debut_percu"/>
+									<field name="date_fin_percu" />
+									<field name="nombre_jours_total_percu"/>
+									<field name="mnt_total_trop_percu"/>
+					     </group>
+					     <group col = '3'>
+					     			<group><field name="mnt_percu_salaire"/></group>
+									<group><field name="mnt_avance_salaire"/></group>
+									<group><field name="mnt_percu_allocation"/></group>
+									<group><field name="mnt_foner"/></group>
+									<group><field name="mnt_percu_resp" style="width:100%"/></group>
+									<group><field name="mnt_percu_astr" style="width:100%"/></group>
+									<group><field name="mnt_percu_loge" style="width:100%"/></group>
+									<group><field name="mnt_percu_techn" style="width:100%"/></group>
+									<group><field name="mnt_percu_spec" style="width:100%"/></group>
+									<group><field name="mnt_percu_trans" style="width:100%"/></group>
+									<group><field name="mnt_percu_inf" style="width:100%"/></group>
+									<group><field name="mnt_percu_explot" style="width:100%"/></group>
+									<group><field name="mnt_percu_resp_financ" style="width:100%"/></group>
+									
+									<group><field name="mnt_percu_garde" style="width:100%"/></group>
+									<group><field name="mnt_percu_risque" style="width:100%"/></group>
+									<group><field name="mnt_percu_sujetion" style="width:100%"/></group>
+									<group><field name="mnt_percu_formation" style="width:100%"/></group>
+									<group><field name="mnt_percu_caisse" style="width:100%"/></group>
+									<group><field name="mnt_percu_veste" style="width:100%"/></group>
+									
+									<group><field name="mnt_total_retenues" style="width:100%"/></group>
+									
+						 </group>	
+						 
+  
+					</page>-->
+					<page string = "Précompte">
+						<notebook>
+							<page string = 'Infos sur precompte'>
+								<group><field name="nature_prcpte_id"/></group>
+								<group col = '2'>
+				                     <group><field name="x_precompte" style="width:50%"/></group>
+				                     <group><field name="x_retrait_prcpt_mois" style="width:50%"/></group>
+				                     <group><field name="x_datedebut_prcpt" style="width:50%"/></group>
+				                     <group><field name="x_datefin_prcpt" style="width:50%"/></group>
+				                     <group><field name="etat_prcpte" style="width:20%"/></group>
+				                     <group><field name="duree" force_save = '1' invisible = '1'/></group>
+				                </group>
+				            </page>
+				            <page string = 'Détails Règlement'>
+				            	  <field name="x_line_reg_ids">
+			                            <tree string="Détails" editable="bottom">
+			                                <field name="name" invisible = '1'/>
+				                            <field name="date"/>
+				                            <field name="mnt_echeance"/>
+				                            <field name="reste_echeance"/>
+				                            <field name="reste_a_payer"/>
+				                            <field name="date_debut"/>
+					                        <field name="date_fin"/>
+				                            <field name="duree_prcpte"/>
+				                            <field name="nature_prcpte_id"/>
+			                            </tree>
+			                            <form string="Détails Line">
+			                                <group>
+			                                    <field name="name" invisible = '1'/>
+					                            <field name="date"/>
+					                            <field name="mnt_echeance"/>
+					                            <field name="reste_echeance"/>
+					                            <field name="reste_a_payer"/>
+					                            <field name="date_debut"/>
+					                            <field name="date_fin"/>
+					                            <field name="duree_prcpte"/>
+					                            <field name="nature_prcpte_id"/>	
+			                                </group>
+			                            </form>
+					              </field> 
+				            </page>
+				            <page string = 'Détails Règlement Par Nature'>
+				            	  <group col = '2'>
+				            	  		<group><field name="nature_prcpte_id"/></group>
+				            	  		<group><button string="Rechercher" name="action_rechercher" type="object" class="oe_highlight"/></group>
+				            	  </group>
+				            	  <field name="x_line_reg_details_ids">
+			                            <tree string="Détails/Nature" editable="bottom">
+			                                <field name="name" invisible = '1'/>
+				                            <field name="date"/>
+				                            <field name="mnt_echeance"/>
+				                            <field name="reste_echeance"/>
+				                            <field name="reste_a_payer"/>
+				                            <field name="date_debut"/>
+					                        <field name="date_fin"/>
+				                            <field name="duree_prcpte"/>
+				                            <field name="nature_prcpte_id"/>
+			                            </tree>
+			                            <form string="Détails/Nature Line">
+			                                <group>
+			                                    <field name="name" invisible = '1'/>
+					                            <field name="date"/>
+					                            <field name="mnt_echeance"/>
+					                            <field name="reste_echeance"/>
+					                            <field name="reste_a_payer"/>
+					                            <field name="date_debut"/>
+					                            <field name="date_fin"/>
+					                            <field name="duree_prcpte"/>
+					                            <field name="nature_prcpte_id"/>	
+			                                </group>
+			                            </form>
+					              </field> 
+				            </page>
+			            </notebook>
+					</page>
+					<page string = "Dossier Individuel">
+						<field name="x_dossier_ind_ids">
+	                            <tree string="Fichiers" editable="bottom">
+	                                <field name="objet_ligne"/>
+		                            <field name="fichier_joint"/>
+		                            <field name="date_op"/>
+	                            </tree>
+	                            <form string="Fichiers Line">
+	                                <group>
+	                                    <field name="objet_ligne"/>
+			                            <field name="fichier_joint"/>
+			                            <field name="date_op"/>	
+	                                </group>
+	                            </form>
+			            </field> 
+					</page>
+					<page string = "Informations Exonérations">
+						<group col = "6" string="Informations Exonérations" >
+                                <field name="x_renum_total_exo" />
+                                 <field name="x_salaire_brut" />
+                                <field name="x_indem_resp_exo" />
+                                <field name="x_indem_astr_exo" />
+                                <field name="x_indem_techn_exo" />
+                                <field name="x_indem_specif_exo" />
+                                <field name="x_indem_specif_it_exo" />
+                                <field name="x_indem_specif_ifc_exo" />
+                                <field name="x_indem_loge_exo" />
+                                <field name="x_indem_transp_exo" />
+                                <field name="x_indem_inform_exo" />
+                                <field name="x_indem_exploit_exo" />
+                                <field name="x_indem_finance_exo" />
+                                <field name="x_indem_garde_exo"/>
+                                <field name="x_indem_risque_exo"/>
+                                <field name="x_indem_suj_exo"/>
+                                <field name="x_indem_form_exo"/>
+                                <field name="x_indem_caisse_exo"/>
+                                <field name="x_indem_veste_exo"/>
+                                <field name="x_indem_residence_exo"/>
+                                <field name="x_total_exo"/>
+                                
+                                <field name="x_abattement_forfaitaire"/>
+                                <field name="x_salaire_net_imposable"/>
+						  </group> 
+					</page>
+			</notebook>
+			
+			<xpath expr="//field[@name='company_id']" position="replace">
+			     <field name = "x_structure_id" invisible = '1'/>
+			</xpath>
+			
+			<xpath expr="//field[@name='google_drive_link']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='parent_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='coach_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='mobile_phone']" position="replace">
+			     <field name = "x_mode_paiement"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_mode_paiement']" position="after">
+			     <field name = "x_banque_id" attrs="{'invisible': [('x_mode_paiement', 'not in', ['virement'])]}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_banque_id']" position="after">
+			     <field name = "num_banque" attrs="{'invisible': [('x_mode_paiement', 'not in', ['virement'])]}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='num_banque']" position="after">
+			     <field name = "intitule" attrs="{'invisible': [('x_mode_paiement', 'not in', ['virement'])]}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='job_title']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='work_phone']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='work_location']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='work_location']" position="after">
+			     <field name = "x_fonction_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_fonction_id']" position="before">
+			     <field name = "x_emploi_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='address_home_id']" position="after">
+			     <field name = "tel"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='address_home_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			
+			
+			<xpath expr="//field[@name='marital']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='emergency_phone']" position="after">
+			     <field name = "x_email"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='bank_account_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='resource_calendar_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+						
+			<xpath expr="//field[@name='tz']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='km_home_work']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+		    <xpath expr="//field[@name='visa_no']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='permit_no']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='visa_expire']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//group[@name='work_permit']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<!-- <xpath expr="//group[@name='Contact_Information']" position="attributes">
+			     <attribute name = "invisible">False</attribute>
+			</xpath>-->
+			
+			<xpath expr="//field[@name='address_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='identification_id']" position="replace">
+			     <field name = "matricule_genere"/>
+			</xpath>
+			<xpath expr="//field[@name='matricule_genere']" position="after">
+			     <field name = "matricule"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='work_email']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='birthday']" position="replace">
+			     	<field name = "x_date_naissance"/>
+			</xpath>
+			
+			 <xpath expr="//field[@name='x_date_naissance']" position="after">
+			     <field name = "x_nb_annee_retraite" style="width:20%"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='country_id']" position="replace">
+			     	<field name = "x_nationalite_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='user_id']" position="after">
+			     <field name = "x_compte_conge" style="width:20%"/>
+			</xpath>
+			
+			
+			
+			
+			<!--<xpath expr="//field[@name='department_id']" position="after">
+			     <field name = "hr_service" domain = "[('department_id','=',department_id)]" options="{'no_create':True}"/>
+			      <field name = "hr_service"/>
+			     
+			</xpath>-->
+			
+			<xpath expr="//field[@name='department_id']" position="before">
+			     <field name = "x_type_employe_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_type_employe_id']" position="after">
+			     <field name = "x_lib_type_emp" force_save = '1' invisible = '1'/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='x_lib_type_emp']" position="after">
+			     <field name = "num_declaration" attrs="{'invisible': [('x_lib_type_emp', 'not in', ['Contractuel'])]}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_type_employe_id']" position="before">
+			     <field name = "x_categorie_employe_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='job_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			
+			 <xpath expr="//field[@name='study_field']" position="replace">
+			     <field name = "branche"/>
+			 </xpath>
+			 
+			 <xpath expr="//field[@name='emergency_contact']" position="replace">
+			     <field name = "personne_id"/>
+			 </xpath>
+			
+			<xpath expr="//field[@name='study_school']" position="replace">
+			     <field name = "ecole"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='children']" position="replace">
+			     <field name = "charge_femme" style="width:30%"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='charge_femme']" position="after">
+			     <field name = "charge_enfant" style="width:30%"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='charge_enfant']" position="after">
+			     <field name = "charge" style="width:30%" froce_save = '1'/>
+			</xpath>
+			
+			<xpath expr="//field[@name='passport_id']" position="replace">
+			     <field name = "ref_identification"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='ref_identification']" position="before">
+			     <field name = "x_type_piece_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='additional_note']" position="replace">
+			     <field name = "observations"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='certificate']" position="replace">
+			     <field name = "x_diplome_id" options="{'no_create':True}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_diplome_id']" position="after">
+			     <field name = "x_diplome_recrut_id" options="{'no_create':True}"/>
+			</xpath>
+			
+		
+			
+			<xpath expr="//field[@name='intitule']" position="after">
+			     	<field name = "x_date_retraite"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='place_of_birth']" position="replace">
+			     	<field name = "lieu_naiss" style="width:100%"/>
+			</xpath>
+			
+			
+			<xpath expr="//field[@name='x_section_id']" position="after">
+			        <field name = "x_zone_id" options="{'no_create':True}"/>
+			</xpath>
+			    
+		    <xpath expr="//field[@name='gender']" position="replace">
+			     <field name = "genre"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='genre']" position="after">
+			     <field name = "situation_marital"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='situation_marital']" position="after">
+					<field name="nom_conjoint" attrs="{'invisible': [('situation_marital', 'not in', ['marie', 'concubinage'])]}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='situation_marital']" position="after">
+		            <field name="date_naiss_conjoint" attrs="{'invisible': [('marital', 'not in', ['marie', 'concubinage'])]}"/>
+			</xpath>
+		    
+		    <xpath expr="//field[@name='x_compte_conge']" position="after">
+		        <field name = "x_compte_conge_maternite" attrs="{'invisible': [('genre', 'not in', ['feminin'])]}"/>
+		    </xpath>
+		    
+		     <xpath expr="//field[@name='x_compte_conge_maternite']" position="after">
+		        <field name = "x_compte_auto_abs"/>
+		    </xpath>
+		    
+		     <xpath expr="//field[@name='x_compte_auto_abs']" position="after">
+		        <field name = "x_compte_examens"/>
+		    </xpath>
+		    
+		    <xpath expr="//field[@name='x_compte_examens']" position="after">
+		        <field name = "x_vehicule_fction_id" options="{'no_create':True}"/>
+		    </xpath>
+		    
+		    <xpath expr="//field[@name='x_vehicule_fction_id']" position="after">
+		        <field name = "x_vehicule_service_id" options="{'no_create':True}"/>
+		    </xpath>
+		    
+		    <xpath expr="//field[@name='x_vehicule_service_id']" position="after">
+		        <field name = "x_vehicule_affect_id" options="{'no_create':True}"/>
+		    </xpath>
+		    
+		    <xpath expr="//field[@name='medic_exam']" position="after">
+		        <field name = "resultat_visite_medic" options="{'no_create':True}"/>
+		    </xpath>
+		    
+		    
+		    <xpath expr="//field[@name='resultat_visite_medic']" position="after">
+		        <field name = "fichier_joint"/>
+		    </xpath>
+		    
+		    <xpath expr="//field[@name='vehicle']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<!-- <xpath expr="//field[@name='num_declaration']" position="after">
+			     <field name = "x_assurance_id"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_assurance_id']" position="after">
+			     <field name = "mnt_assurance" attrs="{'invisible': [('x_assurance_id', '=', False)]}"/>
+			</xpath>-->
+ 
+            <xpath expr="//field[@name='name']" position="attributes">
+
+			      <attribute name="attrs">{'required':True, 'invisible':False}</attribute>
+			
+			      <attribute name="field">Nom et Prénom(s)</attribute>
+			      <field name = "nomprenoms"/>
+			
+			      <attribute name="placeholder">Entrez Nom et Prénom(s) ici</attribute>
+			
+			</xpath>
+			
+			<xpath expr="//field[@name='department_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+	
+			
+			
+	
+	</field>
+</record>
+
+
+<!-- vue heritée du departement dans employée form-->
+ <record model="ir.ui.view" id="hr_department_form">
+	<field name="name">hr.department.form</field>
+	<field name="model">hr.department</field>
+    <field name="inherit_id" ref="hr.view_department_form"/>
+	<field name="arch" type="xml">	
+			<xpath expr="//field[@name='company_id']" position="replace">
+			     <field name = "x_structure_id" options="{'no_open': True}"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='x_structure_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+			</xpath>
+			<!-- -><xpath expr="//field[@name='x_structure_id']" position="after">
+			     <field name = "x_service_id" options="{'no_open': True}"/>
+			</xpath>-->
+
+  </field>
+</record>
+
+
+<!-- vue heritée du departement dans employée tree -->
+ <record model="ir.ui.view" id="hr_department_tree">
+	<field name="name">hr.department.tree</field>
+	<field name="model">hr.department</field>
+    <field name="inherit_id" ref="hr.view_department_tree"/>
+	<field name="arch" type="xml">	
+			<xpath expr="//field[@name='company_id']" position="replace">
+			     <field name = "x_structure_id" options="{'no_open': True}"/>
+			</xpath>
+			
+			<!-- -><xpath expr="//field[@name='x_structure_id']" position="after">
+			     <field name = "x_service_id"/>
+			</xpath>-->
+
+  </field>
+</record>
+
+<!-- Action  departement-->
+	<record model="ir.actions.act_window" id="act_list_dep">
+			<field name="name">Liste des departements</field>
+			<field name="res_model">hr.department</field>
+			<field name="view_mode">kanban,tree,form</field>
+		
+	</record>
+
+<!-- vue type retenue tree-->
+	<record model="ir.ui.view" id="view_id_retenue">
+		<field name="name">view.retenue.tree</field>
+		<field name="model">hr_typeretenue</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des types">
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue retenue form-->
+	<record model="ir.ui.view" id="view_id_retenue_form">
+		<field name="name">view.retenue.form</field>
+		<field name="model">hr_typeretenue</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des types">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  type retenue-->
+	<record model="ir.actions.act_window" id="act_list_type_retenue">
+			<field name="name">Liste des types de retenues</field>
+			<field name="res_model">hr_typeretenue</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+	
+	
+	
+
+<!-- vue type rappel tree-->
+	<record model="ir.ui.view" id="view_id_rappel">
+		<field name="name">view.rappel.tree</field>
+		<field name="model">hr_typerappel</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des rappels">
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue rappel form-->
+	<record model="ir.ui.view" id="view_id_rappel_form">
+		<field name="name">view.rappel.form</field>
+		<field name="model">hr_typerappel</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des types rappels">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  type rappel-->
+	<record model="ir.actions.act_window" id="act_list_type_rappel">
+			<field name="name">Liste des types de rappels</field>
+			<field name="res_model">hr_typerappel</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+
+
+<!-- Vue héritée de tree de employés -->
+	 <record id="view_hr_employee_inherit" model="ir.ui.view">
+            <field name="name">hr.view_employee_tree.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_phone']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+				
+				<xpath expr="//field[@name='work_email']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+				
+				<xpath expr="//field[@name='job_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+				
+				<xpath expr="//field[@name='parent_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+				
+				<xpath expr="//field[@name='name']" position="before">
+			     	<field name = "matricule_genere"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='name']" position="before">
+			     	<field name = "matricule"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='name']" position="after">
+			     	<field name = "x_categorie_c_id"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_categorie_c_id']" position="after">
+			     	<field name = "x_echelle_c_id"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_echelle_c_id']" position="after">
+			     	<field name = "x_echellon_c_id"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_echellon_c_id']" position="after">
+			     	<field name = "genre"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='genre']" position="after">
+			     	<field name = "marital"/>
+				</xpath>
+				
+			    <xpath expr="//field[@name='marital']" position="after">
+			     	<field name = "x_date_retraite"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_date_retraite']" position="after">
+			     	<field name = "x_fonction_id" options="{'no_create':True}"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='company_id']" position="replace">
+			     	<field name = "x_structure_id" invisible = '1'/>
+				</xpath>
+				
+				<xpath expr="//field[@name='department_id']" position="attributes">
+			     	<attribute name = "invisible">True</attribute>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_fonction_id']" position="after">
+				     <field name = "x_direction_id" options="{'no_create':True}"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='x_direction_id']" position="after">
+				     <field name = "hr_service" options="{'no_create':True}"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='hr_service']" position="after">
+				     <field name = "x_type_employe_id" options="{'no_create':True}"/>
+				</xpath>
+				
+				<xpath expr="//field[@name='hr_service']" position="after">
+			        <field name = "x_zone_id" options="{'no_create':True}"/>
+			    </xpath>
+				
+				<!-- <xpath expr="//field[@name='x_structure_id']" position="after">
+			     	<field name = "department_id" options="{'no_create':True}"/>
+				</xpath>-->
+				
+			
+            </field>
+        </record>	
+
+ <!-- vue service tree-->
+	<record model="ir.ui.view" id="view_id">
+		<field name="name">view.service</field>
+		<field name="model">hr_service</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des services">
+				<field name="x_direction_id"/>
+				<field name="libcourt"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue service form-->
+	<record model="ir.ui.view" id="view_id_s_form">
+		<field name="name">view.service</field>
+		<field name="model">hr_service</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des services">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="code" style="width:20%"/>
+							<field name="libcourt" style="width:40%"/>
+							<field name="name" style="width:60%"/>
+							<field name="x_direction_id" style="width:70%"/>
+							<field name="responsable" style="width:80%"/>
+							<field name="est_stock" style="width:10%"/>
+					</group>
+			</sheet>
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  service-->
+	<record model="ir.actions.act_window" id="act_list_service">
+			<field name="name">Liste des services</field>
+			<field name="res_model">hr_service</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+
+
+
+
+
+
+<!-- vue unité tree-->
+	<record model="ir.ui.view" id="view_id_unitSS">
+		<field name="name">view.unite</field>
+		<field name="model">hr_unite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des unités">
+				<field name="x_service_id"/>
+				<field name="libcourt"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue unité form-->
+	<record model="ir.ui.view" id="view_id_uNITESS_form">
+		<field name="name">view.unite</field>
+		<field name="model">hr_unite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des unités">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="code" style="width:20%"/>
+							<field name="libcourt" style="width:40%"/>
+							<field name="name" style="width:60%"/>
+							<field name="x_service_id" style="width:70%"/>
+							<field name="responsable" style="width:80%"/>
+					</group>
+			</sheet>
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  unité-->
+	<record model="ir.actions.act_window" id="act_list_unite">
+			<field name="name">Liste des unités</field>
+			<field name="res_model">hr_unite</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+	
+
+<!-- vue section tree-->
+	<record model="ir.ui.view" id="view_id_section">
+		<field name="name">view.section</field>
+		<field name="model">hr_section</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des sections">
+				<field name="x_unite_id"/>
+				<field name="libcourt"/>
+				<field name="name"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue section form-->
+	<record model="ir.ui.view" id="view_id_u_form">
+		<field name="name">view.section</field>
+		<field name="model">hr_section</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des section">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="code" style="width:20%"/>
+							<field name="libcourt" style="width:40%"/>
+							<field name="name" style="width:60%"/>
+							<field name="x_unite_id" style="width:70%"/>
+							<field name="responsable" style="width:80%"/>
+					</group>
+			</sheet>
+				
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  section-->
+	<record model="ir.actions.act_window" id="act_list_section">
+			<field name="name">Liste des sections</field>
+			<field name="res_model">hr_section</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+
+
+
+
+
+
+
+	
+<!-- vue fonction tree-->
+	<record model="ir.ui.view" id="view_id_fcti_tree">
+		<field name="name">view.fonction.tree</field>
+		<field name="model">hr_fonction</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des fonctions">
+				<field name="sequence" widget="handle"/>
+				<!-- <field name="code"/>-->
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue fonction form-->
+	<record model="ir.ui.view" id="view_id_form_fct">
+		<field name="name">view.fonction.form</field>
+		<field name="model">hr_fonction</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des fonctions">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	
+	
+	
+	
+	
+	<!-- vue historique tree-->
+	<record model="ir.ui.view" id="view_id_hist_tree">
+		<field name="name">view.historique.tree</field>
+		<field name="model">hr_employee_historique</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des historisations">
+				<field name="employee_id"/>
+				<field name="x_categorie_c_id"/>
+				<field name="x_echelle_c_id"/>
+				<field name="x_echellon_c_id"/>
+				<field name="date_modif"/>
+				<field name="date_op" invisible = '1'/>
+				<field name="company_id"/>
+				<field name="x_exercice_id"/>
+			</tree>
+		</field>
+	</record>
+	
+	
+	
+
+
+
+
+	
+	
+	
+<!-- Vue Paramètre indemnité responsabilité tree-->
+	<record model="ir.ui.view" id="view_id_tree_resp">
+		<field name="name">view.hr_paramindemniteresp.tree</field>
+		<field name="model">hr_paramindemniteresp</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Responsabilité">
+            	<field name="x_type_indem_id"/>
+		        <field name="x_fonction_id"/>
+		        <field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité responsabilité form-->
+	<record model="ir.ui.view" id="view_id_form_resp">
+		<field name="name">view.hr_paramindemniteresp.form</field>
+		<field name="model">hr_paramindemniteresp</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Parametrage Indemnité/Responsabilité">
+			   <group col = "3">
+		            <group>
+		            	<field name="x_type_indem_id" force_save = '1'/>
+				       <field name="x_fonction_id"/>
+		            </group>
+				    <group>	
+				        <field name="x_zone_id"/>
+				        <field name="x_taux"/> 
+				        <field name="company_id" invisible = '1'/>
+				    </group>    
+		        </group>
+			</form>
+		</field>
+	</record>
+	
+	
+<!-- Vue Paramètre indemnité astreinte tree-->
+	<record model="ir.ui.view" id="view_id_tree_astr">
+		<field name="name">view.hr_paramindemniteastr.tree</field>
+		<field name="model">hr_paramindemniteastr</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Astreinte">
+            	<field name="x_type_indem_id"/>
+		        <field name="x_emploi_id"/>
+		        <field name="x_categorie_c_id"/>
+		        <field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité astreinte form-->
+	<record model="ir.ui.view" id="view_id_form_astr">
+		<field name="name">view.hr_paramindemniteastr.form</field>
+		<field name="model">hr_paramindemniteastr</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Parametrage Indemnité/Astreinte">
+			    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+			</form>	
+		</field>
+	</record>	
+	
+	
+	
+	
+<!-- Vue Paramètre indemnité astreinte liée a la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fction_astr">
+		<field name="name">view.hr_paramindemniteastrs.tree</field>
+		<field name="model">hr_paramindemniteastrs</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Astreinte">
+            	<field name="x_type_indem_id"/>
+		        <field name="x_fonction_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité astreinte fonction form
+	<record model="ir.ui.view" id="view_id_form_fction_astr">
+		<field name="name">view.hr_paramindemniteastrs.form</field>
+		<field name="model">hr_paramindemniteastrs</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Parametrage Indemnité/Astreinte">
+			   <group col = "3">
+		            <group>
+		            	<field name="x_type_indem_id" force_save = '1'/>
+		            	<field name="x_fonction_id"/>
+		            </group>
+				    <group>	
+				        <field name="x_zone_id"/>
+				        <field name="x_taux"/> 
+				        <field name="company_id" invisible = '1'/>   
+				    </group>   
+		        </group>
+			</form>	
+		</field>
+	</record>-->		
+		
+	
+<!-- Vue Paramètre logement indemnité tree-->
+	<record model="ir.ui.view" id="view_id_tree_type_logement">
+		<field name="name">view.hr_paramindemnitelogement.tree</field>
+		<field name="model">hr_paramindemnitelogement</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Logement">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité logement form-->
+	<record model="ir.ui.view" id="view_id_form_type_logement">
+		<field name="name">view.hr_paramindemnitelogement.form</field>
+		<field name="model">hr_paramindemnitelogement</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Logement">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	
+	<!-- Vue Paramètre logement indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_logement">
+		<field name="name">view.hr_paramindemnitelogements.tree</field>
+		<field name="model">hr_paramindemnitelogements</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Logement">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité logement liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_logement">
+		<field name="name">view.hr_paramindemnitelogements.form</field>
+		<field name="model">hr_paramindemnitelogements</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Logement">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	<!-- Vue Paramètre technicité indemnité tree-->
+	<record model="ir.ui.view" id="view_id_tree_type_technicite">
+		<field name="name">view.hr_paramindemnitetechnicite.tree</field>
+		<field name="model">hr_paramindemnitetechnicite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Technicité">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité technicité form-->
+	<record model="ir.ui.view" id="view_id_form_type_technicites">
+		<field name="name">view.hr_paramindemnitetechnicite.form</field>
+		<field name="model">hr_paramindemnitetechnicite</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Technicité">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	<!-- Vue Paramètre technicité indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_techn">
+		<field name="name">view.hr_paramindemnitetechnicites.tree</field>
+		<field name="model">hr_paramindemnitetechnicites</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Technicité">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité technicité liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_tech">
+		<field name="name">view.hr_paramindemnitetechnicites.form</field>
+		<field name="model">hr_paramindemnitetechnicites</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Technicité">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	<!-- Vue Paramètre spécifique indemnité GRH tree-->
+	<record model="ir.ui.view" id="view_id_tree_specifiques">
+		<field name="name">view.hr_paramindemnitespecifique.tree</field>
+		<field name="model">hr_paramindemnitespecifique</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Spécifique">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité spécifique GRH form-->
+	<record model="ir.ui.view" id="view_id_form_type_specifique">
+		<field name="name">view.hr_paramindemnitespecifique.form</field>
+		<field name="model">hr_paramindemnitespecifique</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Spécifique">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	<!-- Vue Paramètre spécifique indemnité IT tree-->
+	<record model="ir.ui.view" id="view_id_tree_specifiques_it">
+		<field name="name">view.hr_paramindemnitespecifique_it.tree</field>
+		<field name="model">hr_paramindemnitespecifique_it</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Spécifique IT">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité spécifique IT form-->
+	<record model="ir.ui.view" id="view_id_form_type_specifiqueçit">
+		<field name="name">view.hr_paramindemnitespecifique_it.form</field>
+		<field name="model">hr_paramindemnitespecifique_it</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Spécifique IT">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre spécifique indemnité IFC tree-->
+	<record model="ir.ui.view" id="view_id_tree_specifiques_ifc">
+		<field name="name">view.hr_paramindemnitespecifique_ifc.tree</field>
+		<field name="model">hr_paramindemnitespecifique_ifc</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Spécifique IFC">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité spécifique IFC form-->
+	<record model="ir.ui.view" id="view_id_form_type_specifiqueçifc">
+		<field name="name">view.hr_paramindemnitespecifique_ifc.form</field>
+		<field name="model">hr_paramindemnitespecifique_ifc</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Spécifique IFC">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	<!-- Vue Paramètre spécifique indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_specf">
+		<field name="name">view.hr_paramindemnitespecifiques.tree</field>
+		<field name="model">hr_paramindemnitespecifiques</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Spécifiques">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité spécifique liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_specf">
+		<field name="name">view.hr_paramindemnitespecifiques.form</field>
+		<field name="model">hr_paramindemnitespecifiques</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Spécifiques">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	<!-- Vue Paramètre spécifique transport tree-->
+	<record model="ir.ui.view" id="view_id_tree_transport">
+		<field name="name">view.hr_paramindemnitetransport.tree</field>
+		<field name="model">hr_paramindemnitetransport</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Transport">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité transport form-->
+	<record model="ir.ui.view" id="view_id_form_type_transp">
+		<field name="name">view.hr_paramindemnitetransport.form</field>
+		<field name="model">hr_paramindemnitetransport</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Transport">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	<!-- Vue Paramètre transport indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_transp">
+		<field name="name">view.hr_paramindemnitetransports.tree</field>
+		<field name="model">hr_paramindemnitetransports</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Transport">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité transport liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_trsp">
+		<field name="name">view.hr_paramindemnitetransports.form</field>
+		<field name="model">hr_paramindemnitetransports</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Transport">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>    
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	<!-- Vue Paramètre spécifique informatique tree-->
+	<record model="ir.ui.view" id="view_id_tree_informatique">
+		<field name="name">view.hr_paramindemniteinformatique.tree</field>
+		<field name="model">hr_paramindemniteinformatique</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Informatique">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité informatique form-->
+	<record model="ir.ui.view" id="view_id_form_type_inform">
+		<field name="name">view.hr_paramindemniteinformatique.form</field>
+		<field name="model">hr_paramindemniteinformatique</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Informatique">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	<!-- Vue Paramètre informatique indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_inf">
+		<field name="name">view.hr_paramindemniteinformatiques.tree</field>
+		<field name="model">hr_paramindemniteinformatiques</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Informatique">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité informatique liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_info">
+		<field name="name">view.hr_paramindemniteinformatiques.form</field>
+		<field name="model">hr_paramindemniteinformatiques</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Informatique">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	<!-- Vue Paramètre spécifique exploi reseau tree-->
+	<record model="ir.ui.view" id="view_id_tree_reseau">
+		<field name="name">view.hr_paramindemniteexploireseau.tree</field>
+		<field name="model">hr_paramindemniteexploireseau</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Exploitation-Reseau">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité exploitation reseau form-->
+	<record model="ir.ui.view" id="view_id_form_type_reseau">
+		<field name="name">view.hr_paramindemniteexploireseau.form</field>
+		<field name="model">hr_paramindemniteexploireseau</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Exploitation-Reseau">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre exploi_reseau indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_exre">
+		<field name="name">view.hr_paramindemniteexploireseaus.tree</field>
+		<field name="model">hr_paramindemniteexploireseaus</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Exploitation-Réseau">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité exploi_reseau liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_exr">
+		<field name="name">view.hr_paramindemniteexploireseaus.form</field>
+		<field name="model">hr_paramindemniteexploireseaus</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Exploitation-Réseau">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>    
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	<!-- Vue Paramètre spécifique resp. financière tree-->
+	<record model="ir.ui.view" id="view_id_tree_financiere">
+		<field name="name">view.hr_paramindemniterespfinanciere.tree</field>
+		<field name="model">hr_paramindemniterespfinanciere</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Resp.Financière">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité resp. financière form-->
+	<record model="ir.ui.view" id="view_id_form_type_financiere">
+		<field name="name">view.hr_paramindemniterespfinanciere.form</field>
+		<field name="model">hr_paramindemniterespfinanciere</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Resp.Financière">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre resp_fin indemnité liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_respf">
+		<field name="name">view.hr_paramindemniterespfinancieres.tree</field>
+		<field name="model">hr_paramindemniterespfinancieres</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Responsabilité Financière">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité res_financière liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_finc">
+		<field name="name">view.hr_paramindemniterespfinancieres.form</field>
+		<field name="model">hr_paramindemniterespfinancieres</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Responsabilité Financière">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	
+	<!-- Vue Paramètre indem de garde tree-->
+	<record model="ir.ui.view" id="view_id_tree_garde">
+		<field name="name">view.hr_paramindemnitegarde.tree</field>
+		<field name="model">hr_paramindemnitegarde</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Garde">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité de garde form-->
+	<record model="ir.ui.view" id="view_id_form_type_gardess">
+		<field name="name">view.hr_paramindemnitegarde.form</field>
+		<field name="model">hr_paramindemnitegarde</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Garde">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem de garde liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_gardes">
+		<field name="name">view.hr_paramindemnitegardes.tree</field>
+		<field name="model">hr_paramindemnitegardes</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Garde">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité de garde liée a la fction form
+		<field name="name">view.hr_paramindemnitegardes.form</field>
+		<field name="model">hr_paramindemnitegardes</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Garde">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>    
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	
+	
+	<!-- Vue Paramètre indem de risque de contagion tree-->
+	<record model="ir.ui.view" id="view_id_tree_rc">
+		<field name="name">view.hr_paramindemniterisquecontagion.tree</field>
+		<field name="model">hr_paramindemniterisquecontagion</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Risque de Contagion">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité de risque form-->
+	<record model="ir.ui.view" id="view_id_form_type_garde">
+		<field name="name">view.hr_paramindemniterisquecontagion.form</field>
+		<field name="model">hr_paramindemniterisquecontagion</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Risque de Contagion">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem de risque de contagion liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_rcs">
+		<field name="name">view.hr_paramindemniterisquecontagions.tree</field>
+		<field name="model">hr_paramindemniterisquecontagions</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Risque de Contagion">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité de risque liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_rcstS">
+		<field name="name">view.hr_paramindemniterisquecontagions.form</field>
+		<field name="model">hr_paramindemniterisquecontagions</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Risque de Contagion">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	<!-- Vue Paramètre indem de sujetion de contagion tree-->
+	<record model="ir.ui.view" id="view_id_tree_suj">
+		<field name="name">view.hr_paramindemnitesujetion.tree</field>
+		<field name="model">hr_paramindemnitesujetion</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Sujétion Géographique">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité de sujétion form-->
+	<record model="ir.ui.view" id="view_id_form_type_suj">
+		<field name="name">view.hr_paramindemnitesujetion.form</field>
+		<field name="model">hr_paramindemnitesujetion</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Sujétion Géographique">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem de sujétion géographique liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_sujs">
+		<field name="name">view.hr_paramindemnitesujetions.tree</field>
+		<field name="model">hr_paramindemnitesujetions</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Sujétion Géographique">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité de sujétion geographique liée a la fction form
+		<field name="name">view.hr_paramindemnitesujetions.form</field>
+		<field name="model">hr_paramindemnitesujetions</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Sujétion Géographique">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	<!-- Vue Paramètre indem de formation spécialisée tree-->
+	<record model="ir.ui.view" id="view_id_tree_fs">
+		<field name="name">view.hr_paramindemniteformation.tree</field>
+		<field name="model">hr_paramindemniteformation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Formation Spécialisée">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité de formation spécialisée form-->
+	<record model="ir.ui.view" id="view_id_form_type_fsc">
+		<field name="name">view.hr_paramindemniteformation.form</field>
+		<field name="model">hr_paramindemniteformation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Formation Spécialisée">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem de formation spécialisée liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_fsl">
+		<field name="name">view.hr_paramindemniteformations.tree</field>
+		<field name="model">hr_paramindemniteformations</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Formation Spécialisée">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité de fprmation speciale liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_fscl">
+		<field name="name">view.hr_paramindemniteformations.form</field>
+		<field name="model">hr_paramindemniteformations</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Formation Spécialisée">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>    
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	
+	
+<!-- Vue Paramètre indem de caisse tree-->
+	<record model="ir.ui.view" id="view_id_tree_caisse">
+		<field name="name">view.hr_paramindemnitecaisse.tree</field>
+		<field name="model">hr_paramindemnitecaisse</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Caisse">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité de caisse form-->
+	<record model="ir.ui.view" id="view_id_form_type_caiss">
+		<field name="name">view.hr_paramindemnitecaisse.form</field>
+		<field name="model">hr_paramindemnitecaisse</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Caisse">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem de caisse liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_fcc">
+		<field name="name">view.hr_paramindemnitecaisses.tree</field>
+		<field name="model">hr_paramindemnitecaisses</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Caisse">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité de caisse liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_css">
+		<field name="name">view.hr_paramindemnitecaisses.form</field>
+		<field name="model">hr_paramindemnitecaisses</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Caisse">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>    
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	
+<!-- Vue Paramètre indem vestimentaire tree-->
+	<record model="ir.ui.view" id="view_id_tree_vest">
+		<field name="name">view.hr_paramindemnitevest.tree</field>
+		<field name="model">hr_paramindemnitevest</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Vestimentaire">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_emploi_id"/>
+            	<field name="x_categorie_c_id"/>
+            	<field name="x_echelle_c_id"/>
+		        <field name="x_zone_id"/>	
+		        <field name="x_taux"/>
+		        <field name="company_id"/> 
+			</tree>
+		</field>
+	 </record>
+	
+	
+<!-- Vue Paramètre indemnité vestimentaire form-->
+	<record model="ir.ui.view" id="view_id_form_type_vest">
+		<field name="name">view.hr_paramindemnitevest.form</field>
+		<field name="model">hr_paramindemnitevest</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Vestimentaire">
+				    <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+			            	<field name="x_categorie_c_id"/>
+			            </group>
+					    <group>
+					       <field name="x_echelle_c_id"/>
+					       <field name="x_emploi_id"/>
+					    </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/> 
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>
+	
+	
+	
+	<!-- Vue Paramètre indem vestimentaire liée à la fonction tree
+	<record model="ir.ui.view" id="view_id_tree_fct_type_vst">
+		<field name="name">view.hr_paramindemnitevests.tree</field>
+		<field name="model">hr_paramindemnitevests</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Parametrage Indemnité/Vestimentaire">
+            	<field name="x_type_indem_id"/>
+            	<field name="x_fonction_id"/>
+            	<field name="x_zone_id"/>
+		        <field name="x_taux"/>
+				<field name="company_id"/>   
+			</tree>
+		</field>
+	 </record>-->
+	
+	
+<!-- Vue Paramètre indemnité vestimentaire liée a la fction form
+	<record model="ir.ui.view" id="view_id_form_fct_type_vsts">
+		<field name="name">view.hr_paramindemnitevests.form</field>
+		<field name="model">hr_paramindemnitevests</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+				<form string="Parametrage Indemnité/Vestimentaire">
+				   <group col = "3">
+			            <group>
+			            	<field name="x_type_indem_id" force_save = '1'/>
+					       <field name="x_fonction_id"/>
+			            </group>
+					    <group>
+					        <field name="x_zone_id"/>
+					        <field name="x_taux"/>
+					        <field name="company_id" invisible = '1'/>   
+					    </group>   
+			       </group>
+				</form>
+		</field>
+	</record>-->
+	
+	
+	
+	<!--Definition de la vue contract-->
+<record model="ir.ui.view" id="hr_contract_form">
+	<field name="name">hr.contract.form</field>
+	<field name="model">hr.contract</field>
+    <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+	<field name="arch" type="xml">
+	<notebook>
+	              <page string = "Informations Salariales" style="text-align:center;">
+					      <group col = "6" string="Informations Salariales">
+	                                <field name="x_solde_indiciaire_ctrct"/>
+	                                <field name="x_allocation_familial"/>
+	                                <field name="x_indem_resp"/>
+	                                <field name="x_indem_astr"/>
+	                                <field name="x_indem_techn"/>
+	                                <field name="x_indem_specif"/>
+	                                <field name="x_indem_loge"/>
+	                                <field name="x_indem_transp"/>
+	                                <field name="x_indem_inform"/>
+	                                <field name="x_indem_exploit"/>
+	                                <field name="x_indem_finance"/>
+						  </group>
+					</page>
+					<page string = "Rémuneration nette" style="text-align:center;">
+					      <group col = "3" string="Infos Rémuneration nette">
+				               <group>
+	                               <field name="x_total_indemnites"/>
+	                               <field name="x_base_imposable_ctrct"/>
+	                               <field name="x_mnt_cnss"/>
+	                               <field name="x_mnt_carfo"/>
+	                           </group>
+	                           <group>    
+	                              <field name="x_montant_charge"/>
+	                              <field name="x_iuts_net"/>
+	                              <field name="x_net_payer_ctrct"/>
+	                           </group> 
+						  </group>
+					</page>
+					<page string = "Rappel" style="text-align:center;">
+					      <group>
+	                             <field name="mnt_total_rappel"/>
+						  </group>
+					</page>
+					<page string = "Trop perçu" style="text-align:center;">
+					      <group>
+	                             <field name="mnt_total_trop_percu"/>
+						  </group>
+					</page>
+			</notebook>	
+			<xpath expr="//field[@name='resource_calendar_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+			</xpath>
+			
+			<xpath expr="//field[@name='name']" position="after">
+			     <label for="date_signature"/>
+			     <field name = "date_signature"/>
+			</xpath>
+			
+			<xpath expr="//field[@name='job_id']" position="attributes">
+		          <attribute name = "invisible">True</attribute>
+	        </xpath>
+	</field>
+</record>
+
+
+<!-- vue nombre année -->
+<record id="nbre_view_form" model="ir.ui.view">
+     <field name="name">hr.nbreannee.form</field>
+     <field name="model">hr_nbreannee</field>
+     <field name="arch" type="xml">
+         <form string="Nombre Année">
+             <group col="4">
+                 <field colspan="4" name="name"/>
+             </group>
+         </form>
+     </field>
+</record>
+
+<record id="nbre_view_tree" model="ir.ui.view">
+    <field name="name">hr.nbreannee.tree</field>
+    <field name="model">hr_nbreannee</field>
+    <field name="arch" type="xml">
+        <tree string="Nombre Année">
+            <field colspan="4" name="name"/>
+        </tree>
+    </field>
+</record>
+
+<!-- vue form héritée pour le type de contrat form-->
+	<record model="ir.ui.view" id="hr_type_contrat_form">
+		<field name="name">hr.contract.type.form</field>
+		<field name="model">hr.contract.type</field>
+	    <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+		<field name="arch" type="xml">	
+			
+			<xpath expr="//field[@name='name']" position="attributes">
+				     <attribute name = "invisible">False</attribute>
+			</xpath>
+	    
+	  </field>
+	</record>
+
+
+
+<!-- vue kanban héritée pour  contrat -->
+<record model="ir.ui.view" id="hr_contract_kanban">
+	<field name="name">hr.contract.kanban</field>
+	<field name="model">hr.contract</field>
+    <field name="inherit_id" ref="hr_contract.hr_contract_view_kanban"/>
+	<field name="arch" type="xml">	
+		
+		<xpath expr="//field[@name='employee_id']" position="attributes">
+			     <attribute name = "invisible">False</attribute>
+		</xpath>
+    
+  </field>
+</record>
+
+<!-- Action nbre année -->
+<record model="ir.actions.act_window" id="act_list_nbre_annee">
+		<field name="name">Liste Année Retraite</field>
+		<field name="res_model">hr_nbreannee</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+<!-- vue form héritée pour contrat tree -->
+<record model="ir.ui.view" id="hr_type_contrat_tree">
+	<field name="name">hr.contract.form</field>
+	<field name="model">hr.contract</field>
+    <field name="inherit_id" ref="hr_contract.hr_contract_view_tree"/>
+	<field name="arch" type="xml">	
+		
+		<xpath expr="//field[@name='date_end']" position="after">
+		       <field name = "x_structure_id"/>
+        </xpath>
+        
+        <xpath expr="//field[@name='job_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+		</xpath>
+		
+		 <xpath expr="//field[@name='resource_calendar_id']" position="attributes">
+			     <attribute name = "invisible">True</attribute>
+		</xpath>
+    
+  </field>
+</record>
+	
+<!-- Action contrat -->
+<record model="ir.actions.act_window" id="act_list_contrat">
+		<field name="name">Liste des Contrats</field>
+		<field name="res_model">hr.contract</field>
+		<field name="view_mode">kanban,tree,form</field>
+</record>
+
+<!-- Action registre contribution 
+<record model="ir.actions.act_window" id="act_list_reg_emp">
+		<field name="name">Liste des Registres</field>
+		<field name="res_model">hr_regemploye</field>
+		<field name="view_mode">tree,form</field>
+</record>-->
+
+<!-- Action type contrat -->
+<record model="ir.actions.act_window" id="act_list_type_contrat">
+		<field name="name">Liste des Types de Contrats</field>
+		<field name="res_model">hr.contract.type</field>
+		<field name="view_mode">tree,form</field>
+</record> 
+	
+	
+
+
+<!-- Définition de l'action -->
+
+
+
+
+<!-- Action Position 
+<record model="ir.actions.act_window" id="act_list_position">
+		<field name="name">Liste des Positions</field>
+		<field name="res_model">hr_position</field>
+		<field name="view_mode">tree,form,kanban</field>
+</record>-->
+
+
+	<!-- Action  fonction-->
+	<record model="ir.actions.act_window" id="act_list_fonction">
+			<field name="name">Liste des fonctions</field>
+			<field name="res_model">hr_fonction</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+	<!--Action  assurance
+	<record model="ir.actions.act_window" id="act_list_assurance">
+			<field name="name">Liste des assurances</field>
+			<field name="res_model">hr_assurance</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>-->
+	
+	
+	
+	
+	<!-- Action Paramètre Indemnité Responsabilité-->
+	<record model="ir.actions.act_window" id="act_param_resp_indemnite">
+			<field name="name">Liste des Paramétrages Indemnité/Responsabilité</field>
+			<field name="res_model">hr_paramindemniteresp</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Astreinte-->
+	<record model="ir.actions.act_window" id="act_param_astr_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Astreintes</field>
+			<field name="res_model">hr_paramindemniteastr</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	<!-- Action Paramètre Indemnité fonction Astreinte
+	<record model="ir.actions.act_window" id="act_param_astr_fction_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Astreintes</field>
+			<field name="res_model">hr_paramindemniteastrs</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité Logement-->
+	<record model="ir.actions.act_window" id="act_param_logement_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Logement</field>
+			<field name="res_model">hr_paramindemnitelogement</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Logement liée a la fction tree
+	<record model="ir.actions.act_window" id="act_param_logement_indemnite_fct">
+			<field name="name">Liste des Paramétrage Indemnité/Logement</field>
+			<field name="res_model">hr_paramindemnitelogements</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Technicité-->
+	<record model="ir.actions.act_window" id="act_param_technicite_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Technicité</field>
+			<field name="res_model">hr_paramindemnitetechnicite</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Technicité liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_technicite_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Technicité</field>
+			<field name="res_model">hr_paramindemnitetechnicites</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Spécifique GRH-->
+	<record model="ir.actions.act_window" id="act_param_specifique_indemnite_grh">
+			<field name="name">Liste des Paramétrage Indemnité/Spécifique GRH</field>
+			<field name="res_model">hr_paramindemnitespecifique</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Spécifique IT-->
+	<record model="ir.actions.act_window" id="act_param_specifique_indemnite_it">
+			<field name="name">Liste des Paramétrage Indemnité/Spécifique IT</field>
+			<field name="res_model">hr_paramindemnitespecifique_it</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Spécifique IFC-->
+	<record model="ir.actions.act_window" id="act_param_specifique_indemnite_ifc">
+			<field name="name">Liste des Paramétrage Indemnité/Spécifique IFC</field>
+			<field name="res_model">hr_paramindemnitespecifique_ifc</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Spécifique liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_specifique_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Spécifique</field>
+			<field name="res_model">hr_paramindemnitespecifiques</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Transport
+	<record model="ir.actions.act_window" id="act_param_transport_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Transport</field>
+			<field name="res_model">hr_paramindemnitetransport</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Transport liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_transport_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Transport</field>
+			<field name="res_model">hr_paramindemnitetransports</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Informatique-->
+	<record model="ir.actions.act_window" id="act_param_informatique_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Informatique</field>
+			<field name="res_model">hr_paramindemniteinformatique</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Informatique liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_informatique_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Informatique</field>
+			<field name="res_model">hr_paramindemniteinformatiques</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Exploi-reseau-->
+	<record model="ir.actions.act_window" id="act_param_exploi_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Exploitation-Réseau</field>
+			<field name="res_model">hr_paramindemniteexploireseau</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Exploi-reseau liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_exploi_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Exploitation-Réseau</field>
+			<field name="res_model">hr_paramindemniteexploireseaus</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité Financière-->
+	<record model="ir.actions.act_window" id="act_param_financiere_indemnite">
+			<field name="name">Liste des Paramétrage Indemnité/Resp.Financière</field>
+			<field name="res_model">hr_paramindemniterespfinanciere</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	<!-- Action Paramètre Indemnité Financière liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_financiere_indemnites">
+			<field name="name">Liste des Paramétrage Indemnité/Resp.Financière</field>
+			<field name="res_model">hr_paramindemniterespfinancieres</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité Garde-->
+	<record model="ir.actions.act_window" id="act_param_garde">
+			<field name="name">Liste des Paramétrage Indemnité/Garde</field>
+			<field name="res_model">hr_paramindemnitegarde</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité Garde liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_gardes">
+			<field name="name">Liste des Paramétrage Indemnité/Garde</field>
+			<field name="res_model">hr_paramindemnitegardes</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité risque de contagion-->
+	<record model="ir.actions.act_window" id="act_param_contagion">
+			<field name="name">Liste des Paramétrage Indemnité/Risque Contagion</field>
+			<field name="res_model">hr_paramindemniterisquecontagion</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité contagion liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_contagions">
+			<field name="name">Liste des Paramétrage Indemnité/Risque Contagion</field>
+			<field name="res_model">hr_paramindemniterisquecontagions</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité de sujétion-->
+	<record model="ir.actions.act_window" id="act_param_sujetion">
+			<field name="name">Liste des Paramétrage Indemnité/Sujétion Géographique</field>
+			<field name="res_model">hr_paramindemnitesujetion</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité de sujétion liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_sujetions">
+			<field name="name">Liste des Paramétrage Indemnité/Sujétion Géographique</field>
+			<field name="res_model">hr_paramindemnitesujetions</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité de formation spécialisée-->
+	<record model="ir.actions.act_window" id="act_param_speciale">
+			<field name="name">Liste des Paramétrage Indemnité/Formation Spécialisée</field>
+			<field name="res_model">hr_paramindemniteformation</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité de formation spécialisée liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_speciales">
+			<field name="name">Liste des Paramétrage Indemnité/Formation Spécialisée</field>
+			<field name="res_model">hr_paramindemniteformations</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	<!-- Action Paramètre Indemnité de caisse-->
+	<record model="ir.actions.act_window" id="act_param_caisse">
+			<field name="name">Liste des Paramétrage Indemnité/Caisse</field>
+			<field name="res_model">hr_paramindemnitecaisse</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité de caisse  liée à la fonction
+	<record model="ir.actions.act_window" id="act_param_caisses">
+			<field name="name">Liste des Paramétrage Indemnité/Caisse</field>
+			<field name="res_model">hr_paramindemnitecaisses</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action Paramètre Indemnité vestimentaire-->
+	<record model="ir.actions.act_window" id="act_param_vst">
+			<field name="name">Liste des Paramétrage Indemnité/Vestimentaire</field>
+			<field name="res_model">hr_paramindemnitevest</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	<!-- Action Paramètre Indemnité vestimentaire  liée à la fonction-
+	<record model="ir.actions.act_window" id="act_param_vsts">
+			<field name="name">Liste des Paramétrage Indemnité/Vestimentaire</field>
+			<field name="res_model">hr_paramindemnitevests</field>
+			<field name="view_mode">tree,form</field>
+	</record>-->
+	
+	
+	<!-- Action historisation-->
+	<record model="ir.actions.act_window" id="act_list_hist">
+			<field name="name">Liste Suivi-Carrière</field>
+			<field name="res_model">hr_employee_historique</field>
+			<field name="view_mode">tree</field>
+	</record>
+	
+	<!-- Action employé-->
+	<record model="ir.actions.act_window" id="act_list_emp">
+			<field name="name">Liste Des Employés</field>
+			<field name="res_model">hr.employee</field>
+			<field name="view_mode">kanban,tree,form</field>
+	</record>
+	
+	
+<!-- <record id="hr.menu_hr_root" model="ir.ui.menu">
+    <field name='name'>Gestion Employés</field>
+</record>-->
+
+
+
+<!-- pARTIE EVALUATION DES EMPLOYÉS -->
+
+<!-- Définition des vues liées a l'evaluation des employés de la fiche A de la fonction publique-->
+	<!-- vue evalauation -->
+	<record model="ir.ui.view" id="view_id_evaluation_tree">
+		<field name="name">view.evaluation.tree</field>
+		<field name="model">hr_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des evalauations">
+				<field name="sequence" widget="handle"/>
+				<field name="x_categorie_employe_id"/>
+				<field name="employee_id"/>
+				<field name="name"/>
+				<field name="x_categorie"/>
+				<field name="x_echelle"/>
+				<field name="x_echellon"/>
+				<field name="x_service"/>
+				<field name="x_emploi"/>
+			</tree>
+		</field>
+	</record>
+
+	<record model="ir.ui.view" id="view_id_evaluation_form">
+		<field name="name">view.evaluation.form</field>
+		<field name="model">hr_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des evaluations">
+			 <header>
+                    <button string="Rechercher" name="action_rechercher" type="object" class="oe_highlight"/>
+                    <button string="Confirmer" name="action_confrimer" type="object" class="oe_highlight"/>
+            </header>
+			<sheet>
+				<notebook>
+		              <page string = "Identification de l'agent à noter">
+					  <group><field name="x_titre_id" style="width:100%" options="{'no_create':True}"/></group>
+		               <group col = "2">
+			                <group> <!-- <label for="x_categorie_employe_id" class="oe_edit_only"/>-->
+									<field name="x_type_employe_id" style="width:100%" options="{'no_create':True}"/>
+									<field name="x_categorie_employe_id"  style="width:100%" options="{'no_create':True}"/>
+							</group>
+							<group>
+									<field name="employee_id" style="width:100%" domain = "[('x_type_employe_id','=',x_type_employe_id),('x_categorie_employe_id','=',x_categorie_employe_id)]" options="{'no_create':True}"/>
+									<field name="annee_evaluation" invisible = '0' force_save = '1'/>
+							</group>
+						</group>
+						<group col = "3">
+								
+							<group>
+								<field name="x_matricule_c" force_save = '1'/>
+								<field name="x_matricule_f" force_save = '1'/>
+								<field name="x_emploi" force_save = '1'/>
+							</group>
+							<group>
+								<field name="x_fonction" force_save = '1'/>
+								<field name="x_categorie" force_save = '1'/>
+								<field name="x_echelle" force_save = '1'/>
+						
+							</group>
+							<group>
+								<field name="x_echellon" force_save = '1'/>
+								<field name="x_service" force_save = '1'/>
+								
+							</group>
+						</group>
+						
+					  </page>
+					  <page string = "Identification du supérieur hiérarchique immédiat recevant lettre de mission">
+						     <group col = "3">
+								<group>
+									<field name="x_type_employe_recev_id" style="width:100%" options="{'no_create':True}"/>
+									<field name="employee_id_imm" domain = "[('x_categorie_employe_id.name','=','Supérieur hiérarchique immédiat recevant lettre de mission')]" options="{'no_create':True}"/>
+									<field name="x_matricule_imm_c" force_save = '1'/>
+								</group>
+								<group>	
+										<field name="x_matricule_imm_f" force_save = '1'/>
+										<field name="x_categorie_imm" force_save = '1'/>
+										<field name="x_echelle_imm" force_save = '1'/>
+								</group>
+								<group>
+										<field name="x_echellon_imm" force_save = '1'/>
+										<field name="x_service_imm" force_save = '1'/>
+										<field name="x_fonction_imm" force_save = '1'/>
+								</group>
+						     </group>
+						     <group>
+								<field name="x_note_globaless" invisible = '0' force_save = '1'/>
+							</group>
+						     <group col = '6' invisible = '1'>
+										
+										
+										<group>
+											<field name="x_localite_id" invisible = '1' force_save = '1'/>
+										</group>
+										<group>
+											<field name="company_id" invisible = '1' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_compss"  invisible = '0' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_assiduites" invisible = '0' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_ethique_profs" invisible = '0' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_sens_responsabilites" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_sens_animations" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_aptitude_encs" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_capacite_evaluers" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_total_consc_pros" invisible = '0' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_total_leads" force_save = '1' invisible = '0'/>
+										</group>
+										
+										
+										
+										
+										<group>
+											<field name="x_note_globales_agentss"  invisible = '0' force_save = '1'/>
+										</group>
+										
+										<group>
+											<field name="x_note_realisations_attentess"  force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_sens_orgs" invisible = '0' force_save = '1'/>
+										</group>
+										<group>
+											<field name="x_note_esprit_initiatives" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_total_comp_pro_agents" force_save = '1' invisible = '0'/>
+										</group>
+										
+										<group>
+											<field name="x_note_assiduites" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_ethique_profs" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_ponctualites" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_total_consc_pro_agents" force_save = '1' invisible = '0'/>
+										</group>
+										
+										
+										<group>
+											<field name="x_note_esprit_sacrifices" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_respect_bien_publics" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_respect_hierarchies" force_save = '1' invisible = '0'/>
+										</group>
+										<group>
+											<field name="x_note_total_sens_publics" force_save = '1' invisible = '0'/>
+										</group>
+						        </group>
+				          </page>
+				</notebook>
+				<notebook>
+				       <page string = "Fiche d'attente">
+				       <field name="x_line_f_ids">
+					        <tree string="Fiche d'attente" editable="bottom">
+							    <field name="objectif" force_save ='1'/>
+						    </tree>
+						    <form string="Fiche d'attente">
+						        <group>
+							    <field name="objectif"/>
+						        </group>
+						    </form>
+				       </field>
+				       </page>
+				       <page string = "Sous-Critère">
+				       <field name="x_line_ids">
+					        <tree string="Sous-Critère" editable="bottom">
+								<field name="x_critere_id" force_save = '1'/>
+							    <field name="x_sous_critere" force_save = '1'/>
+							    <!-- <field name="x_note_sous" domain = "[('x_sous_critere_id','=',x_sous_critere_id)]"/>-->
+							    <field name="x_note_sous" force_save = '1'/>
+							    <field name="x_cocher"/>
+						    </tree>
+						    <form string="Sous-Critère Line">
+						        <group>
+								    <field name="x_critere_id" force_save = '1'/>
+								    <field name="x_sous_critere"/>
+								    <field name="x_note_sous" force_save = '1'/>
+								    <field name="x_cocher"/>
+						        </group>
+						    </form>
+				       </field>
+				       </page>
+				       <page string = "Procès-Verbal de l'entretien d'évaluation">
+				           <field name="observation_sup_imm" placeholder="Observations du supérieur hiérarchique immédiat sur le niveau de performance de l'agent ici..."/>							      								
+					       <field name="contrainte_realisation" placeholder="Contraintes de réalisation relevées (éventuellement) ici..." />                              
+					       <field name="point_divergence" placeholder="Points de divergence (s'il y a lieu) ici..."/>			                      	
+				       </page>
+				       <page string = "Proposition Amelioration/Motivation">
+				           <field name="observation_amelioration" placeholder="Propositions d'amélioration où de motivation de l'agent..."/>							      										                      	
+				       </page>
+				</notebook>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	
+	<!-- vue critere evaluation -->
+	<record model="ir.ui.view" id="view_id_evaluation_critere_tree">
+		<field name="name">view.criter.evaluation.tree</field>
+		<field name="model">hr_critere_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des critères des evaluations">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_court"/>
+			</tree>
+		</field>
+	</record>
+
+	
+	<!-- vue critere evaluation -->
+	<record model="ir.ui.view" id="view_id_evaluation_criteres_form">
+		<field name="name">view.criter.evaluation.form</field>
+		<field name="model">hr_critere_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des critères des evaluations">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="lib_court" style="width:60%"/>
+							<field name="name" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+
+	
+	
+	
+	<!-- vue sous critere tree-->
+	<record model="ir.ui.view" id="view_id_evaluation_sous_critere_tree">
+		<field name="name">view.hr_sous_critere_evaluation.tree</field>
+		<field name="model">hr_sous_critere_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Sous critères">
+				<field name="sequence" widget="handle"/>
+				<field name="x_categorie_employe_id"/>
+				<field name="x_critere_evaluation_id"/>
+				<field name="lib_long"/>
+				<field name="lib_p"/>
+				<field name="note_sous_critere"/>
+				
+			</tree>
+			
+		</field>
+	</record>
+
+	<!-- vue sous critere form -->
+	<record model="ir.ui.view" id="view_id_evaluation_sous_critere_form">
+		<field name="name">view.hr_sous_critere_evaluation.form</field>
+		<field name="model">hr_sous_critere_evaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Sous critères">
+			<sheet>
+			<group col ='2'>
+			      <group><field name="x_critere_evaluation_id" style="width:100%"/></group>
+			      <group><field name="x_categorie_employe_id" style="width:100%"/></group>
+			</group>
+			
+			<group col = "2">
+				<group><field name="lib_court" style="width:60%"/></group>
+				<group><field name="lib_long" style="width:100%"/></group>
+			</group>
+			<group col = "3">
+					<group><field name="name" style="width:60%"/></group>
+					<group><field name="born_sup" style="width:60%"/></group>
+					<group><field name="note_sous_critere" /></group>
+					
+			</group>
+			<group>
+			     <field name="lib_p"/>	
+			</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+
+
+	<!--Definition des actions-->
+
+	<!-- Action evaluation-->
+	<record model="ir.actions.act_window" id="act_list_evaluation">
+			<field name="name">Liste des Evaluations des cadres supérieurs recevant lettre de mission/Agents non investis</field>
+			<field name="res_model">hr_evaluation</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	<!-- Action critere evaluation-->
+	<record model="ir.actions.act_window" id="act_list_critere_evaluation">
+			<field name="name">Liste des Critères des Evaluations</field>
+			<field name="res_model">hr_critere_evaluation</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	<!-- Action sous critère evaluation-->
+	<record model="ir.actions.act_window" id="act_list_sous_critere">
+			<field name="name">Liste des Sous-Critères Evaluations</field>
+			<field name="res_model">hr_sous_critere_evaluation</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+	
+	
+	
+<!-- Registre des employés ici -->
+
+
+<!-- Vue registre employé form -->
+<record model="ir.ui.view" id="view_id_regemp_form">
+	<field name="name">view.hr_regemploye.form</field>
+	<field name="model">hr_regemployes</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Registre">
+			<header>
+		   	        <button string="Rechercher" name="action_rech" type="object" class="oe_highlight"/>
+            </header>
+	        <sheet>
+	        	<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+                <label for="name" class="oe_edit_only"/>
+                <h1>
+                    <field name="name"/>
+                </h1>
+                <group col = '2'>
+	                <group><field name = "x_direction_id" options="{'no_create':True}" invisible = '0'/></group>
+	                <group><field name = "x_service_id" domain = "[('x_direction_id','=',x_direction_id)]" options="{'no_create':True}" invisible = '0'/></group>
+                </group>
+                <group><field name="date_imp" invisible = '1'/></group>
+				<group><field name="company_id" invisible = '1'/></group>
+                <separator string="Liste Des Employés"/>
+                <field name="x_line_ids"/>
+            </sheet>
+			
+		</form>
+	</field>
+</record>
+
+<!-- Vue registre tree -->
+<record model="ir.ui.view" id="view_id_reg_tree">
+	<field name="name">view.hr_regemployes.tree</field>
+	<field name="model">hr_regemployes</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Registre des employés">
+			<field name="name"/>
+			<field name="company_id"/>
+			<field name="current_user"/>
+			<field name="active"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!-- Vue registre line tree--> 
+<record model="ir.ui.view" id="view_id_reg_line_tree">
+	<field name="name">view.hr_regemployes_line.Line</field>
+	<field name="model">hr_regemployes_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Registre Line" editable="bottom">
+		    <field name="mat" force_save = '1'/>
+		    <field name="mat_ctrct" force_save = '1'/>
+		    <field name="nom" force_save = '1'/>
+			<field name="categorie" force_save = '1'/>
+			<field name="echelle" force_save = '1'/>
+			<field name="echelon" force_save = '1'/>
+			<field name="genre" force_save = '1'/>
+			<field name="eta_civil" force_save = '1'/>
+			<field name="retraite" force_save = '1'/>
+			<field name="emploi" force_save = '1'/>
+			<field name="fonction" force_save = '1'/>
+			<field name="dep" force_save = '1'/>
+			<field name="service" force_save = '1'/>
+			<field name="zone" force_save = '1'/>
+			<field name="type" force_save = '1' invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+<!-- Action registre-->
+<record model="ir.actions.act_window" id="act_list_employ">
+		<field name="name">Liste des employés</field>
+		<field name="res_model">hr_regemployes</field>
+		<field name="view_mode">tree,form</field>
+</record>
+
+
+
+<!-- vue emploi tree-->
+	<record model="ir.ui.view" id="view_id_emploi">
+		<field name="name">view.emploi.tree</field>
+		<field name="model">hr_emploi</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des emplois">
+				<field name="sequence" widget="handle"/>
+				<!-- <field name="code"/>-->
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue emploi form-->
+	<record model="ir.ui.view" id="view_id_form_emploi">
+		<field name="name">view.emploi.form</field>
+		<field name="model">hr_emploi</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des emplois">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<!-- <field name="code" style="width:20%"/>-->
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  emploi-->
+	<record model="ir.actions.act_window" id="act_list_emploi">
+			<field name="name">Liste des emplois</field>
+			<field name="res_model">hr_emploi</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+
+<!-- vue motif tree-->
+	<record model="ir.ui.view" id="view_id_motif">
+		<field name="name">view.motif.tree</field>
+		<field name="model">hr_motif</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des emplois">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue motif form-->
+	<record model="ir.ui.view" id="view_id_form_motif">
+		<field name="name">view.motif.form</field>
+		<field name="model">hr_motif</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des emplois">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  motif-->
+	<record model="ir.actions.act_window" id="act_list_motif">
+			<field name="name">Liste des motifs</field>
+			<field name="res_model">hr_motif</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+	
+	
+	
+	
+
+<!-- vue emploi tree-->
+	<record model="ir.ui.view" id="view_id_nature">
+		<field name="name">view.nature.tree</field>
+		<field name="model">hr_nature</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des emplois">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue nature form-->
+	<record model="ir.ui.view" id="view_id_form_natures_fo">
+		<field name="name">view.nature.form</field>
+		<field name="model">hr_nature</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des natures">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  nature-->
+	<record model="ir.actions.act_window" id="act_list_nature">
+			<field name="name">Liste des natures</field>
+			<field name="res_model">hr_nature</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+	
+
+<!-- vue titre evaluation tree-->
+	<record model="ir.ui.view" id="view_id_titre_eval">
+		<field name="name">view.titre.evaluation.tree</field>
+		<field name="model">hr_titreevaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des titres evaluations">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue titre evaluation form-->
+	<record model="ir.ui.view" id="view_id_form_nature">
+		<field name="name">view.titre.evaluation.form</field>
+		<field name="model">hr_titreevaluation</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des titres d'evaluations">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  titre evaluation-->
+	<record model="ir.actions.act_window" id="act_list_titre_eva">
+			<field name="name">Liste des titres evaluations</field>
+			<field name="res_model">hr_titreevaluation</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+	
+	
+		
+<!-- Vue fiche attente form -->
+<record model="ir.ui.view" id="view_id_fiche_attente_form">
+	<field name="name">view.hr.fiche.form</field>
+	<field name="model">hr_ficheattente</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Fiche Attente">
+		<header>
+                    <button string="Soumettre" name="action_valider" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['draft'])]}"/>
+                    
+                     <button string="Non Valider" name="action_non_valider" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['draft'])]}"/>
+                   
+                    
+                    <button string="Confirmer" name="action_confirmer" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['V'])]}"/>
+                    
+                    <button string="Non Confirmer" name="action_non_confirmer" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['V'])]}"/>
+                    
+                    <button string="Approuver" name="action_appr" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['C'])]}" />
+                    
+                    <button string="Non Approuver" name="action_non_appr" type="object" class="oe_highlight"
+                    attrs="{'invisible' : [('state', 'not in', ['C'])]}" />
+                    
+                    <field name="state" widget = "statusbar"/>
+            </header>
+	        <sheet>
+	        	<div class="oe_button_box" name="button_box">
+					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+						<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+					</button>
+				</div>
+				<label for="name" class="oe_edit_only"/>
+                <h1>
+                    <field name="name"/>
+                </h1>
+                
+                <label for="x_drh_id" class="oe_edit_only"/>
+                <h3>
+                    <field name="x_drh_id"/>
+                </h3>
+				<group><field name="date_op"  force_save = '1'/></group>
+				<group><field name="fichier_joint"/></group>
+				<field name = 'x_line_ids'/>
+				
+			</sheet>
+			
+		</form>
+	</field>
+</record>
+
+<!-- Vue fiche attente tree -->
+<record model="ir.ui.view" id="view_id_attente_fiche_tree">
+	<field name="name">view.hr.fiche.tree</field>
+	<field name="model">hr_ficheattente</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Fiche Attente">
+		    <field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="current_user"/>
+			<field name="date_op"/>
+			<field name="company_id"/>
+		</tree>
+	</field>
+</record>
+
+
+
+<!-- Vue fiche attente line tree -->
+<record model="ir.ui.view" id="view_id_fiche_attente_line_tree">
+	<field name="name">view.hr.fiche.attente.Line</field>
+	<field name="model">hr_ficheattente_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Fiche Attente Line" editable="bottom">
+		        <field name="objectif"/>
+				<field name="company_id" force_save = '1'/>
+				<field name="x_exercice_id" force_save = '1'/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Action  fiche d'attente -->
+<record model="ir.actions.act_window" id="act_list_fiche_attente">
+		<field name="name">Liste des objectifs</field>
+		<field name="res_model">hr_ficheattente</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>	
+
+
+
+
+<!-- Vue convention precompte form 
+<record model="ir.ui.view" id="view_id_cvtion_prcpte_form">
+	<field name="name">view.hr.convention.precompte.form</field>
+	<field name="model">hr_conventionprecptes</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Convention-Précompte">
+		 <header>
+        	   <button string="Valider" name="action_valider_prcpte" type="object" class="oe_highlight"/>
+         </header>
+	     <sheet>
+	        <notebook>
+		        <page string = 'Convention-Retenue'>
+			        	<div class="oe_button_box" name="button_box">
+							<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+								<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+							</button>
+						</div>
+						<label for="x_employe_id" class="oe_edit_only"/>
+		                <h1>
+		                    <field name="x_employe_id" force_save = '1'/>
+		                </h1>
+		                <group col ='3'>
+				                <group><field name="name"/></group>
+								<group><field name="date_op"  force_save = '1'/></group>
+								<group><field name="mnt_totals" force_save = '1'/></group>
+		                </group>
+				                <group col = '2'><group><field name="company_id" invisible = '1'/></group>
+								<group><field name="x_exercice_id" invisible = '1'/></group>
+						</group>
+						
+						<field name = 'x_line_ids'/>
+				</page>
+				<page string = 'Echéance Retenue'>
+					<field name = 'x_line_ret_ids'/>	
+				</page>	
+				<page string = 'Règle Echéance'>
+				    <group col = "3">
+				    		<group><field name = 'date'/></group>
+				    		<group><button string="OK" name="action_ok" type="object" class="oe_highlight"/></group>
+				    		<group><field name = 'mnt_echeance'/></group>
+				    		<group><field name = 'reste_echeance' force_save = '1'/></group>
+				    		<group><field name="reste_a_payer" force_save = '1'/></group>
+				    		<group><field name = 'x_mode_id'/></group>
+				    		<group><field name = 'ref_piece'/></group>
+				    		<group><field name = 'x_mode' invisible = '1'/></group>
+				    </group>
+					<group><field name = 'observation'/></group>
+        			<button string="Valider" name="valider_action" type="object" class="oe_highlight"/>
+				</page>
+				<page string = 'Liste Règle Echéance'>
+					<field name = 'x_line_reg_ids'/>	
+				</page>
+			</notebook>	
+			</sheet>
+			
+		</form>
+	</field>
+</record>-->
+
+<!-- Vue convention precompte tree 
+<record model="ir.ui.view" id="view_id_cvtion_precpte_tree">
+	<field name="name">view.hr.convention.precomptes.fiche.tree</field>
+	<field name="model">hr_conventionprecptes</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Convention-Précompte">
+		    <field name="sequence" widget="handle"/>
+			<field name="x_employe_id"/>
+			<field name="name"/>
+			<field name="current_user"/>
+			<field name="date_op"/>
+			<field name="company_id"/>
+		</tree>
+	</field>
+</record>-->
+
+
+
+<!-- Vue convention precompte line tree 
+<record model="ir.ui.view" id="view_id_cvtion_prcpte_line_tree">
+	<field name="name">view.hr.convention.precomptes.Line</field>
+	<field name="model">hr_conventionprecptes_lines</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Convention-Précompte Lines" editable="bottom">
+		        <field name="date_mise_en_place"/>
+		        <field name="date_effet"/>
+		        <field name="date_fin"/>
+		        <field name="x_nbre_j" force_save = '1'/>
+		        <field name="type_acte"/>
+		        <field name="ref_acte"/>
+		        <field name="elt_sal_id"/>
+		        <field name="mnt_cvtions"/>
+		        <field name="mnt_cvtion_reste" force_save = '1'/>
+		        <field name="etat"/>
+				<field name="company_id" force_save = '1' invisible = '1'/>
+				<field name="x_exercice_id" force_save = '1' invisible = '1'/>
+		</tree>
+	</field>
+</record>-->
+
+
+
+
+<!-- Vue echeance retenue precompte line tree 
+<record model="ir.ui.view" id="view_id_ech_ret_prcpte_line_tree">
+	<field name="name">view.hr.echeance.retenue.precomptes.Line</field>
+	<field name="model">hr_echeanceretenue_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Echeance retenue Line" editable="bottom">
+		        <field name="date"/>
+		        <field name="mnt_echeance"/>
+		        <field name="x_mode"/>
+		        <field name="ref_piece"/>
+		        <field name="observation"/>
+				<field name="company_id" force_save = '1' invisible = '1'/>
+				<field name="x_exercice_id" force_save = '1' invisible = '1'/>
+		</tree>
+	</field>
+</record>-->
+
+
+
+<!-- Vue echeance regle precompte line tree 
+<record model="ir.ui.view" id="view_id_ech_regl_prcpte_line_tree">
+	<field name="name">view.hr.echeance.regle.precompte.Line</field>
+	<field name="model">hr_regleecheance_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Echeance retenue Line" editable="bottom">
+		        <field name="date"/>
+		        <field name="mnt_echeance"/>
+		        <field name="reste_echeance"/>
+		        <field name="reste_a_payer"/>
+		        <field name="x_mode_id" invisible = '1'/>
+		        <field name="x_mode"/>
+		        <field name="ref_piece"/>
+		        <field name="observation"/>
+		        <field name="company_id" invisible = '1'/>
+		        <field name="x_exercice_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>-->
+
+
+<!-- Action  convention precompte 
+<record model="ir.actions.act_window" id="act_list_cvtion_precpte">
+		<field name="name">Liste des conventions precomptes</field>
+		<field name="res_model">hr_conventionprecptes</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>	-->
+
+
+
+
+
+	
+<!-- Vue simulation salaire form 
+<record model="ir.ui.view" id="view_id_simulsssa_form">
+	<field name="name">view.simulsss.salss.form</field>
+	<field name="model">hr_simulsalaire</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Simulation Salaire">
+		    <header>
+		   	        <button string="Valider" name="action_valider" type="object" class="oe_highlight"/>
+            </header>
+	        <sheet>
+		        	<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<label for="name" class="oe_edit_only"/>
+	                <h1>
+	                    <field name="name"/>
+	                </h1>
+	                <group col = '2'>
+	                	<group><field name="x_exercice_id" force_save = '1'/></group>
+					    <group><field name="date_op" force_save = '1'/></group>
+	                </group>
+	                
+	                <group col = '3'>
+	                	<group><field name="x_date_debut" /></group>
+					    <group><field name="x_date_fin" /></group>
+					    <group><field name="x_nbre_jours" force_save = '1'/></group>
+	                </group>
+					<field name="current_user" invisible = '1'/>
+					<field name="x_line_ids"/>
+			</sheet>
+			
+		</form>
+	</field>
+</record>-->
+
+<!-- Vue simulation  tree 
+<record model="ir.ui.view" id="view_id_simulssas_tree">
+	<field name="name">view.hr.simulsss.sal.tree</field>
+	<field name="model">hr_simulsalaire</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree  string="Simulation Salaire">
+		    <field name="sequence" widget="handle"/>
+		    <field name="name"/>
+			<field name="current_user"/>
+			<field name="x_exercice_id"/>
+			<field name="date_op"/>
+		</tree>
+	</field>
+</record>-->
+
+
+<!-- Vue simul  line tree
+<record model="ir.ui.view" id="view_id_simulsssaree">
+	<field name="name">view.hr.simulsss.sal.line.tree</field>
+	<field name="model">hr_simulsalaire_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Simulation Rappel Line" editable="bottom">
+		    <field name="x_elt_sal" force_save = '1'/>
+		    <field name="x_mnt" force_save = '1'/>
+		    <field name="x_mnt_simul" force_save = '1'/>
+			<field name="x_exercice_id" force_save = '1'/>
+			<field name="company_id" force_save = '1'/>
+						
+		</tree>
+	</field>
+</record>--> 
+
+<!-- Action  simul de rappel
+	<record model="ir.actions.act_window" id="act_list_simul">
+			<field name="name">Liste Simulation</field>
+			<field name="res_model">hr_simulsalaire</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>-->
+	
+	
+	
+
+<!-- vue from sasie cessation service stage -->
+<record id="infos_stage_form" model="ir.ui.view">
+        <field name="name">hr.cessation.form</field>
+        <field name="model">hr_cessation_service</field>
+        <field name="arch" type="xml">
+            <form string="Infos Cessation Service">
+            <sheet>
+            <notebook>
+            	<page string = 'Informations générales'>
+	        		<div class="oe_button_box" name="button_box">
+									<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+										<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+									</button>
+				     </div>
+	                <label for="x_type_employe_id" class="oe_edit_only"/>
+	                <h1>
+	                    <field name="x_type_employe_id"/>
+	                </h1>
+	                
+	                <label for="name" class="oe_edit_only"/>
+	                <h4>
+	                    <field name="name" style="width:40%" domain = "[('x_type_employe_id','=',x_type_employe_id)]" options="{'no_create':True}"/>
+	                </h4>
+		                	<group col = '3'>           
+		                	       <group><field name="x_date_cess" /></group>
+								   <group><field name="x_motif_cess" /></group>
+								   <group><field name="x_titre_id" /></group>
+		                	</group>
+		                	<group><field name="x_titre" /></group>
+		                	<group col = '2'>
+				                	<group><field name="p1"/></group>
+									<group><field name="responsale" force_save = '1' style="width:100%"/></group>
+									<group><field name="x_fonction" force_save = '1' style="width:100%"/></group>
+									<group><field name="p2" style="width:100%"/></group>
+									<group><field name="matricule" force_save = '1' style="width:100%"/></group>
+									<group><field name="x_emploi" force_save = '1' style="width:100%"/></group>
+									<group><field name="categorie" force_save = '1' style="width:100%"/></group>
+									<group><field name="echelle" force_save = '1' style="width:100%"/></group>
+									<group><field name="classe" force_save = '1' style="width:100%"/></group>
+									<group><field name="echelon" force_save = '1' style="width:100%"/></group>
+									<group><field name="indice" force_save = '1' style="width:100%"/></group>
+									<group><field name="p3" style="width:100%"/></group>
+	               				    <group><field name="company_id" class="oe_inline" invisible = '0' force_save = '1' style="width:100%"/></group>
+									<group><field name="p4" style="width:100%"/></group>
+									<group><field name="x_date_cess" style="width:30%"/></group>
+									<group><field name="p5" style="width:100%"/></group>
+									<!-- <field name="x_service" force_save = '1'/>
+									<field name="p4"/>
+									<field name="date_debut_affect" force_save = '1'/>
+									<field name="p5"/>
+									
+									<field name="p6"/>-->
+									
+		                	</group>
+		                	<group>
+		                		  <field name="p6"/>
+				        		  <field name="date_attest" invisible = '1'/>
+	               				  <field name="x_exercice_id" class="oe_inline" invisible = '1'/>
+		                	</group>
+	                <group><field name="observation"/></group>
+	             </page>
+	             <page string = 'Ampliations'>
+	             		<field name="x_line_cess_ids"/>
+	             </page>   
+	        </notebook>
+            </sheet>
+            </form>
+        </field>
+</record>
+    
+
+
+<!-- Vue cessation service  tree -->
+<record model="ir.ui.view" id="view_id_cessation_tree">
+	<field name="name">view.cessation.tree</field>
+	<field name="model">hr_cessation_service</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Infos Cessation Service">
+		    <field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="current_user"/>
+			<field name="x_emploi"/>
+			<field name="matricule"/>
+			<field name="x_service"/>
+			<field name="date_attest"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue ampliation  tree -->
+<record model="ir.ui.view" id="view_id_ampliation_tree">
+	<field name="name">view.ampliation.tree</field>
+	<field name="model">hr_cessation_service_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Infos Cessation Service Line" editable="bottom">
+			<field name="name"/>
+			<field name="observations"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Action  cessation service -->
+<record model="ir.actions.act_window" id="act_list_cess">
+		<field name="name">Liste Cessation Service</field>
+		<field name="res_model">hr_cessation_service</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>
+
+
+		
+<!-- vue titre poste tree-->
+	<record model="ir.ui.view" id="view_id_titrep_tree">
+		<field name="name">view.titre.poste.tree</field>
+		<field name="model">hr_titreposte</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des titres des postes">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_long"/>
+			</tree>
+		</field>
+	</record>
+	
+	<!-- vue titre poste form-->
+	<record model="ir.ui.view" id="view_id_titre_form">
+		<field name="name">view.titre.poste.form</field>
+		<field name="model">hr_titreposte</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des titres des postes">
+			<sheet>
+					<div class="oe_button_box" name="button_box">
+						<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+							<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+						</button>
+					</div>
+					<group>
+							<field name="name" style="width:60%"/>
+							<field name="lib_long" style="width:80%"/>
+					</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+	<!-- Action  titre poste-->
+	<record model="ir.actions.act_window" id="act_list_titre">
+			<field name="name">Liste des titres de poste</field>
+			<field name="res_model">hr_titreposte</field>
+			<field name="view_mode">tree,form</field>
+		
+	</record>
+
+
+
+
+<!-- vue form certificat de travail -->
+<record id="infos_certif_trav_form" model="ir.ui.view">
+        <field name="name">hr.certificat.form</field>
+        <field name="model">hr_certificat_travail</field>
+        <field name="arch" type="xml">
+            <form string="Infos Certificat">
+            <sheet>
+        		<div class="oe_button_box" name="button_box">
+								<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+									<field name="active" widget="boolean_button" options='{"terminology":"archive"}'/>
+								</button>
+			     </div>
+                <label for="name" class="oe_edit_only"/>
+                <h1>
+                    <field name="name"/>
+                </h1>
+	                	<group col = '2'>           
+	                	       <group><field name="x_date_cess" /></group>
+	                	</group>
+	                	<group><field name="x_titre" /></group>
+	                	<group col ='6'>
+			                	<field name="p1"/>
+								<field name="responsale" force_save = '1'/>
+								<field name="x_fonction" force_save = '1'/>
+								<field name="p2"/>
+								<field name="x_emploi" force_save = '1'/>
+								<field name="p3"/>
+								<field name="x_service" force_save = '1'/>
+								<field name="p4"/>
+								<field name="date_debut_affect" force_save = '1'/>
+								<field name="p5"/>
+								<field name="x_date_cess" />
+								<field name="p6"/>
+								
+	                	</group>
+	                	<group>
+	                		  <field name="p7"/>
+	                		  <field name="p8"/>
+			        		  <field name="date_attest" invisible = '0'/>
+               				  <field name="company_id" class="oe_inline" invisible = '1'/>
+               				  <field name="x_exercice_id" class="oe_inline" invisible = '1'/>
+	                	</group>
+                <group><field name="observation"/></group>
+            </sheet>
+            </form>
+        </field>
+</record>
+    
+
+
+<!-- Vue certificat de travail  tree -->
+<record model="ir.ui.view" id="view_id_certif_tree">
+	<field name="name">view.certificat.tree</field>
+	<field name="model">hr_certificat_travail</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Infos Certificat de travail">
+		    <field name="sequence" widget="handle"/>
+			<field name="name"/>
+			<field name="current_user"/>
+			<field name="x_emploi"/>
+			<field name="x_direction"/>
+			<field name="x_service"/>
+			<field name="date_attest"/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Action  CERTIFICAT DE TRAVAIL  -->
+<record model="ir.actions.act_window" id="act_list_cert">
+		<field name="name">Liste Certificat De Travail</field>
+		<field name="res_model">hr_certificat_travail</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>
+
+
+
+<!-- Vue personnel avançable form -->
+<record model="ir.ui.view" id="view_id_avancable_form">
+	<field name="name">view.hr_personnel_avancable.form</field>
+	<field name="model">hr_personnel_avancable</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Personnel Avançable">
+			<header>
+					<button string="Rechercher" name="action_recherche" type="object" class="oe_highlight"
+                    />
+                    
+                     <button string="Confimer" name="action_confirme" type="object" class="oe_highlight"
+                    />
+                    
+                    <button string="Approuver" name="action_approuve" type="object" class="oe_highlight"
+                    />
+                    
+                    <button string="Avancer" name="action_avance" type="object" class="oe_highlight"
+                    />
+                                   
+                    <field name="state" widget = "statusbar"/>
+	        </header>
+	        <sheet>
+	        <notebook>
+             	<page string = 'Personnel Par Catégorie'>
+			        <group col = '3'>
+				        <group><field name="name" options="{'no_create':True}"/></group>
+						<group><field name="date_op" invisible = "0" force_save = '1'/></group>
+						<group><field name="company_id" invisible = "0" force_save = '1'/></group>
+				    </group>
+					 <group>
+					      <field name = 'x_line_ids'/>
+					</group>
+				</page>
+				<page string = 'Personnel Avançable'>
+			        <group col = '1'>
+				        <group><button string="Afficher Personnel Avançable" name="action_afficher_avancable" type="object" class="oe_highlight"/></group>
+				    </group>
+					<group>
+					      <field name = 'x_line_a_ids'/>
+					</group>
+				</page>
+				<page string = 'Avancement'>
+					<group col = '1'>
+				        <group><button string="Avancer Personnel Avançable" name="action_avance" type="object" class="oe_highlight"/></group>
+				    </group>
+					 <group>
+					      <field name = 'x_line_avc_ids'/>
+					</group>
+				</page>
+			</notebook>
+			</sheet>	
+		</form>
+	</field>
+</record>
+
+
+<!-- Vue personnel avançable tree -->
+<record model="ir.ui.view" id="view_id_avancable_tree">
+	<field name="name">view.hr_personnel_avancable.tree</field>
+	<field name="model">hr_personnel_avancable</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Personnel Avançable">
+			<field name="name"/>
+			<field name="currents_users"/>
+			<field name="company_id"/>
+			<field name="date_op"/>
+		</tree>
+	</field>
+</record>
+
+<!-- Vue personnel avançable line tree -->
+<record model="ir.ui.view" id="view_id_pers_line_tree">
+	<field name="name">view.hr_personnel_categorie_line.Line</field>
+	<field name="model">hr_personnel_categorie_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Personnel Catégorie" editable="bottom">
+		    <field name="x_pers_id" invisible = '1'/>
+			<field name="x_type_employe_id"/>
+			<field name="mat_f"/>
+			<field name="mat_c"/>
+			<field name="name"/>
+			<field name="x_cat_id"/>
+			<field name="x_echel_id"/>
+			<field name="x_echelon_id"/>
+			<field name="x_service"/>
+			<field name="x_emploi"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue personnel avançable line tree -->
+<record model="ir.ui.view" id="view_id_avancable_line_tree">
+	<field name="name">view.hr_personnel_avancable_line.Line</field>
+	<field name="model">hr_personnel_avancable_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Personnel Avançable" editable="bottom">
+		    <field name="x_pers_a_id" invisible = '1'/>
+			<field name="x_type_employe_id"/>
+			<field name="mat_f"/>
+			<field name="mat_c"/>
+			<field name="name"/>
+			<field name="x_cat_id"/>
+			<field name="x_echel_id"/>
+			<field name="x_echelon_id"/>
+			<field name="x_service"/>
+			<field name="x_emploi"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Vue personnel avance line tree -->
+<record model="ir.ui.view" id="view_id_avance_line_tree">
+	<field name="name">view.hr_personnel_avance_line.Line</field>
+	<field name="model">hr_personnel_avance_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Personnel Avance" editable="bottom">
+		    <field name="x_pers_avc_id" invisible = '1'/>
+			<field name="x_type_employe_id"/>
+			<field name="mat_f"/>
+			<field name="mat_c"/>
+			<field name="name"/>
+			<field name="x_cat_id"/>
+			<field name="x_echel_id"/>
+			<field name="x_echelon_id"/>
+			<field name="company_id" invisible = '1'/>
+		</tree>
+	</field>
+</record>
+
+
+<!-- Action  Personnel Avançable  -->
+<record model="ir.actions.act_window" id="act_list_personnel_avancable">
+		<field name="name">Liste Personnel Avançable</field>
+		<field name="res_model">hr_personnel_avancable</field>
+		<field name="view_mode">tree,form</field>
+	
+</record>
+
+
+
+
+<!-- Vue grille salariale contractuel-->
+<record model="ir.ui.view" id="view_id_grille_sal_contract_tree">
+	<field name="name">view.hr_grillesalariale_contractuel.tree</field>
+	<field name="model">hr_grillesalariale_contractuel</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	        <tree string="Liste des grilles salariales des contractuels">
+			   <field name="x_categorie_c_id"/>
+			   <field name="x_echelle_c_id"/>
+	           <field name="x_echellon_c_id"/>
+	           <field name="x_salbase_ctrt"/>
+	       </tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_grille_sal_contract_form">
+	<field name="name">view.hr_grillesalariale_contractuel.form</field>
+	<field name="model">hr_grillesalariale_contractuel</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	        <form string="Liste des grilles salariales des contractuels">
+		      <sheet>
+		        <group col = "3">
+		            <group>
+		            	<field name="x_categorie_c_id"/>
+		            	<field name="x_echelle_c_id"/>
+		            </group>
+				    <group>
+				       <field name="x_echellon_c_id"/>
+				       <field name="x_salbase_ctrt"/>
+				    </group>
+				    <group>
+		                <field name="company_id" invisible = '1'/>
+				    </group>   
+		        </group>
+		      </sheet>
+	       </form>
+	</field>
+</record>
+
+	<!-- Action Grille Salariale Contractuel-->
+	<record model="ir.actions.act_window" id="act_list_grille_salariale_contract">
+			<field name="name">Grille Salariale Contractuel</field>
+			<field name="res_model">hr_grillesalariale_contractuel</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+
+
+
+
+<!-- Menu en héritant le id de configuration -->
+<menuitem id="main_menu" name ="Gestion Personnel" sequence="1" groups='Gestion_RH.Gestion_RH_manager_Agent'/>
+
+	<menuitem id="main_menu_emp" name ="Personnel" sequence="20" parent="main_menu" groups='Gestion_RH.Gestion_RH_manager_Gestionnaire'/>
+		<menuitem id="main_menu_emp_e" name ="Saisie/MàJ-Personnel" sequence="21" parent="main_menu_emp" action="act_list_emp"/>
+		<menuitem id="main_menu_emp_re" name ="Régistre Du Personnel" sequence="22" parent="main_menu_emp" action="act_list_employ"/>
+		<menuitem id="main_menu_cess" name ="Cessation/Reprise de Service" sequence="25" parent="main_menu_emp" action="act_list_cess"/>
+		<menuitem id="main_menu_certif" name ="Attestation/Certificat De Travail" sequence="26" parent="main_menu_emp" action="act_list_cert"/>
+		<menuitem id="menu_historisation" parent="main_menu_emp" name="Suivi-Carrière" action="act_list_hist" sequence = "27"/> 
+	
+	<menuitem id="main_menu_contrat" name ="Contrats Personnel" sequence="30" parent="main_menu" action="act_list_contrat" groups='Gestion_RH.Gestion_RH_manager_Gestionnaire'/>
+	
+	<menuitem id="main_menu_dep" name ="Départment/Direction" sequence="40" parent="main_menu" action="act_list_dep" groups='Gestion_RH.Gestion_RH_admin_donnees'/>
+	
+	
+	
+	<menuitem id="main_menu_conf" name ="Données de base" sequence="60" parent="main_menu" groups='Gestion_RH.Gestion_RH_admin_donnees'/>
+		<menuitem id="menu_classif" parent="main_menu_conf" name="CLASSIFICATION" sequence = "61"/>
+			<menuitem id="menu_emplois" parent="menu_classif" name="Saisie/Màj-Emploi" action="act_list_emploi" sequence = "612"/>
+			<menuitem id="menu_fonctions" parent="menu_classif" name="Saisie/Màj-Fonction" action="act_list_fonction" sequence = "613"/>
+			
+		<menuitem id="menu_service" parent="main_menu_conf" name="SERVICE" sequence = "62"/>
+			<menuitem id="menu_service_id" parent="menu_service" name="Saisie/Màj-Service" action="act_list_service" sequence = "621"/> 
+			<menuitem id="menu_section" parent="menu_service" name="Saisie/Màj-Section" action="act_list_section" sequence = "622"/>
+			<menuitem id="menu_unite" parent="menu_service" name="Saisie/Màj-Unité" action="act_list_unite" sequence = "623"/>
+		
+		<menuitem id="menu_typage" parent="main_menu_conf" name="TYPAGE" sequence = "63"/>
+			<menuitem id="menu_type_contrat" parent="menu_typage" name="Saisie/Maj-Type Contrat" action="act_list_type_contrat" sequence = "632"/>
+			<menuitem id="menu_nature" parent="menu_typage" name="Saisie/Màj-Nature Précompte" action="act_list_nature" sequence = "633"/>
+			<menuitem id="menu_motif" parent="menu_typage" name="Saisie/Maj-Motif Cessation Service" action="act_list_motif" sequence = "635"/> 
+			<menuitem id="menu_nbr" parent="menu_typage" name="Saisie/Maj-Année Retraite" action="act_list_nbre_annee" sequence = "636"/> 
+		
+		<menuitem id="menu_grille" parent="main_menu_conf" name="GRILLE" sequence = "80"/> 
+			<menuitem id="menu_grille_salaire_ctrct" parent="menu_grille" name="Saisie/Maj-Grille salariale Contractuel" action="act_list_grille_salariale_contract" sequence = "82"/> 
+	 
+	<menuitem id="main_menu_eva" name ="Evaluation" sequence="45" parent="main_menu" groups='Gestion_RH.Gestion_RH_manager_Gestionnaire'/>
+		<menuitem id="main_menu_eval" name ="Evaluation" sequence="46" parent="main_menu_eva" action="act_list_evaluation"/>
+		<menuitem id="main_menu_iche" name ="Fiche d'attente" sequence="47" parent="main_menu_eva" action="act_list_fiche_attente"/>
+		<menuitem id="main_menu_avancable" name ="Saisie/Maj-Avancement Personnel" sequence="48" parent="main_menu_eva" action="act_list_personnel_avancable"/>
+	
+	<menuitem id="main_menu_param" name ="Paramétrage" sequence="50" parent="main_menu" groups='Gestion_RH.Gestion_RH_admin_donnees'/>
+		<menuitem id="menu_emploi" parent="main_menu_param" name="INDEMNITES LIEES A L'EMPLOI" sequence = "50"/> 
+			<menuitem id="menu_indem_ordinaire" parent="menu_emploi" name="INDEMNITES ORDINAIRES" sequence = "51"/> 
+				<menuitem id="menu_param_indemnite_astr" parent="menu_indem_ordinaire" name="Parametrage Indemnité/Astreinte" action="act_param_astr_indemnite" sequence = "512"/> 
+				<menuitem id="menu_param_indemnite_loge" parent="menu_indem_ordinaire" name="Parametrage Indemnité/Logement" action="act_param_logement_indemnite" sequence = "513"/> 
+				<menuitem id="menu_param_indemnite_techn" parent="menu_indem_ordinaire" name="Parametrage Indemnité/Technicité" action="act_param_technicite_indemnite" sequence = "514"/> 
+				<menuitem id="menu_param_indemnite_exploit" parent="menu_indem_ordinaire" name="Parametrage Indemnité/Exploitation-Réseau" action="act_param_exploi_indemnite" sequence = "515"/> 
+				<menuitem id="menu_param_indemnite_financiere" parent="menu_indem_ordinaire" name="Parametrage Indemnité/Resp.Financière" action="act_param_financiere_indemnite" sequence = "516"/>
+				
+			<menuitem id="menu_indem_specif" parent="menu_emploi" name="INDEMNITES SPECIFIQUES" sequence = "52"/> 
+				<menuitem id="menu_param_indemnite_specifique_grh" parent="menu_indem_specif" name="Parametrage Indemnité/Spécifique GRH" action="act_param_specifique_indemnite_grh" sequence = "521"/> 
+				<menuitem id="menu_param_indemnite_specifique_insp" parent="menu_indem_specif" name="Parametrage Indemnité/Spécifique IT" action="act_param_specifique_indemnite_it" sequence = "522"/> 
+				<menuitem id="menu_param_indemnite_specifique_ifc" parent="menu_indem_specif" name="Parametrage Indemnité/Spécifique IFC" action="act_param_specifique_indemnite_ifc" sequence = "523"/> 
+				<menuitem id="menu_param_indemnite_informatique" parent="menu_indem_specif" name="Parametrage Indemnité/Informatique" action="act_param_informatique_indemnite" sequence = "524"/> 
+				<menuitem id="menu_param_indemnite_caisse" parent="menu_indem_specif" name="Parametrage Indemnité/Caisse" action="act_param_caisse" sequence = "525"/> 
+				
+			<menuitem id="menu_indem_hop_journ" parent="menu_emploi" name="INDEMNITES HOSPITALIÈRES/JOURNALISME" sequence = "53"/> 
+				<menuitem id="menu_param_indemnite_garde" parent="menu_indem_hop_journ" name="Parametrage Indemnité/Garde" action="act_param_garde" sequence = "531"/> 
+				<menuitem id="menu_param_indemnite_contagion" parent="menu_indem_hop_journ" name="Parametrage Indemnité/Risque de Contagion" action="act_param_contagion" sequence = "532"/> 
+				<menuitem id="menu_param_indemnite_sujetion" parent="menu_indem_hop_journ" name="Parametrage Indemnité/Sujétion Géographique" action="act_param_sujetion" sequence = "533"/> 
+				<menuitem id="menu_param_indemnite_formation" parent="menu_indem_hop_journ" name="Parametrage Indemnité/Formation Spécialisée" action="act_param_speciale" sequence = "534"/> 
+				<menuitem id="menu_param_indemnite_veste" parent="menu_indem_hop_journ" name="Parametrage Indemnité/Vestimentaire" action="act_param_vst" sequence = "536"/> 
+	
+		<menuitem id="menu_fonction" parent="main_menu_param" name="INDEMNITES LIEES A LA FONCTION" sequence = "70"/> 
+			<menuitem id="menu_param_indemnite_resp" parent="menu_fonction" name="Parametrage Indemnité/Responsabilité" action="act_param_resp_indemnite" sequence = "71"/> 
+			<!-- <menuitem id="menu_param_indemnite_resps" parent="menu_fonction" name="Parametrage Indemnité/Astreinte" action="act_param_astr_fction_indemnite" sequence = "72"/> 
+			<menuitem id="menu_param_indemnite_loges" parent="menu_fonction" name="Parametrage Indemnité/Logement" action="act_param_logement_indemnite_fct" sequence = "73"/> 
+			<menuitem id="menu_param_indemnite_techns" parent="menu_fonction" name="Parametrage Indemnité/Technicité" action="act_param_technicite_indemnites" sequence = "74"/> 
+			<menuitem id="menu_param_indemnite_specifiques" parent="menu_fonction" name="Parametrage Indemnité/Spécifique" action="act_param_specifique_indemnites" sequence = "75"/> 
+			<menuitem id="menu_param_indemnite_transports" parent="menu_fonction" name="Parametrage Indemnité/Transport" action="act_param_transport_indemnites" sequence = "76"/> 
+			<menuitem id="menu_param_indemnite_informatiques" parent="menu_fonction" name="Parametrage Indemnité/Informatique" action="act_param_informatique_indemnites" sequence = "77"/> 
+			<menuitem id="menu_param_indemnite_exploits" parent="menu_fonction" name="Parametrage Indemnité/Exploitation-Réseau" action="act_param_exploi_indemnites" sequence = "78"/> 
+			<menuitem id="menu_param_indemnite_financieres" parent="menu_fonction" name="Parametrage Indemnité/Resp.Financière" action="act_param_financiere_indemnites" sequence = "79"/>
+			<menuitem id="menu_param_indemnite_gardes" parent="menu_fonction" name="Parametrage Indemnité/Garde" action="act_param_gardes" sequence = "80"/> 
+			<menuitem id="menu_param_indemnite_contagions" parent="menu_fonction" name="Parametrage Indemnité/Risque de Contagion" action="act_param_contagions" sequence = "81"/> 
+			<menuitem id="menu_param_indemnite_sujetions" parent="menu_fonction" name="Parametrage Indemnité/Sujétion Géographique" action="act_param_sujetions" sequence = "82"/> 
+			<menuitem id="menu_param_indemnite_formations" parent="menu_fonction" name="Parametrage Indemnité/Formation Spécialisée" action="act_param_speciales" sequence = "83"/> 
+			<menuitem id="menu_param_indemnite_caisses" parent="menu_fonction" name="Parametrage Indemnité/Caisse" action="act_param_caisses" sequence = "84"/> 
+			<menuitem id="menu_param_indemnite_vestes" parent="menu_fonction" name="Parametrage Indemnité/Vestimentaire" action="act_param_vsts" sequence = "85"/>--> 
+	
+	
+	<menuitem id="menu_evalu" parent="main_menu_conf" name="EVALUATION" sequence = "150"/> 
+		<menuitem id="menu_crit" parent="menu_evalu" name="Saisie/Màj-Critère" action="act_list_critere_evaluation" sequence = "151"/> 
+		<menuitem id="menu_s_crit" parent="menu_evalu" name="Saisie/Màj-Sous-Critère" action="act_list_sous_critere" sequence = "152"/> 
+		<menuitem id="menu_titre" parent="menu_evalu" name="Saisie/Màj-Titre evaluation" action="act_list_titre_eva" sequence = "153"/> 
+	
+	
+	
+
+
+</odoo>
+
+

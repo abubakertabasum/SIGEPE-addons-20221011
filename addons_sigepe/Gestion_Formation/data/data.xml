@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="TYPF" model="hr_type_formation">
+            <field name="name">Génériques</field>
+            <field name="lib_long">Génériques</field>
+        </record>
+        
+        <record id="TYPS" model="hr_type_formation">
+            <field name="name">Spécifiques</field>
+            <field name="lib_long">Spécifiques</field>
+        </record>
+        
+        <record id="TYPEi" model="hr_type_stage">
+            <field name="name">Interne</field>
+            <field name="lib_long">Interne</field>
+        </record>
+        
+        <record id="TYPEE" model="hr_type_stage">
+            <field name="name">Externe</field>
+            <field name="lib_long">Externe</field>
+        </record>
+        
+        <record id="TYPEa" model="hr_type_session">
+            <field name="name">Annuelle</field>
+            <field name="lib_long">Annuelle</field>
+        </record>
+        
+        <record id="TYPEM" model="hr_type_session">
+            <field name="name">Mensuelle</field>
+            <field name="lib_long">Mensuelle</field>
+        </record>
+        
+        <record id="TYPED" model="hr_domaine">
+            <field name="name">Informatique</field>
+            <field name="lib_long">Informatique</field>
+        </record>
+        
+        <record id="TYPEd1" model="hr_domaine">
+            <field name="name">Jouurnalise</field>
+            <field name="lib_long">Jouurnalise</field>
+        </record>
+        
+        
+        <record id="org" model="hr_organisme">
+            <field name="name">Telia Informatique</field>
+            <field name="lib_long">Telia Informatique</field>
+        </record>
+        
+        <record id="org1" model="hr_organisme">
+            <field name="name">ANPTIC</field>
+            <field name="lib_long">ANPTIC</field>
+        </record>
+        
+        <record id="LIEU" model="hr_lieu">
+            <field name="name">Ouagadougou</field>
+            <field name="lib_long">Ouagadougou</field>
+        </record>
+        
+        <record id="LIEU1" model="hr_lieu">
+            <field name="name">Bobo Dioulasso</field>
+            <field name="lib_long">Bobo Dioulasso</field>
+        </record>
+        
+        <record id="si" model="hr_situationfamille">
+            <field name="name">Marié(e)</field>
+            <field name="lib_long">Marié(e)</field>
+        </record>
+        
+        <record id="sit1" model="hr_situationfamille">
+            <field name="name">Divorcé(e)</field>
+            <field name="lib_long">Divocé(e)</field>
+        </record>
+        
+        <record id="sit11" model="hr_situationfamille">
+            <field name="name">Célibataire</field>
+            <field name="lib_long">Célibataire</field>
+        </record>
+        
+        <record id="sit2" model="hr_situationfamille">
+            <field name="name">Veuf(ve)</field>
+            <field name="lib_long">Veuf(ve)</field>
+        </record>
+        
+        
+        <record id="mode1" model="hr_modepaiement">
+            <field name="name">Numéraire</field>
+            <field name="lib_long">Numéraire</field>
+        </record>
+        
+        <record id="mode2" model="hr_modepaiement">
+            <field name="name">Chéque</field>
+            <field name="lib_long">Chèque</field>
+        </record>
+
+    </data>
+</odoo>

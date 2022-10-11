@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<!--Definition de la vue-->
+
+	
+	<!-- vue critere business -->
+	<record model="ir.ui.view" id="view_id_busi_tree">
+		<field name="name">view.bus.intro.tree</field>
+		<field name="model">bus_intro</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Liste des business">
+				<field name="sequence" widget="handle"/>
+				<field name="name"/>
+				<field name="lib_court"/>
+				<field name="description"/>
+				
+			</tree>
+		</field>
+	</record>
+
+	<!-- vue critere business -->
+	<record model="ir.ui.view" id="view_id_busi_form">
+		<field name="name">view.bus.intro.form</field>
+		<field name="model">bus_intro</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<form string="Liste des business">
+			<sheet>
+			<group col = "2">
+				<group>
+					<field name="name"/>
+					<field name="lib_court"/>
+				</group>
+				<group>
+					<field name="description"/>
+				</group>
+			</group>
+			</sheet>
+			</form>
+		</field>
+	</record>
+	
+<!--Vue Part des charges personnel dans les recettes propres et subventions de l'etat-->
+<record model="ir.ui.view" id="view_charge_personnel_form">
+    <field name="name">view.charge.personnel.form</field>
+    <field name="model">gfc_charge_personnel</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Charge personnel">
+        <header>
+        	<button string="Afficher" name="remplir_balance" type="object" class="oe_highlight"/>
+        </header>
+         
+        <sheet>
+            <group>
+            	 <field name="x_exercice_id" style = "width:50%" options="{'no_create': True}"/>         	 
+            </group>                   
+             <field name = "charges_personnel_line" nolabel ="1">
+             	<tree string = "charges personnel" editable = "bottom">           
+             		<field name = "secteur_activite" />
+             		<field name = "charge_personnel" sum="Total"/>
+             		<field name = "montant_rp" sum="Total"/>
+             		<field name = "taux_rp"/>
+             		<field name = "montant_se" sum="Total"/>
+             		<field name = "taux_se"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+	
+<record model="ir.ui.view" id="view_charge_personnel_tree">
+	<field name="name">view.charge.personnel.tree</field>
+	<field name="model">gfc_charge_personnel</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Charges des personnel">
+			<field name="sequence" widget="handle"/>
+			<field name="x_exercice_id"/>				
+		</tree>
+	</field>
+</record>	
+	
+
+<!--Vue Evolution des recetts et des dépenses des EPE sur les trois dernières années -->
+<record model="ir.ui.view" id="view_evolution_form">
+    <field name="name">view.evolution.form</field>
+    <field name="model">gfc_evolution_rec_dep</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Evolution des dépenses et des recettes">
+        <header>
+        	<button string="Afficher" name="remplir_balance" type="object" class="oe_highlight"/>
+        </header>
+         
+        <sheet>
+            <group col='4'>
+            	 <field name="categorie" style = "width:50%"/>
+            	 <field name="x_exercice_id" style = "width:50%" options="{'no_create': True}"/>         	 
+            </group>                   
+             <field name = "evolution_rec_dep_line" nolabel ="1">
+             	<tree string = "Evolution des recettes et des dépenses des EPE" editable = "bottom">           
+             		<field name = "epe" />
+             		<field name = "annee2r" sum="Total"/>
+             		<field name = "annee1r" sum="Total"/>
+             		<field name = "anneer" sum="Total"/>
+             		<field name = "variationr" sum="Total"/>
+					<field name = "annee2d" sum="Total"/>
+             		<field name = "annee1d" sum="Total"/>
+             		<field name = "anneed" sum="Total"/>
+             		<field name = "variationd" sum="Total"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_evolution_tree">
+		<field name="name">view.evolution.tree</field>
+		<field name="model">gfc_evolution_rec_dep</field>
+		<field name="priority" eval="16"/>
+		<field name="arch" type="xml">
+			<tree string="Evolution des recettes et des dépenses des EPE">
+				<field name="sequence" widget="handle"/>
+				<field name="categorie"/>
+				<field name="x_exercice_id"/>				
+			</tree>
+		</field>
+	</record>
+	
+	
+	
+
+<!-- vue form balance depense et recette -->
+<record model="ir.ui.view" id="view_balance_form">
+    <field name="name">view.balance.form</field>
+    <field name="model">budg_balance</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Balance">
+        <header>
+        	<button string="Rechercher" name="remplir_balance" type="object" class="oe_highlight"/>
+        </header>
+         
+        <sheet>
+            <group col ="8">
+            	 <field name="x_exercice_id" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="type" style = "width:100%"/>
+            	 <field name="dt_debut" style = "width:100%" class ="oe_inline"/>
+            	 <field name="dt_fin" style = "width:100%" class ="oe_inline"/>            	 
+            </group>
+            	 <field name="company_id" invisible="1"/> 
+            	 <field name="total_budget" invisible="1"/>
+            	 <field name="total_engagement" invisible="1"/>
+            	 <field name="total_mandat" invisible="1"/> 
+             <field name = "balance_lines" nolabel ="1">
+             	<tree string = "Balance" editable = "bottom">           
+             		<field name = "numero_compte" />
+             		<field name = "libelle" />
+             		<field name = "montant_budgetise" sum="Total budget"/>
+             		<field name = "montant_engagement"/>
+             		<field name = "montant_mandatement"/>
+             		<field name = "montant_recette"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree balance depense et recette -->
+
+<record model="ir.ui.view" id="view_balance_tree">
+        <field name="name">view.balance.tree</field>
+        <field name="model">budg_balance</field>
+        <field name="arch" type="xml">
+            <tree string="Balance">
+               <field name ="type"/>
+               <field name ="dt_debut"/>
+               <field name ="dt_fin"/>
+               <field name ="x_exercice_id"/>
+            </tree>
+        </field>
+</record>
+
+
+
+<!-- vue form babordereau mandat annule -->
+<record model="ir.ui.view" id="view_bord_annulz_form">
+    <field name="name">view.bordereau.form</field>
+    <field name="model">bus_bord_annul_mandat</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Bordereau Annulé">
+	        <header>
+	        	<button string="Rechercher" name="remplir_liste" type="object" class="oe_highlight"/>
+	        </header>
+	        <sheet>
+	            <group col ="6">
+	            	 <field name="company_id" style = "width:100%"/>
+	            	 <field name="x_date_debut"  class ="oe_inline"/>
+	            	 <field name="x_date_fin"  class ="oe_inline"/>            	 
+	            </group>
+	            	 
+	             <field name="total_mandat_annule" invisible="1"/> 
+	             <field name = "x_line_ids" nolabel ="1">
+	             	<tree string = "Bordereau Annulé" editable = "bottom">           
+	             		<field name = "num_mandat" />
+	             		<field name = "nature_depense" />
+	             		<field name = "nom_creancier" />
+	             		<field name = "adress_creancier"/>
+	             		<field name = "compte"/>
+	             		<field name = "somme_a_annuler" sum="Total budget"/>
+	             	</tree>
+	             </field>
+	         </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree bordereau mandat annule -->
+
+<record model="ir.ui.view" id="view_bordereau_aannuls_tree">
+        <field name="name">view.bordereau.annule.tree</field>
+        <field name="model">bus_bord_annul_mandat</field>
+        <field name="arch" type="xml">
+            <tree string="Bordereau Annule">
+               <field name ="company_id"/>
+               <field name ="x_date_debut"/>
+               <field name ="x_date_fin"/>
+               <field name ="x_exercice_id"/>
+            </tree>
+        </field>
+</record>	
+	
+	
+	
+<!-- vue form synthese generale -->
+<record model="ir.ui.view" id="view_synthes_gene_form">
+    <field name="name">view.bus_synthese_generale.form</field>
+    <field name="model">bus_synthese_generale</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Synthèse Générale">
+        <header>
+        	<button string="Rechercher" name="remplir_balance" type="object" class="oe_highlight"/>
+        </header>
+         
+        <sheet>
+            <group col ="6">
+            	 <field name="x_exercice_id" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="company_id" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="date_op" force_save ="1"/>           	 
+            </group>
+            
+             <field name = "x_line_ids" nolabel ="1">
+             	<tree string = "Synthèse Générale" editable = "bottom">           
+             		<field name = "budget" />
+             		<field name = "pris_en_charge"/>
+             		<field name = "recouvrement"/>
+             		<field name = "x_taux"/>
+             		<field name = "reste_a_recouvrer"/>
+             		<field name = "x_exercice_id" invisible = '1'/>
+             		<field name = "company_id" invisible = '1'/>
+             	</tree>
+             </field>
+             <group col = '4'>
+             		 <group><field name="total_recette" force_save ="1"/></group> 
+		             <group><field name="total_depense" force_save ="1"/></group> 
+		             <group><field name="excedent" force_save ="1"/></group> 
+		             <group><field name="deficit" force_save ="1"/></group>
+             </group>
+              
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree synthese-->
+
+<record model="ir.ui.view" id="view_synthese_tree">
+        <field name="name">view.synthese.tree</field>
+        <field name="model">bus_synthese_generale</field>
+        <field name="arch" type="xml">
+            <tree string="Synthèse">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+	
+
+
+
+	
+<!-- vue form principaux responsables -->
+<record model="ir.ui.view" id="view_princ_resp_form">
+    <field name="name">view.bus_principaux_resp.form</field>
+    <field name="model">bus_principaux_resp</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Principaux Responsables">
+        <header>
+        	<button string="Rechercher" name="action_rech" type="object" class="oe_highlight"/>
+        </header>
+         
+        <sheet>
+            <group col ="6">
+            	 <field name="x_exercice_id" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="company_id" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="date_op" force_save ="1"/>           	 
+            </group>
+            
+             <field name = "x_line_ids" nolabel ="1">
+             	<tree string = "Principaux Responsables Line" editable = "bottom">           
+             		<field name = "nom_prenom" />
+             		<field name = "fction_id" />
+             		<field name = "ref"/>
+             		<field name = "date_acte"/>
+             		<field name = "date_prise_serv"/>
+             		<field name = "nbre_annee"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree principaux responsables-->
+
+<record model="ir.ui.view" id="view_princ_resp_tree">
+        <field name="name">view.bus_principaux_resp.tree</field>
+        <field name="model">bus_principaux_resp</field>
+        <field name="arch" type="xml">
+            <tree string="Principaux Responsables">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+
+
+
+<!-- vue form resolutions gle -->
+<record model="ir.ui.view" id="view_resolution_gle_form">
+    <field name="name">view.bus_resolution_gle.form</field>
+    <field name="model">bus_resolution_gle</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Résolutions Générales">
+        <sheet>
+        <notebook>
+        		  <page string = 'Resolutions'>
+			            <group col ="6">
+			            	 <field name="x_exercice_id" force_save ="1" style = "width:50%" options="{'no_create': True}"/>
+			            	 <field name="company_id" force_save = '1' invisivle = '1' style = "width:80%" options="{'no_create': True}"/>
+			            	 <field name="date_op" force_save ="1"/>           	 
+			            </group>
+			            
+			             <field name = "x_line_ids" nolabel ="1">
+			             	<tree string = "Résolutions Générales Line" editable = "bottom">           
+				             		<field name = "nature_resolution" />
+				             		<field name = "etat_mise_en_oeuvre"/>
+				             		<field name = "observation_damof"/>
+			             	</tree>
+			             </field>
+			       </page>
+			       <page string = 'Structures Concernées'>
+			       		<group col ="3">
+			            	 <group><field name="cat_struct" options="{'no_create': True}"/></group>
+			            	 <group><field name="struct_id" domain = "[('ref_cat_struct_id','=',cat_struct)]" options="{'no_create': True}"/></group> 
+			            	 <group><button string="Valider" name="action_rech" type="object" class="oe_highlight"/></group>
+                              	 
+			            </group>
+			       		 <field name = "x_line_c_ids" nolabel ="1">
+			             	<tree string = "Structures Concernées Line" editable = "bottom">           
+				             		<field name = "cat_struct" options="{'no_create': True}"/>
+				             		<field name = "company_id" domain = "[('ref_cat_struct_id','=',cat_struct)]" options="{'no_create': True}"/>
+			             	</tree>
+			             </field>
+			       </page>
+		</notebook>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree resolutions gle-->
+
+<record model="ir.ui.view" id="view_resolution_gle_tree">
+        <field name="name">view.bus_resolution_gle.tree</field>
+        <field name="model">bus_resolution_gle</field>
+        <field name="arch" type="xml">
+            <tree string="Resolutions Generaless">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+
+
+
+<!-- vue form recommandation gle -->
+<record model="ir.ui.view" id="view_recommandation_gle_form">
+    <field name="name">view.bus_recommandation_gle.form</field>
+    <field name="model">bus_recommandation_gle</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Recommandations Générales">
+        <sheet>
+            <group col ="6">
+            	 <field name="x_exercice_id" force_save ="1" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="company_id" force_save = '1' style = "width:80%" options="{'no_create': True}"/>
+            	 <field name="date_op" force_save ="1"/>           	 
+            </group>
+            
+             <field name = "x_line_ids" nolabel ="1">
+             	<tree string = "Récommandations Générales Line" editable = "bottom">           
+	             		<field name = "nature_recommandation" />
+	             		<field name = "etat_mise_en_oeuvre"/>
+	             		<field name = "observation_damof"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree recommandation gle-->
+
+<record model="ir.ui.view" id="view_recommandation_gle_tree">
+        <field name="name">view.bus_recommandation_gle.tree</field>
+        <field name="model">bus_recommandation_gle</field>
+        <field name="arch" type="xml">
+            <tree string="Recommandations Générales">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+
+
+
+
+<!-- vue form recommandation speci -->
+<record model="ir.ui.view" id="view_recommandation_speci_form">
+    <field name="name">view.bus_recommandation_spec.form</field>
+    <field name="model">bus_recommandation_spec</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Recommandations Spécifiques">
+        <sheet>
+            <group col ="6">
+            	 <field name="x_exercice_id" force_save ="1" style = "width:50%" options="{'no_create': True}"/>
+            	 <field name="company_id" force_save = '1' style = "width:80%" options="{'no_create': True}"/>
+            	 <field name="date_op" force_save ="1"/>           	 
+            </group>
+            
+             <field name = "x_line_ids" nolabel ="1">
+             	<tree string = "Récommandations Spécifiques Line" editable = "bottom">           
+	             		<field name = "nature_recommandation" />
+	             		<field name = "etat_mise_en_oeuvre"/>
+	             		<field name = "observation_damof"/>
+             	</tree>
+             </field>
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree recommandation specifiques-->
+
+<record model="ir.ui.view" id="view_recommandation_speci_tree">
+        <field name="name">view.bus_recommandation_spec.tree</field>
+        <field name="model">bus_recommandation_spec</field>
+        <field name="arch" type="xml">
+            <tree string="Recommandations Spécifiques">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+
+
+
+<!-- vue form resolutions spec -->
+<record model="ir.ui.view" id="view_resolution_spec_form">
+    <field name="name">view.bus_resolution_spec.form</field>
+    <field name="model">bus_resolution_spec</field>
+    <field name="priority" eval="16"/>
+    <field name="arch" type="xml">
+        <form string="Résolutions Spécifiques">
+        <sheet>
+        <notebook>
+        	<page string = 'Resolution'>
+            <group col ="2">
+            	 <group><field name="company_id" style = "width:80%" options="{'no_create': True}"/></group>
+            	 <group><field name="x_exercice_id" style = "width:50%" force_save ="1" options="{'no_create': True}"/></group>
+            </group>
+            <field name="date_op" force_save ="1" invisible = '1'/>
+            
+             <field name = "x_line_ids" nolabel ="1">
+             	<tree string = "Résolutions Spécifiques Line" editable = "bottom">           
+	             		<field name = "nature_resolution" />
+	             		<field name = "etat_mise_en_oeuvre"/>
+	             		<field name = "observation_damof"/>
+             	</tree>
+             </field>
+             </page>
+             <page string = 'Structures Concernées'>
+			       		<group col ="3">
+			            	 <group><field name="cat_struct" options="{'no_create': True}"/></group>
+			            	 <group><button string="Valider" name="action_rech" type="object" class="oe_highlight"/></group>
+                              	 
+			            </group>
+			       		 <field name = "x_line_c_ids" nolabel ="1">
+			             	<tree string = "Structures Concernées Line" editable = "bottom">           
+				             		<field name = "cat_struct" options="{'no_create': True}"/>
+				             		<field name = "company_id" domain = "[('ref_cat_struct_id','=',cat_struct)]" options="{'no_create': True}"/>
+			             	</tree>
+			             </field>
+			   </page>
+         </notebook>    
+        </sheet>    
+        </form>
+    </field>
+</record>
+
+<!-- vue tree resolutions spec-->
+
+<record model="ir.ui.view" id="view_resolution_spec_tree">
+        <field name="name">view.bus_resolution_spec.tree</field>
+        <field name="model">bus_resolution_spec</field>
+        <field name="arch" type="xml">
+            <tree string="Resolutions Spécifiques">
+               <field name ="x_exercice_id"/>
+               <field name ="company_id"/>
+               <field name ="date_op"/>
+            </tree>
+        </field>
+</record>
+		
+	
+	
+	
+	<!-- Action business-->
+	<record model="ir.actions.act_window" id="act_list_business">
+			<field name="name">Liste des business</field>
+			<field name="res_model">bus_intro</field>
+			<field name="view_mode">tree,form</field>
+	</record>
+
+<!--Action Part des charges personnel dans les recettes propres et subventions de l'etat-->
+	<record model="ir.actions.act_window" id="act_charge_personnel">
+			<field name="name">Part Charges Personnel dans les RP et SE</field>
+			<field name="res_model">gfc_charge_personnel</field>
+			<field name="view_mode">tree,form,kanban</field>
+	</record>
+
+<!--Action Evolution des recettes et des dépenses des EPE sur les trois dernières années -->
+	<record model="ir.actions.act_window" id="act_evolution">
+			<field name="name">Evolution des recettes et dépenses des EPE sur les 3 derniers exercices</field>
+			<field name="res_model">gfc_evolution_rec_dep</field>
+			<field name="view_mode">tree,form,kanban</field>
+	</record>
+	
+	<!-- action balance -->
+	<record id="act_balance" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une balance</field>
+	    <field name="res_model">budg_balance</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une balance.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action bordereau annulé -->
+	<record id="act_bord_annule" model="ir.actions.act_window">
+	    <field name="name">Enregistrement de bordereau annulé</field>
+	    <field name="res_model">bus_bord_annul_mandat</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer un bordereau.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action synthese generale -->
+	<record id="act_synthe_gne" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une synthèse générale</field>
+	    <field name="res_model">bus_synthese_generale</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une synthèse générale.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action responsable principal -->
+	<record id="act_princ_resp" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'un responsable principal</field>
+	    <field name="res_model">bus_principaux_resp</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une synthèse des principaux responsables.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action resolution gle -->
+	<record id="act_resolution_gle" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une resolution générale</field>
+	    <field name="res_model">bus_resolution_gle</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une résolution gle.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action resolution spec -->
+	<record id="act_resolution_spec" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une resolution spécifique</field>
+	    <field name="res_model">bus_resolution_spec</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une résolution spécifique.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action recommandations gles -->
+	<record id="act_recommandation_gle" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une recommandation générale</field>
+	    <field name="res_model">bus_recommandation_gle</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une recommandation générale.
+	            </p>
+	        </field>
+	</record>
+	
+	
+	<!-- action recommandations specifiques -->
+	<record id="act_recommandation_spec" model="ir.actions.act_window">
+	    <field name="name">Enregistrement d'une recommandation spécifique</field>
+	    <field name="res_model">bus_recommandation_spec</field>
+	    <field name="view_mode">tree,form,kanban</field>
+	    <field name="help" type="html">
+	            <p class="o_view_nocontent_smiling_face">
+	                Cliquer pour créer une recommandation spécifique.
+	            </p>
+	        </field>
+	</record>
+	
+
+	<!--Definition du menu-->
+	<menuitem id="main_menu" name ="Business Intelligence" sequence="11"/>
+	
+	<menuitem id="main_menu_gfc" name ="Finance" sequence="2" parent="main_menu"/>
+    <menuitem id="menu_balance" parent="main_menu_gfc" sequence="1" name="Balance Dépenses" action="act_balance"/>
+    <!--  <menuitem id="menu_bordereau_annule" parent="main_menu_gfc" sequence="2" name="Bordereaux Annulés" action="act_bord_annule"/>-->
+    
+    <menuitem id="main_menu_rp_se" name ="Part Charges Personnel dans les RP et Subv. Etat" sequence="3" action="act_charge_personnel" parent="main_menu_gfc"/>
+    <menuitem id="main_menu_evolution" name ="Evolution des recettes et dépenses des EPE sur les 3 derniers exercices" sequence="4" action="act_evolution" parent="main_menu_gfc"/>
+    <menuitem id="main_menu_synthese" name ="Synthèse Générale" sequence="5" action="act_synthe_gne" parent="main_menu_gfc"/>
+	
+	<menuitem id="main_menu_grh" name ="Resources Humaines" sequence="3" action="act_list_business" parent="main_menu"/>
+	
+	<menuitem id="main_menu_ca" name ="Conseil d'Administration" sequence="4" action="act_list_business" parent="main_menu"/>
+		<menuitem id="menu_princ_resp" parent="main_menu_ca" sequence="1" name="Principaux Responsables de l'EPE" action="act_princ_resp"/>
+		<menuitem id="main_menu_recom" name ="MISE EN OEUVRE DES RESOLUTIONS ET RECOMMANDATIONS ISSUES" sequence="2" parent="main_menu_ca"/>
+	    	<menuitem id="main_menu_resolution" name ="RESOLUTIONS" sequence="21" parent="main_menu_recom"/>
+	    		<menuitem id="main_menu_resolution_generale" name ="Ordre Générale" sequence="211" action="act_resolution_gle" parent="main_menu_resolution"/>
+	    		<menuitem id="main_menu_resolution_spec" name ="Ordre Spécifique" sequence="212" action="act_resolution_spec" parent="main_menu_resolution"/>
+	
+	    	<menuitem id="main_menu_recomm" name ="RECOMMANDATIONS" sequence="22" parent="main_menu_recom"/>
+	    		<menuitem id="main_menu_recomm_generale" name ="Ordre Générale" sequence="221" action="act_recommandation_gle" parent="main_menu_recomm"/>
+	    		<menuitem id="main_menu_recomm_spec" name ="Ordre Spécifique" sequence="222" action="act_recommandation_spec" parent="main_menu_recomm"/>
+	
+	
+	<menuitem id="main_menu_immo" name ="Gestion Biens" sequence="5" action="act_list_business" parent="main_menu"/>
+    
+	
+	
+</odoo>
+
+

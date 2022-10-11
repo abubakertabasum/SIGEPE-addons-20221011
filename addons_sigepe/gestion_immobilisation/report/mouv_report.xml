@@ -1,0 +1,1313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report 
+    id="report_affectation"
+    string="Affectation"
+    model="gi_affectation" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_affectation" 
+    name="gestion_immobilisation.report_affectation_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_affectation_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU D'AFFECTATION DES MATIERES</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_mvt" class="col-auto mw-100 mb-2">
+                            <strong>N° d'ordre:</strong>
+                                <tr><span t-field="o.n_mvt"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.observation" class="col-auto mw-100 mb-2">
+                            <strong>Observation:</strong>
+                                <td> <span t-field="o.observation"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <table class="table table-sm table-bordered" style="border:2px solid black">
+                            <thead style="border:2px solid black">
+                                <tr style= "border:2px solid black">
+                                    <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                                    <th style="border:2px solid black" class="text-center">Désignation</th>
+                                    <th style="border:2px solid black" class="text-center">Magasin</th>
+                                    <th style="border:2px solid black" class="text-center">Montant</th>
+                                    <th style="border:2px solid black" class="text-center">Direction Affectée</th>
+                                    <th style="border:2px solid black" class="text-center">Utilisateur</th>
+                                    <th style="border:2px solid black" class="text-center">Etat</th>
+                                    <th style="border:2px solid black" class="text-center">Date Affectation</th>
+                                </tr>
+                            </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.affect_line_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.magasin"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.user"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.date_affect"/></td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                                
+                            <strong>Ordonnateur matière:</strong>
+                        </div>
+                                
+                            <div> 
+                                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                            </div>
+
+                                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                                    <strong>Comptable matière:</strong>
+
+                                </div>
+                                
+                            <div>
+                                <span t-field="o.compta_mat_id.employe_id.name"/> 
+                            </div> 
+                                
+
+                            <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                                <strong>Magasinier/ Fichiste:</strong>
+                            </div>
+                                
+                            <div> 
+                                <span t-field="o.magasinier_id.employe_id.name"/> 
+                            </div> 
+                    </div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template> 
+
+
+<report 
+    id="report_mutation"
+    string="Mutation"
+    model="gi_mutation" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_mutation" 
+    name="gestion_immobilisation.report_mutation_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_mutation_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE MUTATION DES MATIERES</FONT> </h2>
+                    </div>
+
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Bénéficiaire</FONT> </h3>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <strong>Service detenteur:</strong>
+                            <td> <span t-field="o.serviceB_id"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <strong>Date de la mutation:</strong>
+                            <td> <span t-field="o.date_mutation"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <strong>Observation:</strong>
+                            <td> <span t-field="o.observation"/> </td> 
+                    </div>
+
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Liste des matières à muter</FONT> </h3>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                        <table class="table table-sm table-bordered" style="border:2px solid black">
+                            <thead style="border:2px solid black">
+                                <tr style= "border:2px solid black">
+                                    <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                                    <th style="border:2px solid black" class="text-center">Désignation</th>
+                                    <th style="border:2px solid black" class="text-center">Magasin</th>
+                                    <th style="border:2px solid black" class="text-center">Montant</th>
+                                    <th style="border:2px solid black" class="text-center">Direction Affectée</th>
+                                    <th style="border:2px solid black" class="text-center">Utilisateur</th>
+                                    <th style="border:2px solid black" class="text-center">Nouveau code du bien</th>
+                                    <th style="border:2px solid black" class="text-center">Etat</th>
+                                </tr>
+                            </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.mute_line_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.magasin"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.user"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.new_code"/></td>
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+                                    </tr>
+                                </tbody>
+                        </table>
+                    </div>
+
+
+        <div class="row mt32 mb32" id="informations">
+            <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                    
+                <strong>Ordonnateur matière:</strong>
+            </div>
+                    
+                <div> 
+                    <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                </div>
+
+                    <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                <strong>Comptable matière:</strong>
+
+                    </div>
+                    
+                <div>
+                    <span t-field="o.compta_mat_id.employe_id.name"/> 
+                </div> 
+        </div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template> 
+
+
+<report 
+    id="report_sortie"
+    string="Sortie"
+    model="gi_sortie" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_sortie" 
+    name="gestion_immobilisation.report_sortie_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_sortie_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE SORTIE MOMENTANNEE DES BIENS</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_ordre" class="col-auto mw-100 mb-2">
+                    <strong>N° d'ordre:</strong>
+                    <tr><span t-field="o.n_ordre"/> </tr> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.destinateur" class="col-auto mw-100 mb-2">
+                    <strong>Detenteur:</strong>
+                    <td> <span t-field="o.destinateur"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.motif_id" class="col-auto mw-100 mb-2">
+                    <strong>Motif:</strong>
+                        <td> <span t-field="o.motif_id"/> </td>
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date" class="col-auto mw-100 mb-2">
+                    <strong>Date de sortie:</strong>
+                    <td> <span t-field="o.date"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_retour" class="col-auto mw-100 mb-2">
+                    <strong>Date de retour prévisionnelle:</strong>
+                    <td> <span t-field="o.date_retour"/> </td> 
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Liste des biens à sortir</FONT> </h3>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Detenteur</th>
+                        <th style="border:2px solid black" class="text-center">Valeur Brute</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.sortiline_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.service"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.detenteur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.val_brute"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div> 
+                
+
+            <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Magasinier/ Fichiste:</strong>
+            </div>
+                
+            <div> 
+                <span t-field="o.magasinier_id.employe_id.name"/> 
+            </div> 
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_retour"
+    string="Imprimer"
+    model="gi_entree" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_retour" 
+    name="gestion_immobilisation.report_retour_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_retour_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE RETOUR DES BIENS</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.gi_sortie_id" class="col-auto mw-100 mb-2">
+                    <strong>N° d'ordre: </strong>
+                    <tr><span t-field="o.gi_sortie_id"/> </tr> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date" class="col-auto mw-100 mb-2">
+                    <strong>Date d'entrée: </strong>
+                    <td> <span t-field="o.date"/> </td> 
+                        </div>
+                    </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <td style="border:2px solid black">Observation</td>
+                                        <td style="border:2px solid black"><span t-field="o.observation"/></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                              
+                            <div>
+                                <h3> <FONT COLOR= "Blue">Liste des biens à sortir</FONT> </h3>
+                            </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Detenteur</th>
+                        <th style="border:2px solid black" class="text-center">Valeur Brute</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.entreline_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.service"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.detenteur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.val_brute"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div> 
+                
+
+            <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Magasinier/ Fichiste:</strong>
+            </div>
+                
+            <div> 
+                <span t-field="o.magasinier_id.employe_id.name"/> 
+            </div> 
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_transfert"
+    string="Transfert"
+    model="gi_transfert" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_transfert" 
+    name="gestion_immobilisation.report_transfert_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_transfert_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE TRANFERT DU BIEN</FONT> </h2>
+                    </div>
+
+                    <div>
+                    <h4 style= "text-align:center;"> <FONT COLOR= "Blue">Informations</FONT> </h4>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.code_immo" class="col-auto mw-100 mb-2">
+                    <strong>Code Immobilisation:</strong>
+                    <tr><span t-field="o.code_immo"/> </tr> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.categorie" class="col-auto mw-100 mb-2">
+                    <strong>Categorie:</strong>
+                    <td> <span t-field="o.categorie"/> </td> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.designation" class="col-auto mw-100 mb-2">
+                    <strong>Désignation:</strong>
+                    <td> <span t-field="o.designation"/> </td> 
+                        </div>
+                    </div>
+
+
+                    <div>
+                    <h4> <FONT COLOR= "Blue">Origine du tranfert</FONT> </h4>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereA" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <td> <span t-field="o.ministereA"/> </td> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.service" class="col-auto mw-100 mb-2">
+                    <strong>Direction/Service:</strong>
+                    <td> <span t-field="o.service"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.magasin" class="col-auto mw-100 mb-2">
+                    <strong>Magasin:</strong>
+                    <td> <span t-field="o.magasin"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date_mise_serv" class="col-auto mw-100 mb-2">
+                    <strong>Date mise en service:</strong>
+                    <td> <span t-field="o.date_mise_serv"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                    <h4> <FONT COLOR= "Blue">Destination du bien</FONT> </h4>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereB_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <td> <span t-field="o.ministereB_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.directionB_id" class="col-auto mw-100 mb-2">
+                    <strong>Direction/Service:</strong>
+                    <td> <span t-field="o.directionB_id"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date_transfert" class="col-auto mw-100 mb-2">
+                    <strong>Date de transfert:</strong>
+                    <td> <span t-field="o.date_transfert"/> </td> 
+                        </div>
+                    </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <td style="border:2px solid black">Observation</td>
+                                        <td style="border:2px solid black"><span t-field="o.observation"/></td>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                            <div class="row mt32 mb32" id="informations">
+                                <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                                        
+                                    <strong>Ordonnateur matière:</strong>
+                                </div>
+                                        
+                                    <div> 
+                                        <span t-field="o.ordo_mat_id.employe_id.name"/> 
+                                    </div>
+
+                                        <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                                    <strong>Comptable matière:</strong>
+
+                                        </div>
+                                        
+                                    <div>
+                                        <span t-field="o.compta_mat_id.employe_id.name"/> 
+                                    </div> 
+                                        
+
+                                    <div t-if="o.magasinier_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+                                    <strong>Magasinier/ Fichiste:</strong>
+                                    </div>
+                                        
+                                    <div> 
+                                        <span t-field="o.magasinier_id.employe_id.name"/> 
+                                    </div> 
+                            </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+<report 
+    id="report_cession_vente"
+    string="Imprimer"
+    model="gi_cession_vente" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_cession_vente" 
+    name="gestion_immobilisation.report_cession_vente_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_cession_vente_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h2 style= "text-align:center;"> <FONT COLOR= "Blue">BON DE VENTE D'IMMOBILISATION</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_mvt" class="col-auto mw-100 mb-2">
+                    <strong>N° d'ordre:</strong>
+                    <tr><span t-field="o.n_mvt"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereA_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <td> <span t-field="o.ministereA_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.typ_mvt" class="col-auto mw-100 mb-2">
+                    <strong>Type de mouvement:</strong>
+                    <td> <span t-field="o.typ_mvt"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_mvt" class="col-auto mw-100 mb-2">
+                    <strong>Date de la vente:</strong>
+                    <td> <span t-field="o.date_mvt"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.type_operation" class="col-auto mw-100 mb-2">
+                    <strong>Type d'opération:</strong>
+                    <td> <span t-field="o.type_operation"/> </td> 
+                        </div>
+
+                        <div t-if="o.type_journal" class="col-auto mw-100 mb-2">
+                    <strong>Type Journal:</strong>
+                    <td> <span t-field="o.type_journal"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                    <h2> <FONT COLOR= "Blue">Cession Vente</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.acquereur" class="col-auto mw-100 mb-2">
+                    <strong>Acquereur/ Bénéficiaire:</strong>
+                    <td> <span t-field="o.acquereur"/> </td> 
+                        </div>
+
+                        <div t-if="o.ref_pay" class="col-auto mw-100 mb-2">
+                    <strong>Référence quittance:</strong>
+                    <td> <span t-field="o.ref_pay"/> </td> 
+                        </div>
+                    </div>
+                            
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Liste des biens sortie pour vente</FONT> </h3>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Valeur Brute</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.cess_vente_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.valeur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+               <br t-field="o.ordo_mat_id.employe_id.name"/> 
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+                 <br t-field="o.compta_mat_id.employe_id.name"/>
+                
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_cession_don"
+    string="Imprimer"
+    model="gi_cession_don" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_cession_don" 
+    name="gestion_immobilisation.report_cession_don_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_cession_don_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <h3 style= "text-align:center;"> <FONT COLOR= "Blue">CESSION DE DON DES BIENS</FONT> </h3>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_mvt" class="col-auto mw-100 mb-2">
+                            <strong>N° d'ordre:</strong>
+                                <tr><span t-field="o.n_mvt"/> </tr> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereA_id.lib_long" class="col-auto mw-100 mb-2">
+                            <strong>Ministère:</strong>
+                                <td> <span t-field="o.ministereA_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.typ_mvt" class="col-auto mw-100 mb-2">
+                            <strong>Type de mouvement:</strong>
+                                <td> <span t-field="o.typ_mvt"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_mvt" class="col-auto mw-100 mb-2">
+                            <strong>Date du don:</strong>
+                                <td> <span t-field="o.date_mvt"/> </td> 
+                        </div>
+                    </div>
+                    
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.type_operation" class="col-auto mw-100 mb-2">
+                            <strong>Type d'opération:</strong>
+                                <td> <span t-field="o.type_operation"/> </td> 
+                        </div>
+
+                        <div t-if="o.type_journal" class="col-auto mw-100 mb-2">
+                            <strong>Type de journal:</strong>
+                                <td> <span t-field="o.type_journal"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.acquereur" class="col-auto mw-100 mb-2">
+                            <strong>Acquereur/ Bénéficiaire:</strong>
+                                <td> <span t-field="o.acquereur"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Liste des biens sortie pour don</FONT> </h3>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Valeur réelle</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Observations</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.cess_don_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.valeur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.observation"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div> 
+                
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_reforme"
+    string="Imprimer"
+    model="gi_reforme" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_reforme" 
+    name="gestion_immobilisation.report_reforme_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_reforme_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h3 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE REFORME DES BIENS</FONT> </h3>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_ordre" class="col-auto mw-100 mb-2">
+                    <strong>N° d'ordre: </strong>
+                    <tr><span t-field="o.n_ordre"/> </tr> 
+                        </div>
+                    </div>
+
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereA_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Ministère:</strong>
+                    <td> <span t-field="o.ministereA_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.nom_mvt" class="col-auto mw-100 mb-2">
+                    <strong>Type de mouvement:</strong>
+                    <td> <span t-field="o.nom_mvt"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.date_mvt" class="col-auto mw-100 mb-2">
+                    <strong>Date de la reforme:</strong>
+                    <td> <span t-field="o.date_mvt"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                    <h2> <FONT COLOR= "Blue">Pièce Justificative</FONT> </h2>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ref_piece_id" class="col-auto mw-100 mb-2">
+                    <strong>Reference de la pièce justificative:</strong>
+                    <td> <span t-field="o.ref_piece_id"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Nom de la pièce Justificative:</strong>
+                    <td> <span t-field="o.lib_long"/> </td> 
+                        </div>
+
+                        <div t-if="o.date" class="col-auto mw-100 mb-2">
+                    <strong>Date du:</strong>
+                    <td> <span t-field="o.date"/> </td> 
+                        </div>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <td style="border:2px solid black">Commentaire</td>
+                                        <td style="border:2px solid black"><span t-field="o.commentaire"/></td>
+                                    </tr>
+                                </thead>
+                            </table>
+</div>
+                            
+                        <div>
+                            <h3> <FONT COLOR= "Blue">Liste des biens à reformer</FONT> </h3>
+                        </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Valeur</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                        <th style="border:2px solid black" class="text-center">Nouvelle nature</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.reforme_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.valeur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.nature"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div> 
+                
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_declassement"
+    string="Imprimer"
+    model="gi_declassement" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_declassement" 
+    name="gestion_immobilisation.report_declassement_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_declassement_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                        <h3 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU DE DECLASSEMENT DES BIENS</FONT> </h3>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_ordre" class="col-auto mw-100 mb-2">
+                            <strong>N° d'ordre: </strong>
+                                <tr><span t-field="o.n_ordre"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.ministereA_id.lib_long" class="col-auto mw-100 mb-2">
+                            <strong>Ministère:</strong>
+                                <td> <span t-field="o.ministereA_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.mvt_id.lib_long" class="col-auto mw-100 mb-2">
+                            <strong>Type de mouvement:</strong>
+                                <td> <span t-field="o.mvt_id.lib_long"/> </td> 
+                        </div>
+                        <div t-if="o.date_mvt" class="col-auto mw-100 mb-2">
+                            <strong>Date de declassement:</strong>
+                                <td> <span t-field="o.date_mvt"/> </td> 
+                        </div>
+                    </div>
+
+                
+<div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <td style="border:2px solid black">Commentaire</td>
+                                        <td style="border:2px solid black"><span t-field="o.commentaire"/></td>
+                                    </tr>
+                                </thead>
+                            </table>
+</div>
+                            
+                        <div>
+                            <h3> <FONT COLOR= "Blue">Liste des biens à déclasser</FONT> </h3>
+                        </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Direction/Service</th>
+                        <th style="border:2px solid black" class="text-center">Valeur</th>
+                        <th style="border:2px solid black" class="text-center">Etat</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.declassement_line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.direction"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.valeur"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat_id"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div> 
+                
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+
+<report 
+    id="report_ordre_entree"
+    string="Imprimer"
+    model="gi_ordre_entree" 
+    report_type="qweb-html"
+    file="gestion_immobilisation.report_ordre_entree" 
+    name="gestion_immobilisation.report_ordre_entree_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_ordre_entree_view" >
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h3 style= "text-align:center;"> <FONT COLOR= "Blue">BORDERAU D'ENTREE DES MATIERES</FONT> </h3>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.n_mvt" class="col-auto mw-100 mb-2">
+                    <strong>N° d'ordre: </strong>
+                    <tr><span t-field="o.n_mvt"/> </tr> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.facture" class="col-auto mw-100 mb-2">
+                    <strong>Reference facture:</strong>
+                    <td> <span t-field="o.facture"/> </td> 
+                        </div>
+
+                        <div t-if="o.fournisseur_id.nm" class="col-auto mw-100 mb-2">
+                    <strong>Fournisseur:</strong>
+                    <td> <span t-field="o.fournisseur_id.nm"/> </td> 
+                        </div>
+
+                        <div t-if="o.date_entree" class="col-auto mw-100 mb-2">
+                    <strong>Date d'entrée:</strong>
+                    <td> <span t-field="o.date_entree"/> </td> 
+                        </div>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                        <div t-if="o.mode_acqu_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Mode d'acquisition:</strong>
+                    <td> <span t-field="o.mode_acqu_id.lib_long"/> </td> 
+                        </div>
+
+                        <div t-if="o.src_fin_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Source de financement:</strong>
+                    <td> <span t-field="o.src_fin_id.lib_long"/> </td> 
+                        </div>
+
+                        <div t-if="o.magasin_id.lib_long" class="col-auto mw-100 mb-2">
+                    <strong>Source de financement:</strong>
+                    <td> <span t-field="o.magasin_id.lib_long"/> </td> 
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3> <FONT COLOR= "Blue">Liste des matières</FONT> </h3>
+                    </div>
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead style="border:2px solid black">
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Code budgetaire</th>
+                        <th style="border:2px solid black" class="text-center">Imputation budgetaire</th>
+                        <th style="border:2px solid black" class="text-center">Type immobilisation</th>
+                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                        <th style="border:2px solid black" class="text-center">Quantité</th>
+                        <th style="border:2px solid black" class="text-center">Prix unitaire</th>
+                        <th style="border:2px solid black" class="text-center">Total</th>
+                    </tr>
+                </thead>
+                    <tbody style="border:2px solid black">
+                        <tr t-foreach="o.line_ids" t-as="line" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.sous_code"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.imp_budg_id.concate_cpte"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo_id.lib_long"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.categorie_id.lib_long"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.designation_id.lib_long"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.quant"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+
+    <div class="row mt32 mb32" id="informations">
+        <div t-if="o.ordo_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+                
+            <strong>Ordonnateur matière:</strong>
+        </div>
+                
+            <div> 
+                <span t-field="o.ordo_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.compta_mat_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Comptable matière:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.compta_mat_id.employe_id.name"/> 
+            </div>
+
+                <div t-if="o.fichiste_id.employe_id.name" class="col-auto mw-100 mb-2">
+
+            <strong>Magasinier:</strong>
+
+                </div>
+                
+            <div>
+                <span t-field="o.fichiste_id.employe_id.name"/> 
+            </div> 
+                
+    </div>
+            </div>
+            </t>
+        </t>
+    </t>
+</template> 
+
+</odoo>

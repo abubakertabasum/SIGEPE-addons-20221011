@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report 
+        id="report_journal_entree"
+        string="Imprimer"
+        model="gi_journal_entree" 
+        report_type="qweb-html"
+        file="gestion_immobilisation.report_journal_entree" 
+        name="gestion_immobilisation.report_journal_entree_view"
+        groups = "base.group_user"
+        attachment_use="True"
+        menu = "True"/>
+
+
+    <template id="report_journal_entree_view" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <h1 style= "text-align:center;"> <FONT COLOR= "Blue">LIVRE JOURNAL DES ENTREES DES MATIERES</FONT> </h1>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.direction_id.name" class="col-auto mw-100 mb-2">
+                                <strong>Direction:</strong>
+                                    <tr><span t-field="o.direction_id.name"/> </tr> 
+                            </div>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                                <strong>Date debut:</strong>
+                                    <tr><span t-field="o.date_debut"/> </tr> 
+                            </div>
+
+                            <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                                <strong>Date fin:</strong>
+                                    <td> <span t-field="o.date_fin"/> </td>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style= "text-align:center;"> <FONT COLOR= "Blue">Liste des matières</FONT> </h4>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <th style="border:2px solid black" class="text-center">Sous code</th>
+                                        <th style="border:2px solid black" class="text-center">N° d'ordre</th>
+                                        <th style="border:2px solid black" class="text-center">Date</th>
+                                        <th style="border:2px solid black" class="text-center">Type immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                                        <th style="border:2px solid black" class="text-center">Quantité</th>
+                                        <th style="border:2px solid black" class="text-center">Prix unitaire</th>
+                                        <th style="border:2px solid black" class="text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.jr_entree_line_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.sous_code"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.n_ordre"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.date_entree"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.quant"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.mnt_total" class="col-auto mw-100 mb-2">
+                                <strong>Montant total:</strong>
+                                    <tr><span t-field="o.mnt_total"/> </tr> 
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                </t>
+            </t>
+    </template>
+
+    <report 
+        id="report_journal_sortie"
+        string="Imprimer"
+        model="gi_journal_sortie" 
+        report_type="qweb-html"
+        file="gestion_immobilisation.report_journal_sortie" 
+        name="gestion_immobilisation.report_journal_sortie_view"
+        groups = "base.group_user"
+        attachment_use="True"
+        menu = "True"/>
+
+
+    <template id="report_journal_sortie_view" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <h1 style= "text-align:center;"> <FONT COLOR= "Blue">LIVRE JOURNAL DES SORTIES DES MATIERES</FONT> </h1>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.direction_id.name" class="col-auto mw-100 mb-2">
+                                <strong>Direction:</strong>
+                                    <tr><span t-field="o.direction_id.name"/> </tr> 
+                            </div>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.date_debut" class="col-auto mw-100 mb-2">
+                                <strong>Date debut:</strong>
+                                    <tr><span t-field="o.date_debut"/> </tr> 
+                            </div>
+
+                            <div t-if="o.date_fin" class="col-auto mw-100 mb-2">
+                                <strong>Date fin:</strong>
+                                    <td> <span t-field="o.date_fin"/> </td>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style= "text-align:center;"> <FONT COLOR= "Blue">Liste des matières</FONT> </h4>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <th style="border:2px solid black" class="text-center">Date mise en service</th>
+                                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Type immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                                        <th style="border:2px solid black" class="text-center">Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.jr_sortie_line_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.date_mise_service"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.mnt_total" class="col-auto mw-100 mb-2">
+                                <strong>Montant total:</strong>
+                                    <tr><span t-field="o.mnt_total"/> </tr> 
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                </t>
+            </t>
+    </template>
+
+    <report 
+        id="report_livre_journal"
+        string="Imprimer"
+        model="gi_livre_journal" 
+        report_type="qweb-html"
+        file="gestion_immobilisation.report_livre_journal" 
+        name="gestion_immobilisation.report_livre_journal_view"
+        groups = "base.group_user"
+        attachment_use="True"
+        menu = "True"/>
+
+
+    <template id="report_livre_journal_view" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div>
+                            <h1 style= "text-align:center;"> <FONT COLOR= "Blue">LIVRE JOURNAL DES MATIERES</FONT> </h1>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.direction_id.name" class="col-auto mw-100 mb-2">
+                                <strong>Direction:</strong>
+                                    <tr><span t-field="o.direction_id.name"/> </tr> 
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 style= "text-align:center;"> <FONT COLOR= "Blue">Journal des entrées</FONT> </h4>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <th style="border:2px solid black" class="text-center">Sous code</th>
+                                        <th style="border:2px solid black" class="text-center">N° d'ordre</th>
+                                        <th style="border:2px solid black" class="text-center">Date</th>
+                                        <th style="border:2px solid black" class="text-center">Type immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                                        <th style="border:2px solid black" class="text-center">Quantité</th>
+                                        <th style="border:2px solid black" class="text-center">Prix unitaire</th>
+                                        <th style="border:2px solid black" class="text-center">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.lv_jr_entree_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.sous_code"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.n_ordre"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.date_entree"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.quant"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.val_unit"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <h4 style= "text-align:center;"> <FONT COLOR= "Blue">Journal des sorties</FONT> </h4>
+                        </div>
+
+                        <div class="row mt32 mb32" id="informations">
+                            <table class="table table-sm table-bordered" style="border:2px solid black">
+                                <thead style="border:2px solid black">
+                                    <tr style= "border:2px solid black">
+                                        <th style="border:2px solid black" class="text-center">Date mise en service</th>
+                                        <th style="border:2px solid black" class="text-center">Code Immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Type immobilisation</th>
+                                        <th style="border:2px solid black" class="text-center">Categorie</th>
+                                        <th style="border:2px solid black" class="text-center">Désignation</th>
+                                        <th style="border:2px solid black" class="text-center">Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="border:2px solid black">
+                                    <tr t-foreach="o.lv_jr_sortie_ids" t-as="line" >
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.date_mise_service"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.code_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.type_immo"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.categorie"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.designation"/></td>
+
+                                        <td class="text-center" style="border:2px solid black"><span t-field="line.montant"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mt32 mb32" id="informations">
+                            <div t-if="o.mnt_total" class="col-auto mw-100 mb-2">
+                                <strong>Montant total:</strong>
+                                    <tr><span t-field="o.mnt_total"/> </tr> 
+                            </div>
+                        </div>
+                    </div>
+                    </t>
+                </t>
+            </t>
+    </template>    
+</odoo>

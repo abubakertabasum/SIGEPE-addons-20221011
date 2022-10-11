@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_primes_paiement"
+            string="Prime"
+            model="hr_prime" 
+            report_type="qweb-pdf"
+            file="Gestion_Paie.report_primes_paiement" 
+            name="Gestion_Paie.report_primes_paiement"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_primes_paiement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h4 style="text-align:center"><span t-field="o.x_intitule"/>  DU MOIS DE  <span t-field="o.x_moi"/></h4>
+            <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;">
+			                          <th style="border:2px solid;"><i>Financier</i></th>
+			                          <th style="border:2px solid;"><i>DRH</i></th>
+			                      	  <th style="border:2px solid;"><i>Année</i></th>
+			                      	  <th style="border:2px solid;"><i>Date opération</i></th>
+			                    </tr>
+			                </thead>  
+			                <tbody>
+			                        <td style="border:2px solid;"><span t-field="o.financiers_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="o.drhs_id.name"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.x_exercice_id.no_ex"/></td> 
+			                        <td style="border:2px solid;"><span t-field="o.date_op"/></td> 
+			                </tbody>
+			    </table> 
+                <table class = 'table table-sm'>
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;" >
+			                          <th style="border:2px solid;"><i>Employé</i></th>
+			                          <th style="border:2px solid;"><i>Matricule</i></th>
+			                          <th style="border:2px solid;"><i>Emploi</i></th>
+			                          <th style="border:2px solid;"><i>Classification</i></th>
+			                          <th style="border:2px solid;"><i>Montant perçu</i></th>
+			                          <th style="border:2px solid;"><i>Signature</i></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                      
+			                        <td style="border:2px solid;" ><span t-field="line.name"/></td> 
+			                        <td style="border:2px solid;" ><span t-field="line.x_matricule"/></td>
+			                        <td style="border:2px solid;"><span t-field="line.x_emploi"/></td> 
+			                        <td style="border:2px solid;"><span t-field="line.x_classification"/></td> 
+			                        <td style="border:2px solid;"><span t-esc="line.x_mnt_percu"/></td>
+			                        <td style="border:2px solid;"><span t-esc="line.signature"/></td>                      
+			                    </tr>
+			                </tbody>
+			        	
+			    </table>
+			    <p style="text-align:right; widht:100%"> Total : <span t-field="o.x_prime_total"/> FCFA</p> 
+			     <p style="text-align:right; widht:100%">
+	               	Arrêté à la somme de : 
+	                  <span t-field="o.x_mnt_en_lettre"/>  francs CFA.
+	            </p> 
+	            <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong>DRH</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-field="o.drhs_id.name"/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Financier</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.financiers_id.name"/>
+	                        </div>
+                        </div>
+	            </tfoot> 
+
+            </t>
+         </t>
+    </t>
+</template>
+
+
+
+ <report 
+            id="report_livre_paie_paiement"
+            string="Livre Paie"
+            model="hr_livrepaie" 
+            report_type="qweb-pdf"
+            file="Gestion_Paie.report_livre_paie_paiement" 
+            name="Gestion_Paie.report_livre_paie_paiement"
+            groups = "base.group_user"
+            menu = "True"/>
+            
+<template id="report_livre_paie_paiement">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h4 style="text-align:center">LIVRE DE PAIE DU : <span t-field="o.x_date_debut"/> Au <span t-field="o.x_date_fin"/></h4>
+             
+                <table class = 'table table-sm'>
+				<t t-if="o.name.name == 'Fonctionnaire Detaché' ">
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;" >
+			                          <th style="border:2px solid;"><i>Employé</i></th>
+			                          <!--<th style="border:2px solid;"><i>Matricule</i></th>-->
+			                          <th style="border:2px solid;"><i>Base FP</i></th>
+									   <th style="border:2px solid;"><i>Base EPE</i></th>
+									  <th style="border:2px solid;"><i>Astreinte</i></th>
+			                          <th style="border:2px solid;"><i>Logement</i></th>
+			                          <th style="border:2px solid;"><i>Technicité</i></th>
+			                          <th style="border:2px solid;"><i>Exploit-reseaux</i></th>
+			                          <th style="border:2px solid;"><i>Resp. Financière</i></th>
+									  <th style="border:2px solid;"><i>Specifique GRH</i></th>
+									  <th style="border:2px solid;"><i>Specifique IRP</i></th>
+									  <th style="border:2px solid;"><i>Informatique</i></th>
+									  <th style="border:2px solid;"><i>Responsabilité</i></th>
+			                          <th style="border:2px solid;"><i>ICF</i></th>
+									   <th style="border:2px solid;"><i>Caisse</i></th>
+			                          <th style="border:2px solid;"><i>Transport</i></th>
+			                          <th style="border:2px solid;"><i>Salaire Brut</i></th>
+			                          <th style="border:2px solid;"><i>Nbre charge</i></th>
+			                          <th style="border:2px solid;"><i>Cotisation CARFO</i></th>
+			                          
+			                          <th style="border:2px solid;"><i>Retenue IUTS</i></th>
+			                          <th style="border:2px solid;"><i>Retenue Total</i></th>
+			                          <th style="border:2px solid;"><i>Salaire Net à Payer</i></th>
+			                          <th style="border:2px solid;"><i>CARFO Employeur</i></th>
+			                      </tr>
+			                </thead> 
+				</t>
+				<t t-if="o.name.name == 'Contractuel' ">
+			        		<thead style="border:2px solid #000000;">
+			                      <tr style="border:2px solid;" >
+			                          <th style="border:2px solid;"><i>Employé</i></th>
+			                          <!--<th style="border:2px solid;"><i>Matricule</i></th>-->
+									   <th style="border:2px solid;"><i>Base EPE</i></th>
+									  <th style="border:2px solid;"><i>Astreinte</i></th>
+			                          <th style="border:2px solid;"><i>Logement</i></th>
+			                          <th style="border:2px solid;"><i>Technicité</i></th>
+			                          <th style="border:2px solid;"><i>Exploit-reseaux</i></th>
+			                          <th style="border:2px solid;"><i>Resp. Financière</i></th>
+									  <th style="border:2px solid;"><i>Specifique GRH</i></th>
+									  <th style="border:2px solid;"><i>Specifique IRP</i></th>
+									  <th style="border:2px solid;"><i>Informatique</i></th>
+									  <th style="border:2px solid;"><i>Responsabilité</i></th>
+			                          <th style="border:2px solid;"><i>ICF</i></th>
+									   <th style="border:2px solid;"><i>Caisse</i></th>
+			                          <th style="border:2px solid;"><i>Transport</i></th>
+			                          <th style="border:2px solid;"><i>Salaire Brut</i></th>
+			                          <th style="border:2px solid;"><i>Nbre charge</i></th>
+			                          <th style="border:2px solid;"><i>Cotisation CNSS</i></th>
+			                          
+			                          <th style="border:2px solid;"><i>Retenue IUTS</i></th>
+			                          <th style="border:2px solid;"><i>Retenue Total</i></th>
+			                          <th style="border:2px solid;"><i>Salaire Net à Payer</i></th>
+			                          <th style="border:2px solid;"><i>CNSS Employeur</i></th>
+			                      </tr>
+			                </thead> 
+				</t>
+				
+			                <tbody>
+							<t t-if="o.name.name == 'Fonctionnaire Detaché'">
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                      
+			                       <td style="border:2px solid;" ><span t-field="line.nom"/></td> 
+			                        <!--<td style="border:2px solid;" ><span t-field="line.mat_c"/></td>-->
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.avance_sal)).replace(',', ' ')"/></td>
+									<td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.salaire_base)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.astr)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.loge)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.tech)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.reseau)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.financ)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.spec)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.autre_mnt)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.inf)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.resp)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.spec_ifc)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.x_indem_caisse)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.transp)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.sal_brut)).replace(',', ' ')"/></td>                      
+			                        
+									
+			                        <td style="border:2px solid;"><span t-field="line.nbre_charge"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.mnt_agent_carfo)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.iuts)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.retenue_totale)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.net)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.mnt_patronal_carfo)).replace(',', ' ')"/></td>                      
+			                    </tr>
+							</t>
+							
+							
+							<t t-if="o.name.name == 'Contractuel'">
+			                     <tr t-foreach="o.x_line_ids" t-as="line">
+			                      
+			                       <td style="border:2px solid;" ><span t-field="line.nom"/></td> 
+			                        <!--<td style="border:2px solid;" ><span t-field="line.mat_c"/></td>-->
+									<td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.salaire_base)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.astr)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.loge)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.tech)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.reseau)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.financ)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.spec)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.autre_mnt)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.inf)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.resp)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.spec_ifc)).replace(',', ' ')"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.x_indem_caisse)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.transp)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.sal_brut)).replace(',', ' ')"/></td>                      
+			                        
+									
+			                        <td style="border:2px solid;"><span t-field="line.nbre_charge"/></td>
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.mnt_agent_cnss)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.iuts)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.retenue_totale)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.net)).replace(',', ' ')"/></td>                      
+			                        <td style="border:2px solid;"><span t-esc="'{:,}'.format(int(line.mnt_patronal_cnss)).replace(',', ' ')"/></td>                      
+			                    </tr>
+							</t>
+							
+								<tr>
+									<th style ="border : 2px solid #000000; font-family : times new roman;">
+									Total
+									<td colspan='15' style = "border:2px solid; text-align:right; font-family : times new roman;"> <span t-esc="sum([ligne.net for ligne in o.x_line_ids])"/></td>
+									
+									</th>
+								</tr>
+			                </tbody>
+			    </table>
+	            
+
+            </t>
+         </t>
+    </t>
+</template>
+
+
+
+</odoo>

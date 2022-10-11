@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+       <record id="REP" model="hr_typeindemnite">
+            <field name="name">Indemnité de responsabilité</field>
+            <field name="code">RESP-</field>
+            <field name="libcourt">Indemnité de responsabilité</field>
+        </record>
+        
+        <record id="ASTR" model="hr_typeindemnite">
+            <field name="name">Indemnité astreinte</field>
+            <field name="code">ASTR-</field>
+            <field name="libcourt">Indemnité astreinte</field>
+        </record>
+        
+        <record id="LOGE" model="hr_typeindemnite">
+            <field name="name">Indemnité de logement</field>
+            <field name="code">LOGE-</field>
+            <field name="libcourt">Indemnité de logement</field>
+        </record>
+        
+        <record id="TRANS" model="hr_typeindemnite">
+            <field name="name">Indemnité de transport</field>
+            <field name="code">TRANS-</field>
+            <field name="libcourt">Indemnité de transport</field>
+        </record>
+        
+        <record id="INF" model="hr_typeindemnite">
+            <field name="name">Indemnité informatique</field>
+            <field name="code">INF-</field>
+            <field name="libcourt">Indemnité informatique</field>
+        </record>
+        
+        <record id="TECH" model="hr_typeindemnite">
+            <field name="name">Indemnité de technicité</field>
+            <field name="code">TECH-</field>
+            <field name="libcourt">Indemnité de technicité</field>
+        </record>
+        
+        <record id="SPEC" model="hr_typeindemnite">
+            <field name="name">Indemnité spécifique GRH</field>
+            <field name="code">SPEC-</field>
+            <field name="libcourt">Indemnité spécifique GRH</field>
+        </record>
+        
+        <record id="SPEC_it" model="hr_typeindemnite">
+            <field name="name">Indemnité spécifique IT</field>
+            <field name="code">SPEC-</field>
+            <field name="libcourt">Indemnité spécifique IT</field>
+        </record>
+        
+        <record id="SPEC_IFC" model="hr_typeindemnite">
+            <field name="name">Indemnité spécifique ICF</field>
+            <field name="code">SPEC-</field>
+            <field name="libcourt">Indemnité spécifique ICF</field>
+        </record>
+        
+        <record id="EXP" model="hr_typeindemnite">
+            <field name="name">Indemnité exploitation réseaux</field>
+            <field name="code">EXP-</field>
+            <field name="libcourt">Indemnité exploitation réseaux</field>
+        </record>
+        
+        <record id="FINANC" model="hr_typeindemnite">
+            <field name="name">Indemnité de responsabilité financière</field>
+            <field name="code">FINANC-</field>
+            <field name="libcourt">Indemnité de responsabilité financière</field>
+        </record>
+        
+        <record id="GRD" model="hr_typeindemnite">
+            <field name="name">Indemnité de garde</field>
+            <field name="code">GRD-</field>
+            <field name="libcourt">Indemnité de garde</field>
+        </record>
+        
+        <record id="CTG" model="hr_typeindemnite">
+            <field name="name">Indemnité de contagion et de contamination</field>
+            <field name="code">CTG-</field>
+            <field name="libcourt">Indemnité de contagion et de contamination</field>
+        </record>
+        
+        <record id="SJT" model="hr_typeindemnite">
+            <field name="name">Indemnité de sujétion géographique</field>
+            <field name="code">SJT-</field>
+            <field name="libcourt">Indemnité de sujétion géographique</field>
+        </record>
+        
+        
+        <record id="FSP" model="hr_typeindemnite">
+            <field name="name">Indemnité de formation spécialisée</field>
+            <field name="code">FSP-</field>
+            <field name="libcourt">Indemnité de formation spécialisée</field>
+        </record>
+        
+         <record id="CSS" model="hr_typeindemnite">
+            <field name="name">Indemnité de caisse</field>
+            <field name="code">CSS-</field>
+            <field name="libcourt">Indemnité de caisse</field>
+        </record>
+        
+        <record id="VST" model="hr_typeindemnite">
+            <field name="name">Indemnité vestimentaire</field>
+            <field name="code">VST-</field>
+            <field name="libcourt">Indemnité vestimentaire</field>
+        </record>
+        
+        
+        <!-- Données de base de la categorie--> 
+        <record id="CATA" model="hr_categorie">
+            <field name="name">A</field>
+            <field name="libcourt">A</field>
+        </record>
+        
+        <record id="CATB" model="hr_categorie">
+            <field name="name">B</field>
+            <field name="libcourt">B</field>
+        </record>
+        
+        <record id="CATC" model="hr_categorie">
+            <field name="name">C</field>
+            <field name="libcourt">C</field>
+        </record>
+        
+        <record id="CATD" model="hr_categorie">
+            <field name="name">D</field>
+            <field name="libcourt">D</field>
+        </record>
+        
+        <record id="CATE" model="hr_categorie">
+            <field name="name">E</field>
+            <field name="libcourt">E</field>
+        </record>
+        
+        <record id="CATP" model="hr_categorie">
+            <field name="name">P</field>
+            <field name="libcourt">P</field>
+        </record>
+        
+        
+        
+        <record id="CATA1" model="hr_categorie">
+            <field name="name">1</field>
+            <field name="libcourt">1</field>
+        </record>
+        
+        <record id="CATB2" model="hr_categorie">
+            <field name="name">2</field>
+            <field name="libcourt">2</field>
+        </record>
+        
+        <record id="CATC3" model="hr_categorie">
+            <field name="name">3</field>
+            <field name="libcourt">3</field>
+        </record>
+        
+        <record id="CATD4" model="hr_categorie">
+            <field name="name">4</field>
+            <field name="libcourt">4</field>
+        </record>
+        
+        <record id="CATE5" model="hr_categorie">
+            <field name="name">5</field>
+            <field name="libcourt">5</field>
+        </record>
+        
+        <record id="CATP6" model="hr_categorie">
+            <field name="name">6</field>
+            <field name="libcourt">6</field>
+        </record>
+
+	 <record id="CATP7" model="hr_categorie">
+            <field name="name">Neant</field>
+            <field name="libcourt">Neant</field>
+        </record>
+
+        
+        
+        
+        <!-- Donnes de base de la classe -->
+        <record id="CLASSE1" model="hr_classe">
+            <field name="name">1</field>
+            <field name="libcourt">1</field>
+        </record>
+        
+        <record id="CLASSE2" model="hr_classe">
+            <field name="name">2</field>
+            <field name="libcourt">2</field>
+        </record>
+        
+        <record id="CLASSE3" model="hr_classe">
+            <field name="name">3</field>
+            <field name="libcourt">3</field>
+        </record>
+
+ 	<record id="CLASSE4" model="hr_classe">
+            <field name="name">Neant</field>
+            <field name="libcourt">Neant</field>
+        </record>
+        
+        
+        <!-- Donnes de base echelle -->
+        <record id="ECHELLE1" model="hr_echelle">
+            <field name="name">1</field>
+            <field name="libcourt">1</field>
+        </record>
+        
+        <record id="ECHELLE2" model="hr_echelle">
+            <field name="name">2</field>
+            <field name="libcourt">2</field>
+        </record>
+        
+        <record id="ECHELLE3" model="hr_echelle">
+            <field name="name">3</field>
+            <field name="libcourt">3</field>
+        </record>
+		
+		 <record id="ECHELLEA" model="hr_echelle">
+            <field name="name">A</field>
+            <field name="libcourt">A</field>
+        </record>
+        
+        <record id="ECHELLEB" model="hr_echelle">
+            <field name="name">B</field>
+            <field name="libcourt">B</field>
+        </record>
+        
+        <record id="ECHELLEC" model="hr_echelle">
+            <field name="name">C</field>
+            <field name="libcourt">C</field>
+        </record>
+
+	<record id="ECHELLE4" model="hr_echelle">
+            <field name="name">Neant</field>
+            <field name="libcourt">Neant</field>
+        </record>
+
+        
+        
+        <!-- Donnes de base echelon -->
+        <record id="ECHELON1" model="hr_echellon">
+            <field name="name">1</field>
+            <field name="libcourt">1</field>
+        </record>
+        
+        <record id="ECHELON2" model="hr_echellon">
+            <field name="name">2</field>
+            <field name="libcourt">2</field>
+        </record>
+        
+        <record id="ECHELON3" model="hr_echellon">
+            <field name="name">3</field>
+            <field name="libcourt">3</field>
+        </record>
+        
+        <record id="ECHELON4" model="hr_echellon">
+            <field name="name">4</field>
+            <field name="libcourt">4</field>
+        </record>
+        
+        <record id="ECHELON5" model="hr_echellon">
+            <field name="name">5</field>
+            <field name="libcourt">5</field>
+        </record>
+        
+        <record id="ECHELON6" model="hr_echellon">
+            <field name="name">6</field>
+            <field name="libcourt">6</field>
+        </record>
+        
+        <record id="ECHELON7" model="hr_echellon">
+            <field name="name">7</field>
+            <field name="libcourt">7</field>
+        </record>
+        
+        <record id="ECHELON8" model="hr_echellon">
+            <field name="name">8</field>
+            <field name="libcourt">8</field>
+        </record>
+        
+        <record id="ECHELON9" model="hr_echellon">
+            <field name="name">9</field>
+            <field name="libcourt">9</field>
+        </record>
+        
+        <record id="ECHELON10" model="hr_echellon">
+            <field name="name">10</field>
+            <field name="libcourt">10</field>
+        </record>
+        
+        <record id="ECHELON11" model="hr_echellon">
+            <field name="name">11</field>
+            <field name="libcourt">11</field>
+        </record>
+        
+        <record id="ECHELON12" model="hr_echellon">
+            <field name="name">12</field>
+            <field name="libcourt">12</field>
+        </record>
+        
+        <record id="ECHELON13" model="hr_echellon">
+            <field name="name">13</field>
+            <field name="libcourt">13</field>
+        </record>
+        
+        <record id="ECHELON14" model="hr_echellon">
+            <field name="name">14</field>
+            <field name="libcourt">14</field>
+        </record>
+        
+        <record id="ECHELON15" model="hr_echellon">
+            <field name="name">15</field>
+            <field name="libcourt">15</field>
+        </record>
+        
+        <record id="ECHELON16" model="hr_echellon">
+            <field name="name">16</field>
+            <field name="libcourt">16</field>
+        </record>
+        
+        <record id="ECHELON17" model="hr_echellon">
+            <field name="name">17</field>
+            <field name="libcourt">17</field>
+        </record>
+        
+        <record id="ECHELON18" model="hr_echellon">
+            <field name="name">18</field>
+            <field name="libcourt">18</field>
+        </record>
+        
+        <record id="ECHELON19" model="hr_echellon">
+            <field name="name">19</field>
+            <field name="libcourt">19</field>
+        </record>
+
+	 <record id="ECHELON20" model="hr_echellon">
+            <field name="name">Neant</field>
+            <field name="libcourt">Neant</field>
+        </record>
+        
+        
+        <!-- Donnes de base zone -->
+       
+        <record id="ZONEU" model="hr_zone">
+            <field name="name">ZONE URBAINE</field>
+            <field name="libcourt">ZONE URBAINE</field>
+        </record>
+       
+        <record id="ZONESEMI" model="hr_zone">
+            <field name="name">ZONE SEMI-URBAINE</field>
+            <field name="libcourt">ZONE SEMI-URBAINE</field>
+        </record>
+        
+        <record id="ZONER" model="hr_zone">
+            <field name="name">ZONE RURALE</field>
+            <field name="libcourt">ZONE RURALE</field>
+        </record>
+        
+         <record id="ZONEC" model="hr_zone">
+            <field name="name">NON DEFINI</field>
+            <field name="libcourt">NON DEFINI</field>
+        </record>
+        
+         
+        
+        <!-- Donnes de base diplome -->
+       
+        <record id="cepe" model="hr_diplome">
+            <field name="name">CEPE</field>
+            <field name="libcourt">CEPE</field>
+        </record>
+        
+        <record id="BEPC" model="hr_diplome">
+            <field name="name">BEPC</field>
+            <field name="libcourt">BEPC</field>
+        </record>
+        
+        <record id="BAC" model="hr_diplome">
+            <field name="name">BAC</field>
+            <field name="libcourt">BAC</field>
+        </record>
+        
+        <record id="LICENCE" model="hr_diplome">
+            <field name="name">LICENCE</field>
+            <field name="libcourt">LICENCE</field>
+        </record>
+        
+        <record id="MASTER" model="hr_diplome">
+            <field name="name">MASTER</field>
+            <field name="libcourt">MASTER</field>
+        </record>
+        
+        <record id="DOCTORAT" model="hr_diplome">
+            <field name="name">DOCTORAT</field>
+            <field name="libcourt">DOCTORAT</field>
+        </record>
+        
+        
+        <!-- Donnes de base Assurance -->
+       
+        <record id="SONAR" model="hr_assurance">
+            <field name="name">SONAR</field>
+            <field name="libcourt">SONAR</field>
+        </record>
+        
+        <record id="GENERAL" model="hr_assurance">
+            <field name="name">GENERAL ASSURANCE</field>
+            <field name="libcourt">GENERAL ASSURANCE</field>
+        </record>
+        
+        <record id="SAHAM" model="hr_assurance">
+            <field name="name">SAHAM ASSURANCE</field>
+            <field name="libcourt">SAHAM ASSURANCE</field>
+        </record>
+        
+        
+        <!-- Donnes de base emploi employee 
+       
+        <record id="emploi" model="hr_emploi">
+            <field name="name">Choisir Emploi</field>
+            <field name="lib_long">Choisir Emploi</field>
+        </record>-->
+        <!-- données de base fonction -->
+        <record id="fct" model="hr_fonctionss">
+            <field name="name">Choisir Fonction</field>
+            <field name="lib_long">Choisir Fonction</field>
+        </record>
+        
+        
+        <!-- Donnes de base Critère d'evaluations des employs -->
+       
+        <record id="comp" model="hr_critere_evaluation">
+            <field name="name">Compétence Professionnelle</field>
+            <field name="lib_court">Compétence Professionnelle</field>
+        </record>
+        
+        <record id="cons" model="hr_critere_evaluation">
+            <field name="name">Conscience Professionnelle</field>
+            <field name="lib_court">Conscience Professionnelle</field>
+        </record>
+        
+        <record id="sens" model="hr_critere_evaluation">
+            <field name="name">Sens du service public</field>
+            <field name="lib_court">Sens du service public</field>
+        </record>
+        
+        <record id="lead" model="hr_critere_evaluation">
+            <field name="name">Leadership</field>
+            <field name="lib_court">Leadership</field>
+        </record>
+        
+        
+        <record id="supe" model="hr_catemp">
+            <field name="name">Supérieur hiérarchique immédiat recevant lettre de mission</field>
+            <field name="lib_court">Supérieur hiérarchique immédiat recevant lettre de mission</field>
+        </record>
+        
+        <record id="inf" model="hr_catemp">
+            <field name="name">Agents non investis du pouvoir de notation</field>
+            <field name="lib_court">Agents non investis du pouvoir de notation</field>
+        </record>
+
+
+	 <!-- Donnes de base Type de piece des employes -->
+       
+        <record id="typep" model="hr_typepiece">
+            <field name="name">CNIB</field>
+            <field name="lib_long">CNIB</field>
+        </record>
+
+ 	<record id="typePA" model="hr_typepiece">
+            <field name="name">PASSPORT</field>
+            <field name="lib_long">PASSPORT</field>
+        </record>
+
+
+	<!-- Donnes de base Type de natures des precomptes -->
+       
+        <record id="nat1" model="hr_nature">
+            <field name="name">AVANCE SUR SALAIRE</field>
+            <field name="lib_long">AVANCE SUR SALAIRE</field>
+        </record>
+
+ 	<record id="nat2" model="hr_nature">
+            <field name="name">FONER</field>
+            <field name="lib_long">FONER</field>
+        </record>
+
+        
+
+    </data>
+</odoo>

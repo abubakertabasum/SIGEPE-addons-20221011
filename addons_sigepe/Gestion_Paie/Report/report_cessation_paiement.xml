@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_cess"
+            string="Cessation Paiement"
+            model="hr_cessation_paiement" 
+            report_type="qweb-html"
+            file="Gestion_Paie.report_cess" 
+            name="Gestion_Paie.report_cess"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_cess">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+		            <h1><p style="text-align:center; widht:100%"><span t-field="o.x_titre"/></p></h1>
+					<p style="widht:100%"><strong><span t-field="o.p1"/> <span t-field="o.responsale"/> <span t-field="o.x_fonction.name"/> <span t-field="o.p2"/> <span t-field="o.name.name"/> <span t-field="o.x_emploi"/> <span t-field="o.p3"/> <span t-field="o.x_service"/> <span t-field="o.p4"/> <span t-field="o.date_debut_affect"/> <span t-field="o.p5"/> <span t-field="o.x_date_cess"/> <span t-field="o.p6"/> <span t-field="o.company_id.name"/> <span t-field="o.p7"/> <span t-field="o.x_motif_cess"/>  </strong></p>  
+		            <p style="widht:100%"><strong><span t-field="o.p8"/></strong></p><br></br>
+		            <p></p>
+		            <p></p>
+					<p style="text-align:right; widht:100%"><strong>Fait à <span t-field="o.company_id.ref_localite_id.name"/> , le <span t-field="o.date_attest"/></strong></p><br/><br/>
+					<p style="text-align:center; widht:100%"><strong>Signature :</strong></p> 
+             </t>
+         </t>
+    </t>
+</template>
+</odoo>

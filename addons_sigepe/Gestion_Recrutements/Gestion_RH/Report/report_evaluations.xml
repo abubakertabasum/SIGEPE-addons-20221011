@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_evaluations_a"
+            string="Agent"
+            model="hr_evaluation" 
+            report_type="qweb-html"
+            file="Gestion_RH.report_evaluations_a" 
+            name="Gestion_RH.report_evaluations_a"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_evaluations_a">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                       <h1 style= "text-align:center;"> <FONT COLOR= "Blue"><span t-field="o.x_titre_id.lib_long"/></FONT></h1>
+                    </div>
+                    <div>
+                       <h2 style= "text-align:center;"> <FONT COLOR= "Red"><u>FICHE B</u></FONT></h2>
+                    </div>
+                    <div>
+                       <h3 style= "text-align:center;"> <FONT COLOR= "Black">(Agents non investis du pouvoir de notation)</FONT></h3>
+                    </div>
+                    <p style="text-align:center; widht:100%"><strong><u>
+                        	Année</u></strong>: 
+                           <span t-field="o.annee_evaluation"/>
+                        </p>
+                </div> 
+         <p style="text-align:left; widht:100%"><strong>1.Informations relatives à l'agent noté</strong>
+         </p>
+		 <p> <td style = "border: 2px SOLID #089CB8"><strong>Fonction : </strong> <span t-field="o.x_fonction"/> </td></p>           
+		 <table class='table table-sm'>
+		 <t t-if="o.x_type_employe_id.name  in ('Fonctionnaire Detaché','FONCTIONNAIRE DETACHE','Fonctionnaire Mis à Disposition','FONCTIONNAIRE MIS A DISPOSITION','Hospitalo-Universitaire','HOSPITALO-UNIVERSITAIRE') " >
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Nom/Prénom(s)  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"> <span t-field="o.employee_id"/></td>
+			                            
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Matricule  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_matricule_f"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8">
+			                    	<td style = "border: 2px SOLID #089CB8"><strong>Type employé </strong></td>
+			                    	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_type_employe_id.name"/></td>
+			                    	
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Catégorie  </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_categorie"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelle </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echelle"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelon</strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echellon"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                    		 <td style = "border: 2px SOLID #089CB8"><strong>Emploi</strong></td>
+			                        	 <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_emploi"/></td>
+			                        	 
+			                        	 
+			                             <td style = "border: 2px SOLID #089CB8"><strong>Service </strong></td>
+			                             <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_service"/></td>
+
+			                     </tr>
+		 </t>
+		 
+		 <t t-if="o.x_type_employe_id.name  in ('Contractuel','CONTRACTUEL') " >
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Nom/Prénom(s)  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"> <span t-field="o.employee_id"/></td>
+			                            
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Matricule  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_matricule_c"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8">
+			                    	<td style = "border: 2px SOLID #089CB8"><strong>Type employé </strong></td>
+			                    	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_type_employe_id.name"/></td>
+			                    	
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Catégorie  </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_categorie"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelle </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echelle"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelon</strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echellon"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                    		 <td style = "border: 2px SOLID #089CB8"><strong>Emploi</strong></td>
+			                        	 <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_emploi"/></td>
+			                        
+			                             <td style = "border: 2px SOLID #089CB8"><strong>Service </strong></td>
+			                             <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_service"/></td>
+
+			                     </tr>
+		 </t>	                        
+		 </table> 
+		 <p style="text-align:left; widht:100%"><strong>2.Informations relatives au supérieur hiérarchique immédiat </strong>
+         </p>
+		 <p> <td style = "border: 2px SOLID #089CB8"><strong>Emploi : </strong> <span t-field="o.x_emploi"/> </td></p>           
+		 <table class='table table-sm'>
+		 <t t-if="o.x_type_employe_recev_id.name  in ('Contractuel','CONTRACTUEL') " >
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Nom/Prénom(s)  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"> <span t-field="o.employee_id_imm"/></td>
+			                            
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Matricule  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_matricule_imm_c"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8">
+			                    	<td style = "border: 2px SOLID #089CB8"><strong>Type employé </strong></td>
+			                    	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_type_employe_recev_id"/></td>
+			                    	
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Catégorie  </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_categorie_imm"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelle </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echelle_imm"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelon</strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echellon_imm"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                    		 <td style = "border: 2px SOLID #089CB8"><strong>Fonction  </strong></td>
+			                        	 <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_fonction_imm"/></td>
+			                        
+			                             <td style = "border: 2px SOLID #089CB8"><strong>Service </strong></td>
+			                             <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_service_imm"/></td>
+
+			                     </tr>
+		</t>
+		<t t-if="o.x_type_employe_recev_id.name  in ('Fonctionnaire Detaché','FONCTIONNAIRE DETACHE','Fonctionnaire Mis à Disposition','FONCTIONNAIRE MIS A DISPOSITION','Hospitalo-Universitaire','HOSPITALO-UNIVERSITAIRE') " >
+		<tr style = "border: 2px SOLID #089CB8" >
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Nom/Prénom(s)  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"> <span t-field="o.employee_id_imm"/></td>
+			                            
+			                            <td style = "border: 2px SOLID #089CB8"><strong>Matricule  </strong></td>
+			                            <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_matricule_imm_f"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8">
+			                    	<td style = "border: 2px SOLID #089CB8"><strong>Type employé </strong></td>
+			                    	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_type_employe_recev_id"/></td>
+			                    	
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Catégorie  </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_categorie_imm"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelle </strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echelle_imm"/></td>
+			                        
+			                        <td style = "border: 2px SOLID #089CB8"><strong>Echelon</strong></td>
+			                        <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_echellon_imm"/></td>
+			                    </tr>
+			                    <tr style = "border: 2px SOLID #089CB8" >
+			                    
+			                    		 <td style = "border: 2px SOLID #089CB8"><strong>Fonction  </strong></td>
+			                        	 <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_fonction_imm"/></td>
+			                        
+			                             <td style = "border: 2px SOLID #089CB8"><strong>Service </strong></td>
+			                             <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_service_imm"/></td>
+
+			                     </tr>
+		</t>	                        
+		</table> 
+	     <p style="text-align:left; widht:100%"><strong>3.Tableau d'évaluation renseigné par le supérieur hiérarchique immédiat </strong>
+         </p>           
+		 <table class='table table-sm'>
+		                <tr style = "border: 2px SOLID #089CB8" >
+		                        <td style = "border: 2px SOLID #089CB8"><strong>N°d'ordre</strong></td>
+		                        <td style = "border: 2px SOLID #089CB8"><strong>Critères d'évaluations  </strong></td>
+		                        <td style = "border: 2px SOLID #089CB8"><strong>Sous-critères</strong></td>
+		                        <td style = "border: 2px SOLID #089CB8"><strong>Notes</strong></td>   
+		                        <td style = "border: 2px SOLID #089CB8"></td>    
+		                </tr>
+		                 <tr style = "border: 2px SOLID #089CB8" >
+		                        <td rowspan = "4" style = "border: 2px SOLID #089CB8"><strong>01</strong></td>
+		                        <td rowspan = "3" style = "text-align:left; border: 2px SOLID #089CB"><strong>Compétence Professionnelle</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><strong>Réalisation des attentes</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_realisations_attentess"/></td> 
+		                      	<td style = "border: 2px SOLID #089CB8">/10</td>        
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                	 <td style = "border: 2px SOLID #089CB8"><strong>Sens de l'organisation</strong></td>
+		                     <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_sens_orgs"/></td> 
+		                     <td style = "border: 2px SOLID #089CB8">/1</td>
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                  <td style = "border: 2px SOLID #089CB8"><strong>Esprit d'initiative</strong></td>
+		                  <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_esprit_initiatives"/></td> 
+		                  <td style = "border: 2px SOLID #089CB8">/1</td>
+		        </tr>  
+		        <tr style = "border: 2px SOLID #089CB8">
+		                  <td colspan = "2" style = "border: 2px SOLID #089CB8"><FONT COLOR= "Black"><strong>Total des notes du critère : Compétence professionnelle</strong></FONT></td>
+		                  <td style = "border: 2px SOLID #089CB8"><FONT COLOR= "RED"><span t-field="o.x_note_total_comp_pro_agents"/></FONT></td>
+		                  <td style = "border: 2px SOLID #089CB8">/12</td> 
+		        </tr> 
+		                <tr style = "border: 2px SOLID #089CB8" >
+		                        <td rowspan = "4" style = "border: 2px SOLID #089CB8"><strong>02</strong></td>
+		                        <td rowspan = "3" style = "text-align:left; border: 2px SOLID #089CB"><strong>Conscience Professionnelle</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><strong>Assiduité</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_assiduites"/></td> 
+		                      	<td style = "border: 2px SOLID #089CB8">/1</td>        
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                	 <td style = "border: 2px SOLID #089CB8"><strong>Ponctualité</strong></td>
+		                     <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_ponctualites"/></td> 
+		                     <td style = "border: 2px SOLID #089CB8">/1</td>
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                  <td style = "border: 2px SOLID #089CB8"><strong>Ethique Professionnelle</strong></td>
+		                  <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_ethique_profs"/></td> 
+		                  <td style = "border: 2px SOLID #089CB8">/2</td>
+		        </tr>  
+		        <tr style = "border: 2px SOLID #089CB8">
+		                  <td colspan = "2" style = "border: 2px SOLID #089CB8"><FONT COLOR= "Black"><strong>Total des notes du critère : Conscience professionnelle</strong></FONT></td>
+		                  <td style = "border: 2px SOLID #089CB8"><FONT COLOR= "RED"><span t-field="o.x_note_total_consc_pro_agents"/></FONT></td>
+		                  <td style = "border: 2px SOLID #089CB8">/4</td> 
+		        </tr> 
+		        
+		        
+		       <tr style = "border: 2px SOLID #089CB8" >
+		                        <td rowspan = "4" style = "border: 2px SOLID #089CB8"><strong>03</strong></td>
+		                        <td rowspan = "3" style = "text-align:left; border: 2px SOLID #089CB"><strong>Sens du service public</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><strong>Esprit de sacrifice</strong></td>
+		                      	<td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_esprit_sacrifices"/></td> 
+		                      	<td style = "border: 2px SOLID #089CB8">/1</td>        
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                	 <td style = "border: 2px SOLID #089CB8"><strong>Respect du bien public</strong></td>
+		                     <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_respect_bien_publics"/></td> 
+		                     <td style = "border: 2px SOLID #089CB8">/2</td>
+		                </tr>
+		                <tr style = "border: 2px SOLID #089CB8">
+		                  <td style = "border: 2px SOLID #089CB8"><strong>Respect de la hiérarchie</strong></td>
+		                  <td style = "border: 2px SOLID #089CB8"><span t-field="o.x_note_respect_hierarchies"/></td> 
+		                  <td style = "border: 2px SOLID #089CB8">/1</td>
+		        </tr>  
+		        <tr style = "border: 2px SOLID #089CB8">
+		                  <td colspan = "2" style = "border: 2px SOLID #089CB8"><FONT COLOR= "Black"><strong>Total des notes du critère : Sens du service public</strong></FONT></td>
+		                  <td style = "border: 2px SOLID #089CB8"><FONT COLOR= "RED"><span t-field="o.x_note_total_sens_publics"/></FONT></td> 
+		                  <td style = "border: 2px SOLID #089CB8">/4</td>
+		        </tr>        
+	  </table>
+	  <table class='table table-sm'>
+                        <tr style = "border: 2px SOLID #089CB8;text-align:left; widht:100%" >
+                 		 <td style = "border: 2px SOLID #089CB8"><strong>Note globale :</strong></td>
+                     	 <td style = "border: 2px SOLID #089CB8"><strong><FONT COLOR= "RED"><span t-field="o.x_note_globales_agentss"/></FONT>/10</strong></td>
+               </tr>
+                       
+	  </table><br/>
+	  <p style="text-align:left; widht:100%"><strong>4. Procès-Verbal de l'entretien d'évaluation</strong></p> 
+	  <table>
+	  		<tr>
+	  			<td><span t-field="o.observation_sup_imm"/></td> 
+	  		</tr>
+	  		<tr>
+	  			<td><span t-field="o.contrainte_realisation"/></td> 
+	  		</tr>
+	  		<tr>
+	  			<td><span t-field="o.point_divergence"/></td> 
+	  		</tr>
+	  		
+	  </table><br/>
+	  
+	  <p style="text-align:left; widht:100%"><strong>5. Propositions d'améliorations ou de motivations de l'agent</strong></p> 
+	  <table>
+	  		<tr>
+	  			<td><span t-field="o.observation_amelioration"/></td> 
+	  		</tr>
+	  </table><br/>
+			   <p style="text-align:right; widht:100%"><strong>A <span t-field="o.x_localite_id"/> , le <span t-field="o.date_evaluation"/></strong></p><br/><br/>
+			  <tfoot>
+           		<div class="row mt32 mb32">
+           			
+                       <div class="col-3">
+                           <strong>Supérieur hiérarchique immédiat-évaluateur</strong>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <p t-esc="o.employee_id_imm.name"/>
+                       </div>
+                       <div class="col-3">
+                           <strong></strong>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <p />
+                       </div>
+                       <div class="col-3">
+                           <strong></strong>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <p/>
+                       </div>
+                       <div class="col-3">
+                           <strong>Signature de l'évalué</strong>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <p t-esc="o.employee_id.name"/>
+                       </div>
+                      </div>
+           </tfoot>  
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

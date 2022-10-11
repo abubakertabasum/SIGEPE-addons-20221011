@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+    	
+    	 <record id="TYPE_C" model="hr_typeconge">
+            <field name="name">Congé Administratif</field>
+            <field name="lib_long">Congé Administratif</field>
+        </record>
+        
+        <record id="TYP" model="hr_typeconge">
+            <field name="name">Congé de maternité</field>
+            <field name="lib_long">Congé de maternité</field>
+        </record>
+        
+        
+        <record id="TYPE1" model="hr_typeabsence">
+            <field name="name">Autorisation d'absence</field>
+            <field name="lib_long">Autorisation d'absence</field>
+        </record>
+      
+        <record id="TYPE3" model="hr_typeconge">
+            <field name="name">Congé pour examens ou concours</field>
+            <field name="lib_long">Congé pour examens ou concours</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_formation_emp"
+            string="Imprimer"
+            model="hr_consult_plan_employe" 
+            report_type="qweb-html"
+            file="Gestion_Formation.report_formation_emp" 
+            name="Gestion_Formation.report_formation_emp"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_formation_emp">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+            <h2 style="text-align:center">ETAT DES FORMATIONS SUIVIES PAR EMPLOYE</h2>
+             
+	        <div class="row mt32 mb32">     
+                 <div class="col-3">
+	                  <strong>Employé:</strong>
+	                  <p t-esc="o.x_employee_id.name"/>
+                 </div>
+	             <div class="col-3">
+	                 <strong>Année:</strong>
+	                 <p t-esc="o.x_exercice_id.no_ex"/>
+	             </div>
+	             <div class="col-3">
+                      <strong>Date Consultation:</strong>
+                      <p t-esc="o.date_consultation"/>
+                 </div>
+             </div>
+                <table class = 'table table-sm'>
+			        		<thead style="background-color:#D2D2FF">
+			                      <tr style = "border: 2px SOLID #434146" >
+			                           <th style="padding: 4px 8px; text-align:right;  line-height: 1.42857143;"><strong><i>Domaine</i></strong></th>
+			                          <th style="padding: 4px 8px; text-align:right;  line-height: 1.42857143;"><strong><i>Thème</i></strong></th>
+			                          <th style="padding: 4px 8px; text-align:right;  line-height: 1.42857143;"><strong><i>Service</i></strong></th>
+			                      </tr>
+			                </thead>  
+			                <tbody>
+			                     <tr t-foreach="o.x_line_ids" t-as="line" style = "border: 2px SOLID #434146">
+			                        <td style="text-align:right;  border: 2px SOLID #089CB8" ><span t-esc="line.domaine.name"/></td> 
+			                        <td style="text-align:right;  border: 2px SOLID #089CB8" ><span t-esc="line.x_theme.name"/></td> 
+			                        <td style="text-align:right;  border: 2px SOLID #089CB8" ><span t-esc="line.x_service_id.name"/></td>                      
+			                    </tr>
+			                </tbody>
+			        	
+			    </table> 
+	
+            </t>
+         </t>
+    </t>
+</template>
+</odoo>

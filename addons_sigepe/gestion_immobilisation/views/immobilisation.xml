@@ -1,0 +1,3003 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="account_asset_asset_form">
+	<field name="name">account_asset_asset.form</field>
+	<field name="model">account.asset.asset</field>
+	<field name= "inherit_id" ref= "om_account_asset.view_account_asset_asset_form" />
+	<field name="arch" type="xml">
+
+		<xpath expr= "//field[@name= 'state']" position= "replace" >
+		<field name="state" widget="statusbar" statusbar_visible="brouillon,confirmer"/>
+
+		<button name="calcul" string="Calculer amortissement" type="object" class="btn-primary"/>
+		</xpath>
+
+		<xpath expr= "//button[@name= 'compute_depreciation_board']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//button[@name= 'set_to_close']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//button[@name= 'set_to_draft']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//button[@name= 'validate']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//button[@class= 'oe_stat_button']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'category_id']" position= "after" >
+		<field name= "immo_id" options="{'no_create':True}"/>
+		<field name= "date_aquisition" />
+		<field name= "company_id" invisible= "1" />
+		<field name= "x_exercice_id" invisible= "1" />
+		</xpath>
+
+		<xpath expr= "//field[@name= 'code']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'partner_id']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'value_residual']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'date']" position= "replace" >
+		<field name= "date_mise_service"/>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'partner_id']" position= "replace" >
+		<field name= "duree_annee" style="width:15%"/>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'account_analytic_id']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'type']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'invoice_id']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'salvage_value']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'analytic_tag_ids']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//field[@name= 'date_first_depreciation']" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+	</field>
+</record>		
+
+
+<record model="ir.ui.view" id="account_asset_category_form">
+	<field name="name">account_asset_category.form</field>
+	<field name="model">account.asset.category</field>
+	<field name= "inherit_id" ref= "om_account_asset.view_account_asset_category_form" />
+	<field name="arch" type="xml">
+
+
+		<xpath expr= "//label[1]" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//group[4]" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+
+		<xpath expr= "//group[3]" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+<!--
+		<xpath expr= "//group[5]" position= "attributes" >
+		<attribute name= "invisible">True</attribute>
+		</xpath>
+-->
+		<xpath expr= "//field[@name= 'name']" position= "replace" >
+		<field name= "name" force_save= "1" placeholder= "Compte des actifs immobilisés" style="width:75%"/>
+		</xpath>
+
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="compta_ecriture_form">
+	<field name="name">compta_ecriture.form</field>
+	<field name="model">compta_ecriture</field>
+	<field name= "inherit_id" ref= "sigepe_compta.view_id_ecriture_form" />
+	<field name="arch" type="xml">
+
+		<xpath expr= "//field[@name= 'type_ecriture']" position= "after" >
+		<field name="company_id" invisible= "1"/>
+		</xpath>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_entree_form">
+	<field name="name">view.gi_ordre_entree.form</field>
+	<field name="model">gi_ordre_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<form string= "Ordre d'entrée">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="ordreentree" string="Valider" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['save'])]}"/>
+ 			</header>
+<sheet>
+			<group string= "Ordre d'entrée des matières" col = "4" colspan= "8">
+				<field name= "n_mvt" style="width:15%"/>
+				<field name= "mode_acqu_id" style="width:50%" options="{'no_create':True}" />
+				<field name= "facture" style="width:50%"/>
+				<field name= "src_fin_id" style="width:50%" options="{'no_create':True}" />
+				<field name= "fournisseur_id" style="width:50%" />
+				<field name= "date_entree" style="width:25%"/>
+				<field name= "magasin_id" style="width:50%" options="{'no_create':True}" />
+			</group>
+
+			<group>
+				<field name= "observation" />
+			</group>
+
+			<group string= "Liste des biens">
+				<field name= "line_ids" />
+			</group>
+
+			<group col= "6">
+				<field name= "ordo_mat_id" options="{'no_create':True}" />
+				<field name= "compta_mat_id" options="{'no_create':True}" />
+				<field name= "fichiste_id" options="{'no_create':True}" />
+			</group>
+</sheet>
+			</form>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_entree_tree">
+	<field name="name">view.gi_ordre_entree.tree</field>
+	<field name="model">gi_ordre_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Ordre d'entrée">
+		<field name= "n_mvt" force_save= "1" />
+		<field name= "mode_acqu_id" />
+		<field name= "src_fin_id" />
+		<field name= "fournisseur_id" />
+		<field name= "magasin_id" />
+		<field name= "date_entree" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_entree">
+	<field name="name">view.gi_ordre_entree.Line</field>
+	<field name="model">gi_ordre_entree_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable= "bottom" >
+		<field name= "sous_code" />
+		<field name= "imp_budg_id" />
+		<field name= "type_immo_id" options="{'no_create':True}"/>
+		<field name= "categorie_id" domain= "[('type_immo_id','=', type_immo_id)]" options="{'no_create':True}"/>
+		<field name= "designation_id" domain= "[('categorie_id','=', categorie_id)]" options="{'no_create':True}" />
+		<field name= "quant"/>
+		<field name= "val_unit" />
+		<field name= "montant" sum= "Montant total"/>
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_invent_entree_form">
+	<field name="name">view.gi_invent_entree.form</field>
+	<field name="model">gi_invent_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Inventaire des biens en stock">
+			<header>
+				<field name="state" widget="statusbar" statusbar_visible="brouillon,fait" />
+				<button name="invent_entree" string="Valider Inventaire" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['fait'])]}"/>
+				<button name="maj" string= "Mettre à jour" type="object" />
+ 			</header>
+<sheet>
+			<group string= "Inventaire des biens en stock ">
+				<group>
+					<field name="ministere_id" style="width:75%"/>
+						<label for= "emplacement" string= "Emplacements"/>
+							<div>
+								<field name="emplacement" style="width:50%" class= "oe_inline" /> - <field name= "magasin_id" style="width:50%" class= "oe_inline" options="{'no_create':True}" attrs = "{'invisible':[('emplacement','in', ['1'])]}"/>
+							</div>
+				</group>
+				<group>
+					<field name= "type_invent" style="width:50%"/>
+						<label for= "date_debut" string= "Période"/>
+							<div>
+								<field name="date_debut" class= "oe_inline" /> - <field name= "date_fin" class= "oe_inline"/>
+							</div>
+				</group>
+			</group>
+
+			<group string= "Liste des biens en stock">
+			</group>
+			<field name = "entree_line_ids" />
+			<group col= "6">
+				<field name= "ordo_mat_id" />
+				<field name= "compta_mat_id" />
+				<field name= "magasinier_id" />
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_invent_entree_tree">
+	<field name="name">view.gi_invent_entree.tree</field>
+	<field name="model">gi_invent_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Inventaire des biens en stock">
+			<field name="ministere_id" />
+			<field name= "magasin_id" />
+			<field name="date_debut" />
+			<field name= "date_fin" />
+			<field name= "type_invent" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_invent_entree">
+	<field name="name">view.gi_invent_entree.Line</field>
+	<field name="model">gi_invent_entree_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en stock" editable= "bottom" >
+		<field name= "entree_id" invisible= "1"/>
+		<field name= "sous_code" />
+		<field name= "type_immo" />
+		<field name= "designation" />
+		<field name= "quant" />
+		<field name= "quant_phys" />
+		<field name= "ecart" />
+		<field name= "val_unit" />
+		<field name= "montant" />
+		<field name= "etat" />
+		<field name= "observation" />
+	</tree>
+		</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_inv_declas_form">
+	<field name="name">view.gi_inv_declas.form</field>
+	<field name="model">gi_inv_declas</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Inventaire des biens déclasser">
+			<header>
+				<field name="state" widget="statusbar" statusbar_visible="brouillon,fait" />
+				<button name="declasse" string="Bien en service" type="object" class="btn-primary"/>
+ 			</header>
+<sheet>
+	<group string= "Inventaire des biens déclasser">
+		<group>
+			<field name="ministere_id" style="width:75%"/>
+				<label for= "emplacement" string= "Emplacements"/>
+					<div>
+						<field name="emplacement" style="width:50%" class= "oe_inline" />
+					</div>
+		</group>
+		<group>
+			<label for= "date_debut" string= "Période"/>
+				<div>
+					<field name="date_debut" class= "oe_inline" /> - <field name= "date_fin" class= "oe_inline"/>
+				</div>
+		</group>
+	</group>
+		<notebook>
+			<page string= "Biens en service à déclasser" >
+				<group>
+					<field name = "declas_line_ids" />
+				</group>
+			</page>
+		</notebook>
+			<group col= "6">
+				<field name= "ordo_mat_id" />
+				<field name= "compta_mat_id" />
+				<field name= "magasinier_id" />
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_inv_declas_tree">
+	<field name="name">view.gi_inv_declas.tree</field>
+	<field name="model">gi_inv_declas</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Inventaire des biens déclasser">
+			<field name="ministere_id"/>
+			<field name="date_debut"/>
+			<field name="date_fin"/>
+			<field name= "ordo_mat_id" />
+			<field name= "compta_mat_id" />
+			<field name= "magasinier_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_inv_declas">
+	<field name="name">view.gi_inv_declas.Line</field>
+	<field name="model">gi_inv_declas_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en stock" editable= "bottom" >
+		<field name= "declas_id" invisible= "1"/>
+		<field name= "code_immo" />
+		<field name= "categorie" />
+		<field name= "designation" />
+		<field name= "direction" />
+		<field name= "etat" />
+		<field name= "montant" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_immobilisation_form">
+	<field name="name">view.gi_immobilisation.form</field>
+	<field name="model">gi_immobilisation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<form string= "Immobilisations">
+			<header>
+				<field name="state" widget="statusbar"/>
+				<button name="confirm" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['1'])]}"/>
+				<button name="mise_jour" string= "Envoyer" type="object" attrs = "{'invisible':[('state','not in', ['2'])]}" />
+ 			</header>
+		<sheet>
+			<group>
+				<group string= "Codification de l'immobilisation">
+					<field name="n_ordre" invisible= "1"/>
+					<field name="code_immo" invisible= "1"/>
+					<field name="code" invisible= "1" />
+					<field name= "designation_id" style="width:75%" options="{'no_create':True}"/>
+					<field name="categorie_id" style="width:50%" options="{'no_create':True}"/>
+					<field name= "annee_acqui_id" style="width:25%" options="{'no_create':True}"/>
+					<field name="compte" invisible= "1" />
+				</group>
+
+				<group string= "Mode d'acquisition" >
+					<field name= "type_immo" force_save= "1"/>
+					<field name= "mode_acqu" force_save= "1"/>
+					<field name= "typefinancement" force_save= "1"/>
+					<field name= "acquisition" force_save= "1"/>
+					<field name= "dateacquisition" force_save= "1"/>
+				</group>
+			</group>
+					<notebook>
+						<page string= " Identification et mise en service" >
+							<group>
+								<group string= "Identification" >
+									<field name= "marque_id" />
+									<field name= "modele_id" />
+									<field name= "n_serie"/>
+									<field name= "fabricant" style="width:50%"/>
+									<field name= "magasin" force_save= "1" />
+								</group>
+								<group string = "Affectation et Amortissement" >
+									<field name= "date_mise_service" style="width:25%"/>
+									<field name= "duree_annee" style="width:25%"/>
+									<field name= "an_amorti" style="width:25%" force_save= "1" />
+									<field name= "taux_degressif" style="width:25%" invisible= "1" />
+									<field name= "amort_id" style="width:50%" options="{'no_create':True}"/>
+									<field name= "utilisateur_id" style="width:50%"/>
+								</group>
+							</group>
+						</page>
+						<page string= "Localisation" >
+							<group string= "Localisation du bien" col= "4" >
+								<field name= "ministere_id" style="width:50%"/>
+								<field name= "epe_id" style="width:50%"/>
+								<field name= "direction_id" style="width:50%"/>
+								<field name= "region_id" style="width:50%"/>
+								<field name= "province_id" style="width:50%"/>
+								<field name= "departement_id" style="width:50%"/>
+							</group>
+						</page>
+					</notebook>
+		</sheet>
+			</form>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_immobilisation_tree">
+	<field name="name">view.gi_immobilisation.tree</field>
+	<field name="model">gi_immobilisation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Immobilisations">
+		<field name="sequence" widget="handle"/>
+		<field name= "n_ordre"/>
+		<field name= "code_immo"/>
+		<field name= "categorie_id" />
+		<field name= "designation_id" />
+		<field name= "acquisition" />
+			</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_designation_form">
+	<field name="code">view.gi_designation.form</field>
+	<field name="model">gi_designation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Désignation">
+			<sheet>
+				<group >
+					<field name="categorie_id" style="width:25%" />
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+					<field name="quant_stoc" invisible = "1"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_designation_tree">
+	<field name="code">view.gi_designation.tree</field>
+	<field name="model">gi_designation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Désignation">
+			<field name="lib_court" />
+			<field name="lib_long" />
+			<field name="categorie_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_categorie_form">
+	<field name="code">view.gi_categorie.form</field>
+	<field name="model">gi_categorie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Categorie">
+			<sheet>
+				<group string= " " >
+					<field name="code" style="width:5%"/>
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+					<field name="type_immo_id" style="width:50%" options="{'no_create':True}"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_categorie_tree">
+	<field name="name">view.gi_categorie.tree</field>
+	<field name="model">gi_categorie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Categorie">
+			<field name="sequence" widget="handle"/>
+			<field name= "code" />
+			<field name="lib_court"/>
+			<field name="lib_long"/>
+			<field name="type_immo_id" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_souscategorie_form">
+	<field name="name">view.gi_souscategorie.form</field>
+	<field name="model">gi_souscategorie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sous Categorie">
+			<sheet>
+				<group string = " " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+					<field name="categorie_id" style="width:25%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_souscategorie_tree">
+	<field name="name">view.gi_souscategorie.tree</field>
+	<field name="model">gi_souscategorie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sous Categorie">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+			<field name="categorie_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_marque_form">
+	<field name="name">view.gi_marque.form</field>
+	<field name="model">gi_marque</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Marque" >
+			<sheet>
+				<group string=" " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_marque_tree">
+	<field name="name">view.gi_marque.tree</field>
+	<field name="model">gi_marque</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Marque">
+		<field name="sequence" widget="handle"/>
+		<field name="lib_court"  />
+		<field name="lib_long"  />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_mode_acquisition_form">
+	<field name="name">view.gi_mode_acquisition.form</field>
+	<field name="model">gi_mode_acquisition</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Mode d'acquisitions">
+			<sheet>
+				<group string=" " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_mode_acquisition_tree">
+	<field name="name">view.gi_mode_acquisition.tree</field>
+	<field name="model">gi_mode_acquisition</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Mode d'acquisitions">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_typeamortissement_form">
+	<field name="name">view.gi_typeamortissement.form</field>
+	<field name="model">gi_typeamortissement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Types d'amortissement">
+			<sheet>
+				<group string= " " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:65%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_typeamortissement_tree">
+	<field name="name">view.gi_typeamortissement.tree</field>
+	<field name="model">gi_typeamortissement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Types d'amortissement">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_source_fin_form">
+	<field name="name">view.gi_source_fin.form</field>
+	<field name="model">gi_source_fin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sources de financement">
+			<sheet>
+				<group string="" >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_source_fin_tree">
+	<field name="name">view.gi_source_fin.tree</field>
+	<field name="model">gi_source_fin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sources de financement">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_typeimmobilisation_form">
+	<field name="name">view.gi_typeimmobilisation.form</field>
+	<field name="model">gi_typeimmobilisation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Types de d'immobilisations">
+			<sheet>
+				<group string= " " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_typeimmobilisation_tree">
+	<field name="name">view.gi_typeimmobilisation.tree</field>
+	<field name="model">gi_typeimmobilisation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Types de d'immobilisations">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court"/>
+			<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_typemvtimmo_form">
+	<field name="name">view.gi_typemvtimmo.form</field>
+	<field name="model">gi_typemvtimmo</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Types de mouvement">
+			<sheet>
+				<group string=" " >
+					<field name="lib_court" style="width:25%"/>
+					<field name="lib_long" style="width:50%"/>
+					<field name="imput_id" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_typemvtimmo_tree">
+	<field name="name">view.gi_typemvtimmo.tree</field>
+	<field name="model">gi_typemvtimmo</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Types de mouvement">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court" />
+			<field name="lib_long" />
+			<field name="imput_id" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_modele_form">
+	<field name="name">view.gi_modele.form</field>
+	<field name="model">gi_modele</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Modeles">
+			<sheet>
+				<group string= " " >
+					<field name="lib_court" style="width:25%"/>
+					<field name= "lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_modele_tree">
+	<field name="name">view.gi_modele.tree</field>
+	<field name="model">gi_modele</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Modeles">
+			<field name="sequence" widget="handle"/>
+			<field name="lib_court"/>
+			<field name= "lib_long"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_susp_amort_form">
+	<field name="name">view.gi_susp_amort.form</field>
+	<field name="model">gi_susp_amort</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Arrêt Plan Amortissement" >
+			<sheet>
+				<group string= "Arrêt plan Amortissement" col = "4">
+					<field name="immo_id" options="{'no_create':True}"/>
+					<field name="immobilisation" force_save= "1" />
+					<field name="amort" force_save= "1"/>
+					<field name="montant_base" force_save= "1" style="width:50%"/>
+					<field name="date_aquisition" force_save= "1" style="width:25%"/>
+					<field name= "date_fin" style="width:25%"/>
+					<field name= "direction" force_save= "1"/>
+					<field name="statut" style="width:25%"/>
+					<field name="p_justify" />
+				</group>
+				<group>
+					<field name= "motif"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_susp_amort_tree">
+	<field name="name">view.gi_susp_amort.tree</field>
+	<field name="model">gi_susp_amort</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Arrêt Plan Amortissement">
+			<field name="sequence" widget="handle"/>
+			<field name="immo_id" />
+			<field name="immobilisation"/>
+			<field name="montant_base" />
+			<field name="date_aquisition" />
+			<field name= "date_fin"/>
+			<field name= "amort" />
+			<field name="statut" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_affectation_form">
+	<field name="name">view.gi_affectation.form</field>
+	<field name="model">gi_affectation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Affectation de la matière">
+			<header>
+				<field name="etat" widget="statusbar" statusbar_visible="brouillon,affecter"/>
+				<button name="conf_affect" string="Confirmer affectation" type="object" class="btn-primary" attrs = "{'invisible':[('etat','in', ['affecter'])]}"/>
+ 			</header>
+			<sheet>
+				<group string= "Borderau d'affectation des matières" >
+				</group>
+					<group>
+						<field name="n_mvt" force_save= "1" />
+					</group>
+				<group>
+					<field name= "observation" />
+				</group>
+				<notebook>
+					<page string= "Liste des matières à affecter">
+						<field name= "affect_line_ids" />
+					</page>
+				</notebook>
+				<group col= "6" >
+					<field name= "ordo_mat_id" options="{'no_create':True}" />
+					<field name= "compta_mat_id" options="{'no_create':True}" />
+					<field name="magasinier_id" options="{'no_create':True}" />
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_affectation_tree">
+	<field name="name">view.gi_affectation.tree</field>
+	<field name="model">gi_affectation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Affectation de la matière">
+			<field name="n_mvt"/>
+			<field name="etat" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_affectation_line">
+	<field name="name">view.gi_affectation.Line</field>
+	<field name="model">gi_affectation_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des matières à affecter" editable="bottom" >
+		<field name= "affec_id" invisible= "1" />
+		<field name= "code_immo" force_save= "1" />
+		<field name= "designation" force_save= "1"/>
+		<field name= "magasin" force_save= "1" />
+		<field name= "val_unit" force_save= "1" />
+		<field name= "direction" force_save= "1" />
+		<field name= "user" force_save= "1" />
+		<field name= "etat_id" />
+		<field name= "date_affect" force_save= "1" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_mutation_form">
+	<field name="name">view.gi_mutation.form</field>
+	<field name="model">gi_mutation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Mutation de la matière">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="muta" string="Confirmer mutation" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['2'])]}"/>
+ 			</header>
+			<sheet>
+				<group string= "Borderau de mutation des biens">
+				</group>
+				<group string="Bénéficiaire">
+					<field name= "serviceB_id" style="width:50%" options="{'no_create':True}" />
+					<field name="date_mutation" style="width:25%" />
+				</group>
+				<group>
+					<field name= "observation" />
+				</group>
+				<notebook>
+					<page string= "Liste des biens à muter" >
+						<field name= "mute_line_ids" />
+					</page>
+				</notebook>
+				<group col= "4" >
+					<field name= "ordo_mat_id" style= "width:50%" options="{'no_create':True}" />
+					<field name= "compta_mat_id" style= "width:50%" options="{'no_create':True}" />
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_mutation_tree">
+	<field name="name">view.gi_mutation.tree</field>
+	<field name="model">gi_mutation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Transfert de la matière">
+			<field name= "serviceB_id"/>
+			<field name="date_mutation" />
+			<field name="state" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_mutation">
+	<field name="name">view.gi_mutation.Line</field>
+	<field name="model">gi_mutation_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable="bottom" >
+		<field name= "mutation_id" invisible= "1" />
+		<field name= "code_immo" />
+		<field name= "designation" force_save= "1" />
+		<field name= "magasin" force_save= "1"/>
+		<field name= "val_unit" force_save= "1" />
+		<field name= "direction" force_save= "1"/>
+		<field name= "user" force_save= "1"/>
+		<field name= "new_code" force_save= "1"/>
+		<field name= "etat_id" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_sortie_form">
+	<field name="name">view.gi_sortie.form</field>
+	<field name="model">gi_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Sortie Momentanée">
+			<header>
+				<button name= "sortie" string= "Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['2'])]}" />
+				<field name= "state" widget= "statusbar" />
+			</header>
+			<sheet>
+				<group string= "Borderau de sortie de la matière" >
+				</group>
+					<group string= " " col= "4">
+						<field name= "n_ordre" style="width:15%" />
+						<field name= "destinateur" style="width:50%" />
+						<field name= "motif_id" style="width:25%" />
+						<field name= "date" style="width:25%" />
+						<field name= "date_retour" style="width:25%" />
+						<field name= "action" style="width:50%" />
+					</group>
+							<notebook>
+								<page string= "Biens à sortir" >
+									<group>
+										<field name= "sortiline_ids" />
+									</group>
+								</page>
+							</notebook>
+						<group col= "6">
+							<field name="ordo_mat_id" />
+							<field name="compta_mat_id" />
+							<field name="magasinier_id" />
+						</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_sortie_tree">
+	<field name="name">view.gi_sortie.tree</field>
+	<field name="model">gi_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sortie Momentanée">
+			<field name="destinateur" />
+			<field name="motif_id" />
+			<field name="ordo_mat_id" />
+			<field name="compta_mat_id" />
+			<field name="magasinier_id" />
+			<field name="state" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_sortie">
+	<field name="name">view.gi_sortie.Line</field>
+	<field name="model">gi_sortie_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable= "bottom" >
+		<field name= "sortie_id" invisible= "1" />
+		<field name= "code_immo" options="{'no_create':True}" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "service" force_save= "1" />
+		<field name= "detenteur" force_save= "1" />
+		<field name= "val_brute" force_save= "1" />
+		<field name= "etat_id" />
+		<field name= "observation" />
+	</tree>
+		</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_entree_form">
+	<field name="name">view.gi_entree.form</field>
+	<field name="model">gi_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Retour du bien">
+	<sheet>
+			<group string= "Retour des biens">
+			</group>
+				<group>
+					<field name="gi_sortie_id" style="width:10%" options="{'no_create':True}"/>
+					<field name= "date_retour" style="width:15%"/>
+					<field name= "observation" />
+				</group>
+				<group string="Retour des biens" >
+					<field name= "entreline_ids" />
+				</group>
+			<group col= "6">
+				<field name="ordo_mat_id" />
+				<field name="compta_mat_id" />
+				<field name="magasinier_id" />
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_entree_tree">
+	<field name="name">view.gi_entree.tree</field>
+	<field name="model">gi_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Sortie Momentanée">
+			<field name="gi_sortie_id"/>
+			<field name="date_retour" />
+			<field name="observation" />
+			<field name="ordo_mat_id" />
+			<field name="compta_mat_id" />
+<field name="magasinier_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_transfert_form">
+	<field name="name">view.gi_transfert.form</field>
+	<field name="model">gi_transfert</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Transfert des matières">
+			<header>
+				<field name="etat" widget="statusbar" statusbar_visible="brouillon,transfert"/>
+				<button name="transf" string="Confirmer Transfert" type="object" class="btn-primary" attrs = "{'invisible':[('etat','in', ['transfert'])]}"/>
+			</header>
+			<sheet>
+				<group string= "Borderau de transfert des biens" >
+				</group>
+					<group string="Destination du bien" col= "4">
+						<field name= "ministereB_id" style="width:75%" />
+						<field name= "typ_mvt" style= "width:25%" />
+						<field name= "directionB_id" style= "width:75%" />
+						<field name= "date_transfert" style= "width:25%" />
+					</group>
+					<group>
+						<field name= "observation" />
+					</group>
+
+					<group string= "Origine des biens">
+						<field name= "transfert_ids" />
+					</group>
+					<group col= "6">
+						<field name= "ordo_mat_id" />
+						<field name= "compta_mat_id" />
+						<field name= "magasinier_id" />
+					</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_transfert_tree">
+	<field name="name">view.gi_transfert.tree</field>
+	<field name="model">gi_transfert</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Transfert des matières">
+			<field name="ministereB_id"/>
+			<field name="directionB_id" />
+			<field name="typ_mvt" />
+			<field name="date_transfert" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_transfert">
+	<field name="name">view.gi_transfert.Line</field>
+	<field name="model">gi_transfert_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable="bottom" >
+		<field name= "transfert_id" invisible= "1" />
+		<field name= "code" />
+		<field name= "date_entree" force_save= "1" />
+		<field name= "type_immo" force_save= "1" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1" />
+		<field name= "user" force_save= "1" />
+		<field name= "quant" force_save= "1" />
+		<field name= "val_unit" force_save= "1" />
+		<field name= "montant" force_save= "1" sum= "Montant Total"/>
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_vente_form">
+	<field name="name">view.gi_cession_vente.form</field>
+	<field name="model">gi_cession_vente</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Cession de vente">
+				<header>
+			<field name="state" widget="statusbar"/>
+			<button name="valid" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['1'])]}"/>
+			<button name="vend" string="Vendre" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['2'])]}"/>
+			<button name="generer_ecriture" string="Générer Ecriture" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['3'])]}"/>
+				</header>
+	<sheet>
+		<group string= "Cession de vente des biens" >
+		</group>
+			<group string= "Informations" col= "4">
+				<field name="no_ecr" style="width:15%" invisible= "1" />
+				<field name="ministereA_id" style="width:50%" />
+				<field name= "date_mvt"  style="width:25%" force_save= "1"/>
+				<field name= "typ_mvt" options="{'no_create':True}" style="width:50%" />
+				<field name= "type_operation" style="width:50%" />
+				<field name= "type_journal" style="width:50%" />
+				<field name= "mnt_total"   invisible= "1"/>
+				<field name= "id_imput" invisible= "1"/>
+				<field name= "var_cpte" invisible= "1"/>
+				<field name= "fg_sens"  invisible= "1" />
+			</group>
+				<group string= "Cession Vente" >
+					<field name= "acquereur" style="width:50%" />
+					<field name= "ref_pay" style="width:25%" attrs = "{'invisible':[('state','in', ['1'])]}"/>
+					<field name= "commentaire"/>
+				</group>
+				<notebook>
+					<page string= "Biens à vendre">
+						<field name= "cess_vente_line_ids" />
+					</page>
+
+					<page string= "Membres commission" >
+						<field name= "vente_comiss_ids" />
+					</page>
+				</notebook>
+				<group col= "6">
+					<field name= "ordo_mat_id" />
+					<field name= "compta_mat_id" />
+				</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_vente_tree">
+	<field name="name">view.gi_cession_vente.tree</field>
+	<field name="model">gi_cession_vente</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Cession de vente">
+<field name="ministereA_id" />
+<field name="date_mvt" />
+<field name= "state" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cess_vente">
+	<field name="name">view.gi_cess_vente.Line</field>
+	<field name="model">gi_cess_vente_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable="bottom" >
+		<field name= "no_ecr"  invisible= "1"/>
+		<field name= "no_lecr" invisible= "1"/>
+		<field name= "code_immo" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1"/>
+		<field name= "etat_id" />
+		<field name= "valeur" />
+		<field name= "fg_sens"  invisible= "1"/>
+		<field name= "observation" />
+		<field name= "annee"  invisible= "1"/>
+		<field name= "compte"  invisible= "1"/>
+		<field name= "cess_vente_id" invisible= "1" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_mem_commis">
+	<field name="name">view.gi_mem_commis.Line</field>
+	<field name="model">gi_mem_commis_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Commission de vente" editable="bottom" >
+		<field name= "nom_pre_id" />
+		<field name= "service_id" />
+		<field name= "membre_id" />
+		<field name= "sign" />
+		<field name= "vente_comiss_id" invisible= "1"/>
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_don_form">
+	<field name="name">view.gi_cession_don.form</field>
+	<field name="model">gi_cession_don</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Cession pour Don">
+			<header>
+				<field name="state" widget="statusbar"/>
+				<button name="test" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['1'])]}"/>
+				<button name="generer_ecriture" string="Générer Ecriture" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['2'])]}"/>
+			</header>
+	<sheet>
+		<group string= "Borderau de donation des biens" >
+		</group>
+			<group string= "Informations" col= "4">
+				<field name="ministereA_id" style="width:50%" />
+				<field name= "date_mvt"  style="width:25%" force_save= "1"/>
+				<field name= "typ_mvt" options="{'no_create':True}" style="width:50%" />
+				<field name= "type_operation" style="width:50%" />
+				<field name= "type_journal" style="width:50%" />
+				<field name= "acquereur" style="width:50%" />
+				<field name= "mnt_total"   invisible= "1"/>
+				<field name= "id_imput"  invisible= "1"/>
+				<field name= "var_cpte"  invisible= "1" />
+				<field name= "fg_sens"  invisible= "1" />
+			</group>
+				<notebook>
+					<page string= "Liste des biens">
+						<field name= "cess_don_line_ids" />
+					</page>
+
+					<page string= "Membres commission" >
+						<group>
+							<field name= "don_comiss_ids" />
+						</group>
+					</page>
+				</notebook>
+				<group col= "6">
+					<field name= "ordo_mat_id" />
+					<field name= "compta_mat_id" />
+				</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_don_tree">
+	<field name="name">view.gi_cession_don.tree</field>
+	<field name="model">gi_cession_don</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Cession de don">
+			<field name="n_mvt"/>
+			<field name="ministereA_id" />
+			<field name="date_mvt" />
+			<field name = "state" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_don">
+	<field name="name">view.gi_cession_don.Line</field>
+	<field name="model">gi_cession_don_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable="bottom" >
+		<field name= "no_ecr"  invisible= "1"/>
+		<field name= "no_lecr" invisible= "1" />
+		<field name= "code_immo" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1"/>
+		<field name= "etat_id" />
+		<field name= "valeur" />
+		<field name= "objet" />
+		<field name= "fg_sens"  invisible= "1"/>
+		<field name= "observation" />
+		<field name= "annee"  invisible= "1"/>
+		<field name= "compte"  invisible= "1"/>
+		<field name= "cess_don_id" invisible= "1" />
+	</tree>
+		</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_reforme_form">
+	<field name="name">view.gi_reforme.form</field>
+	<field name="model">gi_reforme</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Biens à reformer">
+			<header>
+				<field name="state" widget="statusbar" statusbar_visible="brouillon,reforme"/>
+				<button name="test" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['reforme'])]}"/>
+			</header>
+	<sheet>
+			<group string= "Borderau de reforme des biens">
+				<group string= "Informations">
+					<field name="n_ordre" style="width:15%" force_save= "1" />
+					<field name="ministereA_id" style="width:50%" />
+					<field name= "nom_mvt"  style="width:50%" force_save= "1"/>
+					<field name= "date_mvt"  style="width:25%" force_save= "1"/>
+					<field name= "typ_mvt"  style="width:25%" options="{'no_create':True}" />
+				</group>
+				<group string="Pièce justificative" >
+					<field name= "ref_piece_id" style="width:25%" force_save= "1" />
+					<field name= "lib_long" style= "width:75%" force_save= "1"/>
+					<field name= "date" style="width:25%" />
+					<field name= "pj" />
+				</group>
+			</group>
+				<group>
+					<field name= "commentaire" />
+				</group>
+					<notebook>
+						<page string= "Liste des biens à réformer" >
+							<group string = " " >
+								<field name= "reforme_line_ids" />
+							</group>
+						</page>
+
+						<page string= "Membres de la commission" >
+							<group string= " ">
+								<field name= "ref_comiss_ids" />
+							</group>
+						</page>
+					</notebook>
+				<group col= "6">
+					<field name= "ordo_mat_id" />
+					<field name= "compta_mat_id" />
+				</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_reforme_tree">
+	<field name="name">view.gi_reforme.tree</field>
+	<field name="model">gi_reforme</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Biens à reformer">
+			<field name="n_ordre"/>
+			<field name="ministereA_id" />
+			<field name="date_mvt" />
+			<field name="ref_piece_id" />
+			<field name="date" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_reforme">
+	<field name="name">view.gi_reforme.Line</field>
+	<field name="model">gi_reforme_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens" editable="bottom" >
+		<field name= "code_immo" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1"/>
+		<field name= "etat_id" />
+		<field name= "valeur" />
+		<field name= "nature" />
+		<field name= "reforme_id" invisible= "1" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_declassement_form">
+	<field name="name">view.gi_declassement.form</field>
+	<field name="model">gi_declassement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Biens à déclasser">
+			<header>
+				<field name="state" widget="statusbar"/>
+				<button name="test" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['1'])]}"/>
+				<button name="servce" string="Bien en service à déclasser" type="object" class="btn-primary" attrs = "{'invisible':[('state','not in', ['2'])]}"/>
+			</header>
+		<sheet>
+			<group string= "Informations" col = "4">
+				<field name="n_ordre" style="width:15%" force_save= "1" />
+				<field name="ministereA_id" style="width:75%" />
+				<field name= "mvt_id"  style="width:50%"/>
+				<field name= "date_mvt"  style="width:25%" force_save= "1"/>
+			</group>
+			<group>
+				<field name= "commentaire" />
+			</group>
+		<notebook>
+			<page string= "Biens en service à déclasser" >
+				<group>
+					<field name= "declassement_line_ids" />
+				</group>
+			</page>
+		</notebook>
+			<group col= "4">
+				<field name= "ordo_mat_id" />
+				<field name= "compta_mat_id" />
+			</group>
+		</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_declassement_tree">
+	<field name="name">view.gi_declassement.tree</field>
+	<field name="model">gi_declassement</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Biens à reformer">
+<field name="n_ordre"/>
+<field name="ministereA_id" />
+<field name="mvt_id" />
+<field name="date_mvt" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_declassement">
+	<field name="name">view.gi_declassement.Line</field>
+	<field name="model">gi_declassement_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens à déclasser" editable="bottom" >
+		<field name= "code_immo" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1"/>
+		<field name= "etat_id" />
+		<field name= "valeur" />
+		<field name= "declasse_id" invisible= "1" />
+	</tree>
+		</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_pjustificative_form">
+	<field name="name">view.gi_pjustificative.form</field>
+	<field name="model">gi_pjustificative</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Piece Justificative" >
+	<sheet>
+			<group string= " ">
+<field name="ref_piece" style="width:15%" />
+<field name="lib_court" style="width:25%" />
+<field name="lib_long" style="width:50%"/>
+<field name="date" style="width:15%"/>
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_pjustificative_tree">
+	<field name="name">view.gi_pjustificative.tree</field>
+	<field name="model">gi_pjustificative</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Piece Justificative">
+<field name= "sequence" widget="handle"/>
+<field name= "ref_piece" />
+<field name= "lib_court" />
+<field name= "lib_long" />
+<field name= "date" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_reevaluation_form">
+	<field name="name">view.gi_reevaluation.form</field>
+	<field name="model">gi_reevaluation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Réévaluation des biens" >
+	<sheet>
+			<group string= "Réévaluation du bien" col="4">
+<field name="immo_id" style="width:75%" />
+<field name="date_aquisition" style="width:50%" force_save = "1" />
+<field name="categorie" force_save= "1" />
+<field name="date_mise_service" style="width:75%" force_save = "1" />
+<field name="design" style="width:75%" force_save= "1" />
+<field name="Val_brute" style="width:25%" force_save = "1"/>
+<field name="date_rev" style="width:25%" />
+<field name="val_acc" style="width:25%" />
+<field name="val_reev" style="width:50%" />
+<field name="company_id" invisible= "1" />
+<field name="x_exercice_id" invisible= "1" />
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_reevaluation_tree">
+	<field name="name">view.gi_reevaluation.tree</field>
+	<field name="model">gi_reevaluation</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Reevaluation des biens" >
+<field name="immo_id" />
+<field name="date_aquisition" />
+<field name="design" />
+<field name="date_mise_service" />
+<field name="Val_brute" />
+<field name="date_rev" />
+<field name="val_acc" />
+<field name="val_reev" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_cession_form">
+	<field name="name">view.gi_cession.form</field>
+	<field name="model">gi_cession</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Cession" >
+	<sheet>
+			<group string= " " colspan= "8">
+<field name="acquereur" style="width:25%" />
+<field name="ref_pay" style="width:25%" />
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_cession_tree">
+	<field name="name">view.gi_cession.tree</field>
+	<field name="model">gi_cession</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Cession" >
+<field name="sequence" widget="handle"/>
+<field name="acquereur" />
+<field name="ref_pay" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_magasin_form">
+	<field name="code">view.gi_magasin.form</field>
+	<field name="model">gi_magasin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des magasins">
+<sheet>
+			<group string= " " >
+	<field name="lib_court" style="width:25%"/>
+	<field name="lib_long" style="width:50%"/>
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_magasin_tree">
+	<field name="code">view.gi_magasin.tree</field>
+	<field name="model">gi_magasin</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des magasins">
+<sheet>
+			<group string= " " >
+	<field name= "sequence" widget="handle"/>
+	<field name="lib_court" />
+	<field name="lib_long" />
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_type_membre_form">
+	<field name="code">view.gi_type_membre.form</field>
+	<field name="model">gi_type_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Type de membre de la commission">
+<sheet>
+			<group string= " " >
+	<field name="lib_court" style="width:25%"/>
+	<field name="lib_long" style="width:50%"/>
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_type_membre_tree">
+	<field name="code">view.gi_type_membre.tree</field>
+	<field name="model">gi_type_membre</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Type de membre de la commission">
+	<field name="lib_court" />
+	<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_etat_form">
+	<field name="code">view.gi_etat.form</field>
+	<field name="model">gi_etat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Liste des états des matières">
+<sheet>
+			<group string= " " >
+	<field name="lib_court" style="width:25%"/>
+	<field name="lib_long" style="width:50%"/>
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_etat_tree">
+	<field name="code">view.gi_etat.tree</field>
+	<field name="model">gi_etat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Liste des états des matières">
+	<field name= "sequence" widget="handle"/>
+	<field name="lib_court" />
+	<field name="lib_long" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_type_agent_form">
+	<field name="name">view.gi_type_agent.form</field>
+	<field name="model">gi_type_agent</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Liste des types d'agent matières" >
+	<sheet>
+			<group string= " " colspan= "8">
+<field name="lib_court" style="width:25%" />
+<field name="lib_long" style="width:50%" />
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_type_agent_tree">
+	<field name="name">view.gi_type_agent.tree</field>
+	<field name="model">gi_type_agent</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Liste des types d'agent matières" >
+<field name="lib_court" />
+<field name="lib_long"  />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_agent_mat_form">
+	<field name="name">view.gi_agent_mat.form</field>
+	<field name="model">gi_agent_mat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Liste des agents matières" >
+	<sheet>
+			<group string= "Liste des agents matières " colspan= "8">
+<field name="employe_id" style="width:25%" />
+<field name="typeagent_id" style="width:25%" />
+<field name="direction_id" style="width:25%" />
+<field name="service_id" style="width:25%" />
+			</group>
+	</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_agent_mat_tree">
+	<field name="name">view.gi_agent_mat.tree</field>
+	<field name="model">gi_agent_mat</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Liste des agents matières" >
+<field name="employe_id" />
+<field name="typeagent_id"/>
+<field name="direction_id" />
+<field name="service_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_amort_form">
+	<field name="name">view.gi_compta_amort.form</field>
+	<field name="model">gi_compta_amort</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Comptabilisation des amortissements">
+<sheet>
+			<group string= "Ecritures" col= "4">
+				<field name="n_ordre" style= "width:25%"/>
+				<field name= "date" style= "width:50%"/>
+				<field name="typ_op" style= "width:50%"/>
+				<field name= "mode_reglement" style="width:75%"/>
+				<field name="type_journal" style="width:75%"/>
+			</group>
+			<group string= "Lignes ecritures" >
+				<field name= "cmpt_amor_line_ids"/>
+			</group>
+</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_compta_amort_tree">
+	<field name="name">view.gi_compta_amort.tree</field>
+	<field name="model">gi_compta_amort</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Comptabilisation des amortissements">
+			<field name="n_ordre" />
+			<field name= "date" />
+			<field name="typ_op" />
+			<field name= "mode_reglement" />
+			<field name="type_journal" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_amort">
+	<field name="name">view.gi_compta_amort.Line</field>
+	<field name="model">gi_compta_amort_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Lignes ecritures" editable= "bottom" >
+		<field name= "lign_ecrit" />
+		<field name= "typ_pj" />
+		<field name= "pj" />
+		<field name= "fg_sens" />
+		<field name= "montant" />
+		<field name= "intervenant" />
+		<field name= "libelle" />
+		<field name= "annee" />
+		<field name= "cmpt_amor_id" invisible= "1" />
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_reeva_form">
+	<field name="name">view.gi_compta_reeva.form</field>
+	<field name="model">gi_compta_reeva</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Comptabilisation reevaluation">
+			<sheet>
+				<group string= "Ecritures" col= "4">
+					<field name="n_ordre" style= "width:25%"/>
+					<field name= "date" style= "width:50%"/>
+					<field name="typ_op" style= "width:50%"/>
+					<field name= "mode_reglement" style="width:75%"/>
+					<field name="type_journal" style="width:75%"/>
+				</group>
+				<group string= "Lignes ecritures" >
+					<field name= "cmpt_reev_line_ids"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_reeva_tree">
+	<field name="name">view.gi_compta_reeva.tree</field>
+	<field name="model">gi_compta_reeva</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Comptabilisation des réevaluations">
+			<field name="n_ordre" />
+			<field name= "date" />
+			<field name="typ_op" />
+			<field name= "mode_reglement" />
+			<field name="type_journal" />
+
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_reeva">
+	<field name="name">view.gi_compta_reeva.Line</field>
+	<field name="model">gi_compta_reeva_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Lignes ecritures" editable= "bottom" >
+		<field name= "lign_ecrit" />
+		<field name= "typ_pj" />
+		<field name= "pj" />
+		<field name= "fg_sens" />
+		<field name= "montant" />
+		<field name= "intervenant" />
+		<field name= "libelle" />
+		<field name= "annee" />
+		<field name= "cmpt_rev_id" invisible= "1" />
+	</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_compta_mvt_form">
+	<field name="name">view.gi_compta_mvt.form</field>
+	<field name="model">gi_compta_mvt</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Comptabilisation des mouvements">
+			<sheet>
+				<group string= "Ecritures" col= "4">
+					<field name="n_ordre" style= "width:25%"/>
+					<field name= "date" style= "width:50%"/>
+					<field name="typ_op" style= "width:50%"/>
+					<field name= "mode_reglement" style="width:75%"/>
+					<field name="type_journal" style="width:75%"/>
+				</group>
+				<group string= "Ligne ecritures" >
+					<field name= "cmpt_mvt_line_ids"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_compta_mvt_tree">
+	<field name="name">view.gi_compta_mvt.tree</field>
+	<field name="model">gi_compta_mvt</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Comptabilisation des mouvements">
+			<field name="n_ordre" />
+			<field name= "date" />
+			<field name="typ_op" />
+			<field name= "mode_reglement" />
+			<field name="type_journal" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_compta_mvt">
+	<field name="name">view.gi_compta_mvt.Line</field>
+	<field name="model">gi_compta_mvt_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Lignes ecritures" editable= "bottom" >
+		<field name= "lign_ecrit" />
+		<field name= "typ_pj" />
+		<field name= "pj" />
+		<field name= "fg_sens" />
+		<field name= "montant" />
+		<field name= "intervenant" />
+		<field name= "libelle" />
+		<field name= "annee" />
+		<field name= "cmpt_mvt_id" invisible= "1" />
+	</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_gi_motif_sortie_form">
+	<field name="name">view.gi_motif_sortie.form</field>
+	<field name="model">gi_motif_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Motif de sortie des biens">
+			<sheet>
+				<group string= " " >
+					<field name="lib_court" style="width:25%"/>
+					<field name= "lib_long" style="width:50%"/>
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_motif_sortie_tree">
+	<field name="name">view.gi_motif_sortie.tree</field>
+	<field name="model">gi_motif_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Motif de sortie des biens">
+			<field name="lib_court" />
+			<field name= "lib_long" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_invent_bien_form">
+	<field name="name">view.gi_invent_bien.form</field>
+	<field name="model">gi_invent_bien</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Inventaire des biens">
+			<header>
+				<field name="state" widget="statusbar" />
+				<button name="invent" string="Valider Inventaire" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['fait'])]}"/>
+ 			</header>
+			<sheet>
+				<group string= "Inventaire des biens en service" >
+				</group>
+					<group>
+						<group string= " ">
+							<field name="ministere_id" style= "width:75%"/>
+								<label for= "emplacement" string= "Emplacements"/>
+									<div>
+										<field name="emplacement" style="width:50%" class= "oe_inline" /> - <field name= "direction_id" style="width:50%" class= "oe_inline" options="{'no_create':True}" attrs = "{'invisible':[('emplacement','in', ['1'])]}"/>
+									</div>
+						</group>
+						<group>
+							<field name= "type_invent" style= "width:50%"/>
+								<label for= "date_debut" string= "Période"/>
+									<div>
+										<field name="date_debut" style="width:25%" class= "oe_inline" /> - <field name= "date_fin" style="width:25%" class= "oe_inline"/>
+									</div>
+						</group>
+				</group>
+					<group string= "Liste des biens en service">
+						<field name = "inventbien_line_ids" />
+					</group>
+					<group col= "6">
+						<field name= "ordo_mat_id" />
+						<field name= "compta_mat_id" />
+						<field name= "magasinier_id" />
+					</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_invent_bien_tree">
+	<field name="name">view.gi_invent_bien.tree</field>
+	<field name="model">gi_invent_bien</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Inventaire des biens">
+			<field name="ministere_id" />
+			<field name= "direction_id" />
+			<field name="date_debut" />
+			<field name= "date_fin" />
+			<field name= "type_invent" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_invent_bien">
+	<field name="name">view.gi_invent_bien.Line</field>
+	<field name="model">gi_invent_bien_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en service" editable= "bottom" >
+		<field name= "code_immo" force_save= "1" />
+		<field name= "type_immo" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "quantite" force_save= "1"/>
+		<field name= "quant_phys" />
+		<field name= "invent_bien_id" invisible= "1" />
+		<field name= "valeur" force_save= "1" />
+		<field name= "observation" />
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_stock_form">
+	<field name="name">view.gi_fiche_stock.form</field>
+	<field name="model">gi_fiche_stock</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Fiche d'inventaire">
+			<header>
+				<button name="fche_stock" string="Générer" type="object" class="btn-primary" />
+ 			</header>
+			<sheet>
+				<group string= "Fiche d'inventaire des biens en stock">
+					<group string= " ">
+						<field name="ministere_id" style= "width:75%" options="{'no_create':True}"/>
+							<label for= "emplacement" string= "Emplacements"/>
+									<div>
+										<field name="emplacement" style="width:50%" class= "oe_inline" /> - <field name= "magasin" style="width:50%" class= "oe_inline" options="{'no_create':True}" attrs = "{'invisible':[('emplacement','in', ['1'])]}"/>
+									</div>
+					</group>
+					<group>
+						<field name= "type_invent" style= "width:50%"/>
+							<label for= "date_debut" string= "Période"/>
+								<div>
+									<field name="date_debut" style="width:25%" class= "oe_inline" /> - <field name= "date_fin" style="width:25%" class= "oe_inline"/>
+								</div>
+					</group>
+				</group>
+					<group string= "Liste des biens en stock">
+						<field name = "fich_stock_line_ids" />
+					</group>
+					<group col= "6">
+						<field name= "ordo_mat_id" />
+						<field name= "compta_mat_id" />
+						<field name= "magasinier_id" />
+					</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_fiche_stock_tree">
+	<field name="name">view.gi_fiche_stock.tree</field>
+	<field name="model">gi_fiche_stock</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Inventaire des biens">
+				<field name="ministere_id" />
+				<field name= "emplacement" />
+				<field name="date_debut" />
+				<field name= "date_fin" />
+				<field name= "type_invent" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_stock">
+	<field name="name">view.gi_fiche_stock.Line</field>
+	<field name="model">gi_fiche_stock_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en stock" editable= "bottom" >
+		<field name= "fich_stock_id" invisible= "1" />
+		<field name= "sous_code" />
+		<field name= "categorie" />
+		<field name= "designation" />
+		<field name= "quant_phy"  />
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_invent_init_form">
+	<field name="name">view.gi_fiche_invent_init.form</field>
+	<field name="model">gi_fiche_invent_init</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string= "Fiche d'inventaire initial ou d'ouverture" >
+			<header>
+				<button name="insert" string="Confirmer" type="object" class="btn-primary" attrs = "{'invisible':[('state','in', ['2'])]}"/>
+				<field name= "state" widget= "statusbar" />
+ 			</header>
+			<sheet>
+				<group string= "Fiche d'inventaire initial ou d'ouverture">
+				</group>
+				<group>
+					<field name="n_ordre" style= "width:15%"/>
+					<field name= "detenteur" style= "width:25%"/>
+					<field name= "direction_id" style= "width:25%"/>
+				</group>
+				<notebook>
+					<page string= "Liste des matières" >
+						<field name= "fich_inven_ids" />
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_invent_init_tree">
+	<field name="name">view.gi_fiche_invent_init.tree</field>
+	<field name="model">gi_fiche_invent_init</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string= "Fiche d'inventaire initial" >
+			<field name="n_ordre" />
+			<field name= "detenteur" />
+			<field name="direction_id" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_invent_init_line">
+	<field name="name">view.gi_fiche_invent_init.Line</field>
+	<field name="model">gi_fiche_invent_init_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en stock" editable= "bottom" >
+		<field name= "fich_inven_id" invisible= "1" />
+		<field name= "code_immo" />
+		<field name= "designation" />
+		<field name= "marque" />
+		<field name= "typ_amort" />
+		<field name= "date_acquisition"  />
+		<field name= "date_mise_service" />
+		<field name= "ministere" />
+		<field name= "epe"  />
+		<field name= "direction_id" />
+		<field name= "region" />
+		<field name= "province" />
+		<field name= "departement" />
+		<field name= "user"  />
+		<field name= "val_acqu" />
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_service_form">
+	<field name="name">view.gi_fiche_service.form</field>
+	<field name="model">gi_fiche_service</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Fiche d'inventaire des biens en service">
+			<header>
+				<button name="fchservice" string="Générer" type="object" class="btn-primary" />
+ 			</header>
+			<sheet>
+				<group string= "Fiche d'inventaire des biens en services">
+					<group string= " ">
+						<field name="ministere_id" style= "width:75%" options="{'no_create':True}"/>
+							<label for= "emplacement" string= "Emplacements"/>
+									<div>
+										<field name="emplacement" style="width:50%" class= "oe_inline" /> - <field name= "direction_id" style="width:50%" class= "oe_inline" options="{'no_create':True}" attrs = "{'invisible':[('emplacement','in', ['1'])]}"/>
+									</div>
+					</group>
+					<group>
+						<field name= "type_invent" style= "width:50%"/>
+							<label for= "date_debut" string= "Période"/>
+								<div>
+									<field name="date_debut" style="width:25%" class= "oe_inline" /> - <field name= "date_fin" style="width:25%" class= "oe_inline"/>
+								</div>
+					</group>
+				</group>
+					<group string= "Liste des biens en stock">
+						<field name = "stock_line_ids" />
+					</group>
+					<group col= "6">
+						<field name= "ordo_mat_id" />
+						<field name= "compta_mat_id" />
+						<field name= "magasinier_id" />
+				</group>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_fiche_service_tree">
+	<field name="name">view.gi_fiche_service.tree</field>
+	<field name="model">gi_fiche_service</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Inventaire des biens">
+				<field name="ministere_id" />
+				<field name= "emplacement" />
+				<field name="date_debut" />
+				<field name= "date_fin" />
+				<field name= "type_invent" />
+		</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_fiche_service">
+	<field name="name">view.gi_fiche_service.Line</field>
+	<field name="model">gi_fiche_service_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens en stock" editable= "bottom" >
+		<field name= "stock_id" invisible= "1" />
+		<field name= "code" />
+		<field name= "designation" />
+		<field name= "quant_phy"  />
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_journal_entree_form">
+	<field name="name">view.gi_journal_entree.form</field>
+	<field name="model">gi_journal_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Journal des entrées">
+			<header>
+				<field name= "state" widget= "statusbar" />
+				<button name= "j_entree" string = "Confirmer" type="object" class="btn-primary" />
+			</header>
+			<sheet>
+				<group string= "Journal des entrées des matières">
+				</group>
+				<group>
+					<field name= "direction_id" style="width:50%"/>
+					<field name="date_debut" style="width:15%"/>
+					<field name= "date_fin" style="width:15%"/>
+					<field name= "mnt_total" invisible= "1" />
+				</group>
+				<notebook>
+					<page string = "Liste des matières">
+						<field name= "jr_entree_line_ids"/>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_journal_entree_tree">
+	<field name="name">view.gi_journal_entree.tree</field>
+	<field name="model">gi_journal_entree</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Journal des entrées">
+			<field name="direction_id" />
+			<field name="date_debut" />
+			<field name= "date_fin" />
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_gi_journal_entree_line">
+	<field name="name">view.gi_journal_entree.Line</field>
+	<field name="model">gi_journal_entree_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens entrés" editable= "bottom" >
+		<field name= "jr_entree_id" invisible= "1" />
+		<field name= "sous_code" />
+		<field name= "n_ordre" />
+		<field name= "date_entree" />
+		<field name= "type_immo" />
+		<field name= "categorie" />
+		<field name= "designation"  />
+		<field name= "quant" />
+		<field name= "val_unit" />
+		<field name= "montant" sum= "Montant Total"/>
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_sortie_form">
+	<field name="name">view.gi_ordre_sortie.form</field>
+	<field name="model">gi_ordre_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Ordre de sortie des matières">
+			<sheet>
+				<group string= "Ordre de sortie des matières">
+				</group>
+				<group>
+					<field name= "direction_id" style="width:50%"/>
+					<field name="date_sortie" style="width:15%"/>
+				</group>
+				<notebook>
+					<page string = "Liste des matières">
+						<field name= "ordre_sortie_line_ids"/>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_sortie_tree">
+	<field name="name">view.gi_ordre_sortie.tree</field>
+	<field name="model">gi_ordre_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Ordre de sortie des matières">
+			<field name="direction_id" />
+			<field name="date_sortie" />
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_ordre_sortie_line">
+	<field name="name">view.gi_ordre_sortie.Line</field>
+	<field name="model">gi_ordre_sortie_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens entrés" editable= "bottom" >
+		<field name= "ordre_sortie_line_id" invisible= "1" />
+		<field name= "code" />
+		<field name= "date_entree" force_save= "1" />
+		<field name= "type_immo" force_save= "1" />
+		<field name= "categorie" force_save= "1" />
+		<field name= "designation" force_save= "1" />
+		<field name= "direction" force_save= "1" />
+		<field name= "user" force_save= "1" />
+		<field name= "quant" force_save= "1" />
+		<field name= "val_unit" force_save= "1" />
+		<field name= "montant" force_save= "1" sum= "Montant Total"/>
+	</tree>
+	</field>
+</record>
+
+<record model="ir.ui.view" id="view_id_gi_journal_sortie_form">
+	<field name="name">view.gi_journal_sortie.form</field>
+	<field name="model">gi_journal_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Journal des sorties">
+			<header>
+				<field name= "state" widget= "statusbar" />
+				<button name= "j_sortie" string = "Confirmer" type="object" class="btn-primary" />
+			</header>
+			<sheet>
+				<group string= "Journal de sorties des matières" >
+				</group>
+				<group>
+					<field name="direction_id" style="width:15%"/>
+					<field name= "date_debut" style="width:15%"/>
+					<field name= "date_fin" style="width:15%"/>
+					<field name= "mnt_total" invisible= "1" />
+				</group>
+				<notebook>
+					<page string = "Liste des matières">
+						<field name= "jr_sortie_line_ids"/>
+					</page>
+				</notebook>
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_journal_sortie_tree">
+	<field name="name">view.gi_journal_sortie.tree</field>
+	<field name="model">gi_journal_sortie</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Journal des sorties">
+			<field name="direction_id" />
+			<field name="date_debut" />
+			<field name= "date_fin" />
+		</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_gi_journal_sortie_line">
+	<field name="name">view.gi_journal_sortie.Line</field>
+	<field name="model">gi_journal_sortie_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Liste des biens entrés" editable= "bottom" >
+		<field name= "date_mise_service" />
+		<field name= "code_immo" />
+		<field name= "type_immo" />
+		<field name= "categorie"  />
+		<field name= "designation" />
+		<field name= "montant" sum = "Montant Total" />
+		<field name= "jr_sortie_id" invisible= "1" />
+	</tree>
+	</field>
+</record>
+
+
+
+<record model="ir.ui.view" id="view_id_gi_livre_journal_form">
+	<field name="name">view.gi_livre_journal.form</field>
+	<field name="model">gi_livre_journal</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<form string="Livre Journal">
+			<header>
+				<field name= "state" widget= "statusbar" />
+				<button name= "livre_journal" string = "Confirmer" type="object" class="btn-primary" />
+			</header>
+			<sheet>
+				<group string= "Livre Journal des matières" >
+				</group>
+				<group string= "" >
+					<field name= "direction_id" style="width:25%"/>
+					<field name= "mnt_total_1" invisible= "1" />
+					<field name= "mnt_total_2" invisible= "1" />
+					<field name= "mnt_total" style="width:50%"/>
+				</group>
+					<notebook>
+						<page string = "Journal des entrées">
+							<field name= "lv_jr_entree_ids"/>
+						</page> 
+						<page string = "Journal des sorties">
+							<field name= "lv_jr_sortie_ids"/>
+						</page>
+					</notebook> 
+			</sheet>
+		</form>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_livre_journal_tree">
+	<field name="name">view.gi_livre_journal.tree</field>
+	<field name="model">gi_livre_journal</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+		<tree string="Livre Journal">
+			<field name= "direction_id"/>
+		</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_livre_jour_en_line">
+	<field name="name">view.gi_livre_jour_en.Line</field>
+	<field name="model">gi_livre_jour_en_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Journal des entrés" editable= "bottom" >
+		<field name= "lv_jr_entree_id" invisible= "1" />
+		<field name= "sous_code" />
+		<field name= "n_ordre" />
+		<field name= "date_entree" />
+		<field name= "type_immo" />
+		<field name= "categorie" />
+		<field name= "designation"  />
+		<field name= "quant" />
+		<field name= "val_unit" sum = "Montant Total"	/>
+	</tree>
+	</field>
+</record>
+
+
+<record model="ir.ui.view" id="view_id_gi_livre_jour_so_line">
+	<field name="name">view.gi_livre_jour_so.Line</field>
+	<field name="model">gi_livre_jour_so_line</field>
+	<field name="priority" eval="16"/>
+	<field name="arch" type="xml">
+	<tree string= "Journal des sorties" editable= "bottom" >
+		<field name= "date_mise_service" />
+		<field name= "code_immo" />
+		<field name= "type_immo" />
+		<field name= "categorie"  />
+		<field name= "designation" />
+		<field name= "montant" sum = "Montant Total" />
+		<field name= "lv_jr_sortie_id" invisible= "1" />
+	</tree>
+	</field>
+</record>
+
+
+<!-- Definitions des actions-->
+
+<record model="ir.actions.act_window" id="act_list_account_asset_asset">
+		<field name="name">Plan d'Amortissement</field>
+		<field name="res_model">account.asset.asset</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_account_asset_category">
+		<field name="name">Actif Immobilisés</field>
+		<field name="res_model">account.asset.category</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_ordre_entree">
+		<field name="name">Ordre d'entrée des matières</field>
+		<field name="res_model">gi_ordre_entree</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create">Ordre d'entrée des matières</p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_immobilisation">
+		<field name="name">Liste des immobilisations</field>
+		<field name="res_model">gi_immobilisation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Gestion des immobilisations </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_categorie">
+		<field name="name">Liste des categories</field>
+		<field name="res_model">gi_categorie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_souscategorie">
+		<field name="name">Liste des sous categories</field>
+		<field name="res_model">gi_souscategorie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_fiche_invent_init">
+		<field name="name">Fiche d'inventaire initial</field>
+		<field name="res_model">gi_fiche_invent_init</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_marque">
+		<field name="name">Liste des marques</field>
+		<field name="res_model">gi_marque</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_ordre_sortie">
+		<field name="name">Ordre de sortie des matières</field>
+		<field name="res_model">gi_ordre_sortie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_mode_acquisition">
+		<field name="name">Liste des modes d'acquisitions</field>
+		<field name="res_model">gi_mode_acquisition</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Les modes d'acquisitions </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_designation">
+		<field name="name">Liste des biens</field>
+		<field name="res_model">gi_designation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Veuillez saisir la saisir des biens </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_typeamortissement">
+		<field name="name">Liste des types d'amortissements</field>
+		<field name="res_model">gi_typeamortissement</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Les types d'amortissement </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_source_fin">
+		<field name="name">Liste des sources de financement</field>
+		<field name="res_model">gi_source_fin</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Les sources de financements </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_typeimmobilisation">
+		<field name="name">Liste des types d'immobilisations</field>
+		<field name="res_model">gi_typeimmobilisation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Les types d'immobilisations </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_typemvtimmo">
+		<field name="name">Liste des types de mouvement</field>
+		<field name="res_model">gi_typemvtimmo</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Les types de mouvements </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_modele">
+		<field name="name">Liste des modèles d'immobilisation</field>
+		<field name="res_model">gi_modele</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_susp_amort">
+		<field name="name">Arrêt plan Amortissement</field>
+		<field name="res_model">gi_susp_amort</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> Arrêt du plan d'amortissement</p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_affectation">
+		<field name="name">Bordereau d'affectation de matières</field>
+		<field name="res_model">gi_affectation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+
+<record model="ir.actions.act_window" id="act_list_gi_mutation">
+		<field name="name">Bordereau de mutation</field>
+		<field name="res_model">gi_mutation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_sortie">
+		<field name="name">Sortie Momentanée</field>
+		<field name="res_model">gi_sortie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_entree">
+		<field name="name">Retour des biens</field>
+		<field name="res_model">gi_entree</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_transfert">
+		<field name="name">Borderau de transfert des biens</field>
+		<field name="res_model">gi_transfert</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_cession_vente">
+		<field name="name">Cession de Vente</field>
+		<field name="res_model">gi_cession_vente</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_cession_don">
+		<field name="name">Cession Don</field>
+		<field name="res_model">gi_cession_don</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_inv_declas">
+		<field name="name">Liste des biens déclasser</field>
+		<field name="res_model">gi_inv_declas</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_reforme">
+		<field name="name">Reforme</field>
+		<field name="res_model">gi_reforme</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_declassement">
+		<field name="name">Declassement</field>
+		<field name="res_model">gi_declassement</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_pjustificative">
+		<field name="name">Liste des pièces justificative</field>
+		<field name="res_model">gi_pjustificative</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_reevaluation">
+		<field name="name">Paramètre ré-évaluation</field>
+		<field name="res_model">gi_reevaluation</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_cession">
+		<field name="name">Liste des cessions</field>
+		<field name="res_model">gi_cession</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_magasin">
+		<field name="name">Liste des magasins</field>
+		<field name="res_model">gi_magasin</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_type_membre">
+		<field name="name">Liste des types de membres</field>
+		<field name="res_model">gi_type_membre</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_etat">
+		<field name="name">Liste des états des matières</field>
+		<field name="res_model">gi_etat</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_type_agent">
+		<field name="name">Liste des types d'agent matières</field>
+		<field name="res_model">gi_type_agent</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_agent_mat">
+		<field name="name">Liste des agents matières</field>
+		<field name="res_model">gi_agent_mat</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_compta_ecriture">
+		<field name="name">Ecritures libre</field>
+		<field name="res_model">compta_ecriture</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"> </p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_compta_reeva">
+		<field name="name">Comptabilisation des réevaluations</field>
+		<field name="res_model">gi_compta_reeva</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_compta_mvt">
+		<field name="name">Comptabilisation des mouvements</field>
+		<field name="res_model">gi_compta_mvt</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_compta_amort">
+		<field name="name">Comptabilisation des amortissements</field>
+		<field name="res_model">gi_compta_amort</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_motif_sortie">
+		<field name="name">Motif de sortie du bien</field>
+		<field name="res_model">gi_motif_sortie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_invent_bien">
+		<field name="name">Inventaire des biens en service</field>
+		<field name="res_model">gi_invent_bien</field>
+		<field name= "context">{'group_by' : ['type_invent']}</field>
+		<field name="view_mode">tree,form,kanban</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_invent_entree">
+		<field name="name">Inventaire des biens en stock</field>
+		<field name="res_model">gi_invent_entree</field>
+		<field name= "context">{'group_by' : ['type_invent']}</field>
+		<field name="view_mode">tree,form,kanban,graph</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<record model="ir.actions.act_window" id="act_list_gi_fiche_stock">
+		<field name="name">Fiche de stock</field>
+		<field name="res_model">gi_fiche_stock</field>
+		<field name= "context">{'group_by' : ['type_invent']}</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_fiche_service">
+		<field name="name">Fiche de biens en service</field>
+		<field name="res_model">gi_fiche_service</field>
+		<field name= "context">{'group_by' : ['type_invent']}</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_journal_entree">
+		<field name="name">Journal des entrées</field>
+		<field name="res_model">gi_journal_entree</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_journal_sortie">
+		<field name="name">Journal des sorties</field>
+		<field name="res_model">gi_journal_sortie</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+<record model="ir.actions.act_window" id="act_list_gi_livre_journal">
+		<field name="name">Livre Journal</field>
+		<field name="res_model">gi_livre_journal</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html"><p class="oe_view_nocontent_create"></p></field>
+</record>
+
+
+<!--Definition du menu-->
+
+
+<menuitem id="main_menu" name = "Gestion Immobilisations" sequence="9"/>
+
+<menuitem id="main_menu_gi" name = "Gestion Immobilisations" sequence="1"  parent="main_menu"/>
+
+	<menuitem id="main_menu_gi_ordre_entree" name = "Ordre d'entrée des matières" sequence="11" action= "act_list_gi_ordre_entree" parent="main_menu_gi"/>
+
+	<menuitem id="main_menu_gi_immobilisation" name = "Gestion des immobilisations" sequence="12" action= "act_list_gi_immobilisation" parent="main_menu_gi"/>
+
+	<menuitem id="main_menu_gi_ordre_sortie" name = "Ordre de sortie des matières" sequence="13" action= "act_list_gi_ordre_sortie" parent="main_menu_gi"/>
+
+	<menuitem id="main_menu_account_asset_asset" name = "Plan d'amortissement" sequence="14" action= "act_list_account_asset_asset" parent="main_menu_gi"/>
+<!--
+	<menuitem id="main_menu_gi_reevaluation" name = "Réevaluations" sequence="15" action= "act_list_gi_reevaluation" parent="main_menu_gi"/>
+-->
+	<menuitem id="main_menu_gi_susp_amort" name = "Arrêt Plan d'amortissement" sequence="16" action= "act_list_gi_susp_amort" parent="main_menu_gi"/>
+
+<menuitem id="main_menu_mb" name = "Mouvements des biens" sequence="2"  parent="main_menu"/>
+
+<menuitem id="main_menu_suivi" name = "Mouvements sans incidence" sequence="20"  parent="main_menu_mb"/>
+
+	<menuitem id="main_menu_gi_affectation" name = "Bordereau d'affectation du bien" sequence="201" action= "act_list_gi_affectation" parent="main_menu_suivi"/>
+
+	<menuitem id="main_menu_gi_mutation" name = "Bordereau de mutation du bien" sequence="202" action= "act_list_gi_mutation" parent="main_menu_suivi"/>
+
+	<menuitem id="main_menu_gi_sortie" name = "Bordereau de sortie momentanée du bien" sequence="202" action= "act_list_gi_sortie" parent="main_menu_suivi"/>
+
+	<menuitem id="main_menu_gi_entree" name = "Borderau de retour du bien" sequence="203" action= "act_list_gi_entree" parent="main_menu_suivi"/>
+
+<menuitem id="main_menu_mc" name = "Mouvements avec incidence" sequence="21"  parent="main_menu_mb"/>
+
+	<menuitem id="main_menu_gi_transfert" name = "Bordereau de transfert" sequence="211" action= "act_list_gi_transfert" parent="main_menu_mc"/>
+
+	<menuitem id="main_menu_gi_cession_vente" name = "Bordereau de Cession Vente" sequence="212" action= "act_list_gi_cession_vente" parent="main_menu_mc"/>
+
+	<menuitem id="main_menu_gi_cession_don" name = "Borderau de Cession Don" sequence="213" action= "act_list_gi_cession_don" parent="main_menu_mc"/>
+
+	<menuitem id="main_menu_gi_reforme" name = "Borderau de Reforme" sequence="214" action= "act_list_gi_reforme" parent="main_menu_mc"/>
+
+	<menuitem id="main_menu_gi_declassement" name = "Declassement" sequence="215" action= "act_list_gi_declassement" parent="main_menu_mc"/>
+
+
+<menuitem id="main_menu_com" name = "Comptabilisation des biens" sequence="3"  parent="main_menu"/>
+
+<menuitem id="main_menu_compta" name = "Comptabilisation des biens" sequence="31"  parent="main_menu_com"/>
+<!--
+	<menuitem id="main_menu_compta_ecriture" name = "Comptabilisation libre" sequence="311" action= "act_list_compta_ecriture" parent="main_menu_compta"/>
+
+	<menuitem id="main_menu_gi_compta_amort" name = "Comptabilisation amortissements" sequence="312" action= "act_list_gi_compta_amort" parent="main_menu_compta"/>
+
+	<menuitem id="main_menu_gi_compta_reeva" name = "Comptabilisation réevaluations" sequence="313" action= "act_list_gi_compta_reeva" parent="main_menu_compta"/>
+
+	<menuitem id="main_menu_gi_compta_mvt" name = "Comptabilisation mouvements" sequence="314" action= "act_list_gi_compta_mvt" parent="main_menu_compta"/>
+
+-->
+<menuitem id="main_menu_anal" name = "Inventaires" sequence="53"  parent="main_menu"/>
+
+	<menuitem id="main_menu_gestion" name = "Fiches d'inventaires des biens" sequence="40" parent="main_menu_anal"/>
+
+		<menuitem id="main_menu_gi_fiche_invent_init" name = "Fiche d'inventaires initial" sequence="400" action= "act_list_gi_fiche_invent_init" parent="main_menu_gestion"/>
+
+		<menuitem id="main_menu_gi_fiche_stock" name = "Fiche d'inventaires des biens en stock" sequence="401" action= "act_list_gi_fiche_stock" parent="main_menu_gestion"/>
+
+		<menuitem id="main_menu_gi_fiche_service" name = "Fiche d'inventaires des biens en service" sequence="402" action= "act_list_gi_fiche_service" parent="main_menu_gestion"/>
+
+	<menuitem id="main_menu_invent" name = "Inventaire" sequence="41" parent="main_menu_anal"/>
+
+		<menuitem id="main_menu_gi_invent_bien" name = "Inventaire des biens en services" sequence="412" action= "act_list_gi_invent_bien" parent="main_menu_invent"/>
+
+		<menuitem id="main_menu_gi_invent_entree" name = "Inventaire des biens en stock" sequence="411" action= "act_list_gi_invent_entree" parent="main_menu_invent"/>
+
+		<menuitem id="main_menu_gi_inv_declas" name = "Inventaire des biens déclasser" sequence="413" action= "act_list_gi_inv_declas" parent="main_menu_invent"/>
+
+<menuitem id="main_menu_synthese" name = "Synthèses" sequence="5"  parent="main_menu"/>
+
+    <menuitem id="main_menu_gi_journal_entree" name = "Journal des entrées" sequence="51" action= "act_list_gi_journal_entree" parent="main_menu_synthese"/>
+
+    <menuitem id="main_menu_gi_journal_sortie" name = "Journal des sorties" sequence="52" action= "act_list_gi_journal_sortie" parent="main_menu_synthese"/>
+
+    <menuitem id="main_menu_gi_livre_journal" name = "Livre Journal" sequence="53" action= "act_list_gi_livre_journal" parent="main_menu_synthese"/>
+
+<menuitem id="main_menu_configuration" name = "Données de base" sequence="6" parent="main_menu"/>
+
+    <menuitem id="main_menu_gi_typeimmobilisation" name = "Saisie/MàJ des types d'immobilisation" sequence="61" action= "act_list_gi_typeimmobilisation" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_categorie" name = "Saisie/MàJ des categories" sequence="62" action= "act_list_gi_categorie" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_designation" name = "Saisie/MàJ des Immobilisations" sequence="63" action= "act_list_gi_designation" parent="main_menu_configuration"/>
+
+<!--
+	<menuitem id="main_menu_gi_souscategorie" name = "Saisie/MàJ des sous categories" sequence="52" action= "act_list_gi_souscategorie" parent="main_menu_configuration"/>
+-->
+	<menuitem id="main_menu_gi_marque" name = "Saisie/MàJ des marques" sequence="64" action= "act_list_gi_marque" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_modele" name = "Saisie/MàJ des modèles" sequence="65" action= "act_list_gi_modele" parent="main_menu_configuration"/>
+
+
+    <menuitem id="main_menu_gi_mode_acquisition" name = "Saisie/MàJ du mode d'acquisitions" sequence="66" action= "act_list_gi_mode_acquisition" parent="main_menu_configuration"/>
+
+    <menuitem id="main_menu_gi_typeamortissement" name = "Saisie/MàJ des types d'amortissement" sequence="67" action= "act_list_gi_typeamortissement" parent="main_menu_configuration"/>
+
+    <menuitem id="main_menu_gi_source_fin" name = "Saisie/MàJ des sources de financement" sequence="68" action= "act_list_gi_source_fin" parent="main_menu_configuration"/>
+
+
+    <menuitem id="main_menu_gi_typemvtimmo" name = "Saisie/MàJ des types de mouvement" sequence="67" action= "act_list_gi_typemvtimmo" parent="main_menu_configuration"/>
+<!--
+	<menuitem id="main_menu_gi_pjustificative" name = "Saisie/MàJ des pièces justificative" sequence="61" action= "act_list_gi_pjustificative" parent="main_menu_configuration"/> 
+
+	<menuitem id="main_menu_gi_cession" name = "Saisie/MàJ des Cessions" sequence="61" action= "act_list_gi_cession" parent="main_menu_configuration"/> 
+-->
+	<menuitem id="main_menu_gi_magasin" name = "Saisie/MàJ des magasins" sequence="68" action= "act_list_gi_magasin" parent="main_menu_configuration"/> 
+
+	<menuitem id="main_menu_gi_etat" name = "Saisie/MàJ des états des matières" sequence="69" action= "act_list_gi_etat" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_type_agent" name = "Saisie/MàJ des types agents matières" sequence="70" action= "act_list_gi_type_agent" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_agent_mat" name = "Saisie/MàJ des agents matières" sequence="71" action= "act_list_gi_agent_mat" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_motif_sortie" name = "Saisie/MàJ des sorties du bien" sequence="72" action= "act_list_gi_motif_sortie" parent="main_menu_configuration"/>
+
+	<menuitem id="main_menu_gi_type_membre" name = "Saisie/MàJ des types de membre commission" sequence="73" action= "act_list_gi_type_membre" parent="main_menu_configuration"/>
+
+
+</odoo>

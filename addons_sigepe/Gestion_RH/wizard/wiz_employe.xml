@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="ir.ui.view" id="view_wiz_participant_line_tree" >
+        <field name="name">view.wiz.participant.line.tree</field>
+        <field name="model">wiz.participant.line</field>
+        <field name="priority" eval="16"/>
+      	<field name="arch" type="xml">        
+			<tree string="Liste des participants" editable="bottom">
+	        	<field name="name"/>
+	            <field name="partner_id" />
+			 </tree>
+		 </field>
+	</record>
+    
+    <record model="ir.ui.view" id="view_wiz_participant_form">
+        <field name="name">view.wiz.participant.form</field>
+        <field name="model">wiz.participant</field>
+        <field name="priority" eval="16"/>
+        <field name="arch" type="xml">
+        	<form string="Ajout de participants à une session">
+        		<group>
+	        		<field name="session_id" />
+	        		<field name="wiz_participant_ids" nolabel="1" />
+        		</group>	        	     
+                 <footer>
+                 	<button name="add_attendee" string="Add" type="object"/>
+                 	or
+                 	
+                 	<button special="cancel" string="Cancel" />
+                 </footer>              
+        	</form>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="act_open_wiz_participant">
+        <field name="name">wiz.participant</field>
+        <field name="res_model">wiz.participant</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_wiz_participant_form" />
+    </record>
+
+    <menuitem id="menu_wiz_participant" name ="Add attendee" sequence="2" action="act_open_wiz_participant" parent="main_menu"/>
+        
+</odoo>
+
+

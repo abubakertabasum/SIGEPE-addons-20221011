@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <report 
+            id="report_cert"
+            string="Certificat/Attestation"
+            model="hr_certificat_travail" 
+            report_type="qweb-html"
+            file="Gestion_RH.report_cert" 
+            name="Gestion_RH.report_cert"
+            groups = "base.group_user"
+            menu = "True"/>
+
+<template id="report_cert">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+		            <h1><p style="text-align:center; widht:100%"><span t-field="o.x_titre"/></p></h1>
+					<p style="widht:100%"><strong><span t-field="o.p1"/> <span t-field="o.x_fonction"/> <span t-field="o.p2"/> <span t-field="o.name.name"/> <span t-field="o.x_emploi"/> <span t-field="o.p3"/> <span t-field="o.x_service"/> <span t-field="o.p4"/> <span t-field="o.date_debut_affect"/> <span t-field="o.p5"/> <span t-field="o.x_date_cess"/> <span t-field="o.p6"/> <span t-field="o.company_id.name"/> <span t-field="o.p7"/>  </strong></p>  
+		            <p style="widht:100%"><strong><span t-field="o.p8"/></strong></p><br></br>
+		            <p></p>
+		            <p></p>
+					<p style="text-align:right; widht:100%"><strong>Fait à <span t-field="o.company_id.ref_localite_id.name"/> , le <span t-field="o.date_attest"/></strong></p><br/><br/>
+					<!-- <p style="text-align:center; widht:100%"><strong>Signature </strong></p> -->
+             
+             <tfoot>
+	            		<div class="row mt32 mb32">
+	            			<div class="col-2">
+	                            <strong></strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p/>
+                            </div>
+                        	<div class="col-4">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+                            <div class="col-3">
+	                            <strong></strong>
+	                            <p/>
+                            </div>
+	                        <div class="col-3">
+	                            <strong>Le Directeur Général</strong>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <br/>
+	                            <p t-esc="o.responsale.name"/>
+	                        </div>
+                        </div>
+	            </tfoot>
+             
+             </t>
+         </t>
+    </t>
+</template>
+</odoo>

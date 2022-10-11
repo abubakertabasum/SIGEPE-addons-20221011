@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<report 
+    id="report_personnel"
+    string="Liste administrateurs"
+    model="ca_conseil" 
+    report_type="qweb-pdf"
+    file="conseil_administration.report_personnel" 
+    name="conseil_administration.report_personnel_view"
+    groups = "base.group_user"
+    attachment_use="True"
+    menu = "True"/>
+
+
+<template id="report_personnel_view">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div>
+                    <h1 style= "text-align:center;"> <FONT COLOR= "Blue">Liste de présence au conseil d'administration </FONT> </h1>
+                    </div>
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Intitulé du conseil : </strong>
+                    <tr><span t-field="o.intitule"/> </tr> 
+                    </div>
+                    
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Type de session : </strong>
+                    <tr><span t-field="o.cat_id"/> </tr> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Nature de session : </strong>
+                        <td> <span t-field="o.session_id"/> </td>
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Lieu : </strong>
+                    <td> <span t-field="o.lieu"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Heure de début : </strong>
+                    <td> <span t-field="o.date_reelle_debut"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Heure de fin : </strong>
+                    <td> <span t-field="o.date_reelle"/> </td> 
+                    </div>
+
+                    <div class="row mt32 mb32" id="informations">
+                    <strong>Observation : </strong>
+                    <td> <span t-field="o.observation"/> </td> 
+                    </div>
+
+
+<div class="row mt32 mb32" id="informations">
+            <table class="table table-sm table-bordered" style="border:2px solid black">
+                <thead>
+                    <tr style= "border:2px solid black">
+                        <th style="border:2px solid black" class="text-center">Nom et Prénom(s)</th>
+                        <th style="border:2px solid black" class="text-center">Fonction</th>
+                        <th style="border:2px solid black" class="text-center">Structure représentée</th>
+                        <th style="border:2px solid black" class="text-center">Présence</th>
+                        <th style="border:2px solid black" class="text-center">Signature</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr t-foreach="o.conseiladmin_ids" t-as="line" class="text-center" style="border:2px solid black" >
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.membre_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.fonction_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.structure_id"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.etat"/></td>
+
+                            <td class="text-center" style="border:2px solid black"><span t-field="line.signature"/></td>
+                        </tr>
+                    </tbody>
+            </table>
+</div>
+                </div>
+                </t>
+            </t>
+        </t>
+</template>
+
+</odoo>
